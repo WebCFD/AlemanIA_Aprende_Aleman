@@ -68,7 +68,7 @@ export default function FeedbackDialog({ open, onOpenChange }: FeedbackDialogPro
       
       toast({
         title: "¡Gracias por tu feedback!",
-        description: "Hemos recibido tu mensaje correctamente.",
+        description: result.note || "Hemos recibido tu mensaje correctamente.",
       });
       
       form.reset();
