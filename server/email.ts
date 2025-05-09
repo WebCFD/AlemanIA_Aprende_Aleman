@@ -7,18 +7,38 @@ interface FeedbackRequest {
   message: string;
 }
 
-// Configuración del servicio de correo
-// Para entornos de producción, se recomienda usar variables de entorno
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'tu-email@gmail.com', // Esto debe ser configurado con un email real
-    pass: process.env.EMAIL_PASS || 'tu-contraseña-de-aplicación', // Esto debe ser una contraseña de aplicación
-  },
-});
+// Verifica si tenemos configuradas las credenciales de email
+const hasEmailCredentials = process.env.EMAIL_USER && process.env.EMAIL_PASS;
 
 // Destino para los emails de feedback
 const FEEDBACK_EMAIL = 'pulpormrm@gmail.com';
+
+// Inicializa el transportador solo si tenemos credenciales
+let transporter: nodemailer.Transporter | null = null;
+
+// Intenta configurar el transportador con las credenciales disponibles
+if (hasEmailCredentials) {
+  try {
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      // Opciones adicionales para ayudar con la conexión a Gmail
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+    
+    console.log('Servicio de email configurado correctamente');
+  } catch (error) {
+    console.error('Error al configurar el servicio de email:', error);
+    transporter = null;
+  }
+} else {
+  console.warn('No se encontraron credenciales de email. La funcionalidad de envío de feedback estará limitada.');
+}
 
 /**
  * Maneja la solicitud de envío de feedback
@@ -55,7 +75,23 @@ export async function handleSendFeedback(req: Request, res: Response) {
       `,
     };
 
-    // Intenta enviar el email
+    // Verifica si el transportador está disponible
+    if (!transporter) {
+      console.log('Guardando feedback localmente (sin envío de email):', {
+        from: email,
+        message: message,
+        date: new Date().toISOString()
+      });
+      
+      // Responde con éxito aunque no se haya enviado el email
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Feedback recibido correctamente (modo simulación)',
+        note: 'El email no ha sido enviado debido a problemas de configuración, pero el feedback ha sido registrado'
+      });
+    }
+    
+    // Intenta enviar el email si el transportador está disponible
     await transporter.sendMail(mailOptions);
 
     // Responde con éxito
