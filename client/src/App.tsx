@@ -33,7 +33,7 @@ function Navigation() {
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
-            Inicio
+            Aprende
           </button>
           <button 
             onClick={() => navigate("/empieza")}
