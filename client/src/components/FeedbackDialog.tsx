@@ -48,11 +48,23 @@ export default function FeedbackDialog({ open, onOpenChange }: FeedbackDialogPro
     setIsSubmitting(true);
     
     try {
-      // Por ahora, simulamos el envío del email
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Enviamos el feedback al servidor
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.email,
+          message: data.message,
+        }),
+      });
       
-      // En una implementación real, aquí enviaríamos el email
-      console.log("Enviando feedback a pulpormrm@gmail.com:", data);
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || 'Error al enviar feedback');
+      }
       
       toast({
         title: "¡Gracias por tu feedback!",
@@ -61,10 +73,12 @@ export default function FeedbackDialog({ open, onOpenChange }: FeedbackDialogPro
       
       form.reset();
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Error al enviar feedback:', error);
+      
       toast({
         title: "Error al enviar",
-        description: "No pudimos enviar tu mensaje. Por favor, inténtalo de nuevo.",
+        description: error.message || "No pudimos enviar tu mensaje. Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
     } finally {

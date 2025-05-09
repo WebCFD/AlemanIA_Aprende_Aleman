@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { verifyTranslationSchema, type Difficulty } from "@shared/schema";
 import { verifyTranslation } from "./anthropic";
+import { handleSendFeedback } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
@@ -74,6 +75,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return res.status(500).json({ message: "Server error" });
     }
   });
+  
+  // Enviar feedback
+  app.post("/api/feedback", handleSendFeedback);
 
   const httpServer = createServer(app);
   return httpServer;
