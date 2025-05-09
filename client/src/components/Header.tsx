@@ -26,7 +26,7 @@ export default function Header() {
               <span className="text-white font-bold text-lg">DE</span>
             </div>
             <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
-              Alemanía
+              AlemanIA
             </h1>
           </div>
           
