@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { VerifyTranslationResponse } from '@shared/schema';
 
-// Utilizamos Claude 3 Opus para verificación de traducciones - más económico que Sonnet
+// Utilizamos Claude 3 Haiku para verificación de traducciones - el modelo más económico y rápido
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "default_key",
 });
@@ -45,12 +45,22 @@ export async function verifyTranslation(
     `;
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-opus-20240229',
+      model: 'claude-3-haiku-20240307',
       max_tokens: 500,
       messages: [{ role: 'user', content: prompt }],
     });
 
     // Parse the JSON response
+    // Verificar que response.content[0] es del tipo TextBlock
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      console.error("Unexpected response format from Claude:", response.content);
+      return { 
+        isCorrect: false, 
+        correctTranslation,
+        explanation: "No pudimos verificar tu respuesta. La traducción correcta es: " + correctTranslation
+      };
+    }
+    
     const responseText = response.content[0].text;
     const jsonMatch = responseText.match(/\{[\s\S]*\}/);
     
