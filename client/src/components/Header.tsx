@@ -19,9 +19,9 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col gap-3">
-          {/* Primera fila: Logo y título a la izquierda, botones a la derecha */}
-          <div className="flex justify-between items-start">
-            {/* Logo & Title */}
+          {/* Primera fila */}
+          <div className="grid grid-cols-3 items-start">
+            {/* Logo & Title - Columna izquierda */}
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
                 <span className="text-white font-bold text-base md:text-lg">DE</span>
@@ -31,8 +31,8 @@ export default function Header() {
               </h1>
             </div>
             
-            {/* Buttons - siempre en columna a la derecha */}
-            <div className="flex flex-col gap-2 items-center">
+            {/* Buttons - Columna central */}
+            <div className="flex flex-col gap-2 items-center justify-center col-span-1">
               <Button 
                 variant="default" 
                 className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
@@ -51,6 +51,9 @@ export default function Header() {
                 <span className="text-xs md:text-sm">Tu feedback nos interesa</span>
               </Button>
             </div>
+            
+            {/* Columna derecha - Vacía para mantener balance */}
+            <div className="hidden md:block"></div>
           </div>
           
           {/* Segunda fila: Cita de Carlos V - siempre la misma */}
