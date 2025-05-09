@@ -1,8 +1,11 @@
-import { Users, Heart, BookOpen, MailIcon, Target } from "lucide-react";
+import { useState } from "react";
+import { Users, Heart, BookOpen, MailIcon, Target, Coffee, MessageSquare } from "lucide-react";
 import luisTaboadaImg from "../assets/LuisTaboada.png";
 import juanReinaImg from "../assets/JuanReina.png";
+import FeedbackDialog from "../components/FeedbackDialog";
 
 export default function QuienesSomos() {
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -16,7 +19,7 @@ export default function QuienesSomos() {
           </h3>
           
           <p className="text-gray-600 mb-10">
-            AlemanIA nace con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
+            AlemanIA con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
             Combinamos la potencia de la inteligencia artificial con métodos pedagógicos probados. 
             Aprender un idioma debe ser una experiencia personalizada, adaptada a tus necesidades. 
             Deja que nuestra experiencia te sirva de ayuda.
@@ -75,18 +78,31 @@ export default function QuienesSomos() {
               Contáctanos
             </h3>
             
-            <p className="text-gray-700 mb-4">
+            <p className="text-gray-700 mb-6">
               ¿Tienes preguntas, sugerencias o comentarios? ¡Nos encantaría saber de ti!
               Puedes escribirnos a través de nuestro formulario de feedback o directamente 
               a nuestro correo electrónico.
             </p>
             
-            <div className="flex items-center justify-center">
-              <button className="inline-flex items-center px-4 py-2 bg-[#4A6FA5] text-white rounded-full">
-                <Heart className="w-4 h-4 mr-2" />
-                <span>Apoya nuestro proyecto</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button 
+                onClick={() => setIsFeedbackOpen(true)}
+                className="inline-flex items-center px-6 py-3 bg-[#5272A8] text-white rounded-full hover:bg-[#4A6FA5] transition-colors"
+              >
+                <MessageSquare className="w-5 h-5 mr-2" />
+                <span>Tu feedback nos interesa</span>
+              </button>
+              
+              <button 
+                className="inline-flex items-center px-6 py-3 bg-[#F7931A] text-white rounded-full hover:bg-[#E67E0D] transition-colors"
+              >
+                <Coffee className="w-5 h-5 mr-2" />
+                <span>Invítanos a un café</span>
               </button>
             </div>
+            
+            {/* Diálogo de Feedback */}
+            <FeedbackDialog open={isFeedbackOpen} onOpenChange={setIsFeedbackOpen} />
           </div>
         </div>
       </div>
