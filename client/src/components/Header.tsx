@@ -17,34 +17,42 @@ export default function Header() {
   
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md py-4">
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-            <span className="text-white font-bold text-lg">DE</span>
+      <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
+              <span className="text-white font-bold text-lg">DE</span>
+            </div>
+            <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
+              Alemanía
+            </h1>
           </div>
-          <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
-            Alemanía
-          </h1>
+          
+          <div className="flex flex-col md:flex-row gap-2">
+            <Button 
+              variant="default" 
+              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
+              onClick={handleTipButton}
+            >
+              <Heart className="h-4 w-4" />
+              <span className="hidden sm:inline">Invítanos a un café</span>
+            </Button>
+            
+            <Button 
+              variant="default" 
+              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
+              onClick={() => setFeedbackDialogOpen(true)}
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span className="hidden sm:inline">Tu feedback nos interesa</span>
+            </Button>
+          </div>
         </div>
         
-        <div className="flex flex-col md:flex-row gap-2">
-          <Button 
-            variant="default" 
-            className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
-            onClick={handleTipButton}
-          >
-            <Heart className="h-4 w-4" />
-            <span className="hidden sm:inline">Invítanos a un café</span>
-          </Button>
-          
-          <Button 
-            variant="default" 
-            className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
-            onClick={() => setFeedbackDialogOpen(true)}
-          >
-            <MessageSquare className="h-4 w-4" />
-            <span className="hidden sm:inline">Tu feedback nos interesa</span>
-          </Button>
+        {/* Cita de Carlos V */}
+        <div className="text-center mt-2 mb-1 px-4 py-2 bg-gradient-to-r from-blue-50 to-gray-50 rounded-lg border border-blue-100 italic text-gray-700">
+          <p className="text-sm md:text-base">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
+          <p className="text-xs md:text-sm text-blue-600">Carlos V de Alemania y I de España (1500-1558)</p>
         </div>
       </div>
       
