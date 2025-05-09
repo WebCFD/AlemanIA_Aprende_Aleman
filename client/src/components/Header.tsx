@@ -31,7 +31,7 @@ export default function Header() {
           </div>
           
           {/* Cita de Carlos V - Centrada */}
-          <div className="italic text-center hidden sm:block">
+          <div className="italic text-center hidden md:block">
             <p className="text-sm md:text-base text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
             <p className="text-sm md:text-base text-gray-600 font-medium">Carlos V de Alemania y I de España (1500-1558)</p>
           </div>
@@ -59,7 +59,7 @@ export default function Header() {
         </div>
         
         {/* Cita de Carlos V para móviles */}
-        <div className="italic text-center sm:hidden mt-2">
+        <div className="italic text-center md:hidden mt-2">
           <p className="text-xs text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
           <p className="text-xs text-gray-600 font-medium">Carlos V (1500-1558)</p>
         </div>
