@@ -7,38 +7,36 @@ interface FeedbackRequest {
   message: string;
 }
 
-// Verifica si tenemos configuradas las credenciales de email
-const hasEmailCredentials = process.env.EMAIL_USER && process.env.EMAIL_PASS;
-
 // Destino para los emails de feedback
 const FEEDBACK_EMAIL = 'pulpormrm@gmail.com';
 
-// Inicializa el transportador solo si tenemos credenciales
-let transporter: nodemailer.Transporter | null = null;
-
-// Intenta configurar el transportador con las credenciales disponibles
-if (hasEmailCredentials) {
-  try {
-    transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      // Opciones adicionales para ayudar con la conexión a Gmail
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
-    
-    console.log('Servicio de email configurado correctamente');
-  } catch (error) {
-    console.error('Error al configurar el servicio de email:', error);
-    transporter = null;
+// Configuración más robusta para Gmail
+const transporterConfig = {
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // true para 465, false para otros puertos
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  // Configuración adicional para mejorar compatibilidad con Gmail
+  tls: {
+    rejectUnauthorized: false // Ignora errores de certificado
   }
-} else {
-  console.warn('No se encontraron credenciales de email. La funcionalidad de envío de feedback estará limitada.');
-}
+};
+
+// Configura el transporter para enviar emails
+const transporter = nodemailer.createTransport(transporterConfig);
+
+// Verificar la configuración del transporter al inicio
+transporter.verify(function(error, success) {
+  if (error) {
+    console.error('Error al configurar el transporter de email:', error);
+  } else {
+    console.log('Servidor de email listo para enviar mensajes');
+  }
+});
 
 /**
  * Maneja la solicitud de envío de feedback
@@ -57,22 +55,51 @@ export async function handleSendFeedback(req: Request, res: Response) {
       });
     }
 
-    // Siempre guardamos el feedback en los logs del servidor
+    // Registramos el feedback en los logs como respaldo
     console.log('========= NUEVO FEEDBACK RECIBIDO =========');
     console.log(`De: ${email}`);
     console.log(`Fecha: ${new Date().toLocaleString()}`);
     console.log(`Mensaje: ${message}`);
     console.log('==========================================');
     
-    // En un entorno real, aquí enviaríamos el email
-    // Pero para evitar problemas con Gmail, usamos siempre el modo simulación
+    // Configuración del email a enviar
+    const mailOptions = {
+      from: `"Alemanía App" <${process.env.EMAIL_USER}>`,
+      to: FEEDBACK_EMAIL,
+      subject: `Nuevo feedback de ${email}`,
+      text: `De: ${email}\n\nMensaje: ${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+          <h2 style="color: #4A6FA5;">Nuevo Feedback - Alemanía</h2>
+          <p><strong>De:</strong> ${email}</p>
+          <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #4A6FA5; margin: 20px 0;">
+            ${message.replace(/\n/g, '<br>')}
+          </div>
+          <p style="color: #888; font-size: 12px;">Este mensaje fue enviado desde la aplicación Alemanía.</p>
+        </div>
+      `,
+    };
     
-    // Responde con éxito
-    return res.status(200).json({ 
-      success: true, 
-      message: 'Feedback recibido correctamente',
-      note: 'Tu mensaje ha sido registrado y será revisado pronto. Gracias por tu feedback!'
-    });
+    try {
+      // Intenta enviar el email
+      await transporter.sendMail(mailOptions);
+      
+      // Si el envío fue exitoso, responde con éxito
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Feedback enviado correctamente',
+        note: 'Tu mensaje ha sido enviado y será revisado pronto. ¡Gracias por tu feedback!'
+      });
+    } catch (emailError) {
+      console.error('Error al enviar email:', emailError);
+      
+      // Si falla el envío de email, respondemos con simulación
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Feedback recibido correctamente (modo respaldo)',
+        note: 'Tu mensaje ha sido registrado en nuestro sistema. Gracias por tu feedback!'
+      });
+    }
   } catch (error: any) {
     console.error('Error al enviar feedback:', error);
     
