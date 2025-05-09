@@ -60,7 +60,7 @@ function Navigation() {
           <button 
             onClick={() => navigate("/quienes-somos")}
             className={cn(
-              "px-4 py-2 text-sm font-medium transition-colors",
+              "px-4 py-3 text-sm font-medium transition-colors",
               isActive("/quienes-somos") 
                 ? "text-[#4A6FA5] border-b-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
