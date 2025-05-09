@@ -17,15 +17,23 @@ export default function Header() {
   
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md py-4">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-              <span className="text-white font-bold text-lg">DE</span>
+          <div className="flex items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
+                <span className="text-white font-bold text-lg">DE</span>
+              </div>
+              <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
+                Alemanía
+              </h1>
             </div>
-            <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
-              Alemanía
-            </h1>
+            
+            {/* Cita de Carlos V - Colocada junto al título */}
+            <div className="ml-4 italic max-w-md hidden sm:block">
+              <p className="text-xs md:text-sm text-gray-600 leading-tight">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
+              <p className="text-xs text-blue-600 font-medium">Carlos V de Alemania y I de España (1500-1558)</p>
+            </div>
           </div>
           
           <div className="flex flex-col md:flex-row gap-2">
@@ -49,10 +57,10 @@ export default function Header() {
           </div>
         </div>
         
-        {/* Cita de Carlos V */}
-        <div className="text-center mt-2 mb-1 px-4 py-2 bg-gradient-to-r from-blue-50 to-gray-50 rounded-lg border border-blue-100 italic text-gray-700">
-          <p className="text-sm md:text-base">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
-          <p className="text-xs md:text-sm text-blue-600">Carlos V de Alemania y I de España (1500-1558)</p>
+        {/* Versión móvil de la cita */}
+        <div className="sm:hidden text-center mt-2 mb-1 italic text-gray-600">
+          <p className="text-xs">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
+          <p className="text-xs text-blue-600">Carlos V de Alemania y I de España (1500-1558)</p>
         </div>
       </div>
       
