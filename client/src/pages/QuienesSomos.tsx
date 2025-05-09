@@ -40,7 +40,7 @@ export default function QuienesSomos() {
                 <img 
                   src={luisTaboadaImg} 
                   alt="Luis Taboada" 
-                  className="w-32 h-32 object-cover rounded-full border-2 border-[#4A6FA5]"
+                  className="w-28 h-28 object-cover rounded-full border-2 border-[#4A6FA5] object-[center_top]"
                 />
               </div>
               <h4 className="text-lg font-bold text-center text-gray-800 mb-2">Luis Taboada</h4>
