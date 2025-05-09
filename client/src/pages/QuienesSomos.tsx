@@ -13,19 +13,12 @@ export default function QuienesSomos() {
             Nuestra misión
           </h2>
           
-          <p className="text-gray-600 mb-6">
-            AlemanIA nació con un objetivo claro: hacer el aprendizaje del alemán más 
-            accesible y efectivo para hispanohablantes. Combinamos la potencia de la inteligencia 
-            artificial con métodos pedagógicos probados para ofrecerte una experiencia 
-            de aprendizaje única.
+          <p className="text-gray-600 mb-10">
+            AlemanIA con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
+            Combinamos la potencia de la inteligencia artificial con métodos pedagógicos probados. 
+            Aprender un idioma debe ser una experiencia personalizada, adaptada a tus necesidades. 
+            Deja que nuestra experiencia te sirva de ayuda.
           </p>
-          
-          <div className="border-l-4 border-[#4A6FA5] pl-4 py-2 bg-blue-50 mb-8">
-            <p className="text-gray-700">
-              "Creemos que aprender un idioma debe ser una experiencia personalizada, 
-              adaptada a tus necesidades y a tu ritmo de aprendizaje."
-            </p>
-          </div>
           
           {/* Equipo */}
           <h3 className="text-xl font-semibold text-[#4A6FA5] mb-6 flex items-center">
