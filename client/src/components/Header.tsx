@@ -20,7 +20,7 @@ export default function Header() {
             <span className="text-white font-bold">DE</span>
           </div>
           <h1 className="font-heading font-bold text-xl md:text-2xl text-[#4A6FA5]">
-            AprenderAlemán
+            Alemanía
           </h1>
         </div>
         
