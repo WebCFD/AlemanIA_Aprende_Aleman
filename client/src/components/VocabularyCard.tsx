@@ -73,12 +73,46 @@ export default function VocabularyCard({
     }
   });
 
-  // Play audio placeholder
-  const handlePlayAudio = () => {
-    toast({
-      title: "Función en desarrollo",
-      description: "La funcionalidad de audio estará disponible próximamente.",
-    });
+  // Play audio using Web Speech API
+  const handlePlayAudio = (text: string | null | undefined) => {
+    try {
+      // Check if we have text to speak
+      if (!text) {
+        toast({
+          title: "Error",
+          description: "No hay texto para reproducir",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      // Check if speech synthesis is available
+      if ('speechSynthesis' in window) {
+        // Create a new utterance
+        const utterance = new SpeechSynthesisUtterance(text);
+        
+        // Set language to German
+        utterance.lang = 'de-DE';
+        
+        // Optional: adjust rate and pitch
+        utterance.rate = 0.9; // slightly slower for learning
+        
+        // Speak the text
+        window.speechSynthesis.speak(utterance);
+      } else {
+        toast({
+          title: "Función no disponible",
+          description: "Tu navegador no soporta la síntesis de voz.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error de audio",
+        description: "No se pudo reproducir el audio. Intenta de nuevo.",
+        variant: "destructive"
+      });
+    }
   };
 
   // Handle translation submission
@@ -124,9 +158,9 @@ export default function VocabularyCard({
   // Get level name
   const getLevelName = () => {
     switch(difficulty) {
-      case "A": return "Nivel A";
-      case "B": return "Nivel B";
-      case "C": return "Nivel C";
+      case "A": return "Nivel A (Principiante)";
+      case "B": return "Nivel B (Intermedio)";
+      case "C": return "Nivel C (Avanzado)";
     }
   };
 
@@ -218,16 +252,30 @@ export default function VocabularyCard({
             <p className="text-[#4A6FA5] italic mb-2">{currentWord.example}</p>
             <p className="text-neutral-300 text-sm mb-3">{currentWord.exampleTranslation}</p>
             
-            {/* Audio Playback Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
-              onClick={handlePlayAudio}
-            >
-              <Volume2 className="h-4 w-4 mr-1" />
-              <span className="text-sm">Escuchar</span>
-            </Button>
+            {/* Audio Playback Buttons */}
+            <div className="flex space-x-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
+                onClick={() => currentWord && handlePlayAudio(currentWord.german)}
+                title="Escuchar palabra"
+              >
+                <Volume2 className="h-4 w-4 mr-1" />
+                <span className="text-sm">Escuchar palabra</span>
+              </Button>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
+                onClick={() => currentWord && currentWord.example && handlePlayAudio(currentWord.example)}
+                title="Escuchar frase"
+              >
+                <Volume2 className="h-4 w-4 mr-1" />
+                <span className="text-sm">Escuchar frase</span>
+              </Button>
+            </div>
           </div>
         )}
       </div>
