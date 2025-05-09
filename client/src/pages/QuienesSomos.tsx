@@ -59,13 +59,13 @@ export default function QuienesSomos() {
                 <img 
                   src={juanReinaImg} 
                   alt="Juan Reina" 
-                  className="w-32 h-32 object-cover rounded-full border-2 border-[#4A6FA5]"
+                  className="w-28 h-28 object-cover rounded-full border-2 border-[#4A6FA5] object-[center_top]"
                 />
               </div>
               <h4 className="text-lg font-bold text-center text-gray-800 mb-2">Juan Reina</h4>
               <p className="text-sm text-center text-[#4A6FA5] font-medium mb-3">Ingeniero Mecánico, manos con grasa, mente llena de código, y corazón de innovación</p>
               <p className="text-sm text-gray-600 mb-3">
-                Juan combina tecnología y pasión. Ingeniero con experiencia en cinco países y actualmente en Suiza, transforma ideas en código mientras sueña con abrir su propio taller de reparación algún día. Cuando no está explorando las fronteras de la termodinámica o desarrollando proyectos web, dedica su tiempo a sus verdaderos amores: su familia y los viajes a España.
+                Juan combina tecnología en varios mundos. Ingeniero con experiencia en cinco países y actualmente en Suiza, transforma código en motores mientras sueña con abrir su propio taller de reparación algún día. Cuando no está explorando las fronteras de la termodinámica o desarrollando proyectos web, se dedica a aprender alemán, pero no le va muy bien.
               </p>
               <div className="bg-blue-50 p-3 rounded-lg italic text-sm text-gray-700">
                 ¿Tecnología e idiomas? Juan une mundos que parecen distantes.
