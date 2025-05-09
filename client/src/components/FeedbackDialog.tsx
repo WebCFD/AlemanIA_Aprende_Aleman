@@ -103,10 +103,11 @@ export default function FeedbackDialog({ open, onOpenChange }: FeedbackDialogPro
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tu email</FormLabel>
+                  <FormLabel>Tu email de contacto</FormLabel>
                   <FormControl>
                     <Input placeholder="ejemplo@correo.com" {...field} />
                   </FormControl>
+                  <p className="text-sm text-gray-500">Introduce tu email para que podamos responderte</p>
                   <FormMessage />
                 </FormItem>
               )}
