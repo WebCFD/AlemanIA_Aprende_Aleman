@@ -1,5 +1,6 @@
 import { Users, Heart, BookOpen, MailIcon } from "lucide-react";
 import luisTaboadaImg from "../assets/LuisTaboada.png";
+import juanReinaImg from "../assets/JuanReina.png";
 
 export default function QuienesSomos() {
   return (
@@ -52,17 +53,23 @@ export default function QuienesSomos() {
               </div>
             </div>
             
-            {/* Perfil 2 (placeholder) */}
-            <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-500 text-2xl">AG</span>
+            {/* Perfil de Juan Reina */}
+            <div className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="mb-5 mx-auto flex justify-center">
+                <img 
+                  src={juanReinaImg} 
+                  alt="Juan Reina" 
+                  className="w-32 h-32 object-cover rounded-full border-2 border-[#4A6FA5]"
+                />
               </div>
-              <h4 className="text-lg font-medium text-center text-gray-800 mb-1">Ana García</h4>
-              <p className="text-sm text-center text-[#4A6FA5] mb-3">Desarrolladora</p>
-              <p className="text-sm text-gray-600 text-center">
-                Ingeniera de software especializada en aplicaciones educativas e 
-                integración de IA en plataformas de e-learning.
+              <h4 className="text-lg font-bold text-center text-gray-800 mb-2">Juan Reina</h4>
+              <p className="text-sm text-center text-[#4A6FA5] font-medium mb-3">Ingeniero Mecánico, manos con grasa, mente llena de código, y corazón de innovación</p>
+              <p className="text-sm text-gray-600 mb-3">
+                Juan combina tecnología y pasión. Ingeniero con experiencia en cinco países y actualmente en Suiza, transforma ideas en código mientras sueña con abrir su propio taller de reparación algún día. Cuando no está explorando las fronteras de la termodinámica o desarrollando proyectos web, dedica su tiempo a sus verdaderos amores: su familia y los viajes a España.
               </p>
+              <div className="bg-blue-50 p-3 rounded-lg italic text-sm text-gray-700">
+                ¿Tecnología e idiomas? Juan une mundos que parecen distantes.
+              </div>
             </div>
           </div>
           
