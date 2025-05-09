@@ -18,48 +18,42 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col gap-3">
-          {/* Primera fila */}
-          <div className="grid grid-cols-3 items-start">
-            {/* Logo & Title - Columna izquierda */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-                <span className="text-white font-bold text-base md:text-lg">DE</span>
-              </div>
-              <h1 className="font-heading font-bold text-2xl md:text-4xl text-[#4A6FA5] tracking-tight">
-                AlemanIA
-              </h1>
+        <div className="flex flex-col md:flex-row items-start justify-between gap-4 md:gap-0">
+          {/* Logo & Title - Izquierda */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
+              <span className="text-white font-bold text-base md:text-lg">DE</span>
             </div>
-            
-            {/* Buttons - Columna central */}
-            <div className="flex flex-col gap-2 items-center justify-center col-span-1">
-              <Button 
-                variant="default" 
-                className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
-                onClick={handleTipButton}
-              >
-                <Heart className="h-4 w-4" />
-                <span className="text-xs md:text-sm">Invítanos a un café</span>
-              </Button>
-              
-              <Button 
-                variant="default" 
-                className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
-                onClick={() => setFeedbackDialogOpen(true)}
-              >
-                <MessageSquare className="h-4 w-4" />
-                <span className="text-xs md:text-sm">Tu feedback nos interesa</span>
-              </Button>
-            </div>
-            
-            {/* Columna derecha - Vacía para mantener balance */}
-            <div className="hidden md:block"></div>
+            <h1 className="font-heading font-bold text-2xl md:text-4xl text-[#4A6FA5] tracking-tight">
+              AlemanIA
+            </h1>
           </div>
           
-          {/* Segunda fila: Cita de Carlos V - siempre la misma */}
-          <div className="italic text-center">
+          {/* Cita de Carlos V - Centro */}
+          <div className="italic text-center flex-1 mx-0 md:mx-4 order-last md:order-none">
             <p className="text-xs sm:text-sm md:text-base text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
             <p className="text-xs sm:text-sm md:text-base text-gray-600 font-medium">Carlos V de Alemania y I de España (1500-1558)</p>
+          </div>
+          
+          {/* Buttons - Derecha en columna */}
+          <div className="flex flex-col gap-2 items-end self-end md:self-start">
+            <Button 
+              variant="default" 
+              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
+              onClick={handleTipButton}
+            >
+              <Heart className="h-4 w-4" />
+              <span className="text-xs md:text-sm">Invítanos a un café</span>
+            </Button>
+            
+            <Button 
+              variant="default" 
+              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
+              onClick={() => setFeedbackDialogOpen(true)}
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span className="text-xs md:text-sm">Tu feedback nos interesa</span>
+            </Button>
           </div>
         </div>
       </div>
