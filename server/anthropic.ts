@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { VerifyTranslationResponse } from '@shared/schema';
 
-// the newest Anthropic model is "claude-3-7-sonnet-20250219" which was released February 24, 2025
+// Utilizamos Claude 3 Opus para verificación de traducciones - más económico que Sonnet
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY || "default_key",
 });
@@ -45,7 +45,7 @@ export async function verifyTranslation(
     `;
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-7-sonnet-20250219',
+      model: 'claude-3-opus-20240229',
       max_tokens: 500,
       messages: [{ role: 'user', content: prompt }],
     });
