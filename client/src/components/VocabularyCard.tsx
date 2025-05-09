@@ -95,7 +95,8 @@ export default function VocabularyCard({
 
     verifyMutation.mutate({ 
       germanWord: currentWord.german, 
-      translation: translation.trim()
+      translation: translation.trim(),
+      difficulty: difficulty
     });
   };
 
