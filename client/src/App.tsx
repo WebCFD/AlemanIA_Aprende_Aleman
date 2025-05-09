@@ -23,11 +23,11 @@ function Navigation() {
   return (
     <div className="bg-white mb-6">
       <div className="container mx-auto px-4 md:px-6">
-        <nav className="flex justify-end space-x-4">
+        <nav className="flex justify-center md:justify-end space-x-2 md:space-x-4 overflow-x-auto">
           <button 
             onClick={() => navigate("/")}
             className={cn(
-              "px-4 py-3 text-sm font-medium transition-colors",
+              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
               isActive("/") 
                 ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
@@ -38,7 +38,7 @@ function Navigation() {
           <button 
             onClick={() => navigate("/empieza")}
             className={cn(
-              "px-4 py-3 text-sm font-medium transition-colors",
+              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
               isActive("/empieza") 
                 ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
@@ -49,7 +49,7 @@ function Navigation() {
           <button 
             onClick={() => navigate("/videos")}
             className={cn(
-              "px-4 py-3 text-sm font-medium transition-colors",
+              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
               isActive("/videos") 
                 ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
@@ -60,7 +60,7 @@ function Navigation() {
           <button 
             onClick={() => navigate("/quienes-somos")}
             className={cn(
-              "px-4 py-3 text-sm font-medium transition-colors",
+              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
               isActive("/quienes-somos") 
                 ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"

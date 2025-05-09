@@ -22,40 +22,46 @@ export default function Header() {
         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 md:gap-2">
           {/* Logo & Title */}
           <div className="flex items-center gap-3 justify-center md:justify-start">
-            <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-              <span className="text-white font-bold text-lg">DE</span>
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
+              <span className="text-white font-bold text-base md:text-lg">DE</span>
             </div>
-            <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
+            <h1 className="font-heading font-bold text-2xl md:text-4xl text-[#4A6FA5] tracking-tight">
               AlemanIA
             </h1>
           </div>
           
           {/* Cita de Carlos V - Centrada */}
-          <div className="italic text-center">
+          <div className="italic text-center hidden sm:block">
             <p className="text-sm md:text-base text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
             <p className="text-sm md:text-base text-gray-600 font-medium">Carlos V de Alemania y I de España (1500-1558)</p>
           </div>
           
           {/* Buttons */}
-          <div className="flex flex-row gap-2 justify-center md:justify-end">
+          <div className="flex flex-col md:flex-row gap-2 justify-center md:justify-end">
             <Button 
               variant="default" 
-              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
+              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center gap-2 transition-colors"
               onClick={handleTipButton}
             >
               <Heart className="h-4 w-4" />
-              <span className="hidden sm:inline">Invítanos a un café</span>
+              <span className="text-xs md:text-sm">Invítanos a un café</span>
             </Button>
             
             <Button 
               variant="default" 
-              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-4 py-2 rounded-full flex items-center gap-2 transition-colors"
+              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center gap-2 transition-colors"
               onClick={() => setFeedbackDialogOpen(true)}
             >
               <MessageSquare className="h-4 w-4" />
-              <span className="hidden sm:inline">Tu feedback nos interesa</span>
+              <span className="text-xs md:text-sm">Tu feedback nos interesa</span>
             </Button>
           </div>
+        </div>
+        
+        {/* Cita de Carlos V para móviles */}
+        <div className="italic text-center sm:hidden mt-2">
+          <p className="text-xs text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
+          <p className="text-xs text-gray-600 font-medium">Carlos V (1500-1558)</p>
         </div>
       </div>
       
