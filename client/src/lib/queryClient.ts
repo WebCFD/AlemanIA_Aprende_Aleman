@@ -29,7 +29,15 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    // Handle both string and array query keys
+    let url = queryKey[0] as string;
+    
+    // If the second element is a string, assume it's a parameter
+    if (queryKey.length > 1 && typeof queryKey[1] === 'string') {
+      url = `${url}?difficulty=${queryKey[1]}`;
+    }
+    
+    const res = await fetch(url, {
       credentials: "include",
     });
 
