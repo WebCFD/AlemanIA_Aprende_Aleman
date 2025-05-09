@@ -15,11 +15,11 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-            <span className="text-white font-bold">DE</span>
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
+            <span className="text-white font-bold text-lg">DE</span>
           </div>
-          <h1 className="font-heading font-bold text-xl md:text-2xl text-[#4A6FA5]">
+          <h1 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] tracking-tight">
             Alemanía
           </h1>
         </div>
