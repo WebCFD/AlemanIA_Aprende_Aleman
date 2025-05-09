@@ -16,7 +16,7 @@ export default function QuienesSomos() {
           </h3>
           
           <p className="text-gray-600 mb-10">
-            AlemanIA con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
+            AlemanIA nace con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
             Combinamos la potencia de la inteligencia artificial con métodos pedagógicos probados. 
             Aprender un idioma debe ser una experiencia personalizada, adaptada a tus necesidades. 
             Deja que nuestra experiencia te sirva de ayuda.
