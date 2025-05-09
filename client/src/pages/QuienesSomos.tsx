@@ -1,4 +1,5 @@
 import { Users, Heart, BookOpen, MailIcon } from "lucide-react";
+import luisTaboadaImg from "../assets/LuisTaboada.png";
 
 export default function QuienesSomos() {
   return (
@@ -32,20 +33,26 @@ export default function QuienesSomos() {
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {/* Perfil 1 */}
-            <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-500 text-2xl">CV</span>
+            {/* Perfil de Luis Taboada */}
+            <div className="bg-white rounded-lg p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="mb-5 mx-auto flex justify-center">
+                <img 
+                  src={luisTaboadaImg} 
+                  alt="Luis Taboada" 
+                  className="w-32 h-32 object-cover rounded-full border-2 border-[#4A6FA5]"
+                />
               </div>
-              <h4 className="text-lg font-medium text-center text-gray-800 mb-1">Carlos Villena</h4>
-              <p className="text-sm text-center text-[#4A6FA5] mb-3">Fundador & Lingüista</p>
-              <p className="text-sm text-gray-600 text-center">
-                Profesor de alemán con más de 10 años de experiencia y apasionado por 
-                la tecnología educativa y la IA.
+              <h4 className="text-lg font-bold text-center text-gray-800 mb-2">Luis Taboada</h4>
+              <p className="text-sm text-center text-[#4A6FA5] font-medium mb-3">Del diccionario a la fluidez: tu guía confiable en alemán</p>
+              <p className="text-sm text-gray-600 mb-3">
+                Del "Was ist das?" al "Natürlich!" – Luis ha recorrido todo el camino. Traductor certificado con años viviendo en Alemania, combina rigor lingüístico con métodos que funcionan para hispanohablantes. Cuando no está desglosando el Konjunktiv II, disfruta de buena música y apoya incondicionalmente a su equipo local desde las gradas.
               </p>
+              <div className="bg-blue-50 p-3 rounded-lg italic text-sm text-gray-700">
+                ¿Dudas con el alemán? Luis las ha tenido todas... y las ha resuelto.
+              </div>
             </div>
             
-            {/* Perfil 2 */}
+            {/* Perfil 2 (placeholder) */}
             <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
               <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-gray-500 text-2xl">AG</span>
