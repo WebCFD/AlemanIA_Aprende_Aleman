@@ -21,7 +21,7 @@ function Navigation() {
   };
   
   return (
-    <div className="bg-white border-b border-gray-200 mb-6">
+    <div className="bg-white mb-6">
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex justify-end space-x-4">
           <button 
@@ -29,7 +29,7 @@ function Navigation() {
             className={cn(
               "px-4 py-3 text-sm font-medium transition-colors",
               isActive("/") 
-                ? "text-[#4A6FA5] border-b-2 border-[#4A6FA5]" 
+                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
@@ -40,7 +40,7 @@ function Navigation() {
             className={cn(
               "px-4 py-3 text-sm font-medium transition-colors",
               isActive("/empieza") 
-                ? "text-[#4A6FA5] border-b-2 border-[#4A6FA5]" 
+                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
@@ -51,7 +51,7 @@ function Navigation() {
             className={cn(
               "px-4 py-3 text-sm font-medium transition-colors",
               isActive("/videos") 
-                ? "text-[#4A6FA5] border-b-2 border-[#4A6FA5]" 
+                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
@@ -62,7 +62,7 @@ function Navigation() {
             className={cn(
               "px-4 py-3 text-sm font-medium transition-colors",
               isActive("/quienes-somos") 
-                ? "text-[#4A6FA5] border-b-2 border-[#4A6FA5]" 
+                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
