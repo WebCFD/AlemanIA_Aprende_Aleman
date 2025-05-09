@@ -39,14 +39,15 @@ export default function VocabularyCard({
     data: currentWord, 
     refetch: fetchNewWord,
     isLoading: isLoadingWord,
-  } = useQuery({
+  } = useQuery<Word>({
     queryKey: ['/api/vocabulary/random', difficulty],
     retry: false,
-  });
+    refetchOnWindowFocus: false,
+  } as any);
 
   // Verify translation
   const verifyMutation = useMutation({
-    mutationFn: async ({ germanWord, translation }: { germanWord: string; translation: string }) => {
+    mutationFn: async ({ germanWord, translation, difficulty }: { germanWord: string; translation: string; difficulty: Difficulty }) => {
       const response = await apiRequest('POST', '/api/vocabulary/verify', { 
         germanWord, 
         translation,
