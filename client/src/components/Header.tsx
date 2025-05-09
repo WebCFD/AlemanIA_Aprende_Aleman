@@ -32,10 +32,10 @@ export default function Header() {
             </div>
             
             {/* Buttons - siempre en columna a la derecha */}
-            <div className="flex flex-col gap-2 items-end">
+            <div className="flex flex-col gap-2 items-center">
               <Button 
                 variant="default" 
-                className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center gap-2 transition-colors w-auto"
+                className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
                 onClick={handleTipButton}
               >
                 <Heart className="h-4 w-4" />
@@ -44,7 +44,7 @@ export default function Header() {
               
               <Button 
                 variant="default" 
-                className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center gap-2 transition-colors w-auto"
+                className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-3 py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-2 transition-colors w-40 md:w-48"
                 onClick={() => setFeedbackDialogOpen(true)}
               >
                 <MessageSquare className="h-4 w-4" />
