@@ -1,4 +1,4 @@
-import { Users, Heart, BookOpen, MailIcon } from "lucide-react";
+import { Users, Heart, BookOpen, MailIcon, Target } from "lucide-react";
 import luisTaboadaImg from "../assets/LuisTaboada.png";
 import juanReinaImg from "../assets/JuanReina.png";
 
@@ -9,9 +9,11 @@ export default function QuienesSomos() {
         <h1 className="text-3xl font-bold text-[#4A6FA5] mb-6">Quiénes Somos</h1>
         
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          {/* Misión */}
+          <h3 className="text-xl font-semibold text-[#4A6FA5] mb-6 flex items-center">
+            <Target className="w-5 h-5 mr-2" /> 
             Nuestra misión
-          </h2>
+          </h3>
           
           <p className="text-gray-600 mb-10">
             AlemanIA con el objetivo de hacer el aprendizaje del alemán, accesible y efectivo. 
