@@ -37,6 +37,7 @@ export default function VocabularyCard({
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
+  const [selectedReverseWord, setSelectedReverseWord] = useState<Word | null>(null);
   const { toast } = useToast();
   
   // Fetch a random word based on difficulty
@@ -199,12 +200,12 @@ export default function VocabularyCard({
 
     if (!currentWord) return;
 
-    if (isReverseMode && difficulty === "A") {
-      // Modo inverso: verificamos traducción español -> alemán
+    if (isReverseMode && difficulty === "A" && selectedReverseWord) {
+      // Modo inverso: verificamos traducción español -> alemán usando la palabra seleccionada
       verifyReverseMutation.mutate({ 
-        spanishWord: currentWord.spanish, 
+        spanishWord: selectedReverseWord.spanish, 
         translation: translation.trim(),
-        germanWord: currentWord.german
+        germanWord: selectedReverseWord.german
       });
     } else {
       // Modo normal: verificamos traducción alemán -> español
@@ -229,6 +230,7 @@ export default function VocabularyCard({
     setShowFeedback(false);
     setIsCorrect(null);
     setExampleSentence(undefined);
+    setSelectedReverseWord(null);
     
     // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
     if (isReverseMode) {
@@ -243,12 +245,10 @@ export default function VocabularyCard({
       if (lastCorrectWords.length > 0) {
         const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
         // Usar directamente la palabra de la lista de correctas
-        // Nos saltamos fetchNewWord() y simulamos "currentWord"
         const selectedWord = lastCorrectWords[randomIndex];
         
-        // Actualizamos el cache de la consulta para simular que obtuvimos esta palabra
-        // de la API. Esto hace que la UI se actualice sin una petición real.
-        queryClient.setQueryData(['/api/vocabulary/random', difficulty], selectedWord);
+        // Guardar la palabra seleccionada en el estado
+        setSelectedReverseWord(selectedWord);
         console.log("Seleccionada palabra para modo inverso:", selectedWord);
       } else {
         // Si por alguna razón no hay palabras en el historial, buscar una nueva
@@ -303,7 +303,9 @@ export default function VocabularyCard({
             <div className="animate-pulse inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1 min-w-[100px] h-12"></div>
           ) : (
             <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
-              {isReverseMode ? currentWord?.spanish : currentWord?.german || "..."}
+              {isReverseMode 
+                ? (selectedReverseWord?.spanish || "...") 
+                : (currentWord?.german || "...")}
             </span>
           )}
           {isReverseMode ? (
@@ -358,8 +360,8 @@ export default function VocabularyCard({
                   <span className="font-medium">¡Correcto!</span>
                 </div>
                 <p className="text-neutral-400 ml-7">
-                  {isReverseMode ? (
-                    <>{currentWord?.spanish} = {currentWord?.german}</>
+                  {isReverseMode && selectedReverseWord ? (
+                    <>{selectedReverseWord.spanish} = {selectedReverseWord.german}</>
                   ) : (
                     <>{currentWord?.german} = {currentWord?.spanish}</>
                   )}
@@ -372,8 +374,8 @@ export default function VocabularyCard({
                   <span className="font-medium">Incorrecto</span>
                 </div>
                 <p className="text-neutral-400 ml-7">
-                  {isReverseMode ? (
-                    <>{currentWord?.spanish} = {currentWord?.german}</>
+                  {isReverseMode && selectedReverseWord ? (
+                    <>{selectedReverseWord.spanish} = {selectedReverseWord.german}</>
                   ) : (
                     <>{currentWord?.german} = {currentWord?.spanish}</>
                   )}
