@@ -48,3 +48,10 @@ export interface VerifyTranslationResponse {
   correctTranslation?: string;
   explanation?: string;
 }
+
+export interface VerifyReverseTranslationResponse {
+  isCorrect: boolean;
+  correctTranslation?: string;
+  explanation?: string;
+  exampleSentence?: string;
+}

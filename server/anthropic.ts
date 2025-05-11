@@ -1,5 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { VerifyTranslationResponse } from '@shared/schema';
+import { VerifyTranslationResponse, VerifyReverseTranslationResponse } from '@shared/schema';
 
 // Utilizamos Claude 3 Haiku para verificación de traducciones - el modelo más económico y rápido
 const anthropic = new Anthropic({
@@ -92,6 +92,116 @@ export async function verifyTranslation(
       explanation: isExactMatch 
         ? "Tu traducción es correcta." 
         : "Tu traducción no coincide con la esperada."
+    };
+  }
+}
+
+/**
+ * Verifica una traducción del español al alemán usando Claude
+ * @param spanishWord La palabra en español a traducir
+ * @param userTranslation La traducción al alemán propuesta por el usuario
+ * @param correctGermanWord La traducción correcta en alemán
+ * @returns Objeto con el resultado de la verificación
+ */
+export async function verifyReverseTranslation(
+  spanishWord: string,
+  userTranslation: string,
+  correctGermanWord: string
+): Promise<VerifyReverseTranslationResponse> {
+  try {
+    // Comprobación simple para casos de fallo de API
+    const simplifiedUserTranslation = userTranslation.toLowerCase().trim();
+    const simplifiedCorrectTranslation = correctGermanWord.toLowerCase().trim();
+    
+    if (simplifiedUserTranslation === simplifiedCorrectTranslation) {
+      // Generar una frase de ejemplo simple para casos de coincidencia exacta
+      return {
+        isCorrect: true,
+        correctTranslation: correctGermanWord,
+        exampleSentence: `Beispiel: Ich benutze das Wort "${correctGermanWord}" in einem Satz.`,
+        explanation: "¡Correcto! Tu traducción es exacta."
+      };
+    }
+    
+    const prompt = `
+    Estás evaluando traducciones del español al alemán para una aplicación de aprendizaje de idiomas.
+    
+    Palabra en español: "${spanishWord}"
+    Traducción correcta al alemán: "${correctGermanWord}"
+    Traducción propuesta por el usuario: "${userTranslation}"
+    
+    Tarea:
+    1. Determina si la traducción del usuario es correcta. Considera:
+       - El usuario debe incluir el artículo correcto (der, die, das) si es un sustantivo
+       - Variaciones ortográficas menores pueden ser aceptables
+       - Sinónimos exactos pueden ser aceptables
+       
+    2. Si la respuesta es correcta:
+       - Genera una frase de ejemplo en alemán utilizando la palabra
+       - Esta frase debe ser simple y adecuada para principiantes
+       
+    3. Si la respuesta es incorrecta:
+       - Explica brevemente por qué es incorrecta
+       - Menciona cuál sería la traducción correcta, incluyendo el artículo si es un sustantivo
+    
+    Responde en formato JSON con estas propiedades:
+    {
+      "isCorrect": boolean,
+      "explanation": string (explicación en español),
+      "correctTranslation": string (la palabra correcta en alemán con artículo si corresponde),
+      "exampleSentence": string (SOLO si es correcta, una frase de ejemplo en alemán)
+    }
+    `;
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 1000,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    // Analizar la respuesta
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      console.error("Formato de respuesta inesperado de Claude:", response.content);
+      return { 
+        isCorrect: false, 
+        correctTranslation: correctGermanWord,
+        explanation: "No pudimos verificar tu respuesta. La traducción correcta es: " + correctGermanWord
+      };
+    }
+    
+    const responseText = response.content[0].text;
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    
+    if (!jsonMatch) {
+      console.error("Error al analizar JSON de la respuesta de Claude:", responseText);
+      return { 
+        isCorrect: false, 
+        correctTranslation: correctGermanWord,
+        explanation: "No pudimos verificar tu respuesta. La traducción correcta es: " + correctGermanWord
+      };
+    }
+    
+    const result = JSON.parse(jsonMatch[0]);
+    
+    return {
+      isCorrect: result.isCorrect,
+      correctTranslation: correctGermanWord,
+      explanation: result.explanation,
+      exampleSentence: result.exampleSentence
+    };
+  } catch (error) {
+    console.error("Error al verificar traducción inversa con Claude:", error);
+    
+    // Fallback a comparación simple cuando la API falla
+    const isExactMatch = userTranslation.toLowerCase().trim() === correctGermanWord.toLowerCase().trim();
+    
+    return {
+      isCorrect: isExactMatch,
+      correctTranslation: correctGermanWord,
+      explanation: isExactMatch 
+        ? "Tu traducción es correcta." 
+        : "Tu traducción no coincide con la esperada.",
+      exampleSentence: isExactMatch ? `Beispiel: Ich benutze das Wort "${correctGermanWord}" häufig.` : undefined
     };
   }
 }

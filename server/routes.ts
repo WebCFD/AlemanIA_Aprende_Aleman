@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { verifyTranslationSchema, type Difficulty } from "@shared/schema";
-import { verifyTranslation } from "./anthropic";
+import { verifyTranslation, verifyReverseTranslation } from "./anthropic";
 import { handleSendFeedback } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -73,6 +73,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error verifying translation:", error);
       return res.status(500).json({ message: "Server error" });
+    }
+  });
+  
+  // Verify reverse translation (español -> alemán)
+  app.post("/api/vocabulary/verify-reverse", async (req, res) => {
+    try {
+      const { spanishWord, translation, germanWord } = req.body;
+      
+      // Validar datos de entrada
+      if (!spanishWord || !translation || !germanWord) {
+        return res.status(400).json({ message: "Datos incompletos. Se requiere spanishWord, translation y germanWord." });
+      }
+      
+      // Para casos simples, hacer comparación directa
+      if (translation.toLowerCase().trim() === germanWord.toLowerCase().trim()) {
+        return res.json({ 
+          isCorrect: true,
+          correctTranslation: germanWord,
+          explanation: "¡Correcto! Tu traducción es exacta.",
+          exampleSentence: `Beispiel: Ich benutze das Wort "${germanWord}" in einem Satz.`
+        });
+      }
+      
+      // Para traducciones más complejas, usar Claude
+      const verificationResult = await verifyReverseTranslation(
+        spanishWord,
+        translation,
+        germanWord
+      );
+      
+      return res.json(verificationResult);
+      
+    } catch (error) {
+      console.error("Error al verificar traducción inversa:", error);
+      return res.status(500).json({ message: "Error interno del servidor" });
     }
   });
   
