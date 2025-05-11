@@ -17,7 +17,7 @@ export interface IStorage {
 
 // German vocabulary data for different difficulty levels
 const LEVEL_A_WORDS: InsertWord[] = [
-  // Palabras originales
+  // Palabras básicas ya existentes
   { german: "Hallo", spanish: "hola", example: "Hallo, wie geht es dir?", exampleTranslation: "Hola, ¿cómo estás?", difficulty: "A" },
   { german: "Danke", spanish: "gracias", example: "Vielen Danke für deine Hilfe.", exampleTranslation: "Muchas gracias por tu ayuda.", difficulty: "A" },
   { german: "Bitte", spanish: "por favor", example: "Kannst du mir bitte helfen?", exampleTranslation: "¿Puedes ayudarme, por favor?", difficulty: "A" },
@@ -29,7 +29,7 @@ const LEVEL_A_WORDS: InsertWord[] = [
   { german: "Freund", spanish: "amigo", example: "Er ist mein Freund.", exampleTranslation: "Él es mi amigo.", difficulty: "A" },
   { german: "Familie", spanish: "familia", example: "Meine Familie ist groß.", exampleTranslation: "Mi familia es grande.", difficulty: "A" },
   
-  // Nuevas palabras añadidas
+  // Nueva lista de palabras del usuario - todas en nivel A
   { german: "Mann", spanish: "hombre", example: "Der Mann geht zur Arbeit.", exampleTranslation: "El hombre va al trabajo.", difficulty: "A" },
   { german: "Frau", spanish: "mujer", example: "Die Frau liest ein Buch.", exampleTranslation: "La mujer lee un libro.", difficulty: "A" },
   { german: "Kind", spanish: "niño/a", example: "Das Kind spielt im Garten.", exampleTranslation: "El niño juega en el jardín.", difficulty: "A" },
@@ -49,34 +49,83 @@ const LEVEL_A_WORDS: InsertWord[] = [
   { german: "Wasser", spanish: "agua", example: "Ich trinke Wasser.", exampleTranslation: "Bebo agua.", difficulty: "A" },
   { german: "Wort", spanish: "palabra", example: "Dieses Wort ist schwer.", exampleTranslation: "Esta palabra es difícil.", difficulty: "A" },
   { german: "Schule", spanish: "escuela", example: "Die Kinder gehen zur Schule.", exampleTranslation: "Los niños van a la escuela.", difficulty: "A" },
-  { german: "Land", spanish: "país", example: "Deutschland ist ein schönes Land.", exampleTranslation: "Alemania es un hermoso país.", difficulty: "A" }
+  { german: "Land", spanish: "país", example: "Deutschland ist ein schönes Land.", exampleTranslation: "Alemania es un hermoso país.", difficulty: "A" },
+  { german: "Vater", spanish: "padre", example: "Mein Vater arbeitet viel.", exampleTranslation: "Mi padre trabaja mucho.", difficulty: "A" },
+  { german: "Mutter", spanish: "madre", example: "Meine Mutter kocht gerne.", exampleTranslation: "A mi madre le gusta cocinar.", difficulty: "A" },
+  { german: "Gesicht", spanish: "cara", example: "Sein Gesicht ist bekannt.", exampleTranslation: "Su cara es conocida.", difficulty: "A" },
+  { german: "Name", spanish: "nombre", example: "Wie ist dein Name?", exampleTranslation: "¿Cuál es tu nombre?", difficulty: "A" },
+  { german: "Straße", spanish: "calle", example: "Die Straße ist breit.", exampleTranslation: "La calle es amplia.", difficulty: "A" },
+  { german: "Buch", spanish: "libro", example: "Ich lese ein Buch.", exampleTranslation: "Leo un libro.", difficulty: "A" },
+  { german: "Tisch", spanish: "mesa", example: "Das Buch liegt auf dem Tisch.", exampleTranslation: "El libro está sobre la mesa.", difficulty: "A" },
+  { german: "Tür", spanish: "puerta", example: "Die Tür ist geschlossen.", exampleTranslation: "La puerta está cerrada.", difficulty: "A" },
+  { german: "Fenster", spanish: "ventana", example: "Öffne das Fenster, bitte.", exampleTranslation: "Abre la ventana, por favor.", difficulty: "A" },
+  { german: "Raum", spanish: "espacio/habitación", example: "Der Raum ist groß.", exampleTranslation: "El espacio es grande.", difficulty: "A" },
+  { german: "Nacht", spanish: "noche", example: "Die Nacht ist ruhig.", exampleTranslation: "La noche está tranquila.", difficulty: "A" },
+  { german: "Bild", spanish: "imagen/cuadro", example: "Das Bild ist schön.", exampleTranslation: "La imagen es bonita.", difficulty: "A" },
+  { german: "Morgen", spanish: "mañana", example: "Morgen gehe ich einkaufen.", exampleTranslation: "Mañana voy de compras.", difficulty: "A" },
+  { german: "Sache", spanish: "cosa", example: "Das ist eine wichtige Sache.", exampleTranslation: "Eso es una cosa importante.", difficulty: "A" },
+  { german: "Auto", spanish: "coche", example: "Das Auto ist neu.", exampleTranslation: "El coche es nuevo.", difficulty: "A" },
+  { german: "Platz", spanish: "lugar/plaza", example: "Es gibt keinen Platz mehr.", exampleTranslation: "Ya no hay lugar.", difficulty: "A" },
+  { german: "Stunde", spanish: "hora", example: "Die Stunde ist fast vorbei.", exampleTranslation: "La hora casi ha terminado.", difficulty: "A" },
+  { german: "Ende", spanish: "fin", example: "Das ist das Ende des Films.", exampleTranslation: "Este es el final de la película.", difficulty: "A" },
+  { german: "Sohn", spanish: "hijo", example: "Ihr Sohn ist sehr intelligent.", exampleTranslation: "Su hijo es muy inteligente.", difficulty: "A" },
+  { german: "Tochter", spanish: "hija", example: "Ihre Tochter spielt Klavier.", exampleTranslation: "Su hija toca el piano.", difficulty: "A" },
+  { german: "Herz", spanish: "corazón", example: "Mein Herz schlägt schnell.", exampleTranslation: "Mi corazón late rápido.", difficulty: "A" },
+  { german: "Lehrer", spanish: "profesor", example: "Der Lehrer erklärt gut.", exampleTranslation: "El profesor explica bien.", difficulty: "A" },
+  { german: "Stimme", spanish: "voz", example: "Sie hat eine schöne Stimme.", exampleTranslation: "Ella tiene una hermosa voz.", difficulty: "A" },
+  { german: "Beispiel", spanish: "ejemplo", example: "Das ist ein gutes Beispiel.", exampleTranslation: "Este es un buen ejemplo.", difficulty: "A" },
+  { german: "Körper", spanish: "cuerpo", example: "Ein gesunder Körper.", exampleTranslation: "Un cuerpo sano.", difficulty: "A" },
+  { german: "Problem", spanish: "problema", example: "Das ist kein Problem.", exampleTranslation: "Eso no es un problema.", difficulty: "A" },
+  { german: "Punkt", spanish: "punto", example: "Das ist ein wichtiger Punkt.", exampleTranslation: "Ese es un punto importante.", difficulty: "A" },
+  { german: "Seite", spanish: "página/lado", example: "Auf welcher Seite steht das?", exampleTranslation: "¿En qué página está eso?", difficulty: "A" },
+  { german: "Musik", spanish: "música", example: "Ich höre gerne Musik.", exampleTranslation: "Me gusta escuchar música.", difficulty: "A" },
+  { german: "Frage", spanish: "pregunta", example: "Ich habe eine Frage.", exampleTranslation: "Tengo una pregunta.", difficulty: "A" },
+  { german: "Geld", spanish: "dinero", example: "Ich habe kein Geld dabei.", exampleTranslation: "No llevo dinero conmigo.", difficulty: "A" },
+  { german: "Zimmer", spanish: "habitación", example: "Das Zimmer ist sauber.", exampleTranslation: "La habitación está limpia.", difficulty: "A" },
+  { german: "Eltern", spanish: "padres", example: "Meine Eltern leben in Berlin.", exampleTranslation: "Mis padres viven en Berlín.", difficulty: "A" },
+  { german: "Idee", spanish: "idea", example: "Das ist eine gute Idee.", exampleTranslation: "Esa es una buena idea.", difficulty: "A" },
+  { german: "Beruf", spanish: "profesión", example: "Was ist dein Beruf?", exampleTranslation: "¿Cuál es tu profesión?", difficulty: "A" },
+  { german: "Uhr", spanish: "reloj", example: "Wie spät ist es auf deiner Uhr?", exampleTranslation: "¿Qué hora es en tu reloj?", difficulty: "A" },
+  { german: "Film", spanish: "película", example: "Der Film war gut.", exampleTranslation: "La película fue buena.", difficulty: "A" },
+  { german: "Bruder", spanish: "hermano", example: "Mein Bruder ist älter als ich.", exampleTranslation: "Mi hermano es mayor que yo.", difficulty: "A" },
+  { german: "Freundin", spanish: "amiga", example: "Sie ist meine beste Freundin.", exampleTranslation: "Ella es mi mejor amiga.", difficulty: "A" },
+  { german: "Fuß", spanish: "pie", example: "Mein Fuß schmerzt.", exampleTranslation: "Me duele el pie.", difficulty: "A" },
+  { german: "Haar", spanish: "pelo", example: "Sie hat langes Haar.", exampleTranslation: "Ella tiene el pelo largo.", difficulty: "A" },
+  { german: "Tier", spanish: "animal", example: "Das Tier ist sehr süß.", exampleTranslation: "El animal es muy lindo.", difficulty: "A" },
+  { german: "Mädchen", spanish: "chica", example: "Das Mädchen singt schön.", exampleTranslation: "La chica canta bonito.", difficulty: "A" },
+  { german: "Teil", spanish: "parte", example: "Das ist ein Teil des Problems.", exampleTranslation: "Eso es parte del problema.", difficulty: "A" },
+  { german: "Minute", spanish: "minuto", example: "Es dauert nur eine Minute.", exampleTranslation: "Solo toma un minuto.", difficulty: "A" },
+  { german: "Entwicklung", spanish: "desarrollo", example: "Die Entwicklung ist wichtig.", exampleTranslation: "El desarrollo es importante.", difficulty: "A" },
+  { german: "Mund", spanish: "boca", example: "Öffne deinen Mund bitte.", exampleTranslation: "Abre tu boca, por favor.", difficulty: "A" },
+  { german: "Computer", spanish: "ordenador", example: "Mein Computer ist neu.", exampleTranslation: "Mi ordenador es nuevo.", difficulty: "A" },
+  { german: "Antwort", spanish: "respuesta", example: "Ich kenne die Antwort nicht.", exampleTranslation: "No conozco la respuesta.", difficulty: "A" },
+  { german: "Person", spanish: "persona", example: "Diese Person kenne ich nicht.", exampleTranslation: "No conozco a esta persona.", difficulty: "A" },
+  { german: "Bier", spanish: "cerveza", example: "Ein Glas Bier, bitte.", exampleTranslation: "Un vaso de cerveza, por favor.", difficulty: "A" },
+  { german: "Telefon", spanish: "teléfono", example: "Mein Telefon ist kaputt.", exampleTranslation: "Mi teléfono está roto.", difficulty: "A" },
+  { german: "Blume", spanish: "flor", example: "Die Blume ist schön.", exampleTranslation: "La flor es bonita.", difficulty: "A" },
+  { german: "Brot", spanish: "pan", example: "Das Brot ist frisch.", exampleTranslation: "El pan está fresco.", difficulty: "A" },
+  { german: "Brief", spanish: "carta", example: "Ich schreibe einen Brief.", exampleTranslation: "Estoy escribiendo una carta.", difficulty: "A" },
+  { german: "Interesse", spanish: "interés", example: "Ich habe kein Interesse daran.", exampleTranslation: "No tengo interés en eso.", difficulty: "A" },
+  { german: "Baum", spanish: "árbol", example: "Der Baum ist sehr alt.", exampleTranslation: "El árbol es muy viejo.", difficulty: "A" },
+  { german: "Arzt", spanish: "médico", example: "Der Arzt untersucht den Patienten.", exampleTranslation: "El médico examina al paciente.", difficulty: "A" },
+  { german: "Zug", spanish: "tren", example: "Der Zug ist pünktlich.", exampleTranslation: "El tren está puntual.", difficulty: "A" },
+  { german: "Sprache", spanish: "idioma", example: "Deutsch ist eine schöne Sprache.", exampleTranslation: "El alemán es un bonito idioma.", difficulty: "A" },
+  { german: "Küche", spanish: "cocina", example: "Die Küche ist sauber.", exampleTranslation: "La cocina está limpia.", difficulty: "A" },
+  { german: "Grund", spanish: "razón", example: "Es gibt keinen Grund zur Sorge.", exampleTranslation: "No hay razón para preocuparse.", difficulty: "A" },
+  { german: "Hotel", spanish: "hotel", example: "Das Hotel ist komfortabel.", exampleTranslation: "El hotel es cómodo.", difficulty: "A" },
+  { german: "Zeitung", spanish: "periódico", example: "Ich lese die Zeitung.", exampleTranslation: "Leo el periódico.", difficulty: "A" },
+  { german: "Blut", spanish: "sangre", example: "Er hat Blut gespendet.", exampleTranslation: "Él donó sangre.", difficulty: "A" },
+  { german: "Fall", spanish: "caso", example: "In diesem Fall müssen wir handeln.", exampleTranslation: "En este caso debemos actuar.", difficulty: "A" },
+  { german: "Maschine", spanish: "máquina", example: "Die Maschine funktioniert nicht.", exampleTranslation: "La máquina no funciona.", difficulty: "A" },
+  { german: "Klasse", spanish: "clase", example: "Meine Klasse ist groß.", exampleTranslation: "Mi clase es grande.", difficulty: "A" },
+  { german: "Lösung", spanish: "solución", example: "Das ist keine gute Lösung.", exampleTranslation: "Esa no es una buena solución.", difficulty: "A" },
+  { german: "Student", spanish: "estudiante", example: "Er ist ein fleißiger Student.", exampleTranslation: "Él es un estudiante aplicado.", difficulty: "A" },
+  { german: "Ecke", spanish: "esquina", example: "Wir treffen uns an der Ecke.", exampleTranslation: "Nos encontramos en la esquina.", difficulty: "A" }
 ];
 
-const LEVEL_B_WORDS: InsertWord[] = [
-  { german: "Bedeutung", spanish: "significado", example: "Was ist die Bedeutung dieses Wortes?", exampleTranslation: "¿Cuál es el significado de esta palabra?", difficulty: "B" },
-  { german: "Erfahrung", spanish: "experiencia", example: "Ich habe viel Erfahrung in diesem Bereich.", exampleTranslation: "Tengo mucha experiencia en este campo.", difficulty: "B" },
-  { german: "Gelegenheit", spanish: "oportunidad", example: "Das ist eine gute Gelegenheit.", exampleTranslation: "Esta es una buena oportunidad.", difficulty: "B" },
-  { german: "Entwicklung", spanish: "desarrollo", example: "Die Entwicklung neuer Technologien.", exampleTranslation: "El desarrollo de nuevas tecnologías.", difficulty: "B" },
-  { german: "Verantwortung", spanish: "responsabilidad", example: "Er hat viel Verantwortung im Job.", exampleTranslation: "Él tiene mucha responsabilidad en el trabajo.", difficulty: "B" },
-  { german: "Beziehung", spanish: "relación", example: "Wir haben eine gute Beziehung.", exampleTranslation: "Tenemos una buena relación.", difficulty: "B" },
-  { german: "Entscheidung", spanish: "decisión", example: "Das war eine schwierige Entscheidung.", exampleTranslation: "Esa fue una decisión difícil.", difficulty: "B" },
-  { german: "Forschung", spanish: "investigación", example: "Die Forschung ist wichtig.", exampleTranslation: "La investigación es importante.", difficulty: "B" },
-  { german: "Möglichkeit", spanish: "posibilidad", example: "Es gibt viele Möglichkeiten.", exampleTranslation: "Hay muchas posibilidades.", difficulty: "B" },
-  { german: "Gesellschaft", spanish: "sociedad", example: "Die moderne Gesellschaft.", exampleTranslation: "La sociedad moderna.", difficulty: "B" }
-];
-
-const LEVEL_C_WORDS: InsertWord[] = [
-  { german: "Auseinandersetzung", spanish: "confrontación", example: "Eine intellektuelle Auseinandersetzung mit dem Thema.", exampleTranslation: "Una confrontación intelectual con el tema.", difficulty: "C" },
-  { german: "Gewissenhaftigkeit", spanish: "escrupulosidad", example: "Seine Gewissenhaftigkeit bei der Arbeit ist bemerkenswert.", exampleTranslation: "Su escrupulosidad en el trabajo es notable.", difficulty: "C" },
-  { german: "Rechtschaffenheit", spanish: "rectitud", example: "Die Rechtschaffenheit eines ehrlichen Menschen.", exampleTranslation: "La rectitud de una persona honesta.", difficulty: "C" },
-  { german: "Unverzichtbar", spanish: "indispensable", example: "Sein Beitrag war unverzichtbar für den Erfolg.", exampleTranslation: "Su contribución fue indispensable para el éxito.", difficulty: "C" },
-  { german: "Ausschlaggebend", spanish: "decisivo", example: "Das war der ausschlaggebende Faktor.", exampleTranslation: "Ese fue el factor decisivo.", difficulty: "C" },
-  { german: "Zweckentfremdung", spanish: "uso indebido", example: "Die Zweckentfremdung öffentlicher Mittel.", exampleTranslation: "El uso indebido de fondos públicos.", difficulty: "C" },
-  { german: "Beschleunigung", spanish: "aceleración", example: "Die Beschleunigung des Prozesses.", exampleTranslation: "La aceleración del proceso.", difficulty: "C" },
-  { german: "Beeinträchtigung", spanish: "deterioro", example: "Eine Beeinträchtigung der Gesundheit.", exampleTranslation: "Un deterioro de la salud.", difficulty: "C" },
-  { german: "Herausforderung", spanish: "desafío", example: "Das ist eine große Herausforderung.", exampleTranslation: "Este es un gran desafío.", difficulty: "C" },
-  { german: "Gleichberechtigung", spanish: "igualdad de derechos", example: "Die Gleichberechtigung aller Menschen.", exampleTranslation: "La igualdad de derechos de todas las personas.", difficulty: "C" }
-];
+// Mantenemos arrays vacíos para niveles B y C, ya que todas las palabras irán en nivel A
+const LEVEL_B_WORDS: InsertWord[] = [];
+const LEVEL_C_WORDS: InsertWord[] = [];
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
