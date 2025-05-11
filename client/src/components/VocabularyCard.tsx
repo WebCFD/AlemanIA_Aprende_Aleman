@@ -38,6 +38,7 @@ export default function VocabularyCard({
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const [selectedReverseWord, setSelectedReverseWord] = useState<Word | null>(null);
+  const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
   const { toast } = useToast();
   
   // Fetch a random word based on difficulty
@@ -118,6 +119,9 @@ export default function VocabularyCard({
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
       setExampleSentence(data.exampleSentence);
+      
+      // Guardamos la traducción correcta incluyendo el artículo
+      setCorrectResponse(data.correctTranslation);
       
       if (data.isCorrect) {
         onCorrectAnswer();
@@ -223,6 +227,7 @@ export default function VocabularyCard({
     setIsCorrect(null);
     setExampleSentence(undefined);
     setSelectedReverseWord(null);
+    setCorrectResponse(undefined);
     
     // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
     if (isReverseMode) {
