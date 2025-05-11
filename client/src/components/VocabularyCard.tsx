@@ -79,16 +79,8 @@ export default function VocabularyCard({
           // Aumentar contador de correctas consecutivas
           setConsecutiveCorrect(prev => {
             const newCount = prev + 1;
-            // Si llegamos a 5, preparar el modo inverso
-            if (newCount >= 5) {
-              // Restablecer contador
-              setTimeout(() => {
-                // Activar modo inverso y seleccionar aleatoriamente una de las últimas 5 palabras
-                setIsReverseMode(true);
-                // Resetear el contador
-                return 0;
-              }, 500);
-            }
+            // Si llegamos a 5, marcamos que en la próxima palabra debemos entrar en modo inverso
+            // pero no lo activamos automáticamente
             return newCount;
           });
         }
@@ -234,11 +226,14 @@ export default function VocabularyCard({
     
     // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
     if (isReverseMode) {
+      // Después de completar un ejercicio inverso, volvemos al modo normal
       setIsReverseMode(false);
       fetchNewWord();
-    } else if (isReverseMode === false && consecutiveCorrect >= 5 && difficulty === "A") {
+    } else if (consecutiveCorrect >= 5 && difficulty === "A") {
       // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
+      // Solo activamos modo inverso cuando el usuario pide siguiente palabra
       setIsReverseMode(true);
+      // Resetear el contador para el próximo ciclo
       setConsecutiveCorrect(0);
       
       // Seleccionar una palabra aleatoria de las últimas 5 correctas
@@ -303,9 +298,9 @@ export default function VocabularyCard({
             <div className="animate-pulse inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1 min-w-[100px] h-12"></div>
           ) : (
             <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
-              {isReverseMode 
-                ? (selectedReverseWord?.spanish || "...") 
-                : (currentWord?.german || "...")}
+              {isReverseMode && selectedReverseWord
+                ? selectedReverseWord.spanish
+                : currentWord?.german || "..."}
             </span>
           )}
           {isReverseMode ? (
