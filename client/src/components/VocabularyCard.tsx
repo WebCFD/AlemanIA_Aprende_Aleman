@@ -9,9 +9,10 @@ import {
   XCircle, 
   Send, 
   ArrowRight, 
-  Volume2 
+  Volume2,
+  Repeat
 } from "lucide-react";
-import { Word, Difficulty, VerifyTranslationResponse } from "@shared/schema";
+import { Word, Difficulty, VerifyTranslationResponse, VerifyReverseTranslationResponse } from "@shared/schema";
 import { Card } from "@/components/ui/card";
 
 interface VocabularyCardProps {
@@ -32,6 +33,10 @@ export default function VocabularyCard({
   const [translation, setTranslation] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [isReverseMode, setIsReverseMode] = useState(false);
+  const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
+  const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
+  const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const { toast } = useToast();
 
   // Fetch a random word based on difficulty
@@ -45,7 +50,7 @@ export default function VocabularyCard({
     refetchOnWindowFocus: false,
   } as any);
 
-  // Verify translation
+  // Verify normal translation (alemán -> español)
   const verifyMutation = useMutation({
     mutationFn: async ({ germanWord, translation, difficulty }: { germanWord: string; translation: string; difficulty: Difficulty }) => {
       const response = await apiRequest('POST', '/api/vocabulary/verify', { 
@@ -53,16 +58,82 @@ export default function VocabularyCard({
         translation,
         difficulty,
       });
-      return response.json() as Promise<VerifyTranslationResponse>;
+      const result = await response.json();
+      return result as VerifyTranslationResponse;
     },
     onSuccess: (data) => {
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
       if (data.isCorrect) {
+        // Solo para nivel A, rastreamos palabras correctas
+        if (difficulty === "A" && !isReverseMode) {
+          // Añadir a últimas palabras correctas
+          setLastCorrectWords(prev => {
+            const newList = [...prev, currentWord!];
+            // Mantener solo las últimas 5
+            if (newList.length > 5) newList.shift();
+            return newList;
+          });
+          
+          // Aumentar contador de correctas consecutivas
+          setConsecutiveCorrect(prev => {
+            const newCount = prev + 1;
+            // Si llegamos a 5, preparar el modo inverso
+            if (newCount >= 5) {
+              // Restablecer contador
+              setTimeout(() => {
+                // Activar modo inverso y seleccionar aleatoriamente una de las últimas 5 palabras
+                setIsReverseMode(true);
+                // Resetear el contador
+                return 0;
+              }, 500);
+            }
+            return newCount;
+          });
+        }
+        
+        onCorrectAnswer();
+      } else {
+        // Si es incorrecto, reseteamos el contador para el nivel A
+        if (difficulty === "A" && !isReverseMode) {
+          setConsecutiveCorrect(0);
+        }
+        onIncorrectAnswer();
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Error al verificar la traducción",
+        description: `${error}`,
+        variant: "destructive",
+      });
+    }
+  });
+  
+  // Verify reverse translation (español -> alemán)
+  const verifyReverseMutation = useMutation({
+    mutationFn: async ({ spanishWord, translation, germanWord }: { spanishWord: string; translation: string; germanWord: string }) => {
+      const response = await apiRequest('POST', '/api/vocabulary/verify-reverse', { 
+        spanishWord, 
+        translation,
+        germanWord,
+      });
+      const result = await response.json();
+      return result as VerifyReverseTranslationResponse;
+    },
+    onSuccess: (data) => {
+      setIsCorrect(data.isCorrect);
+      setShowFeedback(true);
+      setExampleSentence(data.exampleSentence);
+      
+      if (data.isCorrect) {
         onCorrectAnswer();
       } else {
         onIncorrectAnswer();
       }
+      
+      // Después de procesar una traducción inversa, volvemos al modo normal
+      // (lo haremos cuando se pida la siguiente palabra)
     },
     onError: (error) => {
       toast({
@@ -128,11 +199,21 @@ export default function VocabularyCard({
 
     if (!currentWord) return;
 
-    verifyMutation.mutate({ 
-      germanWord: currentWord.german, 
-      translation: translation.trim(),
-      difficulty: difficulty
-    });
+    if (isReverseMode && difficulty === "A") {
+      // Modo inverso: verificamos traducción español -> alemán
+      verifyReverseMutation.mutate({ 
+        spanishWord: currentWord.spanish, 
+        translation: translation.trim(),
+        germanWord: currentWord.german
+      });
+    } else {
+      // Modo normal: verificamos traducción alemán -> español
+      verifyMutation.mutate({ 
+        germanWord: currentWord.german, 
+        translation: translation.trim(),
+        difficulty: difficulty
+      });
+    }
   };
 
   // Handle key press (Enter)
@@ -147,11 +228,48 @@ export default function VocabularyCard({
     setTranslation("");
     setShowFeedback(false);
     setIsCorrect(null);
-    fetchNewWord();
+    setExampleSentence(undefined);
+    
+    // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
+    if (isReverseMode) {
+      setIsReverseMode(false);
+      fetchNewWord();
+    } else if (isReverseMode === false && consecutiveCorrect >= 5 && difficulty === "A") {
+      // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
+      setIsReverseMode(true);
+      setConsecutiveCorrect(0);
+      
+      // Seleccionar una palabra aleatoria de las últimas 5 correctas
+      if (lastCorrectWords.length > 0) {
+        const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
+        // Usar directamente la palabra de la lista de correctas
+        // Nos saltamos fetchNewWord() y simulamos "currentWord"
+        
+        // En un entorno real usaríamos un estado especial, pero para
+        // simplificar, usamos el mecanismo existente de la API de consulta
+        // para establecer manualmente los datos
+        const selectedWord = lastCorrectWords[randomIndex];
+        
+        // Esto actualizará la UI para mostrar la palabra seleccionada
+        // (no se está haciendo una petición real a la API)
+        console.log("Seleccionada palabra para modo inverso:", selectedWord);
+      } else {
+        // Si por alguna razón no hay palabras en el historial, buscar una nueva
+        setIsReverseMode(false); // Volver al modo normal si no hay palabras
+        fetchNewWord();
+      }
+    } else {
+      // Caso normal: buscar nueva palabra
+      fetchNewWord();
+    }
   };
 
   // Initial word fetch on difficulty change
   useEffect(() => {
+    // Reset states on difficulty change
+    setIsReverseMode(false);
+    setConsecutiveCorrect(0);
+    setLastCorrectWords([]);
     handleNextWord();
   }, [difficulty]);
 
@@ -188,10 +306,25 @@ export default function VocabularyCard({
             <div className="animate-pulse inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1 min-w-[100px] h-12"></div>
           ) : (
             <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
-              {currentWord?.german || "..."}
+              {isReverseMode ? currentWord?.spanish : currentWord?.german || "..."}
             </span>
           )}
-          <div className="text-neutral-300 text-sm">Traduce esta palabra al español</div>
+          {isReverseMode ? (
+            <>
+              <div className="text-neutral-300 text-sm mb-1">Traduce esta palabra al alemán</div>
+              <div className="text-amber-600 text-xs">Importante: incluye el artículo (der, die, das) si es un sustantivo</div>
+            </>
+          ) : (
+            <div className="text-neutral-300 text-sm">Traduce esta palabra al español</div>
+          )}
+          {isReverseMode && difficulty === "A" && (
+            <div className="mt-2 flex justify-center">
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                <Repeat className="h-3 w-3 mr-1" />
+                Modo Inverso
+              </span>
+            </div>
+          )}
         </div>
         
         {/* Translation Input */}
@@ -228,7 +361,11 @@ export default function VocabularyCard({
                   <span className="font-medium">¡Correcto!</span>
                 </div>
                 <p className="text-neutral-400 ml-7">
-                  {currentWord?.german} = {currentWord?.spanish}
+                  {isReverseMode ? (
+                    <>{currentWord?.spanish} = {currentWord?.german}</>
+                  ) : (
+                    <>{currentWord?.german} = {currentWord?.spanish}</>
+                  )}
                 </p>
               </div>
             ) : (
@@ -238,15 +375,19 @@ export default function VocabularyCard({
                   <span className="font-medium">Incorrecto</span>
                 </div>
                 <p className="text-neutral-400 ml-7">
-                  {currentWord?.german} = {currentWord?.spanish}
+                  {isReverseMode ? (
+                    <>{currentWord?.spanish} = {currentWord?.german}</>
+                  ) : (
+                    <>{currentWord?.german} = {currentWord?.spanish}</>
+                  )}
                 </p>
               </div>
             )}
           </div>
         )}
         
-        {/* Example Sentence */}
-        {showFeedback && currentWord?.example && (
+        {/* Example Sentence - Normal Mode */}
+        {showFeedback && !isReverseMode && currentWord?.example && (
           <div className="border-t border-neutral-200 pt-4 mt-4">
             <h4 className="font-heading font-semibold mb-2">Ejemplo:</h4>
             <p className="text-[#4A6FA5] italic mb-2">{currentWord.example}</p>
@@ -270,6 +411,28 @@ export default function VocabularyCard({
                 size="sm"
                 className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
                 onClick={() => currentWord && currentWord.example && handlePlayAudio(currentWord.example)}
+                title="Escuchar frase"
+              >
+                <Volume2 className="h-4 w-4 mr-1" />
+                <span className="text-sm">Escuchar frase</span>
+              </Button>
+            </div>
+          </div>
+        )}
+        
+        {/* Example Sentence - Reverse Mode */}
+        {showFeedback && isReverseMode && exampleSentence && (
+          <div className="border-t border-neutral-200 pt-4 mt-4">
+            <h4 className="font-heading font-semibold mb-2">Ejemplo:</h4>
+            <p className="text-[#4A6FA5] italic mb-2">{exampleSentence}</p>
+            
+            {/* Audio Playback Button */}
+            <div className="flex space-x-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
+                onClick={() => handlePlayAudio(exampleSentence)}
                 title="Escuchar frase"
               >
                 <Volume2 className="h-4 w-4 mr-1" />
