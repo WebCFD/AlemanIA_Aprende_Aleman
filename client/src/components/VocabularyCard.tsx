@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { 
   CheckCircle, 
   XCircle, 
@@ -38,7 +38,7 @@ export default function VocabularyCard({
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const { toast } = useToast();
-
+  
   // Fetch a random word based on difficulty
   const { 
     data: currentWord, 
@@ -244,14 +244,11 @@ export default function VocabularyCard({
         const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
         // Usar directamente la palabra de la lista de correctas
         // Nos saltamos fetchNewWord() y simulamos "currentWord"
-        
-        // En un entorno real usaríamos un estado especial, pero para
-        // simplificar, usamos el mecanismo existente de la API de consulta
-        // para establecer manualmente los datos
         const selectedWord = lastCorrectWords[randomIndex];
         
-        // Esto actualizará la UI para mostrar la palabra seleccionada
-        // (no se está haciendo una petición real a la API)
+        // Actualizamos el cache de la consulta para simular que obtuvimos esta palabra
+        // de la API. Esto hace que la UI se actualice sin una petición real.
+        queryClient.setQueryData(['/api/vocabulary/random', difficulty], selectedWord);
         console.log("Seleccionada palabra para modo inverso:", selectedWord);
       } else {
         // Si por alguna razón no hay palabras en el historial, buscar una nueva
