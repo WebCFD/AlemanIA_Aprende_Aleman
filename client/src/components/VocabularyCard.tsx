@@ -361,7 +361,7 @@ export default function VocabularyCard({
                 </div>
                 <p className="text-neutral-400 ml-7">
                   {isReverseMode && selectedReverseWord ? (
-                    <>{selectedReverseWord.spanish} = {selectedReverseWord.german}</>
+                    <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
                   ) : (
                     <>{currentWord?.german} = {currentWord?.spanish}</>
                   )}
@@ -375,7 +375,7 @@ export default function VocabularyCard({
                 </div>
                 <p className="text-neutral-400 ml-7">
                   {isReverseMode && selectedReverseWord ? (
-                    <>{selectedReverseWord.spanish} = {selectedReverseWord.german}</>
+                    <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
                   ) : (
                     <>{currentWord?.german} = {currentWord?.spanish}</>
                   )}
@@ -431,7 +431,7 @@ export default function VocabularyCard({
                 variant="ghost"
                 size="sm"
                 className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
-                onClick={() => handlePlayAudio(exampleSentence)}
+                onClick={() => exampleSentence && handlePlayAudio(exampleSentence)}
                 title="Escuchar frase"
               >
                 <Volume2 className="h-4 w-4 mr-1" />
@@ -440,20 +440,18 @@ export default function VocabularyCard({
             </div>
           </div>
         )}
-      </div>
-      
-      {/* Action Buttons */}
-      <div className="bg-neutral-100 p-4 flex justify-center">
-        <Button
-          variant="default"
-          size="lg"
-          className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-6 py-3 rounded-lg flex items-center gap-2 transition-colors"
-          onClick={handleNextWord}
-          disabled={verifyMutation.isPending}
-        >
-          <span>Otra palabra</span>
-          <ArrowRight className="h-5 w-5" />
-        </Button>
+        
+        {/* Next Word Button */}
+        <div className="mt-8 text-center">
+          <Button 
+            onClick={handleNextWord}
+            className="bg-[#4A6FA5] text-white hover:bg-[#395888] px-6 py-2 rounded-full flex items-center justify-center mx-auto"
+            disabled={verifyMutation.isPending}
+          >
+            <span className="mr-2">Otra palabra</span>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </Card>
   );

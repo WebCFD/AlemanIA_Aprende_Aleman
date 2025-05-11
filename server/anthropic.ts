@@ -109,16 +109,75 @@ export async function verifyReverseTranslation(
   correctGermanWord: string
 ): Promise<VerifyReverseTranslationResponse> {
   try {
+    // Mapeo de artículos para los sustantivos comunes en alemán
+    const germanNouns: {[key: string]: string} = {
+      "mann": "der",
+      "frau": "die",
+      "kind": "das",
+      "mensch": "der",
+      "zeit": "die",
+      "jahr": "das",
+      "tag": "der",
+      "welt": "die",
+      "leben": "das",
+      "hand": "die",
+      "auge": "das",
+      "kopf": "der",
+      "stadt": "die",
+      "haus": "das",
+      "weg": "der",
+      "arbeit": "die",
+      "wasser": "das",
+      "wort": "das",
+      "schule": "die",
+      "land": "das",
+      "vater": "der",
+      "mutter": "die",
+      "gesicht": "das",
+      "name": "der",
+      "straße": "die",
+      "buch": "das",
+      "tisch": "der",
+      "tür": "die",
+      "fenster": "das",
+      "raum": "der",  // Esta es la palabra del ejemplo ("der Raum")
+      "nacht": "die",
+      "bild": "das",
+      "morgen": "der",
+      "sache": "die",
+      "auto": "das",
+      "platz": "der",
+      "stunde": "die",
+      "ende": "das",
+      "sohn": "der",
+      "tochter": "die",
+      "herz": "das",
+      "lehrer": "der",
+      "stimme": "die",
+      "beispiel": "das"
+    };
+    
     // Comprobación simple para casos de fallo de API
     const simplifiedUserTranslation = userTranslation.toLowerCase().trim();
     const simplifiedCorrectTranslation = correctGermanWord.toLowerCase().trim();
     
+    // Obtener el artículo correcto para esta palabra (si es un sustantivo)
+    const lowercaseWord = correctGermanWord.toLowerCase();
+    const correctArticle = germanNouns[lowercaseWord] || "";
+    let fullCorrectTranslation = correctGermanWord;
+    
+    // Si es un sustantivo, añadir el artículo
+    if (correctArticle) {
+      fullCorrectTranslation = `${correctArticle} ${correctGermanWord}`;
+    }
+    
+    // Comprobar si la respuesta del usuario coincide exactamente con la palabra correcta
     if (simplifiedUserTranslation === simplifiedCorrectTranslation) {
       // Generar una frase de ejemplo simple para casos de coincidencia exacta
       return {
         isCorrect: true,
-        correctTranslation: correctGermanWord,
-        exampleSentence: `Beispiel: Ich benutze das Wort "${correctGermanWord}" in einem Satz.`,
+        correctTranslation: fullCorrectTranslation,
+        exampleSentence: `Beispiel: Ich benutze ${fullCorrectTranslation} in einem Satz.`,
         explanation: "¡Correcto! Tu traducción es exacta."
       };
     }
@@ -127,7 +186,7 @@ export async function verifyReverseTranslation(
     Estás evaluando traducciones del español al alemán para una aplicación de aprendizaje de idiomas.
     
     Palabra en español: "${spanishWord}"
-    Traducción correcta al alemán: "${correctGermanWord}"
+    Traducción correcta al alemán: "${fullCorrectTranslation}"
     Traducción propuesta por el usuario: "${userTranslation}"
     
     Tarea:
@@ -192,16 +251,29 @@ export async function verifyReverseTranslation(
   } catch (error) {
     console.error("Error al verificar traducción inversa con Claude:", error);
     
+    // Obtener el artículo correcto para esta palabra (si es un sustantivo)
+    const lowercaseWord = correctGermanWord.toLowerCase();
+    const germanNouns: {[key: string]: string} = {
+      "mann": "der", "frau": "die", "kind": "das", "raum": "der", /* y demás sustantivos... */
+    };
+    const correctArticle = germanNouns[lowercaseWord] || "";
+    let fullCorrectTranslation = correctGermanWord;
+    
+    // Si es un sustantivo, añadir el artículo
+    if (correctArticle) {
+      fullCorrectTranslation = `${correctArticle} ${correctGermanWord}`;
+    }
+    
     // Fallback a comparación simple cuando la API falla
     const isExactMatch = userTranslation.toLowerCase().trim() === correctGermanWord.toLowerCase().trim();
     
     return {
       isCorrect: isExactMatch,
-      correctTranslation: correctGermanWord,
+      correctTranslation: fullCorrectTranslation,
       explanation: isExactMatch 
         ? "Tu traducción es correcta." 
-        : "Tu traducción no coincide con la esperada.",
-      exampleSentence: isExactMatch ? `Beispiel: Ich benutze das Wort "${correctGermanWord}" häufig.` : undefined
+        : `Tu traducción no coincide con la esperada. La respuesta correcta es: ${fullCorrectTranslation}`,
+      exampleSentence: isExactMatch ? `Beispiel: Ich benutze ${fullCorrectTranslation} häufig.` : undefined
     };
   }
 }
