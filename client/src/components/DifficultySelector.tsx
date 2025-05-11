@@ -1,5 +1,3 @@
-import { Slider } from "@/components/ui/slider";
-import { useState, useEffect } from "react";
 import { Difficulty } from "@shared/schema";
 
 interface DifficultySelectorProps {
@@ -13,6 +11,10 @@ interface LevelInfo {
   color: string;
   bgColor: string;
   borderColor: string;
+  activeColor: string;
+  activeBg: string;
+  inactiveColor: string;
+  inactiveBg: string;
 }
 
 const difficultyLevels: Record<Difficulty, LevelInfo> = {
@@ -22,6 +24,10 @@ const difficultyLevels: Record<Difficulty, LevelInfo> = {
     color: "text-green-600",
     bgColor: "bg-green-100",
     borderColor: "border-green-600",
+    activeColor: "text-white",
+    activeBg: "bg-[#4A6FA5]",
+    inactiveColor: "text-[#4A6FA5]",
+    inactiveBg: "bg-gray-100"
   },
   B: {
     name: "Intermedio",
@@ -29,6 +35,10 @@ const difficultyLevels: Record<Difficulty, LevelInfo> = {
     color: "text-yellow-600",
     bgColor: "bg-yellow-100",
     borderColor: "border-yellow-600",
+    activeColor: "text-white",
+    activeBg: "bg-[#4A6FA5]",
+    inactiveColor: "text-[#4A6FA5]",
+    inactiveBg: "bg-gray-100"
   },
   C: {
     name: "Avanzado",
@@ -36,73 +46,44 @@ const difficultyLevels: Record<Difficulty, LevelInfo> = {
     color: "text-red-600",
     bgColor: "bg-red-100",
     borderColor: "border-red-600",
+    activeColor: "text-white",
+    activeBg: "bg-[#4A6FA5]",
+    inactiveColor: "text-[#4A6FA5]",
+    inactiveBg: "bg-gray-100"
   }
 };
 
 export default function DifficultySelector({ currentDifficulty, onDifficultyChange }: DifficultySelectorProps) {
-  const [sliderValue, setSliderValue] = useState<number[]>([1]);
-  
-  // Map slider value to difficulty
-  const sliderToDifficulty = (value: number): Difficulty => {
-    switch (value) {
-      case 1: return "A";
-      case 2: return "B";
-      case 3: return "C";
-      default: return "A";
-    }
-  };
-  
-  // Map difficulty to slider value
-  const difficultyToSlider = (difficulty: Difficulty): number => {
-    switch (difficulty) {
-      case "A": return 1;
-      case "B": return 2;
-      case "C": return 3;
-      default: return 1;
-    }
-  };
-  
-  useEffect(() => {
-    setSliderValue([difficultyToSlider(currentDifficulty)]);
-  }, [currentDifficulty]);
-  
-  const handleSliderChange = (value: number[]) => {
-    const newDifficulty = sliderToDifficulty(value[0]);
-    setSliderValue(value);
-    onDifficultyChange(newDifficulty);
+  const handleDifficultyClick = (difficulty: Difficulty) => {
+    onDifficultyChange(difficulty);
   };
   
   return (
     <div className="max-w-2xl mx-auto mb-12 bg-white p-6 rounded-xl shadow-md">
       <div className="mb-6">
-        <h3 className="font-heading font-semibold text-xl mb-3">Selecciona tu nivel:</h3>
+        <h3 className="font-heading font-semibold text-xl mb-4">Selecciona tu nivel:</h3>
         
-        <div className="relative">
-          <Slider
-            value={sliderValue}
-            min={1}
-            max={3}
-            step={1}
-            onValueChange={handleSliderChange}
-            className="my-4"
-          />
-          
-          <div className="flex justify-between mt-4">
-            {(["A", "B", "C"] as Difficulty[]).map((level) => (
-              <div key={level} className="text-center relative">
-                <div 
-                  className={`w-10 h-10 rounded-full ${difficultyLevels[level].bgColor} ${difficultyLevels[level].color} border-2 ${difficultyLevels[level].borderColor} flex items-center justify-center font-heading font-bold mx-auto mb-1 transition-transform ${currentDifficulty === level ? 'transform scale-110' : ''}`}
-                >
-                  {level}
-                </div>
-                <span className="text-sm text-neutral-300">{difficultyLevels[level].name}</span>
-              </div>
-            ))}
-          </div>
+        <div className="flex justify-center gap-4 mb-6">
+          {(["A", "B", "C"] as Difficulty[]).map((level) => (
+            <button
+              key={level}
+              onClick={() => handleDifficultyClick(level)}
+              className={`py-2 px-6 rounded-full font-medium transition-all duration-200 flex items-center gap-2 ${
+                currentDifficulty === level 
+                  ? difficultyLevels[level].activeBg + " " + difficultyLevels[level].activeColor
+                  : difficultyLevels[level].inactiveBg + " " + difficultyLevels[level].inactiveColor
+              }`}
+            >
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-[#4A6FA5] font-bold">
+                {level}
+              </span>
+              <span>{difficultyLevels[level].name}</span>
+            </button>
+          ))}
         </div>
       </div>
       
-      <div className="text-sm text-neutral-300 bg-neutral-100 p-3 rounded-lg">
+      <div className="text-sm text-neutral-500 bg-neutral-100 p-3 rounded-lg">
         <p>
           <span className="font-semibold">Nivel {currentDifficulty}:</span> {difficultyLevels[currentDifficulty].description}
         </p>
