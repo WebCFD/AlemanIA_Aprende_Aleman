@@ -17,6 +17,7 @@ export interface IStorage {
 
 // German vocabulary data for different difficulty levels
 const LEVEL_A_WORDS: InsertWord[] = [
+  // Palabras originales
   { german: "Hallo", spanish: "hola", example: "Hallo, wie geht es dir?", exampleTranslation: "Hola, ¿cómo estás?", difficulty: "A" },
   { german: "Danke", spanish: "gracias", example: "Vielen Danke für deine Hilfe.", exampleTranslation: "Muchas gracias por tu ayuda.", difficulty: "A" },
   { german: "Bitte", spanish: "por favor", example: "Kannst du mir bitte helfen?", exampleTranslation: "¿Puedes ayudarme, por favor?", difficulty: "A" },
@@ -26,7 +27,29 @@ const LEVEL_A_WORDS: InsertWord[] = [
   { german: "Schlecht", spanish: "mal", example: "Mir geht es schlecht.", exampleTranslation: "Me siento mal.", difficulty: "A" },
   { german: "Liebe", spanish: "amor", example: "Ich liebe dich.", exampleTranslation: "Te amo.", difficulty: "A" },
   { german: "Freund", spanish: "amigo", example: "Er ist mein Freund.", exampleTranslation: "Él es mi amigo.", difficulty: "A" },
-  { german: "Familie", spanish: "familia", example: "Meine Familie ist groß.", exampleTranslation: "Mi familia es grande.", difficulty: "A" }
+  { german: "Familie", spanish: "familia", example: "Meine Familie ist groß.", exampleTranslation: "Mi familia es grande.", difficulty: "A" },
+  
+  // Nuevas palabras añadidas
+  { german: "Mann", spanish: "hombre", example: "Der Mann geht zur Arbeit.", exampleTranslation: "El hombre va al trabajo.", difficulty: "A" },
+  { german: "Frau", spanish: "mujer", example: "Die Frau liest ein Buch.", exampleTranslation: "La mujer lee un libro.", difficulty: "A" },
+  { german: "Kind", spanish: "niño/a", example: "Das Kind spielt im Garten.", exampleTranslation: "El niño juega en el jardín.", difficulty: "A" },
+  { german: "Mensch", spanish: "persona", example: "Jeder Mensch hat Rechte.", exampleTranslation: "Cada persona tiene derechos.", difficulty: "A" },
+  { german: "Zeit", spanish: "tiempo", example: "Ich habe keine Zeit.", exampleTranslation: "No tengo tiempo.", difficulty: "A" },
+  { german: "Jahr", spanish: "año", example: "Dieses Jahr war sehr gut.", exampleTranslation: "Este año fue muy bueno.", difficulty: "A" },
+  { german: "Tag", spanish: "día", example: "Heute ist ein schöner Tag.", exampleTranslation: "Hoy es un bonito día.", difficulty: "A" },
+  { german: "Welt", spanish: "mundo", example: "Die Welt ist wunderschön.", exampleTranslation: "El mundo es hermoso.", difficulty: "A" },
+  { german: "Leben", spanish: "vida", example: "Das Leben ist kurz.", exampleTranslation: "La vida es corta.", difficulty: "A" },
+  { german: "Hand", spanish: "mano", example: "Gib mir deine Hand.", exampleTranslation: "Dame tu mano.", difficulty: "A" },
+  { german: "Auge", spanish: "ojo", example: "Sie hat blaue Augen.", exampleTranslation: "Ella tiene ojos azules.", difficulty: "A" },
+  { german: "Kopf", spanish: "cabeza", example: "Mein Kopf tut weh.", exampleTranslation: "Me duele la cabeza.", difficulty: "A" },
+  { german: "Stadt", spanish: "ciudad", example: "Berlin ist eine große Stadt.", exampleTranslation: "Berlín es una gran ciudad.", difficulty: "A" },
+  { german: "Haus", spanish: "casa", example: "Mein Haus ist klein.", exampleTranslation: "Mi casa es pequeña.", difficulty: "A" },
+  { german: "Weg", spanish: "camino", example: "Der Weg nach Hause ist lang.", exampleTranslation: "El camino a casa es largo.", difficulty: "A" },
+  { german: "Arbeit", spanish: "trabajo", example: "Ich gehe zur Arbeit.", exampleTranslation: "Voy al trabajo.", difficulty: "A" },
+  { german: "Wasser", spanish: "agua", example: "Ich trinke Wasser.", exampleTranslation: "Bebo agua.", difficulty: "A" },
+  { german: "Wort", spanish: "palabra", example: "Dieses Wort ist schwer.", exampleTranslation: "Esta palabra es difícil.", difficulty: "A" },
+  { german: "Schule", spanish: "escuela", example: "Die Kinder gehen zur Schule.", exampleTranslation: "Los niños van a la escuela.", difficulty: "A" },
+  { german: "Land", spanish: "país", example: "Deutschland ist ein schönes Land.", exampleTranslation: "Alemania es un hermoso país.", difficulty: "A" }
 ];
 
 const LEVEL_B_WORDS: InsertWord[] = [
