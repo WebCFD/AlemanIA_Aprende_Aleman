@@ -235,50 +235,55 @@ export default function VocabularyCard({
 
   // Handle next word
   const handleNextWord = () => {
-    setTranslation("");
+    // Primero, deshabilitamos el contenido temporal para evitar que se muestre el mensaje de error
+    // Solo ocultamos la UI de feedback sin cambiar el estado isCorrect todavía
     setShowFeedback(false);
-    setIsCorrect(null);
-    setExampleSentence(undefined);
-    setSelectedReverseWord(null);
-    setCorrectResponse(undefined);
     
-    // Enfoque automático después de un pequeño retraso para permitir que se actualice el estado
+    // Retrasar la limpieza del estado para evitar parpadeos en la interfaz
     setTimeout(() => {
+      // Limpiamos todos los estados ahora que ya se ocultó el feedback
+      setTranslation("");
+      setIsCorrect(null);
+      setExampleSentence(undefined);
+      setSelectedReverseWord(null);
+      setCorrectResponse(undefined);
+      
+      // Enfoque automático en el input
       if (inputRef.current) {
         inputRef.current.focus();
       }
-    }, 50);
-    
-    // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
-    if (isReverseMode) {
-      // Después de completar un ejercicio inverso, volvemos al modo normal
-      setIsReverseMode(false);
-      fetchNewWord();
-    } else if (consecutiveCorrect >= 5 && difficulty === "A") {
-      // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
-      // Solo activamos modo inverso cuando el usuario pide siguiente palabra
-      setIsReverseMode(true);
-      // Resetear el contador para el próximo ciclo
-      setConsecutiveCorrect(0);
       
-      // Seleccionar una palabra aleatoria de las últimas 5 correctas
-      if (lastCorrectWords.length > 0) {
-        const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
-        // Usar directamente la palabra de la lista de correctas
-        const selectedWord = lastCorrectWords[randomIndex];
+      // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
+      if (isReverseMode) {
+        // Después de completar un ejercicio inverso, volvemos al modo normal
+        setIsReverseMode(false);
+        fetchNewWord();
+      } else if (consecutiveCorrect >= 5 && difficulty === "A") {
+        // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
+        // Solo activamos modo inverso cuando el usuario pide siguiente palabra
+        setIsReverseMode(true);
+        // Resetear el contador para el próximo ciclo
+        setConsecutiveCorrect(0);
         
-        // Guardar la palabra seleccionada en el estado
-        setSelectedReverseWord(selectedWord);
-        console.log("Seleccionada palabra para modo inverso:", selectedWord);
+        // Seleccionar una palabra aleatoria de las últimas 5 correctas
+        if (lastCorrectWords.length > 0) {
+          const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
+          // Usar directamente la palabra de la lista de correctas
+          const selectedWord = lastCorrectWords[randomIndex];
+          
+          // Guardar la palabra seleccionada en el estado
+          setSelectedReverseWord(selectedWord);
+          console.log("Seleccionada palabra para modo inverso:", selectedWord);
+        } else {
+          // Si por alguna razón no hay palabras en el historial, buscar una nueva
+          setIsReverseMode(false); // Volver al modo normal si no hay palabras
+          fetchNewWord();
+        }
       } else {
-        // Si por alguna razón no hay palabras en el historial, buscar una nueva
-        setIsReverseMode(false); // Volver al modo normal si no hay palabras
+        // Caso normal: buscar nueva palabra
         fetchNewWord();
       }
-    } else {
-      // Caso normal: buscar nueva palabra
-      fetchNewWord();
-    }
+    }, 10); // Un retraso muy pequeño, solo para asegurar que la UI se actualice primero
   };
 
   // Global keyboard event handler for Enter key
