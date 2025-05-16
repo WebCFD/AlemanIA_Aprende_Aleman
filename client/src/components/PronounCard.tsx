@@ -1,9 +1,19 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, X, Volume2, ArrowRight, Book, Video, CheckCircle, XCircle } from "lucide-react";
+import { 
+  Check, 
+  X, 
+  Volume2, 
+  ArrowRight, 
+  Book, 
+  Video, 
+  CheckCircle, 
+  XCircle, 
+  Send 
+} from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { useToast, toast } from "@/hooks/use-toast";
@@ -195,12 +205,12 @@ export default function PronounCard({
   // Si aún no tenemos una frase, mostrar cargando
   if (!currentSentence) {
     return (
-      <Card className="w-full max-w-3xl mx-auto shadow-lg">
-        <CardContent className="p-6">
+      <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="p-6">
           <div className="flex justify-center items-center h-40">
             <p className="text-gray-500">Cargando...</p>
           </div>
-        </CardContent>
+        </div>
       </Card>
     );
   }
@@ -214,35 +224,37 @@ export default function PronounCard({
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-lg border-2 transition-all duration-300 ease-in-out">
-      <div className="flex justify-between items-center p-2 px-4 bg-blue-500 text-white text-sm">
-        <div className="flex items-center space-x-3">
+    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+      {/* Progress Tracker */}
+      <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
+        <div className="flex items-center gap-3">
           <div className="flex items-center">
-            <CheckCircle className="w-4 h-4 mr-1" />
-            <span>{correctCount}</span>
+            <CheckCircle className="h-5 w-5 text-[#4CAF50]" />
+            <span className="ml-1 font-medium">{correctCount}</span>
           </div>
           <div className="flex items-center">
-            <XCircle className="w-4 h-4 mr-1" />
-            <span>{incorrectCount}</span>
+            <XCircle className="h-5 w-5 text-[#F44336]" />
+            <span className="ml-1 font-medium">{incorrectCount}</span>
           </div>
         </div>
-        <div>
-          {getDifficultyLabel()}
-        </div>
+        <span className="font-heading font-bold">{getDifficultyLabel()}</span>
       </div>
       
-      <CardHeader className="pb-2 pt-4">
-        <div className="flex justify-center items-center">
-          <CardTitle className="text-2xl font-bold text-gray-800 text-center">
+      {/* Contenedor principal */}
+      <div className="p-6 md:p-8">
+        {/* Sentence Display */}
+        <div className="mb-6 text-center">
+          <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
             {currentSentence?.spanishText || "Cargando..."}
-          </CardTitle>
+          </span>
+          <div className="text-neutral-300 text-sm mt-2">
+            Completa la frase en alemán
+          </div>
         </div>
-      </CardHeader>
-      
-      <CardContent className="py-4 px-6">
+        
         {!showFeedback ? (
-          <div className="flex flex-col items-center justify-center py-6">
-            <div className="bg-gray-50 rounded-lg px-8 py-4 mb-6 shadow-sm">
+          <div className="flex flex-col items-center justify-center py-4">
+            <div className="bg-gray-50 rounded-lg px-8 py-4 mb-6 shadow-sm w-full max-w-xl">
               <div 
                 dangerouslySetInnerHTML={{ 
                   __html: currentSentence.germanTextWithGap.replace(
@@ -254,64 +266,74 @@ export default function PronounCard({
               />
             </div>
             
-            <div className="text-sm text-gray-500 text-center mb-4">
-              Completa la frase en alemán
-            </div>
-            
-            <div className="flex flex-col items-center gap-3 w-full">
-              <div className="w-full max-w-xs relative">
+            <div className="flex flex-col items-center gap-4 w-full max-w-md">
+              <div className="w-full relative">
                 <Input
                   ref={inputRef}
                   type="text"
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="Escribe la traducción..."
-                  className="pr-10 border-2 focus:border-blue-400"
+                  placeholder="Escribe la palabra que falta..."
+                  className="w-full border border-neutral-200 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-[#4A6FA5]"
                 />
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                  <ArrowRight className="h-4 w-4" />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-1.5">
+                  <Button 
+                    onClick={handleSubmitAnswer} 
+                    variant="ghost" 
+                    className="h-8 px-2 text-neutral-400 hover:text-[#4A6FA5]"
+                    disabled={verifyMutation.isPending || !userAnswer.trim()}
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
               
               <Button
                 onClick={() => speak(currentSentence.germanText)}
                 variant="outline"
-                className="border rounded-md hover:bg-gray-50"
-                title="Escuchar pronunciación"
+                className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
               >
-                <Volume2 className="h-5 w-5 mr-2 text-blue-500" />
-                Escuchar
+                <Volume2 className="h-5 w-5 mr-2" />
+                Escuchar la frase completa
               </Button>
             </div>
             
             {/* Pista (opcional) */}
             {currentSentence.hint && (
-              <div className="mt-4 text-sm text-gray-500 text-center">
-                <span className="font-medium">Pista:</span> {currentSentence.hint}
+              <div className="mt-4 p-3 bg-amber-50 border border-amber-100 rounded-lg text-amber-800 text-sm max-w-md w-full">
+                <p className="font-semibold mb-1">Pista:</p>
+                <p>{currentSentence.hint}</p>
               </div>
             )}
           </div>
         ) : (
-          <div className="py-6">
-            <div className="text-center mb-4">
+          <div className="py-4">
+            <div className="mb-6 text-center">
               {isCorrect ? (
-                <div className="flex items-center justify-center mb-3">
-                  <CheckCircle className="h-7 w-7 text-green-500 mr-2" />
-                  <h3 className="text-xl font-bold text-green-600">¡Correcto!</h3>
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-8 w-8 text-green-500 mr-2" />
+                    <h3 className="text-xl font-bold text-green-600">¡Correcto!</h3>
+                  </div>
+                  <p className="text-green-600">¡Bien hecho!</p>
                 </div>
               ) : (
-                <div className="flex items-center justify-center mb-3">
-                  <XCircle className="h-7 w-7 text-red-500 mr-2" />
-                  <h3 className="text-xl font-bold text-red-600">Incorrecto</h3>
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <div className="flex items-center">
+                    <XCircle className="h-8 w-8 text-red-500 mr-2" />
+                    <h3 className="text-xl font-bold text-red-600">Incorrecto</h3>
+                  </div>
+                  <p className="text-red-600">La respuesta correcta es:</p>
                 </div>
               )}
-              
-              <div className={`p-3 rounded-lg text-lg mb-4 ${isCorrect ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'}`}>
+            </div>
+            
+            <div className="bg-white rounded-lg p-5 border shadow-sm mb-6 max-w-xl mx-auto">
+              <p className="font-medium text-lg text-[#4A6FA5] mb-3 text-center">
                 {fullSentence}
-              </div>
-              
-              <div className="text-gray-600 max-w-lg mx-auto mb-4">
+              </p>
+              <div className="text-gray-600 text-sm">
                 {explanation}
               </div>
             </div>
@@ -322,7 +344,7 @@ export default function PronounCard({
                   Material de aprendizaje recomendado:
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <a
+                  <a 
                     onClick={() => {
                       window.location.href = '/empieza#pronombres';
                     }}
@@ -346,42 +368,19 @@ export default function PronounCard({
                 </p>
               </div>
             )}
+            
+            {/* Next Sentence Button */}
+            <div className="flex justify-center mt-6">
+              <Button
+                className="bg-[#6B8CB8] hover:bg-[#4A6FA5] text-white flex items-center gap-2"
+                onClick={handleNextSentence}
+              >
+                Siguiente frase <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         )}
-      </CardContent>
-      
-      <CardFooter className="flex justify-center gap-3 p-6 pt-2">
-        {!showFeedback ? (
-          <Button
-            onClick={handleSubmitAnswer}
-            disabled={verifyMutation.isPending || !userAnswer.trim()}
-            className="px-6 bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            {verifyMutation.isPending ? (
-              <span className="flex items-center">
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Verificando...
-              </span>
-            ) : (
-              <span className="flex items-center">
-                Verificar respuesta
-              </span>
-            )}
-          </Button>
-        ) : (
-          <Button
-            onClick={handleNextSentence}
-            className="px-6 bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            <span className="flex items-center">
-              Otra frase <ArrowRight className="ml-2 h-4 w-4" />
-            </span>
-          </Button>
-        )}
-      </CardFooter>
+      </div>
     </Card>
   );
 }
