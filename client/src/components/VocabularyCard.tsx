@@ -564,12 +564,12 @@ export default function VocabularyCard({
           )}
           
           {/* Learning Recommendation */}
-          {showFeedback && isCorrect === true && (
+          {showFeedback && isCorrect === false && (
             <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
               <div className="flex items-start">
                 <BookOpen className="text-amber-600 h-5 w-5 mr-2 mt-0.5" />
                 <div>
-                  <p className="text-amber-800 font-medium text-sm">¿Quieres aprender más?</p>
+                  <p className="text-amber-800 font-medium text-sm">¿Necesitas repasar conceptos?</p>
                   {(() => {
                     // En modo inverso usamos la palabra seleccionada, de lo contrario la palabra actual
                     const wordToRecommend = isReverseMode ? selectedReverseWord : currentWord;
@@ -590,7 +590,7 @@ export default function VocabularyCard({
                       <Link href="/empieza">
                         <span className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer">
                           <BookOpen className="h-4 w-4 mr-1" />
-                          Aprende conceptos básicos de alemán
+                          Repasar conceptos básicos de alemán
                         </span>
                       </Link>
                     );
