@@ -251,8 +251,8 @@ export default function VocabularyCard({
       fetchNewWord();
       setTranslation("");
       setSelectedReverseWord(null);
-    } else if (consecutiveCorrect >= 5 && difficulty === "A") {
-      // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
+    } else if (consecutiveCorrect >= 4 && difficulty === "A") {
+      // Si llegamos a 4 correctas y estamos en nivel A, pasamos a modo inverso
       setIsReverseMode(true);
       // Resetear el contador para el próximo ciclo
       setConsecutiveCorrect(0);
