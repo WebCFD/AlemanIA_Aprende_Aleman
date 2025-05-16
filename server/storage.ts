@@ -370,6 +370,22 @@ export class MemStorage implements IStorage {
     LEVEL_C_WORDS.forEach(word => {
       this.createWord(word);
     });
+    
+    // Initialize sentences for pronoun/declension practice
+    // Level A sentences
+    LEVEL_A_SENTENCES.forEach(sentence => {
+      this.createSentence(sentence);
+    });
+    
+    // Level B sentences
+    LEVEL_B_SENTENCES.forEach(sentence => {
+      this.createSentence(sentence);
+    });
+    
+    // Level C sentences
+    LEVEL_C_SENTENCES.forEach(sentence => {
+      this.createSentence(sentence);
+    });
   }
 
   // User methods
@@ -426,6 +442,41 @@ export class MemStorage implements IStorage {
     };
     this.words.set(id, word);
     return word;
+  }
+  
+  // Sentence methods for pronoun/declension practice
+  async getSentence(id: number): Promise<Sentence | undefined> {
+    return this.sentences.get(id);
+  }
+
+  async getSentencesByDifficulty(difficulty: Difficulty): Promise<Sentence[]> {
+    return Array.from(this.sentences.values()).filter(
+      sentence => sentence.difficulty === difficulty
+    );
+  }
+
+  async getRandomSentenceByDifficulty(difficulty: Difficulty): Promise<Sentence | undefined> {
+    const sentencesByDifficulty = await this.getSentencesByDifficulty(difficulty);
+    
+    if (sentencesByDifficulty.length === 0) {
+      return undefined;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * sentencesByDifficulty.length);
+    return sentencesByDifficulty[randomIndex];
+  }
+
+  async createSentence(insertSentence: InsertSentence): Promise<Sentence> {
+    const id = this.sentenceCurrentId++;
+    
+    const sentence: Sentence = {
+      ...insertSentence,
+      id,
+      hint: insertSentence.hint || null
+    };
+    
+    this.sentences.set(id, sentence);
+    return sentence;
   }
 }
 

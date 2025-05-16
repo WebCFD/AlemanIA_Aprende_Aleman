@@ -1,5 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { VerifyTranslationResponse, VerifyReverseTranslationResponse } from '@shared/schema';
+import { 
+  VerifyTranslationResponse, 
+  VerifyReverseTranslationResponse,
+  VerifySentenceResponse
+} from '@shared/schema';
 
 // Verificar si la API key está configurada
 if (!process.env.ANTHROPIC_API_KEY) {
