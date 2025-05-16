@@ -8,7 +8,6 @@ import Home from "@/pages/Home";
 import Empieza from "@/pages/Empieza";
 import Videos from "@/pages/Videos";
 import QuienesSomos from "@/pages/QuienesSomos";
-import Pronouns from "@/pages/Pronouns";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
@@ -34,18 +33,7 @@ function Navigation() {
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
-            Aprende Vocabulario
-          </button>
-          <button 
-            onClick={() => navigate("/pronouns")}
-            className={cn(
-              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
-              isActive("/pronouns") 
-                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
-                : "text-gray-600 hover:text-[#4A6FA5]"
-            )}
-          >
-            Aprende Pronombres
+            Aprende
           </button>
           <button 
             onClick={() => navigate("/empieza")}
@@ -94,7 +82,6 @@ function Router() {
       <main className="min-h-[calc(100vh-220px)]">
         <Switch>
           <Route path="/" component={Home} />
-          <Route path="/pronouns" component={Pronouns} />
           <Route path="/empieza" component={Empieza} />
           <Route path="/videos" component={Videos} />
           <Route path="/quienes-somos" component={QuienesSomos} />
