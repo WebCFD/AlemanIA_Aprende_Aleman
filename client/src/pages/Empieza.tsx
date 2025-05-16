@@ -1,6 +1,22 @@
-import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon } from "lucide-react";
+import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Volume2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Empieza() {
+  // Función para reproducir audio usando la Web Speech API
+  const handlePlayAudio = (text: string) => {
+    if ('speechSynthesis' in window) {
+      // Detener cualquier síntesis de voz en curso
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'de-DE'; // Establecer el idioma a alemán
+      utterance.rate = 0.9; // Velocidad ligeramente más lenta para mejor comprensión
+      
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.log('Tu navegador no soporta la Web Speech API');
+    }
+  };
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
@@ -63,6 +79,7 @@ export default function Empieza() {
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Alemán</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Español</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pronunciación</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Escuchar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -70,31 +87,97 @@ export default function Empieza() {
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Hallo</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Hola</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"ha-lo"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Hallo")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Guten Morgen</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Buenos días (mañana)</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"gu-ten mor-guen"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Guten Morgen")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Guten Tag</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Buen día</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"gu-ten tag"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Guten Tag")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Guten Abend</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Buenas tardes/noches</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"gu-ten a-bent"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Guten Abend")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Auf Wiedersehen</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Adiós (formal)</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"auf vi-der-sen"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Auf Wiedersehen")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Tschüss</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Adiós (informal)</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"chüs"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Tschüss")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -197,6 +280,7 @@ export default function Empieza() {
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Alemán</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Español</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Ejemplo</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Escuchar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -204,46 +288,145 @@ export default function Empieza() {
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">ich</td>
                     <td className="py-3 px-4 text-sm text-gray-700">yo</td>
                     <td className="py-3 px-4 text-sm text-gray-700">ich bin (yo soy)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("ich")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">du</td>
                     <td className="py-3 px-4 text-sm text-gray-700">tú</td>
                     <td className="py-3 px-4 text-sm text-gray-700">du bist (tú eres)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("du")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">er</td>
                     <td className="py-3 px-4 text-sm text-gray-700">él</td>
                     <td className="py-3 px-4 text-sm text-gray-700">er ist (él es)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("er")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">sie</td>
                     <td className="py-3 px-4 text-sm text-gray-700">ella</td>
                     <td className="py-3 px-4 text-sm text-gray-700">sie ist (ella es)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("sie")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">es</td>
                     <td className="py-3 px-4 text-sm text-gray-700">ello</td>
                     <td className="py-3 px-4 text-sm text-gray-700">es ist (ello es)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("es")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">wir</td>
                     <td className="py-3 px-4 text-sm text-gray-700">nosotros/as</td>
                     <td className="py-3 px-4 text-sm text-gray-700">wir sind (nosotros somos)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("wir")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">ihr</td>
                     <td className="py-3 px-4 text-sm text-gray-700">vosotros/as</td>
                     <td className="py-3 px-4 text-sm text-gray-700">ihr seid (vosotros sois)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("ihr")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">sie</td>
                     <td className="py-3 px-4 text-sm text-gray-700">ellos/ellas</td>
                     <td className="py-3 px-4 text-sm text-gray-700">sie sind (ellos/ellas son)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("sie")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Sie</td>
                     <td className="py-3 px-4 text-sm text-gray-700">usted/ustedes</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Sie sind (usted es/ustedes son)</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Sie")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -344,6 +527,7 @@ export default function Empieza() {
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Alemán</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Español</th>
                     <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pronunciación</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Escuchar</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -351,46 +535,145 @@ export default function Empieza() {
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Wie heißt du?</td>
                     <td className="py-3 px-4 text-sm text-gray-700">¿Cómo te llamas?</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"vi heist du?"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Wie heißt du?")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Ich heiße...</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Me llamo...</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"ij haise..."</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Ich heiße Juan")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Wie geht es dir?</td>
                     <td className="py-3 px-4 text-sm text-gray-700">¿Cómo estás?</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"vi guet es dir?"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Wie geht es dir?")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Mir geht es gut</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Estoy bien</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"mir guet es gut"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Mir geht es gut")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Woher kommst du?</td>
                     <td className="py-3 px-4 text-sm text-gray-700">¿De dónde eres?</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"voher komst du?"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Woher kommst du?")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Ich komme aus...</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Soy de...</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"ij kome aus..."</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Ich komme aus Spanien")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Bitte</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Por favor / De nada</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"bite"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Bitte")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Danke</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Gracias</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"danke"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Danke")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                   <tr>
                     <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">Entschuldigung</td>
                     <td className="py-3 px-4 text-sm text-gray-700">Perdón / Disculpe</td>
                     <td className="py-3 px-4 text-sm text-gray-500 italic">"entshuldigung"</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                        onClick={() => handlePlayAudio("Entschuldigung")}
+                      >
+                        <Volume2 className="h-3 w-3 mr-1" />
+                        <span className="text-xs">Escuchar</span>
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
