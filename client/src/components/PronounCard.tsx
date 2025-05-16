@@ -288,15 +288,6 @@ export default function PronounCard({
                   </Button>
                 </div>
               </div>
-              
-              <Button
-                onClick={() => speak(currentSentence.germanText)}
-                variant="outline"
-                className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
-              >
-                <Volume2 className="h-5 w-5 mr-2" />
-                Escuchar la frase completa
-              </Button>
             </div>
             
             {/* Pista (opcional) */}
@@ -333,8 +324,19 @@ export default function PronounCard({
               <p className="font-medium text-lg text-[#4A6FA5] mb-3 text-center">
                 {fullSentence}
               </p>
-              <div className="text-gray-600 text-sm">
+              <div className="text-gray-600 text-sm mb-4">
                 {explanation}
+              </div>
+              
+              <div className="flex justify-center mt-3">
+                <Button
+                  onClick={() => speak(currentSentence.germanText)}
+                  variant="outline"
+                  className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
+                >
+                  <Volume2 className="h-5 w-5 mr-2" />
+                  Escuchar la frase completa
+                </Button>
               </div>
             </div>
             
