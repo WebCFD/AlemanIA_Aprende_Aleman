@@ -317,6 +317,9 @@ export default function VerbsCard({
                     <span className="font-medium text-green-800">¡Correcto!</span>
                   </div>
                   <p className="text-neutral-500 ml-7">
+                    Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+                  </p>
+                  <p className="text-neutral-500 ml-7">
                     {fullSentence || (
                       (currentVerb.verbForm === "infinitive" || currentVerb.verbForm === "participle") 
                         ? currentVerb.germanConjugation 
@@ -330,6 +333,9 @@ export default function VerbsCard({
                     <XCircle className="mr-2 h-5 w-5 text-red-600" />
                     <span className="font-medium text-red-800">Incorrecto</span>
                   </div>
+                  <p className="text-neutral-500 ml-7">
+                    Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+                  </p>
                   <p className="text-neutral-500 ml-7">
                     La respuesta correcta es <span className="font-semibold">{
                       (currentVerb.verbForm === "infinitive" || currentVerb.verbForm === "participle") 

@@ -508,6 +508,9 @@ export default function VocabularyCard({
                 <span className="font-medium">¡Correcto!</span>
               </div>
               <p className="text-neutral-400 ml-7">
+                Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+              </p>
+              <p className="text-neutral-400 ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
                 ) : (
@@ -531,6 +534,12 @@ export default function VocabularyCard({
                 <XCircle className="mr-2 h-5 w-5" />
                 <span className="font-medium">Incorrecto</span>
               </div>
+              <p className="text-neutral-400 ml-7">
+                Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+              </p>
+              <p className="text-neutral-400 ml-7">
+                Respuesta correcta:
+              </p>
               <p className="text-neutral-400 ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
