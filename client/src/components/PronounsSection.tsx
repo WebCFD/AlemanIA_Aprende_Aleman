@@ -24,8 +24,17 @@ export default function PronounsSection() {
   return (
     <section id="pronouns" className="mt-12 mb-16">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Practica con pronombres y declinaciones</h2>
-        <p className="text-gray-600">
+        <DifficultySelector 
+          currentDifficulty={difficulty} 
+          onDifficultyChange={handleDifficultyChange} 
+        />
+      </div>
+
+      <div className="text-center mb-10">
+        <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] mb-4">
+          Practica con pronombres y declinaciones
+        </h2>
+        <p className="text-neutral-300 max-w-2xl mx-auto">
           Completa las frases con el pronombre o artículo correcto para practicar la gramática alemana.
         </p>
       </div>
