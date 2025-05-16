@@ -229,17 +229,41 @@ export async function verifyReverseTranslation(
       fullCorrectTranslation = `${correctArticle} ${correctGermanWord}`;
     }
     
-    // Comprobación simple para casos de coincidencia exacta
-    const simplifiedUserTranslation = userTranslation.toLowerCase().trim();
-    const simplifiedCorrectTranslation = correctGermanWord.toLowerCase().trim();
+    // Verificar la correcta capitalización
+    const isNoun = !!correctArticle; // Si tiene artículo, es un sustantivo
+    const userWords = userTranslation.trim().split(' ');
+    const lastUserWord = userWords.length > 0 ? userWords[userWords.length - 1] : "";
     
-    if (simplifiedUserTranslation === simplifiedCorrectTranslation) {
+    // Comprobar la capitalización correcta
+    // Para sustantivos: la primera letra debe ser mayúscula (Wort, no wort)
+    // Para no sustantivos: la primera letra debe ser minúscula (danke, no Danke)
+    const hasCorrectCapitalization = lastUserWord && 
+      ((isNoun && lastUserWord[0] === lastUserWord[0].toUpperCase() && lastUserWord[0] !== lastUserWord[0].toLowerCase()) ||
+       (!isNoun && (lastUserWord[0] === lastUserWord[0].toLowerCase() || lastUserWord[0] === lastUserWord[0].toUpperCase() && lastUserWord[0] === lastUserWord[0].toLowerCase())));
+    
+    // Comprobación simple para casos de coincidencia exacta (ignorando capitalización)
+    const simplifiedUserTranslation = userTranslation.toLowerCase().trim();
+    const simplifiedCorrectTranslation = fullCorrectTranslation.toLowerCase().trim();
+    
+    // La respuesta es correcta solo si coincide (ignorando capitalización) Y tiene la capitalización correcta
+    if (simplifiedUserTranslation === simplifiedCorrectTranslation && hasCorrectCapitalization) {
       // Generar una frase de ejemplo simple para casos de coincidencia exacta
       return {
         isCorrect: true,
         correctTranslation: fullCorrectTranslation,
         exampleSentence: `Beispiel: Ich benutze ${fullCorrectTranslation} in einem Satz.`,
         explanation: "¡Correcto! Tu traducción es exacta."
+      };
+    }
+    
+    // Si coincide en todo excepto en la capitalización, dar un mensaje específico
+    if (simplifiedUserTranslation === simplifiedCorrectTranslation && !hasCorrectCapitalization) {
+      return {
+        isCorrect: false,
+        correctTranslation: fullCorrectTranslation,
+        explanation: isNoun 
+          ? `Casi correcto. Recuerda que en alemán, los sustantivos siempre se escriben con mayúscula inicial: ${fullCorrectTranslation}` 
+          : `Casi correcto. Esta palabra no es un sustantivo, por lo que debe escribirse con minúscula inicial: ${fullCorrectTranslation}`
       };
     }
     
