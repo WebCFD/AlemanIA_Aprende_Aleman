@@ -363,7 +363,7 @@ export default function VocabularyCard({
       return {
         section: '#saludos',
         title: 'Saludos básicos',
-        icon: <MessageSquare className="h-4 w-4 mr-1" />,
+        icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre saludos y expresiones en alemán'
       };
     }
@@ -373,7 +373,7 @@ export default function VocabularyCard({
       return {
         section: '#sustantivos',
         title: 'Sustantivos y mayúsculas',
-        icon: <AlignJustify className="h-4 w-4 mr-1" />,
+        icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre los sustantivos en alemán y el uso de mayúsculas'
       };
     }
@@ -383,7 +383,7 @@ export default function VocabularyCard({
       return {
         section: '#pronombres',
         title: 'Pronombres personales',
-        icon: <Users className="h-4 w-4 mr-1" />,
+        icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre los pronombres personales en alemán'
       };
     }
@@ -392,7 +392,7 @@ export default function VocabularyCard({
     return {
       section: '#expresiones',
       title: 'Expresiones útiles',
-      icon: <TypeIcon className="h-4 w-4 mr-1" />,
+      icon: <BookOpen className="h-4 w-4 mr-1" />,
       text: 'Conoce más expresiones útiles en alemán'
     };
   };
