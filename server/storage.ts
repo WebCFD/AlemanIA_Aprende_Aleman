@@ -17,19 +17,21 @@ export interface IStorage {
 
 // German vocabulary data for different difficulty levels
 const LEVEL_A_WORDS: InsertWord[] = [
-  // Palabras básicas ya existentes
-  { german: "Hallo", spanish: "hola", example: "Hallo, wie geht es dir?", exampleTranslation: "Hola, ¿cómo estás?", difficulty: "A" },
-  { german: "Danke", spanish: "gracias", example: "Vielen Danke für deine Hilfe.", exampleTranslation: "Muchas gracias por tu ayuda.", difficulty: "A" },
-  { german: "Bitte", spanish: "por favor", example: "Kannst du mir bitte helfen?", exampleTranslation: "¿Puedes ayudarme, por favor?", difficulty: "A" },
-  { german: "Ja", spanish: "sí", example: "Ja, ich verstehe.", exampleTranslation: "Sí, entiendo.", difficulty: "A" },
-  { german: "Nein", spanish: "no", example: "Nein, ich kann nicht kommen.", exampleTranslation: "No, no puedo venir.", difficulty: "A" },
-  { german: "Gut", spanish: "bien", example: "Es geht mir gut.", exampleTranslation: "Estoy bien.", difficulty: "A" },
-  { german: "Schlecht", spanish: "mal", example: "Mir geht es schlecht.", exampleTranslation: "Me siento mal.", difficulty: "A" },
+  // Palabras básicas ya existentes - Saludos y expresiones comunes (no sustantivos, en minúscula)
+  { german: "hallo", spanish: "hola", example: "Hallo, wie geht es dir?", exampleTranslation: "Hola, ¿cómo estás?", difficulty: "A" },
+  { german: "danke", spanish: "gracias", example: "Vielen Danke für deine Hilfe.", exampleTranslation: "Muchas gracias por tu ayuda.", difficulty: "A" },
+  { german: "bitte", spanish: "por favor", example: "Kannst du mir bitte helfen?", exampleTranslation: "¿Puedes ayudarme, por favor?", difficulty: "A" },
+  { german: "ja", spanish: "sí", example: "Ja, ich verstehe.", exampleTranslation: "Sí, entiendo.", difficulty: "A" },
+  { german: "nein", spanish: "no", example: "Nein, ich kann nicht kommen.", exampleTranslation: "No, no puedo venir.", difficulty: "A" },
+  { german: "gut", spanish: "bien", example: "Es geht mir gut.", exampleTranslation: "Estoy bien.", difficulty: "A" },
+  { german: "schlecht", spanish: "mal", example: "Mir geht es schlecht.", exampleTranslation: "Me siento mal.", difficulty: "A" },
+  
+  // Sustantivos (con primera letra en mayúscula)
   { german: "Liebe", spanish: "amor", example: "Ich liebe dich.", exampleTranslation: "Te amo.", difficulty: "A" },
   { german: "Freund", spanish: "amigo", example: "Er ist mein Freund.", exampleTranslation: "Él es mi amigo.", difficulty: "A" },
   { german: "Familie", spanish: "familia", example: "Meine Familie ist groß.", exampleTranslation: "Mi familia es grande.", difficulty: "A" },
   
-  // Nueva lista de palabras del usuario - todas en nivel A
+  // Sustantivos - Personas, objetos y conceptos
   { german: "Mann", spanish: "hombre", example: "Der Mann geht zur Arbeit.", exampleTranslation: "El hombre va al trabajo.", difficulty: "A" },
   { german: "Frau", spanish: "mujer", example: "Die Frau liest ein Buch.", exampleTranslation: "La mujer lee un libro.", difficulty: "A" },
   { german: "Kind", spanish: "niño/a", example: "Das Kind spielt im Garten.", exampleTranslation: "El niño juega en el jardín.", difficulty: "A" },
