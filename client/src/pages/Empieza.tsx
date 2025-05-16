@@ -1,7 +1,28 @@
+import { useEffect } from "react";
 import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Empieza() {
+  // Efecto para scroll automático a la sección guardada en localStorage
+  useEffect(() => {
+    // Pequeño retraso para asegurar que la página se ha cargado completamente
+    const timer = setTimeout(() => {
+      const sectionId = localStorage.getItem('scrollToSection');
+      
+      if (sectionId) {
+        // Limpiar el localStorage después de usarlo
+        localStorage.removeItem('scrollToSection');
+        
+        // Buscar y hacer scroll a la sección
+        const element = document.querySelector(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }, 300); // Un retraso de 300ms para dar tiempo a que se cargue la página
+    
+    return () => clearTimeout(timer);
+  }, []);
   // Función para reproducir audio usando la Web Speech API
   const handlePlayAudio = (text: string) => {
     if ('speechSynthesis' in window) {

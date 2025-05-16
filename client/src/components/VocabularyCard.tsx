@@ -581,15 +581,10 @@ export default function VocabularyCard({
                           href={`/empieza${recommendation.section}`}
                           onClick={(e) => {
                             e.preventDefault();
-                            // Navegar primero a la página Empieza
+                            // Almacenar en localStorage qué sección debe ser scrolleada
+                            localStorage.setItem('scrollToSection', recommendation.section);
+                            // Navegar a la página Empieza
                             window.location.href = '/empieza';
-                            // Establecer un pequeño delay antes de hacer scroll a la sección
-                            setTimeout(() => {
-                              const element = document.querySelector(recommendation.section);
-                              if (element) {
-                                element.scrollIntoView({ behavior: 'smooth' });
-                              }
-                            }, 100);
                           }}
                           className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer"
                         >
