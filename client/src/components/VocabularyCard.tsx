@@ -418,6 +418,7 @@ export default function VocabularyCard({
       "Brot": "das",
       "Hotel": "das",
       "Blut": "das",
+      "Bier": "das",
     };
     
     return germanNouns[word] || null;
