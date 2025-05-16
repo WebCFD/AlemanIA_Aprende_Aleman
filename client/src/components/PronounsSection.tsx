@@ -8,7 +8,6 @@ export default function PronounsSection() {
   const [difficulty, setDifficulty] = useState<Difficulty>("A");
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [incorrectCount, setIncorrectCount] = useState<number>(0);
-  const [showFullExercise, setShowFullExercise] = useState<boolean>(false);
 
   const handleDifficultyChange = (difficulty: Difficulty) => {
     setDifficulty(difficulty);
@@ -31,30 +30,13 @@ export default function PronounsSection() {
         </p>
       </div>
       
-      {showFullExercise ? (
-        <PronounCard
-          difficulty={difficulty}
-          correctCount={correctCount}
-          incorrectCount={incorrectCount}
-          onCorrectAnswer={handleCorrectAnswer}
-          onIncorrectAnswer={handleIncorrectAnswer}
-        />
-      ) : (
-        <div className="bg-blue-50 border border-blue-100 rounded-lg p-6 text-center">
-          <h3 className="text-xl font-semibold text-blue-800 mb-3">¡Nuevo ejercicio disponible!</h3>
-          <p className="text-blue-700 mb-4">
-            Practica el uso de pronombres y artículos en frases alemanas completas.
-          </p>
-          <button
-            onClick={() => setShowFullExercise(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md font-medium transition-colors"
-          >
-            Comenzar ejercicio
-          </button>
-        </div>
-      )}
-      
-
+      <PronounCard
+        difficulty={difficulty}
+        correctCount={correctCount}
+        incorrectCount={incorrectCount}
+        onCorrectAnswer={handleCorrectAnswer}
+        onIncorrectAnswer={handleIncorrectAnswer}
+      />
     </section>
   );
 }
