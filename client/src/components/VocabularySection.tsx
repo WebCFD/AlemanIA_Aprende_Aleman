@@ -22,6 +22,13 @@ export default function VocabularySection() {
 
   return (
     <section id="vocabulario" className="mb-16">
+      <div className="mb-8">
+        <DifficultySelector 
+          currentDifficulty={currentDifficulty} 
+          onDifficultyChange={handleDifficultyChange} 
+        />
+      </div>
+
       <div className="text-center mb-10">
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] mb-4">
           Aprende Vocabulario
@@ -30,11 +37,6 @@ export default function VocabularySection() {
           Practica con las palabras más usadas en alemán según tu nivel. Traduce del alemán al español y mejora tu vocabulario.
         </p>
       </div>
-
-      <DifficultySelector 
-        currentDifficulty={currentDifficulty} 
-        onDifficultyChange={handleDifficultyChange} 
-      />
 
       <VocabularyCard 
         difficulty={currentDifficulty}
