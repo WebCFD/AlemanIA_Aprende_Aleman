@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -39,6 +39,7 @@ export default function VocabularyCard({
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const [selectedReverseWord, setSelectedReverseWord] = useState<Word | null>(null);
   const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
   // Fetch a random word based on difficulty
@@ -235,6 +236,13 @@ export default function VocabularyCard({
     setSelectedReverseWord(null);
     setCorrectResponse(undefined);
     
+    // Enfoque automático después de un pequeño retraso para permitir que se actualice el estado
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 50);
+    
     // Si estábamos en modo inverso y pasamos a la siguiente palabra, volver al modo normal
     if (isReverseMode) {
       // Después de completar un ejercicio inverso, volvemos al modo normal
@@ -354,6 +362,7 @@ export default function VocabularyCard({
         <div className="mb-6">
           <div className="relative">
             <Input
+              ref={inputRef}
               type="text"
               className="w-full border border-neutral-200 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-[#4A6FA5]"
               placeholder="Escribe la traducción..."
@@ -361,6 +370,7 @@ export default function VocabularyCard({
               onChange={(e) => setTranslation(e.target.value)}
               onKeyUp={handleKeyPress}
               disabled={verifyMutation.isPending || showFeedback}
+              autoFocus={true}
             />
             <Button
               size="icon"
