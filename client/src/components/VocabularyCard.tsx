@@ -487,122 +487,106 @@ export default function VocabularyCard({
               value={translation}
               onChange={(e) => setTranslation(e.target.value)}
               onKeyUp={handleKeyPress}
-              disabled={verifyMutation.isPending || showFeedback}
-              autoFocus={true}
+              disabled={showFeedback || (isReverseMode && !selectedReverseWord)}
             />
-            <Button
-              size="icon"
-              variant="ghost"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A6FA5] hover:text-[#395888]"
-              onClick={handleSubmitTranslation}
-              disabled={verifyMutation.isPending || showFeedback}
-            >
-              <Send className="h-5 w-5" />
-            </Button>
+            <div className="absolute inset-y-0 right-0 flex items-center pr-1.5">
+              <Button 
+                onClick={handleSubmitTranslation} 
+                variant="ghost" 
+                className="h-8 px-2 text-neutral-400 hover:text-[#4A6FA5]"
+                disabled={showFeedback || (isReverseMode && !selectedReverseWord)}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
-        
-        {/* Feedback Area */}
-        {showFeedback && (
-          <div className="mb-6">
-            {isCorrect ? (
-              <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
-                <div className="flex items-start mb-2">
-                  <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
-                  <span className="font-medium">¡Correcto!</span>
-                </div>
-                <p className="text-neutral-400 ml-7">
-                  {isReverseMode && selectedReverseWord ? (
-                    <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
-                  ) : (
-                    <>{currentWord?.german} = {currentWord?.spanish}</>
-                  )}
-                </p>
-              </div>
-            ) : (
-              <div className="bg-red-100 border border-[#F44336] text-[#F44336] rounded-lg p-4">
-                <div className="flex items-start mb-2">
-                  <XCircle className="mr-2 h-5 w-5" />
-                  <span className="font-medium">Incorrecto</span>
-                </div>
-                <p className="text-neutral-400 ml-7">
-                  {isReverseMode && selectedReverseWord ? (
-                    <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
-                  ) : (
-                    <>{currentWord?.german} = {currentWord?.spanish}</>
-                  )}
-                </p>
-              </div>
-            )}
-          </div>
-        )}
-        
-        {/* Example Sentence - Normal Mode */}
-        {showFeedback && !isReverseMode && currentWord?.example && (
-          <div className="border-t border-neutral-200 pt-4 mt-4">
-            <h4 className="font-heading font-semibold mb-2">Ejemplo:</h4>
-            <p className="text-[#4A6FA5] italic mb-2">{currentWord.example}</p>
-            <p className="text-neutral-300 text-sm mb-3">{currentWord.exampleTranslation}</p>
-            
-            {/* Audio Playback Buttons */}
-            <div className="flex space-x-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
-                onClick={() => currentWord && handlePlayAudio(currentWord.german)}
-                title="Escuchar palabra"
-              >
-                <Volume2 className="h-4 w-4 mr-1" />
-                <span className="text-sm">Escuchar palabra</span>
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
-                onClick={() => currentWord && currentWord.example && handlePlayAudio(currentWord.example)}
-                title="Escuchar frase"
-              >
-                <Volume2 className="h-4 w-4 mr-1" />
-                <span className="text-sm">Escuchar frase</span>
-              </Button>
-            </div>
-          </div>
-        )}
-        
-        {/* Example Sentence - Reverse Mode */}
-        {showFeedback && isReverseMode && exampleSentence && (
-          <div className="border-t border-neutral-200 pt-4 mt-4">
-            <h4 className="font-heading font-semibold mb-2">Ejemplo:</h4>
-            <p className="text-[#4A6FA5] italic mb-2">{exampleSentence}</p>
-            
-            {/* Audio Playback Button */}
-            <div className="flex space-x-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center text-[#4A6FA5] hover:text-[#395888]"
-                onClick={() => exampleSentence && handlePlayAudio(exampleSentence)}
-                title="Escuchar frase"
-              >
-                <Volume2 className="h-4 w-4 mr-1" />
-                <span className="text-sm">Escuchar frase</span>
-              </Button>
-            </div>
-          </div>
-        )}
-        
-        {/* Next Word Button */}
-        <div className="mt-8 text-center">
-          <Button 
-            onClick={handleNextWord}
-            className="bg-[#4A6FA5] text-white hover:bg-[#395888] px-6 py-2 rounded-full flex items-center justify-center mx-auto"
-            disabled={verifyMutation.isPending}
+
+        {/* Play Button */}
+        <div className="mb-6 flex justify-center">
+          <Button
+            variant="outline"
+            className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
+            onClick={() => {
+              if (isReverseMode && selectedReverseWord) {
+                handlePlayAudio(selectedReverseWord.german);
+              } else {
+                handlePlayAudio(currentWord?.german);
+              }
+            }}
           >
-            <span className="mr-2">Otra palabra</span>
-            <ArrowRight className="h-4 w-4" />
+            <Volume2 className="mr-2 h-4 w-4" /> 
+            Escuchar
           </Button>
+        </div>
+        
+        {/* Feedback Section */}
+        <div className={`mb-5 transition-all duration-300 ${
+          showFeedback ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 overflow-hidden'
+        }`}>
+          {isCorrect === true ? (
+            <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
+              <div className="flex items-start mb-2">
+                <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
+                <span className="font-medium">¡Correcto!</span>
+              </div>
+              <p className="text-neutral-400 ml-7">
+                {isReverseMode && selectedReverseWord ? (
+                  <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
+                ) : (
+                  <>
+                    {isNoun(currentWord?.german) ? (
+                      <>
+                        {getGermanArticle(currentWord?.german)} {currentWord?.german} = <span className="italic">"{translateArticle(getGermanArticle(currentWord?.german))}"</span> {currentWord?.spanish}
+                      </>
+                    ) : (
+                      <>{currentWord?.german} = {currentWord?.spanish}</>
+                    )}
+                  </>
+                )}
+              </p>
+            </div>
+          ) : (
+            <div className="bg-red-100 border border-[#F44336] text-[#F44336] rounded-lg p-4">
+              <div className="flex items-start mb-2">
+                <XCircle className="mr-2 h-5 w-5" />
+                <span className="font-medium">Incorrecto</span>
+              </div>
+              <p className="text-neutral-400 ml-7">
+                {isReverseMode && selectedReverseWord ? (
+                  <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
+                ) : (
+                  <>
+                    {isNoun(currentWord?.german) ? (
+                      <>
+                        {getGermanArticle(currentWord?.german)} {currentWord?.german} = <span className="italic">"{translateArticle(getGermanArticle(currentWord?.german))}"</span> {currentWord?.spanish}
+                      </>
+                    ) : (
+                      <>{currentWord?.german} = {currentWord?.spanish}</>
+                    )}
+                  </>
+                )}
+              </p>
+            </div>
+          )}
+          
+          {/* Example sentence (només en mode invers quan la resposta és correcta) */}
+          {isReverseMode && isCorrect && exampleSentence && (
+            <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-blue-800 mb-1 font-medium text-sm">Ejemplo:</p>
+              <p className="text-blue-600 italic">{exampleSentence}</p>
+            </div>
+          )}
+          
+          {/* Next Word Button */}
+          <div className="flex justify-center mt-4">
+            <Button
+              className="bg-[#6B8CB8] hover:bg-[#4A6FA5] text-white flex items-center gap-2"
+              onClick={handleNextWord}
+            >
+              Otra palabra <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </Card>
