@@ -231,11 +231,13 @@ export default function VocabularyCard({
   // Handle key press (Enter)
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
+      e.preventDefault(); // Prevenir comportamiento por defecto
+      
       // Si ya estamos mostrando feedback, "Enter" activa "Otra palabra"
       if (showFeedback) {
         handleNextWord();
-      } else {
-        // Si no, funciona como antes y envía la traducción
+      } else if (translation.trim()) { // Solo si hay texto
+        // Si no hay feedback y hay texto, envía la traducción
         handleSubmitTranslation();
       }
     }
