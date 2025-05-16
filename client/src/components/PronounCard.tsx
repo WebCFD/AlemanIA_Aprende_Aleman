@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Check, X, Volume2, ArrowRight, Book, Video, CheckCircle, XCircle } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
+import { useToast, toast } from "@/hooks/use-toast";
 import { Difficulty } from "@shared/schema";
 
 interface PronounCardProps {
@@ -201,112 +201,100 @@ export default function PronounCard({
         </div>
       </CardHeader>
       
-      <CardContent className="p-6">
-        {/* Frase en español */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Frase en español:</h3>
-          <div className="flex items-center">
-            <p className="text-xl text-gray-800">{currentSentence.spanishText}</p>
-          </div>
-        </div>
-        
-        {/* Frase en alemán con hueco */}
-        <div className="mb-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Completa la frase en alemán:</h3>
-          <div className="flex items-center">
-            {/* Elemento para pronunciar */}
-            <button 
-              onClick={() => speak(currentSentence.germanText)} 
-              className="mr-2 p-2 rounded-full hover:bg-gray-100" 
-              title="Escuchar pronunciación"
-            >
-              <Volume2 className="h-5 w-5 text-blue-500" />
-            </button>
+      <CardContent className="py-4 px-6">
+        {!showFeedback ? (
+          <div className="flex flex-col items-center justify-center py-6">
+            <div className="mb-4">
+              <div className="text-sm text-gray-500 text-center mb-2">
+                Completa la frase en alemán:
+              </div>
+              
+              <div className="flex items-center justify-center">
+                <div 
+                  dangerouslySetInnerHTML={{ 
+                    __html: currentSentence.germanTextWithGap.replace(
+                      '____', 
+                      '<div class="inline-block border-b-2 border-gray-400 min-w-[70px] text-center mx-1"></div>'
+                    ) 
+                  }} 
+                  className="text-xl text-center"
+                />
+              </div>
+            </div>
             
-            {/* Mostrar la frase con hueco */}
-            <div className="text-xl relative">
-              {!showFeedback ? (
-                <div className="flex items-center gap-2">
-                  <div 
-                    dangerouslySetInnerHTML={{ 
-                      __html: currentSentence.germanTextWithGap.replace(
-                        '____', 
-                        '<div class="inline-block border-b-2 border-gray-400 min-w-[70px] text-center mx-1"></div>'
-                      ) 
-                    }} 
-                    className="flex-grow"
-                  />
-                  <Input
-                    ref={inputRef}
-                    type="text"
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder="Escribe aquí"
-                    className="max-w-[180px] border-2 focus:border-blue-400"
-                  />
-                </div>
-              ) : (
-                <div>
-                  {isCorrect ? (
-                    <div className="text-green-600">{fullSentence}</div>
-                  ) : (
-                    <div className="text-red-600">{fullSentence}</div>
-                  )}
-                </div>
-              )}
+            <div className="flex justify-center items-center gap-2 mt-3 w-full">
+              <Input
+                ref={inputRef}
+                type="text"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder="Escribe la traducción..."
+                className="max-w-xs border-2 focus:border-blue-400"
+              />
+              
+              <Button
+                onClick={() => speak(currentSentence.germanText)}
+                variant="outline"
+                size="icon"
+                className="rounded-full border-2 hover:bg-blue-50"
+                title="Escuchar pronunciación"
+              >
+                <Volume2 className="h-5 w-5 text-blue-500" />
+              </Button>
             </div>
+            
+            {/* Pista (opcional) */}
+            {currentSentence.hint && (
+              <div className="mt-4 text-sm text-gray-500 text-center">
+                <span className="font-medium">Pista:</span> {currentSentence.hint}
+              </div>
+            )}
           </div>
-          
-          {/* Pista (opcional) */}
-          {currentSentence.hint && !showFeedback && (
-            <div className="mt-2 text-sm text-gray-500">
-              <span className="font-medium">Pista:</span> {currentSentence.hint}
-            </div>
-          )}
-        </div>
-        
-        {/* Feedback después de responder */}
-        {showFeedback && (
-          <div className={`mt-4 p-4 rounded-lg ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
-            <div className="flex items-start">
-              {isCorrect ? (
-                <Check className="h-6 w-6 text-green-500 mr-2 mt-0.5" />
-              ) : (
-                <X className="h-6 w-6 text-red-500 mr-2 mt-0.5" />
-              )}
-              <div>
-                <p className={`font-medium ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-                  {isCorrect ? '¡Correcto!' : 'Incorrecto'}
-                </p>
-                <p className="text-gray-600 mt-1">{explanation}</p>
-                
-                {!isCorrect && (
-                  <div className="mt-4">
-                    <p className="font-medium text-gray-700 mb-2">Material de aprendizaje relacionado:</p>
-                    <div className="flex flex-col sm:flex-row gap-2">
-                      <a
-                        onClick={() => {
-                          window.location.href = '/empieza';
-                        }}
-                        className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
-                      >
-                        <Book className="h-4 w-4 mr-1.5" />
-                        <span>Ver explicación en texto</span>
-                      </a>
-                      <a
-                        onClick={() => {
-                          window.location.href = '/videos';
-                        }}
-                        className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
-                      >
-                        <Video className="h-4 w-4 mr-1.5" />
-                        <span>Ver explicación en video</span>
-                      </a>
-                    </div>
-                  </div>
+        ) : (
+          <div className="py-6">
+            <div className="flex flex-col items-center justify-center">
+              <div className={`text-xl font-semibold mb-3 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                {isCorrect ? '¡Correcto!' : 'Incorrecto'}
+              </div>
+              
+              <div className="text-center mb-4">
+                {isCorrect ? (
+                  <div className="text-green-600 text-lg">{fullSentence}</div>
+                ) : (
+                  <div className="text-red-600 text-lg">{fullSentence}</div>
                 )}
               </div>
+              
+              <div className="text-gray-600 text-center max-w-md">
+                {explanation}
+              </div>
+              
+              {!isCorrect && (
+                <div className="mt-4">
+                  <p className="font-medium text-gray-700 mb-2 text-center">Material de aprendizaje relacionado:</p>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <a
+                      onClick={() => {
+                        window.location.href = '/empieza';
+                      }}
+                      className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
+                    >
+                      <Book className="h-4 w-4 mr-1.5" />
+                      <span>Ver explicación en texto</span>
+                    </a>
+                    <a
+                      onClick={() => {
+                        window.location.href = '/videos';
+                      }}
+                      className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
+                    >
+                      <Video className="h-4 w-4 mr-1.5" />
+                      <span>Ver explicación en video</span>
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
