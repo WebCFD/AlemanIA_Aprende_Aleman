@@ -577,22 +577,40 @@ export default function VocabularyCard({
                     
                     if (recommendation) {
                       return (
-                        <Link href={`/empieza${recommendation.section}`}>
-                          <span className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer">
-                            {recommendation.icon}
-                            {recommendation.text}
-                          </span>
-                        </Link>
+                        <a 
+                          href={`/empieza${recommendation.section}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // Navegar primero a la página Empieza
+                            window.location.href = '/empieza';
+                            // Establecer un pequeño delay antes de hacer scroll a la sección
+                            setTimeout(() => {
+                              const element = document.querySelector(recommendation.section);
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                              }
+                            }, 100);
+                          }}
+                          className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer"
+                        >
+                          {recommendation.icon}
+                          {recommendation.text}
+                        </a>
                       );
                     }
                     
                     return (
-                      <Link href="/empieza">
-                        <span className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer">
-                          <BookOpen className="h-4 w-4 mr-1" />
-                          Repasar conceptos básicos de alemán
-                        </span>
-                      </Link>
+                      <a 
+                        href="/empieza"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.location.href = '/empieza';
+                        }}
+                        className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer"
+                      >
+                        <BookOpen className="h-4 w-4 mr-1" />
+                        Repasar conceptos básicos de alemán
+                      </a>
                     );
                   })()}
                 </div>
