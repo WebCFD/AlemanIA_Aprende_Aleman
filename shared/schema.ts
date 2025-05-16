@@ -9,6 +9,7 @@ export const words = pgTable("words", {
   id: serial("id").primaryKey(),
   german: text("german").notNull(),
   spanish: text("spanish").notNull(),
+  article: text("article"),  // Nuevo campo para el artículo (der, die, das)
   example: text("example"),
   exampleTranslation: text("example_translation"),
   difficulty: varchar("difficulty", { length: 1 }).notNull(),
