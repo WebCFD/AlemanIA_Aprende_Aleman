@@ -613,7 +613,7 @@ export default function VocabularyCard({
                               }}
                               className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
                             >
-                              <Film className="h-4 w-4 mr-1.5" />
+                              <Video className="h-4 w-4 mr-1.5" />
                               <span>Ver explicación en video</span>
                             </a>
                           </div>
@@ -647,7 +647,7 @@ export default function VocabularyCard({
                             }}
                             className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
                           >
-                            <Film className="h-4 w-4 mr-1.5" />
+                            <Video className="h-4 w-4 mr-1.5" />
                             <span>Videos explicativos</span>
                           </a>
                         </div>
