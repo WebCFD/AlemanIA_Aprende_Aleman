@@ -67,6 +67,12 @@ export default function VocabularyCard({
     onSuccess: (data) => {
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
+      
+      // Mostrar frase de ejemplo en modo directo si existe
+      if (currentWord?.example) {
+        setExampleSentence(currentWord.example);
+      }
+      
       if (data.isCorrect) {
         // Solo para nivel A, rastreamos palabras correctas
         if (difficulty === "A" && !isReverseMode) {
@@ -570,11 +576,25 @@ export default function VocabularyCard({
             </div>
           )}
           
-          {/* Example sentence (només en mode invers quan la resposta és correcta) */}
-          {isReverseMode && isCorrect && exampleSentence && (
+          {/* Example sentence (en modo directo e inverso) */}
+          {exampleSentence && (
             <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-blue-800 mb-1 font-medium text-sm">Ejemplo:</p>
+              <div className="flex justify-between items-start mb-2">
+                <p className="text-blue-800 font-medium text-sm">Ejemplo:</p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 px-2 text-blue-700 hover:text-blue-900 -mt-1"
+                  onClick={() => handlePlayAudio(exampleSentence)}
+                >
+                  <Volume2 className="h-3 w-3 mr-1" /> 
+                  <span className="text-xs">Escuchar ejemplo</span>
+                </Button>
+              </div>
               <p className="text-blue-600 italic">{exampleSentence}</p>
+              {!isReverseMode && currentWord?.exampleTranslation && (
+                <p className="text-blue-400 text-sm mt-1">{currentWord.exampleTranslation}</p>
+              )}
             </div>
           )}
           
