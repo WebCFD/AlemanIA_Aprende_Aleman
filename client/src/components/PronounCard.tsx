@@ -99,6 +99,12 @@ export default function PronounCard({
       }
       
       if (data.isCorrect) {
+        // Mostrar toast de éxito
+        toast({
+          title: "¡Correcto!",
+          description: `${data.correctAnswer} - '${currentSentence?.spanishText}'`,
+          className: "bg-green-50 text-green-600 border border-green-200",
+        });
         onCorrectAnswer();
       } else {
         onIncorrectAnswer();
