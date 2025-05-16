@@ -65,7 +65,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const verificationResult = await verifyTranslation(
         germanWord,
         translation,
-        word.spanish
+        word.spanish,
+        difficulty
       );
       
       return res.json(verificationResult);
@@ -113,6 +114,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Enviar feedback
   app.post("/api/feedback", handleSendFeedback);
+  
+  // Rutas para ejercicios de pronombres y declinaciones
+  
+  // Obtener una frase aleatoria por nivel de dificultad
+  app.get("/api/sentences/random", async (req, res) => {
+    try {
+      const difficulty = (req.query.difficulty as Difficulty) || "A";
+      
+      // Validar dificultad
+      if (!["A", "B", "C"].includes(difficulty)) {
+        return res.status(400).json({ message: "Nivel de dificultad inválido. Debe ser A, B o C." });
+      }
+      
+      const sentence = await storage.getRandomSentenceByDifficulty(difficulty);
+      
+      if (!sentence) {
+        return res.status(404).json({ message: `No se encontraron frases para el nivel de dificultad ${difficulty}` });
+      }
+      
+      return res.json(sentence);
+    } catch (error) {
+      console.error("Error al obtener frase aleatoria:", error);
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
+  
+  // Verificar respuesta para ejercicio de pronombres/declinaciones
+  app.post("/api/sentences/verify", async (req, res) => {
+    try {
+      const validationResult = verifySentenceSchema.safeParse(req.body);
+      
+      if (!validationResult.success) {
+        return res.status(400).json({ 
+          message: "Datos de solicitud inválidos", 
+          errors: validationResult.error.errors 
+        });
+      }
+      
+      const { sentenceId, userAnswer, difficulty } = validationResult.data;
+      
+      // Encontrar la frase en la base de datos
+      const sentence = await storage.getSentence(sentenceId);
+      
+      if (!sentence) {
+        return res.status(404).json({ message: "Frase no encontrada" });
+      }
+      
+      // Para casos simples, comparación directa
+      if (userAnswer.trim().toLowerCase() === sentence.missingWord.trim().toLowerCase()) {
+        return res.json({ 
+          isCorrect: true,
+          correctAnswer: sentence.missingWord,
+          explanation: "¡Correcto! Has completado la frase perfectamente.",
+          fullSentence: sentence.germanText
+        });
+      }
+      
+      // Para verificaciones más complejas, usar Claude
+      const verificationResult = await verifySentenceAnswer(
+        sentence.spanishText,
+        sentence.germanTextWithGap,
+        userAnswer,
+        sentence.missingWord,
+        sentence.wordType
+      );
+      
+      return res.json(verificationResult);
+      
+    } catch (error) {
+      console.error("Error al verificar respuesta:", error);
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;

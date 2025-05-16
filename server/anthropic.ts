@@ -120,7 +120,7 @@ export async function verifyTranslation(
   germanWord: string,
   userTranslation: string,
   correctTranslation: string,
-  difficulty: string
+  difficulty: string = "A"
 ): Promise<VerifyTranslationResponse> {
   try {
     // Simple check for exact match (for API failure cases)
@@ -378,6 +378,117 @@ export async function verifyReverseTranslation(
         ? "Tu traducción es correcta." 
         : `Tu traducción no coincide con la esperada. La respuesta correcta es: ${fullCorrectTranslation}`,
       exampleSentence: isExactMatch ? `Beispiel: Ich benutze ${fullCorrectTranslation} häufig.` : undefined
+    };
+  }
+}
+
+/**
+ * Verifica la respuesta de un usuario en ejercicios de pronombres y declinaciones
+ * @param spanishSentence La frase en español
+ * @param germanSentenceWithGap La frase en alemán con un espacio para completar
+ * @param userAnswer La respuesta del usuario (la palabra que falta)
+ * @param correctAnswer La respuesta correcta conocida
+ * @returns Objeto con el resultado de la verificación
+ */
+export async function verifySentenceAnswer(
+  spanishSentence: string,
+  germanSentenceWithGap: string,
+  userAnswer: string,
+  correctAnswer: string,
+  wordType: string
+): Promise<VerifySentenceResponse> {
+  try {
+    // Comprobación simple para casos de coincidencia exacta
+    if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+      // Crear la frase completa para mostrar al usuario
+      const fullSentence = germanSentenceWithGap.replace('____', correctAnswer);
+      
+      return {
+        isCorrect: true,
+        correctAnswer,
+        explanation: "¡Correcto! Has completado la frase correctamente.",
+        fullSentence
+      };
+    }
+    
+    const prompt = `
+    Estás evaluando ejercicios de completar frases en alemán para una aplicación de aprendizaje de idiomas.
+    
+    Frase en español: "${spanishSentence}"
+    Frase en alemán con hueco: "${germanSentenceWithGap}"
+    Respuesta correcta: "${correctAnswer}"
+    Respuesta del usuario: "${userAnswer}"
+    Tipo de palabra: "${wordType}" (puede ser: pronombre, articulo_det, articulo_indet, pronombre_posesivo, etc.)
+    
+    Tarea:
+    1. Determina si la respuesta del usuario es correcta o suficientemente cercana.
+      - Variaciones ortográficas menores pueden ser aceptables
+      - Debe coincidir en género y número con el contexto de la frase
+      
+    2. Si la respuesta es incorrecta:
+      - Explica brevemente por qué es incorrecta
+      - Explica cuál es la forma correcta y por qué es importante en alemán
+    
+    Responde en formato JSON con estas propiedades:
+    {
+      "isCorrect": boolean,
+      "explanation": string (explicación en español),
+      "fullSentence": string (la frase completa y correcta en alemán)
+    }
+    `;
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 800,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    // Analizar la respuesta
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      console.error("Formato de respuesta inesperado de Claude:", response.content);
+      return { 
+        isCorrect: false, 
+        correctAnswer,
+        explanation: "No pudimos verificar tu respuesta. La palabra correcta es: " + correctAnswer,
+        fullSentence: germanSentenceWithGap.replace('____', correctAnswer)
+      };
+    }
+    
+    const responseText = response.content[0].text;
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    
+    if (!jsonMatch) {
+      console.error("Error al analizar JSON de la respuesta de Claude:", responseText);
+      return { 
+        isCorrect: false, 
+        correctAnswer,
+        explanation: "No pudimos verificar tu respuesta. La palabra correcta es: " + correctAnswer,
+        fullSentence: germanSentenceWithGap.replace('____', correctAnswer)
+      };
+    }
+    
+    const result = JSON.parse(jsonMatch[0]);
+    
+    return {
+      isCorrect: result.isCorrect,
+      correctAnswer,
+      explanation: result.explanation,
+      fullSentence: result.fullSentence || germanSentenceWithGap.replace('____', correctAnswer)
+    };
+  } catch (error) {
+    console.error("Error al verificar respuesta de pronombres con Claude:", error);
+    
+    // Fallback a comparación simple cuando la API falla
+    const isExactMatch = userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
+    const fullSentence = germanSentenceWithGap.replace('____', correctAnswer);
+    
+    return {
+      isCorrect: isExactMatch,
+      correctAnswer,
+      explanation: isExactMatch 
+        ? "Tu respuesta es correcta." 
+        : `Tu respuesta no es correcta. La palabra que completa la frase es: ${correctAnswer}`,
+      fullSentence
     };
   }
 }
