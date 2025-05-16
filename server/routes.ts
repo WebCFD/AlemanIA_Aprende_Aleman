@@ -225,8 +225,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Verbo no encontrado" });
       }
       
-      // Para casos sencillos, hacer comparación directa
-      if (userAnswer.toLowerCase().trim() === verb.germanConjugation.toLowerCase().trim()) {
+      // Preparar la respuesta completa con pronombre
+      const fullAnswer = `${verb.germanPronoun} ${verb.germanConjugation}`.toLowerCase().trim();
+      const userAnswerLower = userAnswer.toLowerCase().trim();
+      
+      // Aceptar tanto la conjugación sola como con el pronombre
+      if (userAnswerLower === verb.germanConjugation.toLowerCase().trim() || 
+          userAnswerLower === fullAnswer) {
         // Formar una frase completa para el feedback
         let fullSentence = "";
         if (verb.verbForm === "infinitive" || verb.verbForm === "participle") {
@@ -235,15 +240,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
           fullSentence = `${verb.germanPronoun} ${verb.germanConjugation}`;
         }
         
+        // Adaptar mensaje según si el usuario usó solo conjugación o pronombre+conjugación
+        let correctAnswer = verb.germanConjugation;
+        let explanation = `¡Correcto! La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}".`;
+        
+        // Si es forma conjugada (no infinitivo o participio), mostrar también con pronombre
+        if (verb.verbForm !== "infinitive" && verb.verbForm !== "participle") {
+          correctAnswer = `${verb.germanPronoun} ${verb.germanConjugation}`;
+          explanation = `¡Correcto! La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}" con el pronombre "${verb.germanPronoun}".`;
+        }
+        
         return res.json({
           isCorrect: true,
-          correctAnswer: verb.germanConjugation,
-          explanation: `¡Correcto! La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}".`,
+          correctAnswer: correctAnswer,
+          explanation: explanation,
           fullSentence
         });
       }
       
       // Para conjugaciones incorrectas
+      // Determinar la respuesta correcta
+      let correctAnswer = verb.germanConjugation;
+      
+      // Para conjugaciones, mostrar con el pronombre
+      if (verb.verbForm !== "infinitive" && verb.verbForm !== "participle") {
+        correctAnswer = `${verb.germanPronoun} ${verb.germanConjugation}`;
+      }
+      
       let explanation = `La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}".`;
       if (verb.hint) {
         explanation += ` ${verb.hint}`;
@@ -259,7 +282,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       return res.json({
         isCorrect: false,
-        correctAnswer: verb.germanConjugation,
+        correctAnswer: correctAnswer,
         explanation,
         fullSentence
       });
