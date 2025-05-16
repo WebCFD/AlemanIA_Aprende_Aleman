@@ -5,11 +5,11 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Check, X, Volume2, ArrowRight, Book, Video } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { queryClient } from "@/lib/queryClient";
 import { toast } from "@/hooks/use-toast";
 import { Difficulty } from "../../../shared/schema";
 
-interface PronounsDeclinationsCardProps {
+interface PronounsCardProps {
   difficulty: Difficulty;
   correctCount: number;
   incorrectCount: number;
@@ -17,13 +17,33 @@ interface PronounsDeclinationsCardProps {
   onIncorrectAnswer: () => void;
 }
 
-export default function PronounsDeclinationsCard({
+// Tipo para la respuesta de la sentencia
+interface SentenceData {
+  id: number;
+  spanishText: string;
+  germanText: string;
+  germanTextWithGap: string;
+  missingWord: string;
+  wordType: string;
+  hint: string | null;
+  difficulty: Difficulty;
+}
+
+// Tipo para la respuesta de verificación
+interface VerificationResponse {
+  isCorrect: boolean;
+  correctAnswer: string;
+  explanation: string;
+  fullSentence: string;
+}
+
+export default function PronounsCard({
   difficulty,
   correctCount,
   incorrectCount,
   onCorrectAnswer,
   onIncorrectAnswer
-}: PronounsDeclinationsCardProps) {
+}: PronounsCardProps) {
   const [userAnswer, setUserAnswer] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -32,24 +52,27 @@ export default function PronounsDeclinationsCard({
   const inputRef = useRef<HTMLInputElement>(null);
   
   // Consulta para obtener una frase aleatoria según la dificultad
-  const { data: currentSentence, refetch } = useQuery({
+  const { data: currentSentence, refetch } = useQuery<SentenceData>({
     queryKey: ['/api/sentences/random', difficulty],
-    queryFn: () => {
-      return apiRequest<any>(`/api/sentences/random?difficulty=${difficulty}`);
-    },
     staleTime: Infinity // No recargar automáticamente
   });
 
   // Mutación para verificar respuesta
   const verifyMutation = useMutation({
     mutationFn: async ({ sentenceId, userAnswer, difficulty }: { sentenceId: number; userAnswer: string; difficulty: Difficulty }) => {
-      return apiRequest<any>('/api/sentences/verify', {
+      const response = await fetch('/api/sentences/verify', {
         method: 'POST',
-        body: JSON.stringify({ sentenceId, userAnswer, difficulty }),
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ sentenceId, userAnswer, difficulty })
       });
+      
+      if (!response.ok) {
+        throw new Error('Error al verificar la respuesta');
+      }
+      
+      return response.json() as Promise<VerificationResponse>;
     },
     onSuccess: (data) => {
       setShowFeedback(true);

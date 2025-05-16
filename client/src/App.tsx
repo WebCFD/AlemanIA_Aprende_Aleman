@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import Empieza from "@/pages/Empieza";
 import Videos from "@/pages/Videos";
 import QuienesSomos from "@/pages/QuienesSomos";
+import Pronouns from "@/pages/Pronouns";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DifficultySelector from "./DifficultySelector";
-import PronounsDeclinationsCard from "./PronounsDeclinationsCard";
 import { type Difficulty } from "../../../shared/schema";
+import PronounsCard from "./PronounsCard";
 
-export default function PronounsDeclinationsSection() {
+export default function PronouncePage() {
   const [difficulty, setDifficulty] = useState<Difficulty>("A");
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [incorrectCount, setIncorrectCount] = useState<number>(0);
@@ -54,7 +54,7 @@ export default function PronounsDeclinationsSection() {
                 />
               </div>
               
-              <PronounsDeclinationsCard
+              <PronounsCard
                 difficulty={difficulty}
                 correctCount={correctCount}
                 incorrectCount={incorrectCount}
