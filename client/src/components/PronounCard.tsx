@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, X, Volume2, ArrowRight, Book, Video } from "lucide-react";
+import { Check, X, Volume2, ArrowRight, Book, Video, CheckCircle, XCircle } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Difficulty } from "@shared/schema";
 
 interface PronounCardProps {
@@ -50,9 +50,14 @@ export default function PronounCard({
   const [explanation, setExplanation] = useState("");
   const [fullSentence, setFullSentence] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
   
   // Consulta para obtener una frase aleatoria según la dificultad
-  const { data: currentSentence, refetch } = useQuery<SentenceData>({
+  const { 
+    data: currentSentence, 
+    refetch,
+    isLoading: isLoadingSentence
+  } = useQuery<SentenceData>({
     queryKey: ['/api/sentences/random', difficulty],
     staleTime: Infinity // No recargar automáticamente
   });
@@ -172,19 +177,27 @@ export default function PronounCard({
   
   return (
     <Card className="w-full max-w-3xl mx-auto shadow-lg border-2 transition-all duration-300 ease-in-out">
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-2xl font-bold text-gray-800">
-            Pronombres y Declinaciones
-          </CardTitle>
-          <div className="flex space-x-2">
-            <Badge variant="outline" className="bg-green-50 text-green-600 border-green-200">
-              {correctCount} correctas
-            </Badge>
-            <Badge variant="outline" className="bg-red-50 text-red-600 border-red-200">
-              {incorrectCount} incorrectas
-            </Badge>
+      <div className="flex justify-between items-center p-2 px-4 bg-blue-500 text-white text-sm">
+        <div className="flex items-center space-x-2">
+          <div>
+            <CheckCircle className="w-4 h-4 mr-1 inline" />
+            <span>{correctCount}</span>
           </div>
+          <div>
+            <XCircle className="w-4 h-4 mr-1 inline" />
+            <span>{incorrectCount}</span>
+          </div>
+        </div>
+        <div>
+          Nivel {difficulty} {difficulty === "A" ? "(Principiante)" : difficulty === "B" ? "(Intermedio)" : "(Avanzado)"}
+        </div>
+      </div>
+      
+      <CardHeader className="pb-2 pt-4">
+        <div className="flex justify-center items-center">
+          <CardTitle className="text-2xl font-bold text-gray-800 text-center">
+            {currentSentence?.spanishText || "Cargando..."}
+          </CardTitle>
         </div>
       </CardHeader>
       
