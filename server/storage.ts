@@ -114,15 +114,15 @@ const LEVEL_A_WORDS: InsertWord[] = [
   { german: "Sprache", spanish: "idioma", article: "die", example: "Deutsch ist eine schöne Sprache.", exampleTranslation: "El alemán es un bonito idioma.", difficulty: "A" },
   { german: "Küche", spanish: "cocina", article: "die", example: "Die Küche ist sauber.", exampleTranslation: "La cocina está limpia.", difficulty: "A" },
   { german: "Grund", spanish: "razón", article: "der", example: "Es gibt keinen Grund zur Sorge.", exampleTranslation: "No hay razón para preocuparse.", difficulty: "A" },
-  { german: "Hotel", spanish: "hotel", example: "Das Hotel ist komfortabel.", exampleTranslation: "El hotel es cómodo.", difficulty: "A" },
-  { german: "Zeitung", spanish: "periódico", example: "Ich lese die Zeitung.", exampleTranslation: "Leo el periódico.", difficulty: "A" },
-  { german: "Blut", spanish: "sangre", example: "Er hat Blut gespendet.", exampleTranslation: "Él donó sangre.", difficulty: "A" },
-  { german: "Fall", spanish: "caso", example: "In diesem Fall müssen wir handeln.", exampleTranslation: "En este caso debemos actuar.", difficulty: "A" },
-  { german: "Maschine", spanish: "máquina", example: "Die Maschine funktioniert nicht.", exampleTranslation: "La máquina no funciona.", difficulty: "A" },
-  { german: "Klasse", spanish: "clase", example: "Meine Klasse ist groß.", exampleTranslation: "Mi clase es grande.", difficulty: "A" },
-  { german: "Lösung", spanish: "solución", example: "Das ist keine gute Lösung.", exampleTranslation: "Esa no es una buena solución.", difficulty: "A" },
-  { german: "Student", spanish: "estudiante", example: "Er ist ein fleißiger Student.", exampleTranslation: "Él es un estudiante aplicado.", difficulty: "A" },
-  { german: "Ecke", spanish: "esquina", example: "Wir treffen uns an der Ecke.", exampleTranslation: "Nos encontramos en la esquina.", difficulty: "A" }
+  { german: "Hotel", spanish: "hotel", article: "das", example: "Das Hotel ist komfortabel.", exampleTranslation: "El hotel es cómodo.", difficulty: "A" },
+  { german: "Zeitung", spanish: "periódico", article: "die", example: "Ich lese die Zeitung.", exampleTranslation: "Leo el periódico.", difficulty: "A" },
+  { german: "Blut", spanish: "sangre", article: "das", example: "Er hat Blut gespendet.", exampleTranslation: "Él donó sangre.", difficulty: "A" },
+  { german: "Fall", spanish: "caso", article: "der", example: "In diesem Fall müssen wir handeln.", exampleTranslation: "En este caso debemos actuar.", difficulty: "A" },
+  { german: "Maschine", spanish: "máquina", article: "die", example: "Die Maschine funktioniert nicht.", exampleTranslation: "La máquina no funciona.", difficulty: "A" },
+  { german: "Klasse", spanish: "clase", article: "die", example: "Meine Klasse ist groß.", exampleTranslation: "Mi clase es grande.", difficulty: "A" },
+  { german: "Lösung", spanish: "solución", article: "die", example: "Das ist keine gute Lösung.", exampleTranslation: "Esa no es una buena solución.", difficulty: "A" },
+  { german: "Student", spanish: "estudiante", article: "der", example: "Er ist ein fleißiger Student.", exampleTranslation: "Él es un estudiante aplicado.", difficulty: "A" },
+  { german: "Ecke", spanish: "esquina", article: "die", example: "Wir treffen uns an der Ecke.", exampleTranslation: "Nos encontramos en la esquina.", difficulty: "A" }
 ];
 
 // Mantenemos arrays vacíos para niveles B y C, ya que todas las palabras irán en nivel A
