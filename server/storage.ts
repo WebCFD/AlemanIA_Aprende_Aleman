@@ -566,12 +566,15 @@ export class MemStorage implements IStorage {
     this.users = new Map();
     this.words = new Map();
     this.sentences = new Map();
+    this.verbs = new Map();
     this.userCurrentId = 1;
     this.wordCurrentId = 1;
     this.sentenceCurrentId = 1;
+    this.verbCurrentId = 1;
     
-    // Initialize words and sentences
+    // Initialize words, sentences and verbs
     this.initializeWords();
+    this.initializeVerbs();
   }
   
   private initializeWords() {
@@ -696,6 +699,59 @@ export class MemStorage implements IStorage {
     
     this.sentences.set(id, sentence);
     return sentence;
+  }
+  
+  // Verb methods for conjugation practice
+  async getVerb(id: number): Promise<Verb | undefined> {
+    return this.verbs.get(id);
+  }
+  
+  async getVerbsByDifficulty(difficulty: Difficulty): Promise<Verb[]> {
+    return Array.from(this.verbs.values()).filter(
+      verb => verb.difficulty === difficulty
+    );
+  }
+  
+  async getRandomVerbByDifficulty(difficulty: Difficulty): Promise<Verb | undefined> {
+    const verbsByDifficulty = await this.getVerbsByDifficulty(difficulty);
+    
+    if (verbsByDifficulty.length === 0) {
+      return undefined;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * verbsByDifficulty.length);
+    return verbsByDifficulty[randomIndex];
+  }
+  
+  async createVerb(insertVerb: InsertVerb): Promise<Verb> {
+    const id = this.verbCurrentId++;
+    
+    const verb: Verb = {
+      ...insertVerb,
+      id,
+      hint: insertVerb.hint || null
+    };
+    
+    this.verbs.set(id, verb);
+    return verb;
+  }
+  
+  // Método para inicializar los verbos
+  private initializeVerbs() {
+    // Nivel A (principiante)
+    LEVEL_A_VERBS.forEach(verb => {
+      this.createVerb(verb);
+    });
+    
+    // Nivel B (intermedio)
+    LEVEL_B_VERBS.forEach(verb => {
+      this.createVerb(verb);
+    });
+    
+    // Nivel C (avanzado)
+    LEVEL_C_VERBS.forEach(verb => {
+      this.createVerb(verb);
+    });
   }
 }
 

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { verifyTranslationSchema, verifySentenceSchema, type Difficulty } from "@shared/schema";
+import { verifyTranslationSchema, verifySentenceSchema, verifyVerbSchema, type Difficulty } from "@shared/schema";
 import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer } from "./anthropic";
 import { handleSendFeedback } from "./email";
 
@@ -175,6 +175,97 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
     } catch (error) {
       console.error("Error al verificar respuesta:", error);
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
+
+  // Rutas para ejercicios de conjugación de verbos
+  
+  // Obtener un verbo aleatorio por nivel de dificultad
+  app.get("/api/verbs/random", async (req, res) => {
+    try {
+      const difficulty = (req.query.difficulty as Difficulty) || "A";
+      
+      // Validar dificultad
+      if (!["A", "B", "C"].includes(difficulty)) {
+        return res.status(400).json({ message: "Nivel de dificultad inválido. Debe ser A, B o C." });
+      }
+      
+      const verb = await storage.getRandomVerbByDifficulty(difficulty);
+      
+      if (!verb) {
+        return res.status(404).json({ message: `No se encontraron verbos para el nivel de dificultad ${difficulty}` });
+      }
+      
+      return res.json(verb);
+    } catch (error) {
+      console.error("Error al obtener verbo aleatorio:", error);
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
+  
+  // Verificar respuesta para ejercicio de conjugación de verbos
+  app.post("/api/verbs/verify", async (req, res) => {
+    try {
+      const validationResult = verifyVerbSchema.safeParse(req.body);
+      
+      if (!validationResult.success) {
+        return res.status(400).json({ 
+          message: "Datos de solicitud inválidos", 
+          errors: validationResult.error.errors 
+        });
+      }
+      
+      const { verbId, userAnswer, difficulty } = validationResult.data;
+      
+      // Encontrar el verbo en la base de datos
+      const verb = await storage.getVerb(verbId);
+      
+      if (!verb) {
+        return res.status(404).json({ message: "Verbo no encontrado" });
+      }
+      
+      // Para casos sencillos, hacer comparación directa
+      if (userAnswer.toLowerCase().trim() === verb.germanConjugation.toLowerCase().trim()) {
+        // Formar una frase completa para el feedback
+        let fullSentence = "";
+        if (verb.verbForm === "infinitive" || verb.verbForm === "participle") {
+          fullSentence = verb.germanConjugation;
+        } else {
+          fullSentence = `${verb.germanPronoun} ${verb.germanConjugation}`;
+        }
+        
+        return res.json({
+          isCorrect: true,
+          correctAnswer: verb.germanConjugation,
+          explanation: `¡Correcto! La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}".`,
+          fullSentence
+        });
+      }
+      
+      // Para conjugaciones incorrectas
+      let explanation = `La forma correcta del verbo "${verb.germanVerb}" es "${verb.germanConjugation}".`;
+      if (verb.hint) {
+        explanation += ` ${verb.hint}`;
+      }
+      
+      // Formar una frase completa para el feedback
+      let fullSentence = "";
+      if (verb.verbForm === "infinitive" || verb.verbForm === "participle") {
+        fullSentence = verb.germanConjugation;
+      } else {
+        fullSentence = `${verb.germanPronoun} ${verb.germanConjugation}`;
+      }
+      
+      return res.json({
+        isCorrect: false,
+        correctAnswer: verb.germanConjugation,
+        explanation,
+        fullSentence
+      });
+      
+    } catch (error) {
+      console.error("Error al verificar conjugación de verbo:", error);
       return res.status(500).json({ message: "Error del servidor" });
     }
   });
