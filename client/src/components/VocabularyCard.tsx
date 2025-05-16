@@ -4,13 +4,19 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Link } from "wouter";
 import { 
   CheckCircle, 
   XCircle, 
   Send, 
   ArrowRight, 
   Volume2,
-  Repeat
+  Repeat,
+  BookOpen,
+  AlignJustify,
+  Users,
+  TextQuote,
+  TypeIcon
 } from "lucide-react";
 import { Word, Difficulty, VerifyTranslationResponse, VerifyReverseTranslationResponse } from "@shared/schema";
 import { Card } from "@/components/ui/card";
@@ -341,6 +347,55 @@ export default function VocabularyCard({
       default: return null;
     }
   };
+  
+  // Función para determinar qué sección de "Empieza de 0" es relevante para la palabra actual
+  const getLearningRecommendation = (word: Word | null | undefined) => {
+    if (!word) return null;
+    
+    const germanWord = word.german.toLowerCase();
+    
+    // Determinar la categoría educativa más relevante para esta palabra
+    
+    // Si es un saludo o expresión común
+    if (['hallo', 'guten', 'tag', 'morgen', 'abend', 'auf', 'wiedersehen', 'tschüss', 'bitte', 'danke', 'entschuldigung'].some(
+      greeting => germanWord.includes(greeting)
+    )) {
+      return {
+        section: '#saludos',
+        title: 'Saludos básicos',
+        icon: <MessageSquare className="h-4 w-4 mr-1" />,
+        text: 'Aprende más sobre saludos y expresiones en alemán'
+      };
+    }
+    
+    // Si es un sustantivo (tiene artículo), recomendar la sección de sustantivos y mayúsculas
+    if (isNoun(word.german) && word.article) {
+      return {
+        section: '#sustantivos',
+        title: 'Sustantivos y mayúsculas',
+        icon: <AlignJustify className="h-4 w-4 mr-1" />,
+        text: 'Aprende más sobre los sustantivos en alemán y el uso de mayúsculas'
+      };
+    }
+    
+    // Si es un pronombre personal
+    if (['ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr'].includes(germanWord)) {
+      return {
+        section: '#pronombres',
+        title: 'Pronombres personales',
+        icon: <Users className="h-4 w-4 mr-1" />,
+        text: 'Aprende más sobre los pronombres personales en alemán'
+      };
+    }
+    
+    // Para cualquier otra palabra, sugerir la sección de expresiones útiles
+    return {
+      section: '#expresiones',
+      title: 'Expresiones útiles',
+      icon: <TypeIcon className="h-4 w-4 mr-1" />,
+      text: 'Conoce más expresiones útiles en alemán'
+    };
+  };
 
   return (
     <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
@@ -505,6 +560,43 @@ export default function VocabularyCard({
               {!isReverseMode && currentWord?.exampleTranslation && (
                 <p className="text-blue-400 text-sm mt-1">{currentWord.exampleTranslation}</p>
               )}
+            </div>
+          )}
+          
+          {/* Learning Recommendation */}
+          {showFeedback && isCorrect === true && (
+            <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex items-start">
+                <BookOpen className="text-amber-600 h-5 w-5 mr-2 mt-0.5" />
+                <div>
+                  <p className="text-amber-800 font-medium text-sm">¿Quieres aprender más?</p>
+                  {(() => {
+                    // En modo inverso usamos la palabra seleccionada, de lo contrario la palabra actual
+                    const wordToRecommend = isReverseMode ? selectedReverseWord : currentWord;
+                    const recommendation = getLearningRecommendation(wordToRecommend);
+                    
+                    if (recommendation) {
+                      return (
+                        <Link href={`/empieza${recommendation.section}`}>
+                          <span className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer">
+                            {recommendation.icon}
+                            {recommendation.text}
+                          </span>
+                        </Link>
+                      );
+                    }
+                    
+                    return (
+                      <Link href="/empieza">
+                        <span className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer">
+                          <BookOpen className="h-4 w-4 mr-1" />
+                          Aprende conceptos básicos de alemán
+                        </span>
+                      </Link>
+                    );
+                  })()}
+                </div>
+              </div>
             </div>
           )}
           
