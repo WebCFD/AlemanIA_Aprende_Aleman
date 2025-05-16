@@ -216,7 +216,13 @@ export default function VocabularyCard({
   // Handle key press (Enter)
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      handleSubmitTranslation();
+      // Si ya estamos mostrando feedback, "Enter" activa "Otra palabra"
+      if (showFeedback) {
+        handleNextWord();
+      } else {
+        // Si no, funciona como antes y envía la traducción
+        handleSubmitTranslation();
+      }
     }
   };
 
@@ -260,6 +266,24 @@ export default function VocabularyCard({
       fetchNewWord();
     }
   };
+
+  // Global keyboard event handler for Enter key
+  useEffect(() => {
+    const handleGlobalKeyPress = (e: KeyboardEvent) => {
+      // Solo manejamos la tecla Enter cuando se muestra el feedback
+      if (e.key === 'Enter' && showFeedback) {
+        handleNextWord();
+      }
+    };
+    
+    // Añadir event listener global
+    window.addEventListener('keydown', handleGlobalKeyPress);
+    
+    // Limpieza del event listener al desmontar el componente
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyPress);
+    };
+  }, [showFeedback]); // Se vuelve a ejecutar cuando showFeedback cambia
 
   // Initial word fetch on difficulty change
   useEffect(() => {
