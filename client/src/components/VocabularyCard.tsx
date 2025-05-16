@@ -341,7 +341,7 @@ export default function VocabularyCard({
             <Button
               size="icon"
               variant="ghost"
-              className="absolute right-3 top-3 text-[#4A6FA5] hover:text-[#395888]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A6FA5] hover:text-[#395888]"
               onClick={handleSubmitTranslation}
               disabled={verifyMutation.isPending || showFeedback}
             >
