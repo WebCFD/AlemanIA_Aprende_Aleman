@@ -125,9 +125,33 @@ const LEVEL_A_WORDS: InsertWord[] = [
   { german: "Ecke", spanish: "esquina", article: "die", example: "Wir treffen uns an der Ecke.", exampleTranslation: "Nos encontramos en la esquina.", difficulty: "A" }
 ];
 
-// Mantenemos arrays vacíos para niveles B y C, ya que todas las palabras irán en nivel A
-const LEVEL_B_WORDS: InsertWord[] = [];
-const LEVEL_C_WORDS: InsertWord[] = [];
+// Palabras para nivel B (intermedio)
+const LEVEL_B_WORDS: InsertWord[] = [
+  { german: "Antwort", spanish: "respuesta", article: "die", example: "Ich warte auf deine Antwort.", exampleTranslation: "Espero tu respuesta.", difficulty: "B" },
+  { german: "Bedeutung", spanish: "significado", article: "die", example: "Welche Bedeutung hat dieses Wort?", exampleTranslation: "¿Qué significado tiene esta palabra?", difficulty: "B" },
+  { german: "Entwicklung", spanish: "desarrollo", article: "die", example: "Die Entwicklung der Technologie ist schnell.", exampleTranslation: "El desarrollo de la tecnología es rápido.", difficulty: "B" },
+  { german: "Erfahrung", spanish: "experiencia", article: "die", example: "Ich habe viel Erfahrung in diesem Bereich.", exampleTranslation: "Tengo mucha experiencia en este campo.", difficulty: "B" },
+  { german: "Fähigkeit", spanish: "habilidad", article: "die", example: "Er hat die Fähigkeit, schnell zu lernen.", exampleTranslation: "Él tiene la habilidad de aprender rápido.", difficulty: "B" },
+  { german: "Gebäude", spanish: "edificio", article: "das", example: "Das Gebäude ist sehr alt.", exampleTranslation: "El edificio es muy antiguo.", difficulty: "B" },
+  { german: "Verhalten", spanish: "comportamiento", article: "das", example: "Sein Verhalten ist inakzeptabel.", exampleTranslation: "Su comportamiento es inaceptable.", difficulty: "B" },
+  { german: "Umgebung", spanish: "entorno", article: "die", example: "Die Umgebung ist sehr ruhig.", exampleTranslation: "El entorno es muy tranquilo.", difficulty: "B" },
+  { german: "Wettbewerb", spanish: "competencia", article: "der", example: "Der Wettbewerb wird nächste Woche stattfinden.", exampleTranslation: "La competencia tendrá lugar la próxima semana.", difficulty: "B" },
+  { german: "Fortschritt", spanish: "progreso", article: "der", example: "Wir haben großen Fortschritt gemacht.", exampleTranslation: "Hemos hecho un gran progreso.", difficulty: "B" }
+];
+
+// Palabras para nivel C (avanzado)
+const LEVEL_C_WORDS: InsertWord[] = [
+  { german: "Ausnahme", spanish: "excepción", article: "die", example: "Es gibt immer eine Ausnahme von der Regel.", exampleTranslation: "Siempre hay una excepción a la regla.", difficulty: "C" },
+  { german: "Beziehung", spanish: "relación", article: "die", example: "Sie haben eine gute Beziehung zueinander.", exampleTranslation: "Tienen una buena relación entre ellos.", difficulty: "C" },
+  { german: "Entscheidung", spanish: "decisión", article: "die", example: "Das war eine schwierige Entscheidung.", exampleTranslation: "Esa fue una decisión difícil.", difficulty: "C" },
+  { german: "Gerechtigkeit", spanish: "justicia", article: "die", example: "Er kämpft für Gerechtigkeit.", exampleTranslation: "Él lucha por la justicia.", difficulty: "C" },
+  { german: "Verantwortung", spanish: "responsabilidad", article: "die", example: "Die Verantwortung liegt bei dir.", exampleTranslation: "La responsabilidad es tuya.", difficulty: "C" },
+  { german: "Gleichgewicht", spanish: "equilibrio", article: "das", example: "Das Gleichgewicht in der Natur ist wichtig.", exampleTranslation: "El equilibrio en la naturaleza es importante.", difficulty: "C" },
+  { german: "Voraussetzung", spanish: "requisito", article: "die", example: "Das ist eine notwendige Voraussetzung.", exampleTranslation: "Ese es un requisito necesario.", difficulty: "C" },
+  { german: "Unternehmen", spanish: "empresa", article: "das", example: "Das Unternehmen expandiert ins Ausland.", exampleTranslation: "La empresa se expande al extranjero.", difficulty: "C" },
+  { german: "Wahrscheinlichkeit", spanish: "probabilidad", article: "die", example: "Die Wahrscheinlichkeit eines Erfolgs ist hoch.", exampleTranslation: "La probabilidad de éxito es alta.", difficulty: "C" },
+  { german: "Zusammenhang", spanish: "contexto", article: "der", example: "Der Zusammenhang ist mir nicht klar.", exampleTranslation: "El contexto no me queda claro.", difficulty: "C" }
+];
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
@@ -204,7 +228,16 @@ export class MemStorage implements IStorage {
 
   async createWord(insertWord: InsertWord): Promise<Word> {
     const id = this.wordCurrentId++;
-    const word: Word = { ...insertWord, id };
+    // Convertir los campos opcionales a null cuando no están definidos
+    const word: Word = { 
+      id,
+      german: insertWord.german,
+      spanish: insertWord.spanish,
+      difficulty: insertWord.difficulty,
+      article: insertWord.article || null,
+      example: insertWord.example || null,
+      exampleTranslation: insertWord.exampleTranslation || null
+    };
     this.words.set(id, word);
     return word;
   }
