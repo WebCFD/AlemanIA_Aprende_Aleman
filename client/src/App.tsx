@@ -34,7 +34,18 @@ function Navigation() {
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
-            Aprende
+            Aprende Vocabulario
+          </button>
+          <button 
+            onClick={() => navigate("/pronouns")}
+            className={cn(
+              "px-2 md:px-4 py-3 text-xs md:text-sm font-medium transition-colors whitespace-nowrap",
+              isActive("/pronouns") 
+                ? "text-[#4A6FA5] border-t-2 border-[#4A6FA5]" 
+                : "text-gray-600 hover:text-[#4A6FA5]"
+            )}
+          >
+            Aprende Pronombres
           </button>
           <button 
             onClick={() => navigate("/empieza")}
@@ -83,6 +94,7 @@ function Router() {
       <main className="min-h-[calc(100vh-220px)]">
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/pronouns" component={Pronouns} />
           <Route path="/empieza" component={Empieza} />
           <Route path="/videos" component={Videos} />
           <Route path="/quienes-somos" component={QuienesSomos} />
