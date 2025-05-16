@@ -248,10 +248,28 @@ export async function verifyReverseTranslation(
     // La respuesta es correcta solo si coincide (ignorando capitalización) Y tiene la capitalización correcta
     if (simplifiedUserTranslation === simplifiedCorrectTranslation && hasCorrectCapitalization) {
       // Generar una frase de ejemplo simple para casos de coincidencia exacta
+      // Crear ejemplos más específicos según el tipo de palabra para el modo inverso
+      let exampleSentence = "";
+      if (isNoun) {
+        exampleSentence = `Das ${correctGermanWord} ist sehr wichtig in der deutschen Sprache.`;
+      } else if (correctGermanWord === "danke") {
+        exampleSentence = `Ich sage ${correctGermanWord} für deine Hilfe.`;
+      } else if (correctGermanWord === "hallo") {
+        exampleSentence = `Ich sage ${correctGermanWord} zu meinen Freunden.`;
+      } else if (correctGermanWord === "bitte") {
+        exampleSentence = `${correctGermanWord} geben Sie mir das Buch.`;
+      } else if (correctGermanWord === "ja") {
+        exampleSentence = `Ich sage ${correctGermanWord} zu deinem Angebot.`;
+      } else if (correctGermanWord === "nein") {
+        exampleSentence = `Ich sage ${correctGermanWord} zu dieser Idee.`;
+      } else {
+        exampleSentence = `Ich benutze ${fullCorrectTranslation} in einem Satz.`;
+      }
+      
       return {
         isCorrect: true,
         correctTranslation: fullCorrectTranslation,
-        exampleSentence: `Beispiel: Ich benutze ${fullCorrectTranslation} in einem Satz.`,
+        exampleSentence: exampleSentence,
         explanation: "¡Correcto! Tu traducción es exacta."
       };
     }
