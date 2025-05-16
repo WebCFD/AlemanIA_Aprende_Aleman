@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
-import { useToast, toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Difficulty } from "@shared/schema";
 
 interface PronounCardProps {
