@@ -16,7 +16,9 @@ import {
   AlignJustify,
   Users,
   TextQuote,
-  TypeIcon
+  TypeIcon,
+  Film,
+  Video
 } from "lucide-react";
 import { Word, Difficulty, VerifyTranslationResponse, VerifyReverseTranslationResponse } from "@shared/schema";
 import { Card } from "@/components/ui/card";
@@ -348,7 +350,7 @@ export default function VocabularyCard({
     }
   };
   
-  // Función para determinar qué sección de "Empieza de 0" es relevante para la palabra actual
+  // Función para determinar qué sección de contenido educativo es relevante para la palabra actual
   const getLearningRecommendation = (word: Word | null | undefined) => {
     if (!word) return null;
     
@@ -361,7 +363,8 @@ export default function VocabularyCard({
       greeting => germanWord.includes(greeting)
     )) {
       return {
-        section: '#saludos',
+        empiezaSection: '#saludos',
+        videosSection: '#saludos-videos',
         title: 'Saludos básicos',
         icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre saludos y expresiones en alemán'
@@ -371,7 +374,8 @@ export default function VocabularyCard({
     // Si es un sustantivo (tiene artículo), recomendar la sección de sustantivos y mayúsculas
     if (isNoun(word.german) && word.article) {
       return {
-        section: '#sustantivos',
+        empiezaSection: '#sustantivos',
+        videosSection: '#sustantivos-videos',
         title: 'Sustantivos y mayúsculas',
         icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre los sustantivos en alemán y el uso de mayúsculas'
@@ -381,7 +385,8 @@ export default function VocabularyCard({
     // Si es un pronombre personal
     if (['ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr'].includes(germanWord)) {
       return {
-        section: '#pronombres',
+        empiezaSection: '#pronombres',
+        videosSection: '#pronombres-videos',
         title: 'Pronombres personales',
         icon: <BookOpen className="h-4 w-4 mr-1" />,
         text: 'Aprende más sobre los pronombres personales en alemán'
@@ -390,7 +395,8 @@ export default function VocabularyCard({
     
     // Para cualquier otra palabra, sugerir la sección de expresiones útiles
     return {
-      section: '#expresiones',
+      empiezaSection: '#expresiones',
+      videosSection: '#expresiones-videos',
       title: 'Expresiones útiles',
       icon: <BookOpen className="h-4 w-4 mr-1" />,
       text: 'Conoce más expresiones útiles en alemán'
@@ -577,35 +583,79 @@ export default function VocabularyCard({
                     
                     if (recommendation) {
                       return (
-                        <a 
-                          href={`/empieza${recommendation.section}`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            // Almacenar en localStorage qué sección debe ser scrolleada
-                            localStorage.setItem('scrollToSection', recommendation.section);
-                            // Navegar a la página Empieza
-                            window.location.href = '/empieza';
-                          }}
-                          className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer"
-                        >
-                          {recommendation.icon}
-                          {recommendation.text}
-                        </a>
+                        <div className="flex flex-col space-y-2 mt-2">
+                          <div className="flex items-center gap-3">
+                            {/* Opción para Empieza de 0 */}
+                            <a 
+                              href={`/empieza${recommendation.empiezaSection}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                // Guardar en localStorage qué sección debe ser scrolleada
+                                localStorage.setItem('scrollToSection', recommendation.empiezaSection);
+                                // Navegar a la página Empieza
+                                window.location.href = '/empieza';
+                              }}
+                              className="flex-1 inline-flex items-center justify-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-md"
+                            >
+                              <BookOpen className="h-4 w-4 mr-1.5" />
+                              <span>Ver explicación en texto</span>
+                            </a>
+                            
+                            {/* Opción para Videos */}
+                            <a 
+                              href={`/videos${recommendation.videosSection}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                // Guardar en localStorage qué sección debe ser scrolleada
+                                localStorage.setItem('scrollToSectionVideo', recommendation.videosSection);
+                                // Navegar a la página Videos
+                                window.location.href = '/videos';
+                              }}
+                              className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
+                            >
+                              <Film className="h-4 w-4 mr-1.5" />
+                              <span>Ver explicación en video</span>
+                            </a>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {recommendation.text}
+                          </p>
+                        </div>
                       );
                     }
                     
                     return (
-                      <a 
-                        href="/empieza"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.location.href = '/empieza';
-                        }}
-                        className="mt-1 inline-flex items-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer"
-                      >
-                        <BookOpen className="h-4 w-4 mr-1" />
-                        Repasar conceptos básicos de alemán
-                      </a>
+                      <div className="flex flex-col space-y-2 mt-2">
+                        <div className="flex items-center gap-3">
+                          <a 
+                            href="/empieza"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.location.href = '/empieza';
+                            }}
+                            className="flex-1 inline-flex items-center justify-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-md"
+                          >
+                            <BookOpen className="h-4 w-4 mr-1.5" />
+                            <span>Conceptos básicos (texto)</span>
+                          </a>
+                          
+                          <a 
+                            href="/videos"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.location.href = '/videos';
+                            }}
+                            className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
+                          >
+                            <Film className="h-4 w-4 mr-1.5" />
+                            <span>Videos explicativos</span>
+                          </a>
+                        </div>
+                        
+                        <p className="text-xs text-gray-500 mt-1">
+                          Repasar conceptos básicos de alemán
+                        </p>
+                      </div>
                     );
                   })()}
                 </div>
