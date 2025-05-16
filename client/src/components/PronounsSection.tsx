@@ -54,14 +54,7 @@ export default function PronounsSection() {
         </div>
       )}
       
-      <div className="mt-8 bg-amber-50 border border-amber-100 rounded-lg p-4 text-sm text-amber-800">
-        <p className="font-semibold mb-1">¿Por qué es importante?</p>
-        <p>
-          Los pronombres personales (ich, du, er/sie/es...) y los artículos (der, die, das...) son fundamentales 
-          en alemán. A diferencia del español, los sustantivos tienen género gramatical que afecta a los artículos
-          y otros elementos de la oración.
-        </p>
-      </div>
+
     </section>
   );
 }
