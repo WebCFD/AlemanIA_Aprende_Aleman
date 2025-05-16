@@ -415,9 +415,14 @@ export async function verifySentenceAnswer(
       - Variaciones ortográficas menores pueden ser aceptables
       - Debe coincidir en género y número con el contexto de la frase
       
-    2. Si la respuesta es incorrecta:
+    2. Para TODAS las respuestas (tanto correctas como incorrectas):
+      - Explica el papel gramatical de la palabra en la frase
+      - Explica por qué se usa esta forma específica (género, número, caso, etc.)
+      - Menciona alguna regla gramatical relevante de forma breve y clara
+      
+    3. Si la respuesta es incorrecta:
       - Explica brevemente por qué es incorrecta
-      - Explica cuál es la forma correcta y por qué es importante en alemán
+      - Explica cuál es la forma correcta
     
     Responde en formato JSON con estas propiedades:
     {
