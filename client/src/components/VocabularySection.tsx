@@ -1,16 +1,14 @@
 import { useState } from "react";
-import DifficultySelector from "./DifficultySelector";
 import VocabularyCard from "./VocabularyCard";
 import { Difficulty } from "@shared/schema";
 
-export default function VocabularySection() {
-  const [currentDifficulty, setCurrentDifficulty] = useState<Difficulty>("A");
+interface VocabularySectionProps {
+  sharedDifficulty: Difficulty;
+}
+
+export default function VocabularySection({ sharedDifficulty }: VocabularySectionProps) {
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
-
-  const handleDifficultyChange = (difficulty: Difficulty) => {
-    setCurrentDifficulty(difficulty);
-  };
 
   const handleCorrectAnswer = () => {
     setCorrectCount(prev => prev + 1);
@@ -22,13 +20,6 @@ export default function VocabularySection() {
 
   return (
     <section id="vocabulario" className="mb-16">
-      <div className="mb-8">
-        <DifficultySelector 
-          currentDifficulty={currentDifficulty} 
-          onDifficultyChange={handleDifficultyChange} 
-        />
-      </div>
-
       <div className="text-center mb-10">
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] mb-4">
           Aprende Vocabulario
@@ -39,7 +30,7 @@ export default function VocabularySection() {
       </div>
 
       <VocabularyCard 
-        difficulty={currentDifficulty}
+        difficulty={sharedDifficulty}
         correctCount={correctCount}
         incorrectCount={incorrectCount}
         onCorrectAnswer={handleCorrectAnswer}

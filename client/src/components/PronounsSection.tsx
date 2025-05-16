@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import DifficultySelector from "./DifficultySelector";
 import PronounCard from "./PronounCard";
 import { Difficulty } from "@shared/schema";
 
-export default function PronounsSection() {
-  const [difficulty, setDifficulty] = useState<Difficulty>("A");
+interface PronounsSectionProps {
+  sharedDifficulty: Difficulty;
+}
+
+export default function PronounsSection({ sharedDifficulty }: PronounsSectionProps) {
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [incorrectCount, setIncorrectCount] = useState<number>(0);
-
-  const handleDifficultyChange = (difficulty: Difficulty) => {
-    setDifficulty(difficulty);
-  };
 
   const handleCorrectAnswer = () => {
     setCorrectCount(count => count + 1);
@@ -23,13 +21,6 @@ export default function PronounsSection() {
 
   return (
     <section id="pronouns" className="mt-12 mb-16">
-      <div className="mb-8">
-        <DifficultySelector 
-          currentDifficulty={difficulty} 
-          onDifficultyChange={handleDifficultyChange} 
-        />
-      </div>
-
       <div className="text-center mb-10">
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#4A6FA5] mb-4">
           Practica con pronombres y declinaciones
@@ -40,7 +31,7 @@ export default function PronounsSection() {
       </div>
       
       <PronounCard
-        difficulty={difficulty}
+        difficulty={sharedDifficulty}
         correctCount={correctCount}
         incorrectCount={incorrectCount}
         onCorrectAnswer={handleCorrectAnswer}
