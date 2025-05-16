@@ -233,29 +233,24 @@ export default function VocabularyCard({
     }
   };
 
-  // Handle next word
+  // Handle next word - versión simplificada directa
   const handleNextWord = () => {
-    // Corregimos el comportamiento para evitar el flash de respuesta incorrecta
-    // Primero configuramos un estado de "cargando" y ocultamos cualquier feedback
-    setTranslation("");
+    // 1. Primero ocultamos el UI de feedback
     setShowFeedback(false);
+    
+    // 2. Limpiamos variables de estado 
     setIsCorrect(null);
     setExampleSentence(undefined);
-    setSelectedReverseWord(null);
     setCorrectResponse(undefined);
     
-    // Enfoque automático después de un pequeño retraso
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    }, 50);
-    
-    // Decidir qué hacer según el modo (normal o inverso)
+    // 3. Alternar modos y cargar la siguiente palabra
     if (isReverseMode) {
       // Después de completar un ejercicio inverso, volvemos al modo normal
       setIsReverseMode(false);
+      // Cargar nueva palabra y luego limpiar input
       fetchNewWord();
+      setTranslation("");
+      setSelectedReverseWord(null);
     } else if (consecutiveCorrect >= 5 && difficulty === "A") {
       // Si llegamos a 5 correctas y estamos en nivel A, pasamos a modo inverso
       setIsReverseMode(true);
@@ -268,18 +263,29 @@ export default function VocabularyCard({
         // Usar directamente la palabra de la lista de correctas
         const selectedWord = lastCorrectWords[randomIndex];
         
-        // Guardar la palabra seleccionada en el estado
+        // Limpiar y establecer la nueva palabra
+        setTranslation("");
         setSelectedReverseWord(selectedWord);
-        console.log("Seleccionada palabra para modo inverso:", selectedWord);
       } else {
         // Si por alguna razón no hay palabras en el historial, buscar una nueva
         setIsReverseMode(false); // Volver al modo normal si no hay palabras
         fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
       }
     } else {
       // Caso normal: buscar nueva palabra
       fetchNewWord();
+      setTranslation("");
+      setSelectedReverseWord(null);
     }
+    
+    // 4. Enfocar el input después de un pequeño retraso para permitir que React actualice la UI
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 10);
   };
 
   // Global keyboard event handler for Enter key
@@ -353,8 +359,9 @@ export default function VocabularyCard({
         <span className="font-heading font-bold">{getLevelName()}</span>
       </div>
       
-      {/* Word Card */}
+      {/* Contenedor principal */}
       <div className="p-6 md:p-8">
+        {/* Word Card */}
         <div className="mb-6 text-center">
           {isLoadingWord ? (
             <div className="animate-pulse inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1 min-w-[100px] h-12"></div>
