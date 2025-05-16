@@ -398,18 +398,8 @@ export async function verifySentenceAnswer(
   wordType: string
 ): Promise<VerifySentenceResponse> {
   try {
-    // Comprobación simple para casos de coincidencia exacta
-    if (userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
-      // Crear la frase completa para mostrar al usuario
-      const fullSentence = germanSentenceWithGap.replace('____', correctAnswer);
-      
-      return {
-        isCorrect: true,
-        correctAnswer,
-        explanation: "¡Correcto! Has completado la frase correctamente.",
-        fullSentence
-      };
-    }
+    // Vamos a usar Claude para obtener explicaciones detalladas incluso para respuestas correctas
+    // No haremos un short-circuit aquí para que todas las respuestas tengan explicaciones detalladas
     
     const prompt = `
     Estás evaluando ejercicios de completar frases en alemán para una aplicación de aprendizaje de idiomas.

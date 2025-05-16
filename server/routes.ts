@@ -161,17 +161,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Frase no encontrada" });
       }
       
-      // Para casos simples, comparación directa
-      if (userAnswer.trim().toLowerCase() === sentence.missingWord.trim().toLowerCase()) {
-        return res.json({ 
-          isCorrect: true,
-          correctAnswer: sentence.missingWord,
-          explanation: "¡Correcto! Has completado la frase perfectamente.",
-          fullSentence: sentence.germanText
-        });
-      }
-      
-      // Para verificaciones más complejas, usar Claude
+      // Usar Claude para obtener explicaciones detalladas para todas las respuestas
+      // (tanto correctas como incorrectas)
       const verificationResult = await verifySentenceAnswer(
         sentence.spanishText,
         sentence.germanTextWithGap,
