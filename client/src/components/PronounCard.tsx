@@ -205,21 +205,29 @@ export default function PronounCard({
     );
   }
   
+  const getDifficultyLabel = (): string => {
+    switch(difficulty) {
+      case "A": return "Nivel A (Principiante)";
+      case "B": return "Nivel B (Intermedio)";
+      case "C": return "Nivel C (Avanzado)";
+    }
+  };
+
   return (
     <Card className="w-full max-w-3xl mx-auto shadow-lg border-2 transition-all duration-300 ease-in-out">
       <div className="flex justify-between items-center p-2 px-4 bg-blue-500 text-white text-sm">
-        <div className="flex items-center space-x-2">
-          <div>
-            <CheckCircle className="w-4 h-4 mr-1 inline" />
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center">
+            <CheckCircle className="w-4 h-4 mr-1" />
             <span>{correctCount}</span>
           </div>
-          <div>
-            <XCircle className="w-4 h-4 mr-1 inline" />
+          <div className="flex items-center">
+            <XCircle className="w-4 h-4 mr-1" />
             <span>{incorrectCount}</span>
           </div>
         </div>
         <div>
-          Nivel {difficulty} {difficulty === "A" ? "(Principiante)" : difficulty === "B" ? "(Intermedio)" : "(Avanzado)"}
+          {getDifficultyLabel()}
         </div>
       </div>
       
@@ -342,12 +350,12 @@ export default function PronounCard({
         )}
       </CardContent>
       
-      <CardFooter className="flex justify-between p-6 pt-2">
+      <CardFooter className="flex justify-center gap-3 p-6 pt-2">
         {!showFeedback ? (
           <Button
             onClick={handleSubmitAnswer}
             disabled={verifyMutation.isPending || !userAnswer.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            className="px-6 bg-blue-600 hover:bg-blue-700 text-white"
           >
             {verifyMutation.isPending ? (
               <span className="flex items-center">
@@ -366,7 +374,7 @@ export default function PronounCard({
         ) : (
           <Button
             onClick={handleNextSentence}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            className="px-6 bg-blue-600 hover:bg-blue-700 text-white"
           >
             <span className="flex items-center">
               Otra frase <ArrowRight className="ml-2 h-4 w-4" />
