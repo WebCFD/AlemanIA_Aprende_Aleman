@@ -88,3 +88,37 @@ export interface VerifySentenceResponse {
   explanation?: string;
   fullSentence?: string;
 }
+
+// Verbs model for conjugation practice
+export const verbs = pgTable("verbs", {
+  id: serial("id").primaryKey(),
+  spanishVerb: text("spanish_verb").notNull(),      // Verbo en infinitivo en español
+  spanishConjugation: text("spanish_conjugation").notNull(), // Conjugación en español
+  spanishPronoun: text("spanish_pronoun").notNull(), // Pronombre en español (yo, tú, etc.)
+  germanVerb: text("german_verb").notNull(),        // Verbo en infinitivo en alemán
+  germanConjugation: text("german_conjugation").notNull(), // Conjugación en alemán
+  germanPronoun: text("german_pronoun").notNull(),   // Pronombre en alemán (ich, du, etc.)
+  verbForm: text("verb_form").notNull(),            // Forma verbal: "present", "past", "infinitive", "participle"
+  hint: text("hint"),                               // Pista opcional
+  difficulty: varchar("difficulty", { length: 1 }).notNull(),
+});
+
+export const insertVerbSchema = createInsertSchema(verbs).omit({
+  id: true
+});
+
+export const verifyVerbSchema = z.object({
+  verbId: z.number(),
+  userAnswer: z.string(),
+  difficulty: z.enum(["A", "B", "C"])
+});
+
+export type InsertVerb = z.infer<typeof insertVerbSchema>;
+export type Verb = typeof verbs.$inferSelect;
+
+export interface VerifyVerbResponse {
+  isCorrect: boolean;
+  correctAnswer: string;
+  explanation?: string;
+  fullSentence?: string;
+}
