@@ -1,4 +1,8 @@
-import { words, type Word, type InsertWord, type Difficulty } from "@shared/schema";
+import { 
+  words, type Word, type InsertWord, 
+  sentences, type Sentence, type InsertSentence,
+  type Difficulty 
+} from "@shared/schema";
 import { users, type User, type InsertUser } from "@shared/schema";
 
 // Interface for storage operations
@@ -13,7 +17,185 @@ export interface IStorage {
   getWordsByDifficulty(difficulty: Difficulty): Promise<Word[]>;
   getRandomWordByDifficulty(difficulty: Difficulty): Promise<Word | undefined>;
   createWord(word: InsertWord): Promise<Word>;
+  
+  // Sentence methods for pronoun/declension practice
+  getSentence(id: number): Promise<Sentence | undefined>;
+  getSentencesByDifficulty(difficulty: Difficulty): Promise<Sentence[]>;
+  getRandomSentenceByDifficulty(difficulty: Difficulty): Promise<Sentence | undefined>;
+  createSentence(sentence: InsertSentence): Promise<Sentence>;
 }
+
+// Example sentences for pronoun/declension practice
+const LEVEL_A_SENTENCES: InsertSentence[] = [
+  // Pronombres personales
+  {
+    spanishText: "Yo soy estudiante.",
+    germanText: "Ich bin Student.",
+    germanTextWithGap: "____ bin Student.",
+    missingWord: "Ich",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Tú tienes un libro.",
+    germanText: "Du hast ein Buch.",
+    germanTextWithGap: "____ hast ein Buch.",
+    missingWord: "Du",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Él tiene un perro.",
+    germanText: "Er hat einen Hund.",
+    germanTextWithGap: "____ hat einen Hund.",
+    missingWord: "Er",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Ella está en casa.",
+    germanText: "Sie ist zu Hause.",
+    germanTextWithGap: "____ ist zu Hause.",
+    missingWord: "Sie",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Nosotros somos amigos.",
+    germanText: "Wir sind Freunde.",
+    germanTextWithGap: "____ sind Freunde.",
+    missingWord: "Wir",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Vosotros venís a la fiesta.",
+    germanText: "Ihr kommt zur Party.",
+    germanTextWithGap: "____ kommt zur Party.",
+    missingWord: "Ihr",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Ellos van a la escuela.",
+    germanText: "Sie gehen zur Schule.",
+    germanTextWithGap: "____ gehen zur Schule.",
+    missingWord: "Sie",
+    wordType: "pronombre",
+    difficulty: "A"
+  },
+  
+  // Artículos determinados
+  {
+    spanishText: "El hombre está aquí.",
+    germanText: "Der Mann ist hier.",
+    germanTextWithGap: "____ Mann ist hier.",
+    missingWord: "Der",
+    wordType: "articulo_det",
+    difficulty: "A"
+  },
+  {
+    spanishText: "La mujer lee un libro.",
+    germanText: "Die Frau liest ein Buch.",
+    germanTextWithGap: "____ Frau liest ein Buch.",
+    missingWord: "Die",
+    wordType: "articulo_det",
+    difficulty: "A"
+  },
+  {
+    spanishText: "El niño juega en el parque.",
+    germanText: "Das Kind spielt im Park.",
+    germanTextWithGap: "____ Kind spielt im Park.",
+    missingWord: "Das",
+    wordType: "articulo_det",
+    difficulty: "A"
+  },
+  
+  // Artículos indeterminados
+  {
+    spanishText: "Tengo un auto.",
+    germanText: "Ich habe ein Auto.",
+    germanTextWithGap: "Ich habe ____ Auto.",
+    missingWord: "ein",
+    wordType: "articulo_indet",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Él compra una manzana.",
+    germanText: "Er kauft einen Apfel.",
+    germanTextWithGap: "Er kauft ____ Apfel.",
+    missingWord: "einen",
+    wordType: "articulo_indet",
+    difficulty: "A"
+  },
+  {
+    spanishText: "Ella necesita una amiga.",
+    germanText: "Sie braucht eine Freundin.",
+    germanTextWithGap: "Sie braucht ____ Freundin.",
+    missingWord: "eine",
+    wordType: "articulo_indet",
+    difficulty: "A"
+  }
+];
+
+const LEVEL_B_SENTENCES: InsertSentence[] = [
+  // Más ejemplos con nivel intermedio
+  // Pronombres posesivos
+  {
+    spanishText: "Este es mi libro.",
+    germanText: "Das ist mein Buch.",
+    germanTextWithGap: "Das ist ____ Buch.",
+    missingWord: "mein",
+    wordType: "pronombre_posesivo",
+    difficulty: "B"
+  },
+  {
+    spanishText: "¿Dónde está tu casa?",
+    germanText: "Wo ist dein Haus?",
+    germanTextWithGap: "Wo ist ____ Haus?",
+    missingWord: "dein",
+    wordType: "pronombre_posesivo",
+    difficulty: "B"
+  },
+  
+  // Ejemplos con casos (nominativo, acusativo, dativo)
+  {
+    spanishText: "Doy el libro al hombre.",
+    germanText: "Ich gebe dem Mann das Buch.",
+    germanTextWithGap: "Ich gebe ____ Mann das Buch.",
+    missingWord: "dem",
+    wordType: "articulo_dativo",
+    difficulty: "B"
+  },
+  {
+    spanishText: "Veo al hombre en la calle.",
+    germanText: "Ich sehe den Mann auf der Straße.",
+    germanTextWithGap: "Ich sehe ____ Mann auf der Straße.",
+    missingWord: "den",
+    wordType: "articulo_acusativo",
+    difficulty: "B"
+  }
+];
+
+const LEVEL_C_SENTENCES: InsertSentence[] = [
+  // Ejemplos más complejos
+  {
+    spanishText: "A pesar de la dificultad, aprendió alemán rápidamente.",
+    germanText: "Trotz der Schwierigkeit hat er schnell Deutsch gelernt.",
+    germanTextWithGap: "Trotz ____ Schwierigkeit hat er schnell Deutsch gelernt.",
+    missingWord: "der",
+    wordType: "articulo_genitivo",
+    difficulty: "C"
+  },
+  {
+    spanishText: "Detrás de cuya casa hay un hermoso jardín.",
+    germanText: "Hinter dessen Haus gibt es einen schönen Garten.",
+    germanTextWithGap: "Hinter ____ Haus gibt es einen schönen Garten.",
+    missingWord: "dessen",
+    wordType: "pronombre_relativo",
+    difficulty: "C"
+  }
+];
 
 // German vocabulary data for different difficulty levels
 const LEVEL_A_WORDS: InsertWord[] = [
@@ -156,16 +338,20 @@ const LEVEL_C_WORDS: InsertWord[] = [
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private words: Map<number, Word>;
+  private sentences: Map<number, Sentence>;
   private userCurrentId: number;
   private wordCurrentId: number;
+  private sentenceCurrentId: number;
 
   constructor() {
     this.users = new Map();
     this.words = new Map();
+    this.sentences = new Map();
     this.userCurrentId = 1;
     this.wordCurrentId = 1;
+    this.sentenceCurrentId = 1;
     
-    // Initialize words
+    // Initialize words and sentences
     this.initializeWords();
   }
   

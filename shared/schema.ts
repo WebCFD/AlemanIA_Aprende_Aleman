@@ -28,6 +28,31 @@ export const verifyTranslationSchema = z.object({
 export type InsertWord = z.infer<typeof insertWordSchema>;
 export type Word = typeof words.$inferSelect;
 
+// Sentences model for pronoun/declension practice
+export const sentences = pgTable("sentences", {
+  id: serial("id").primaryKey(),
+  spanishText: text("spanish_text").notNull(),      // Frase completa en español
+  germanText: text("german_text").notNull(),        // Frase completa en alemán
+  germanTextWithGap: text("german_text_with_gap").notNull(), // Frase en alemán con hueco
+  missingWord: text("missing_word").notNull(),      // Palabra que falta (pronombre o artículo)
+  wordType: text("word_type").notNull(),            // Tipo: "pronombre", "articulo_det", "articulo_indet"
+  hint: text("hint"),                               // Pista opcional
+  difficulty: varchar("difficulty", { length: 1 }).notNull(),
+});
+
+export const insertSentenceSchema = createInsertSchema(sentences).omit({
+  id: true
+});
+
+export const verifySentenceSchema = z.object({
+  sentenceId: z.number(),
+  userAnswer: z.string(),
+  difficulty: z.enum(["A", "B", "C"])
+});
+
+export type InsertSentence = z.infer<typeof insertSentenceSchema>;
+export type Sentence = typeof sentences.$inferSelect;
+
 // Users model (kept from original schema)
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -55,4 +80,11 @@ export interface VerifyReverseTranslationResponse {
   correctTranslation?: string;
   explanation?: string;
   exampleSentence?: string;
+}
+
+export interface VerifySentenceResponse {
+  isCorrect: boolean;
+  correctAnswer: string;
+  explanation?: string;
+  fullSentence?: string;
 }
