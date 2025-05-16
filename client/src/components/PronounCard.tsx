@@ -106,9 +106,30 @@ export default function PronounCard({
   
   // Función para hablar el texto en alemán
   const speak = (text: string) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'de-DE';
-    window.speechSynthesis.speak(utterance);
+    try {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'de-DE';
+        
+        // Optional: adjust rate and pitch
+        utterance.rate = 0.9; // slightly slower for learning
+        
+        // Speak the text
+        window.speechSynthesis.speak(utterance);
+      } else {
+        toast({
+          title: "Función no disponible",
+          description: "Tu navegador no soporta la síntesis de voz.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error de audio",
+        description: "No se pudo reproducir el audio. Intenta de nuevo.",
+        variant: "destructive"
+      });
+    }
   };
   
   // Actualizar el estado cuando cambia la dificultad
@@ -130,7 +151,16 @@ export default function PronounCard({
   
   // Manejar envío de respuesta
   const handleSubmitAnswer = () => {
-    if (!currentSentence || !userAnswer.trim()) return;
+    if (!userAnswer.trim()) {
+      toast({
+        title: "Respuesta vacía",
+        description: "Por favor, introduce una respuesta.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!currentSentence) return;
     
     verifyMutation.mutate({
       sentenceId: currentSentence.id,
@@ -204,43 +234,46 @@ export default function PronounCard({
       <CardContent className="py-4 px-6">
         {!showFeedback ? (
           <div className="flex flex-col items-center justify-center py-6">
-            <div className="mb-4">
-              <div className="text-sm text-gray-500 text-center mb-2">
-                Completa la frase en alemán:
-              </div>
-              
-              <div className="flex items-center justify-center">
-                <div 
-                  dangerouslySetInnerHTML={{ 
-                    __html: currentSentence.germanTextWithGap.replace(
-                      '____', 
-                      '<div class="inline-block border-b-2 border-gray-400 min-w-[70px] text-center mx-1"></div>'
-                    ) 
-                  }} 
-                  className="text-xl text-center"
-                />
-              </div>
+            <div className="bg-gray-50 rounded-lg px-8 py-4 mb-6 shadow-sm">
+              <div 
+                dangerouslySetInnerHTML={{ 
+                  __html: currentSentence.germanTextWithGap.replace(
+                    '____', 
+                    '<div class="inline-block border-b-2 border-gray-400 min-w-[70px] text-center mx-1"></div>'
+                  ) 
+                }} 
+                className="text-xl text-center"
+              />
             </div>
             
-            <div className="flex justify-center items-center gap-2 mt-3 w-full">
-              <Input
-                ref={inputRef}
-                type="text"
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                onKeyDown={handleKeyPress}
-                placeholder="Escribe la traducción..."
-                className="max-w-xs border-2 focus:border-blue-400"
-              />
+            <div className="text-sm text-gray-500 text-center mb-4">
+              Completa la frase en alemán
+            </div>
+            
+            <div className="flex flex-col items-center gap-3 w-full">
+              <div className="w-full max-w-xs relative">
+                <Input
+                  ref={inputRef}
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  onKeyDown={handleKeyPress}
+                  placeholder="Escribe la traducción..."
+                  className="pr-10 border-2 focus:border-blue-400"
+                />
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </div>
               
               <Button
                 onClick={() => speak(currentSentence.germanText)}
                 variant="outline"
-                size="icon"
-                className="rounded-full border-2 hover:bg-blue-50"
+                className="border rounded-md hover:bg-gray-50"
                 title="Escuchar pronunciación"
               >
-                <Volume2 className="h-5 w-5 text-blue-500" />
+                <Volume2 className="h-5 w-5 mr-2 text-blue-500" />
+                Escuchar
               </Button>
             </div>
             
@@ -253,49 +286,58 @@ export default function PronounCard({
           </div>
         ) : (
           <div className="py-6">
-            <div className="flex flex-col items-center justify-center">
-              <div className={`text-xl font-semibold mb-3 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                {isCorrect ? '¡Correcto!' : 'Incorrecto'}
-              </div>
-              
-              <div className="text-center mb-4">
-                {isCorrect ? (
-                  <div className="text-green-600 text-lg">{fullSentence}</div>
-                ) : (
-                  <div className="text-red-600 text-lg">{fullSentence}</div>
-                )}
-              </div>
-              
-              <div className="text-gray-600 text-center max-w-md">
-                {explanation}
-              </div>
-              
-              {!isCorrect && (
-                <div className="mt-4">
-                  <p className="font-medium text-gray-700 mb-2 text-center">Material de aprendizaje relacionado:</p>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <a
-                      onClick={() => {
-                        window.location.href = '/empieza';
-                      }}
-                      className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
-                    >
-                      <Book className="h-4 w-4 mr-1.5" />
-                      <span>Ver explicación en texto</span>
-                    </a>
-                    <a
-                      onClick={() => {
-                        window.location.href = '/videos';
-                      }}
-                      className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
-                    >
-                      <Video className="h-4 w-4 mr-1.5" />
-                      <span>Ver explicación en video</span>
-                    </a>
-                  </div>
+            <div className="text-center mb-4">
+              {isCorrect ? (
+                <div className="flex items-center justify-center mb-3">
+                  <CheckCircle className="h-7 w-7 text-green-500 mr-2" />
+                  <h3 className="text-xl font-bold text-green-600">¡Correcto!</h3>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center mb-3">
+                  <XCircle className="h-7 w-7 text-red-500 mr-2" />
+                  <h3 className="text-xl font-bold text-red-600">Incorrecto</h3>
                 </div>
               )}
+              
+              <div className={`p-3 rounded-lg text-lg mb-4 ${isCorrect ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'}`}>
+                {fullSentence}
+              </div>
+              
+              <div className="text-gray-600 max-w-lg mx-auto mb-4">
+                {explanation}
+              </div>
             </div>
+            
+            {!isCorrect && (
+              <div className="mt-6 max-w-lg mx-auto">
+                <p className="font-semibold text-gray-700 mb-3 text-center">
+                  Material de aprendizaje recomendado:
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <a
+                    onClick={() => {
+                      window.location.href = '/empieza#pronombres';
+                    }}
+                    className="flex-1 inline-flex items-center justify-center text-sm text-amber-600 hover:text-amber-800 hover:underline cursor-pointer px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-md"
+                  >
+                    <Book className="h-4 w-4 mr-1.5" />
+                    <span>Ver explicación en texto</span>
+                  </a>
+                  <a
+                    onClick={() => {
+                      window.location.href = '/videos#pronombres-videos';
+                    }}
+                    className="flex-1 inline-flex items-center justify-center text-sm text-blue-600 hover:text-blue-800 hover:underline cursor-pointer px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md"
+                  >
+                    <Video className="h-4 w-4 mr-1.5" />
+                    <span>Ver explicación en video</span>
+                  </a>
+                </div>
+                <p className="text-xs text-gray-500 mt-1 text-center">
+                  Aprende más sobre pronombres y declinaciones en alemán
+                </p>
+              </div>
+            )}
           </div>
         )}
       </CardContent>
