@@ -1,6 +1,7 @@
 import { 
   words, type Word, type InsertWord, 
   sentences, type Sentence, type InsertSentence,
+  verbs, type Verb, type InsertVerb,
   type Difficulty 
 } from "@shared/schema";
 import { users, type User, type InsertUser } from "@shared/schema";
@@ -23,6 +24,12 @@ export interface IStorage {
   getSentencesByDifficulty(difficulty: Difficulty): Promise<Sentence[]>;
   getRandomSentenceByDifficulty(difficulty: Difficulty): Promise<Sentence | undefined>;
   createSentence(sentence: InsertSentence): Promise<Sentence>;
+  
+  // Verb methods for conjugation practice
+  getVerb(id: number): Promise<Verb | undefined>;
+  getVerbsByDifficulty(difficulty: Difficulty): Promise<Verb[]>;
+  getRandomVerbByDifficulty(difficulty: Difficulty): Promise<Verb | undefined>;
+  createVerb(verb: InsertVerb): Promise<Verb>;
 }
 
 // Example sentences for pronoun/declension practice
@@ -197,6 +204,216 @@ const LEVEL_C_SENTENCES: InsertSentence[] = [
   }
 ];
 
+// Verbos alemanes para practicar conjugación - Nivel A (principiante)
+const LEVEL_A_VERBS: InsertVerb[] = [
+  // Presente
+  {
+    spanishVerb: "ser",
+    spanishConjugation: "soy",
+    spanishPronoun: "yo",
+    germanVerb: "sein",
+    germanConjugation: "bin",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "ser",
+    spanishConjugation: "eres",
+    spanishPronoun: "tú",
+    germanVerb: "sein",
+    germanConjugation: "bist",
+    germanPronoun: "du",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "ser",
+    spanishConjugation: "es",
+    spanishPronoun: "él",
+    germanVerb: "sein",
+    germanConjugation: "ist",
+    germanPronoun: "er",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "tener",
+    spanishConjugation: "tengo",
+    spanishPronoun: "yo",
+    germanVerb: "haben",
+    germanConjugation: "habe",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "tener",
+    spanishConjugation: "tienes",
+    spanishPronoun: "tú",
+    germanVerb: "haben",
+    germanConjugation: "hast",
+    germanPronoun: "du",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "tener",
+    spanishConjugation: "tiene",
+    spanishPronoun: "él",
+    germanVerb: "haben",
+    germanConjugation: "hat",
+    germanPronoun: "er",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "hacer",
+    spanishConjugation: "hago",
+    spanishPronoun: "yo",
+    germanVerb: "machen",
+    germanConjugation: "mache",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "A"
+  },
+  {
+    spanishVerb: "ir",
+    spanishConjugation: "voy",
+    spanishPronoun: "yo",
+    germanVerb: "gehen",
+    germanConjugation: "gehe",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "A"
+  }
+];
+
+// Verbos alemanes - Nivel B (intermedio)
+const LEVEL_B_VERBS: InsertVerb[] = [
+  // Pasado (Präteritum)
+  {
+    spanishVerb: "ser",
+    spanishConjugation: "era",
+    spanishPronoun: "yo",
+    germanVerb: "sein",
+    germanConjugation: "war",
+    germanPronoun: "ich",
+    verbForm: "past",
+    difficulty: "B"
+  },
+  {
+    spanishVerb: "tener",
+    spanishConjugation: "tenía",
+    spanishPronoun: "yo",
+    germanVerb: "haben",
+    germanConjugation: "hatte",
+    germanPronoun: "ich",
+    verbForm: "past",
+    difficulty: "B"
+  },
+  // Verbos modales en presente
+  {
+    spanishVerb: "poder",
+    spanishConjugation: "puedo",
+    spanishPronoun: "yo",
+    germanVerb: "können",
+    germanConjugation: "kann",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "B"
+  },
+  {
+    spanishVerb: "deber",
+    spanishConjugation: "debo",
+    spanishPronoun: "yo",
+    germanVerb: "müssen",
+    germanConjugation: "muss",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "B"
+  },
+  {
+    spanishVerb: "querer",
+    spanishConjugation: "quiero",
+    spanishPronoun: "yo",
+    germanVerb: "wollen",
+    germanConjugation: "will",
+    germanPronoun: "ich",
+    verbForm: "present",
+    difficulty: "B"
+  },
+  // Verbos con prefijos separables
+  {
+    spanishVerb: "salir",
+    spanishConjugation: "salgo",
+    spanishPronoun: "yo",
+    germanVerb: "ausgehen",
+    germanConjugation: "gehe aus",
+    germanPronoun: "ich",
+    verbForm: "present",
+    hint: "Verbo con prefijo separable: aus + gehen",
+    difficulty: "B"
+  }
+];
+
+// Verbos alemanes - Nivel C (avanzado)
+const LEVEL_C_VERBS: InsertVerb[] = [
+  // Konjunktiv II (condicional)
+  {
+    spanishVerb: "ser",
+    spanishConjugation: "sería",
+    spanishPronoun: "yo",
+    germanVerb: "sein",
+    germanConjugation: "wäre",
+    germanPronoun: "ich",
+    verbForm: "past",
+    difficulty: "C"
+  },
+  {
+    spanishVerb: "tener",
+    spanishConjugation: "tendría",
+    spanishPronoun: "yo",
+    germanVerb: "haben",
+    germanConjugation: "hätte",
+    germanPronoun: "ich",
+    verbForm: "past",
+    difficulty: "C"
+  },
+  // Participios
+  {
+    spanishVerb: "hacer",
+    spanishConjugation: "hecho",
+    spanishPronoun: "",
+    germanVerb: "machen",
+    germanConjugation: "gemacht",
+    germanPronoun: "",
+    verbForm: "participle",
+    difficulty: "C"
+  },
+  {
+    spanishVerb: "ir",
+    spanishConjugation: "ido",
+    spanishPronoun: "",
+    germanVerb: "gehen",
+    germanConjugation: "gegangen",
+    germanPronoun: "",
+    verbForm: "participle",
+    difficulty: "C"
+  },
+  // Infinitivos con zu
+  {
+    spanishVerb: "estudiar",
+    spanishConjugation: "estudiar",
+    spanishPronoun: "",
+    germanVerb: "studieren",
+    germanConjugation: "zu studieren",
+    germanPronoun: "",
+    verbForm: "infinitive",
+    difficulty: "C"
+  }
+];
+
 // German vocabulary data for different difficulty levels
 const LEVEL_A_WORDS: InsertWord[] = [
   // Palabras básicas ya existentes - Saludos y expresiones comunes (no sustantivos, en minúscula)
@@ -339,9 +556,11 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private words: Map<number, Word>;
   private sentences: Map<number, Sentence>;
+  private verbs: Map<number, Verb>;
   private userCurrentId: number;
   private wordCurrentId: number;
   private sentenceCurrentId: number;
+  private verbCurrentId: number;
 
   constructor() {
     this.users = new Map();
