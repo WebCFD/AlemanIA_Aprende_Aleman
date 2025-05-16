@@ -310,6 +310,124 @@ export default function VocabularyCard({
       case "C": return "Nivel C (Avanzado)";
     }
   };
+  
+  // Función para determinar si una palabra alemana es un sustantivo (primera letra mayúscula)
+  const isNoun = (word: string | undefined): boolean => {
+    if (!word) return false;
+    return word.length > 0 && word[0] === word[0].toUpperCase() && word[0] !== word[0].toLowerCase();
+  };
+  
+  // Función para obtener el artículo alemán basado en la palabra
+  const getGermanArticle = (word: string | undefined): string | null => {
+    if (!word || !isNoun(word)) return null;
+    
+    // Mapeo de artículos para los sustantivos comunes en alemán
+    const germanNouns: {[key: string]: string} = {
+      // Artículos masculinos (der)
+      "Mann": "der",
+      "Mensch": "der",
+      "Tag": "der",
+      "Weg": "der",
+      "Name": "der",
+      "Tisch": "der",
+      "Raum": "der",
+      "Morgen": "der",
+      "Platz": "der",
+      "Sohn": "der",
+      "Lehrer": "der",
+      "Punkt": "der",
+      "Beruf": "der",
+      "Film": "der",
+      "Bruder": "der",
+      "Fuß": "der",
+      "Teil": "der",
+      "Mund": "der",
+      "Computer": "der",
+      "Brief": "der",
+      "Baum": "der",
+      "Arzt": "der",
+      "Zug": "der",
+      "Grund": "der",
+      "Fall": "der",
+      "Student": "der",
+      "Körper": "der",
+      
+      // Artículos femeninos (die)
+      "Frau": "die",
+      "Zeit": "die",
+      "Welt": "die",
+      "Hand": "die",
+      "Stadt": "die",
+      "Arbeit": "die",
+      "Schule": "die",
+      "Mutter": "die",
+      "Straße": "die",
+      "Tür": "die",
+      "Nacht": "die",
+      "Sache": "die",
+      "Stunde": "die",
+      "Tochter": "die",
+      "Stimme": "die",
+      "Seite": "die",
+      "Musik": "die",
+      "Frage": "die",
+      "Idee": "die",
+      "Uhr": "die",
+      "Freundin": "die",
+      "Minute": "die",
+      "Entwicklung": "die",
+      "Person": "die",
+      "Blume": "die",
+      "Sprache": "die",
+      "Küche": "die",
+      "Zeitung": "die",
+      "Maschine": "die",
+      "Klasse": "die",
+      "Lösung": "die",
+      
+      // Artículos neutros (das)
+      "Kind": "das",
+      "Jahr": "das",
+      "Leben": "das",
+      "Auge": "das",
+      "Haus": "das",
+      "Wasser": "das",
+      "Wort": "das",
+      "Land": "das",
+      "Gesicht": "das",
+      "Buch": "das",
+      "Fenster": "das",
+      "Bild": "das",
+      "Auto": "das",
+      "Ende": "das",
+      "Herz": "das",
+      "Beispiel": "das",
+      "Problem": "das",
+      "Geld": "das",
+      "Zimmer": "das",
+      "Haar": "das",
+      "Tier": "das",
+      "Mädchen": "das",
+      "Interesse": "das",
+      "Brot": "das",
+      "Hotel": "das",
+      "Blut": "das",
+    };
+    
+    return germanNouns[word] || null;
+  };
+  
+  // Función para traducir el artículo alemán al español
+  const translateArticle = (article: string | null): string | null => {
+    if (!article) return null;
+    
+    switch(article) {
+      case "der": return "el";
+      case "die": return "la";
+      case "das": return "lo";
+      default: return null;
+    }
+  };
 
   return (
     <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
