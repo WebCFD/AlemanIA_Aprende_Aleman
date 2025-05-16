@@ -23,7 +23,7 @@ export default function Home() {
       
       <VocabularySection sharedDifficulty={currentDifficulty} />
       <PronounsSection sharedDifficulty={currentDifficulty} />
-      <VerbsSection />
+      <VerbsSection sharedDifficulty={currentDifficulty} />
     </div>
   );
 }
