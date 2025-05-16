@@ -306,44 +306,49 @@ export default function PronounCard({
           </div>
         ) : (
           <div className="py-4">
-            <div className="mb-6 text-center">
+            {/* Feedback similar al de VocabularyCard */}
+            <div className="mb-6">
               {isCorrect ? (
-                <div className="flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center">
-                    <CheckCircle className="h-8 w-8 text-green-500 mr-2" />
-                    <h3 className="text-xl font-bold text-green-600">¡Correcto!</h3>
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-start mb-2">
+                    <CheckCircle className="mr-2 h-5 w-5 text-green-600" />
+                    <span className="font-medium text-green-800">¡Correcto!</span>
                   </div>
-                  <p className="text-green-600">¡Bien hecho!</p>
+                  <p className="text-neutral-500 ml-7">
+                    {fullSentence}
+                  </p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center">
-                    <XCircle className="h-8 w-8 text-red-500 mr-2" />
-                    <h3 className="text-xl font-bold text-red-600">Incorrecto</h3>
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="flex items-start mb-2">
+                    <XCircle className="mr-2 h-5 w-5 text-red-600" />
+                    <span className="font-medium text-red-800">Incorrecto</span>
                   </div>
-                  <p className="text-red-600">La respuesta correcta es:</p>
+                  <p className="text-neutral-500 ml-7">
+                    La respuesta correcta es <span className="font-semibold">{currentSentence.missingWord}</span>
+                  </p>
+                  <p className="text-neutral-500 ml-7 mt-1">
+                    {fullSentence}
+                  </p>
                 </div>
               )}
             </div>
             
-            <div className="bg-white rounded-lg p-5 border shadow-sm mb-6 max-w-xl mx-auto">
-              <p className="font-medium text-lg text-[#4A6FA5] mb-3 text-center">
-                {fullSentence}
-              </p>
-              <div className="text-gray-600 text-sm mb-4">
-                {explanation}
-              </div>
+            {/* Explicación */}
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4">
+              <p className="text-blue-800 font-medium text-sm mb-1">Explicación:</p>
+              <p className="text-blue-600">{explanation}</p>
+            </div>
               
-              <div className="flex justify-center mt-3">
-                <Button
-                  onClick={() => speak(currentSentence.germanText)}
-                  variant="outline"
-                  className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
-                >
-                  <Volume2 className="h-5 w-5 mr-2" />
-                  Escuchar la frase completa
-                </Button>
-              </div>
+            <div className="flex justify-center mt-3">
+              <Button
+                onClick={() => speak(currentSentence.germanText)}
+                variant="outline"
+                className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
+              >
+                <Volume2 className="h-5 w-5 mr-2" />
+                Escuchar la frase completa
+              </Button>
             </div>
             
             {!isCorrect && (
