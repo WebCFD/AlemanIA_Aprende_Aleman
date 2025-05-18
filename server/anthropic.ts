@@ -390,6 +390,96 @@ export async function verifyReverseTranslation(
  * @param correctAnswer La respuesta correcta conocida
  * @returns Objeto con el resultado de la verificación
  */
+// Interfaz para los ejemplos de preposiciones
+export interface PrepositionExampleResponse {
+  examples: string[];
+  explanation: string;
+}
+
+/**
+ * Genera ejemplos de uso de una preposición alemana usando Claude
+ * @param preposition La preposición alemana
+ * @param difficulty Nivel de dificultad (A, B, C)
+ * @returns Array de frases de ejemplo y una explicación gramatical
+ */
+export async function generatePrepositionExamples(
+  preposition: string,
+  difficulty: string
+): Promise<PrepositionExampleResponse> {
+  try {
+    // Ajustar la complejidad según el nivel de dificultad
+    let complexity = "muy simples y básicas";
+    if (difficulty === "B") {
+      complexity = "de complejidad media";
+    } else if (difficulty === "C") {
+      complexity = "más complejas y naturales";
+    }
+    
+    const prompt = `
+    Eres un profesor de alemán ayudando a estudiantes hispanohablantes.
+    
+    Tarea: Genera 2 frases de ejemplo usando la preposición alemana "${preposition}" y una breve explicación gramatical.
+    
+    Nivel de dificultad: ${difficulty} (A=principiante, B=intermedio, C=avanzado)
+    
+    Instrucciones:
+    1. Genera frases ${complexity} que ilustren el uso correcto de la preposición.
+    2. Cada frase debe ir acompañada de su traducción al español entre paréntesis.
+    3. Proporciona una explicación clara y concisa sobre el uso gramatical de esta preposición (cuándo se usa, qué caso gramatical requiere, etc.)
+    
+    Responde en formato JSON:
+    {
+      "examples": [
+        "Ejemplo 1 en alemán (Traducción en español)",
+        "Ejemplo 2 en alemán (Traducción en español)"
+      ],
+      "explanation": "Breve explicación gramatical en español (máximo 2-3 oraciones)"
+    }
+    `;
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 1000,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    // Analizar la respuesta
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      console.error("Formato de respuesta inesperado de Claude:", response.content);
+      return { 
+        examples: [`Ich gehe ${preposition} die Stadt. (Voy a la ciudad)`],
+        explanation: "No pudimos generar una explicación detallada."
+      };
+    }
+    
+    const responseText = response.content[0].text;
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    
+    if (!jsonMatch) {
+      console.error("Error al analizar JSON de la respuesta de Claude:", responseText);
+      return { 
+        examples: [`Ich gehe ${preposition} die Stadt. (Voy a la ciudad)`],
+        explanation: "No pudimos generar una explicación detallada."
+      };
+    }
+    
+    const result = JSON.parse(jsonMatch[0]);
+    
+    return {
+      examples: result.examples,
+      explanation: result.explanation
+    };
+  } catch (error) {
+    console.error("Error al generar ejemplos con Claude:", error);
+    
+    // Fallback en caso de error
+    return {
+      examples: [`Ich gehe ${preposition} die Stadt. (Voy a la ciudad)`],
+      explanation: "Las preposiciones en alemán pueden regir diferentes casos gramaticales según su uso."
+    };
+  }
+}
+
 export async function verifySentenceAnswer(
   spanishSentence: string,
   germanSentenceWithGap: string,

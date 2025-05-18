@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { verifyTranslationSchema, verifySentenceSchema, verifyVerbSchema, type Difficulty } from "@shared/schema";
-import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer } from "./anthropic";
+import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer, generatePrepositionExamples } from "./anthropic";
 import { handleSendFeedback } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -324,6 +324,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error al verificar conjugación de verbo:", error);
       return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
+
+  // Endpoint para obtener ejemplos de preposiciones usando Claude
+  app.get("/api/prepositions/examples", async (req, res) => {
+    try {
+      const preposition = req.query.preposition as string;
+      const difficulty = (req.query.difficulty as Difficulty) || "A";
+      
+      if (!preposition) {
+        return res.status(400).json({ message: "Se requiere el parámetro 'preposition'" });
+      }
+      
+      // Validar dificultad
+      if (!["A", "B", "C"].includes(difficulty)) {
+        return res.status(400).json({ message: "Nivel de dificultad inválido. Debe ser A, B o C." });
+      }
+      
+      const examples = await generatePrepositionExamples(preposition, difficulty);
+      return res.json(examples);
+    } catch (error) {
+      console.error("Error al generar ejemplos de preposiciones:", error);
+      return res.status(500).json({ 
+        message: "Error del servidor",
+        examples: [`Ich gehe ${req.query.preposition} die Stadt. (Voy a la ciudad)`],
+        explanation: "Las preposiciones en alemán pueden regir diferentes casos gramaticales según su uso."
+      });
     }
   });
 
