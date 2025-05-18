@@ -53,7 +53,8 @@ const difficultyLevels: Record<Difficulty, LevelInfo> = {
   }
 };
 
-export default function DifficultySelector({ currentDifficulty, onDifficultyChange }: DifficultySelectorProps) {
+// Componente original para la página
+export function DetailedDifficultySelector({ currentDifficulty, onDifficultyChange }: DifficultySelectorProps) {
   const handleDifficultyClick = (difficulty: Difficulty) => {
     onDifficultyChange(difficulty);
   };
@@ -91,3 +92,36 @@ export default function DifficultySelector({ currentDifficulty, onDifficultyChan
     </div>
   );
 }
+
+// Versión compacta para el header
+export function CompactDifficultySelector({ currentDifficulty, onDifficultyChange }: DifficultySelectorProps) {
+  const handleDifficultyClick = (difficulty: Difficulty) => {
+    onDifficultyChange(difficulty);
+  };
+  
+  return (
+    <div className="flex justify-center items-center">
+      <div className="flex gap-2">
+        {(["A", "B", "C"] as Difficulty[]).map((level) => (
+          <button
+            key={level}
+            onClick={() => handleDifficultyClick(level)}
+            className={`py-1 px-3 rounded-full font-medium transition-all duration-200 flex items-center gap-1 ${
+              currentDifficulty === level 
+                ? difficultyLevels[level].activeBg + " " + difficultyLevels[level].activeColor
+                : difficultyLevels[level].inactiveBg + " " + difficultyLevels[level].inactiveColor
+            }`}
+          >
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-white text-[#4A6FA5] font-bold text-xs">
+              {level}
+            </span>
+            <span className="text-xs">{difficultyLevels[level].name}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Exportar ambos componentes
+export default DetailedDifficultySelector;
