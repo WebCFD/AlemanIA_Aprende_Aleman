@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Heart, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import FeedbackDialog from "./FeedbackDialog";
+import { CompactDifficultySelector } from "./DifficultySelector";
+import { useDifficulty } from "../context/DifficultyContext";
 
 export default function Header() {
   const { toast } = useToast();
   const [feedbackDialogOpen, setFeedbackDialogOpen] = useState(false);
+  const { currentDifficulty, setCurrentDifficulty } = useDifficulty();
   
   const handleTipButton = () => {
     toast({
@@ -55,6 +58,16 @@ export default function Header() {
               <span className="text-xs md:text-sm">Tu feedback nos interesa</span>
             </Button>
           </div>
+        </div>
+      </div>
+      
+      {/* Selector de dificultad debajo del banner principal */}
+      <div className="mt-4 flex justify-center w-full">
+        <div className="bg-white py-2 px-4 rounded-lg shadow-sm border border-gray-200">
+          <CompactDifficultySelector 
+            currentDifficulty={currentDifficulty}
+            onDifficultyChange={setCurrentDifficulty}
+          />
         </div>
       </div>
       

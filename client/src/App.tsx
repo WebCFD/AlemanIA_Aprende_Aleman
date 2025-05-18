@@ -12,6 +12,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { DifficultyProvider } from "./context/DifficultyContext";
 
 function Navigation() {
   const [location, navigate] = useLocation();
@@ -94,12 +95,13 @@ function Router() {
 }
 
 function App() {
-  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <DifficultyProvider>
+          <Router />
+        </DifficultyProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
