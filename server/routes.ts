@@ -44,16 +44,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       const { germanWord, translation, difficulty } = validationResult.data;
+      const includePoolA = req.query.includePoolA === 'true';
       
       // Find the word in the database
-      // Para nivel B, buscar en palabras de nivel A y B
-      let words = await storage.getWordsByDifficulty(difficulty);
-      let word = words.find(w => w.german === germanWord);
+      let word = null;
       
-      // Si estamos en nivel B y no encontramos la palabra, buscar también en nivel A
-      if (!word && difficulty === "B") {
+      // Primero buscar en el nivel de dificultad especificado
+      const words = await storage.getWordsByDifficulty(difficulty);
+      word = words.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
+      
+      // Si estamos en nivel B o si se solicitó incluir palabras de nivel A
+      if (!word && (difficulty === "B" || includePoolA)) {
         const wordsA = await storage.getWordsByDifficulty("A");
-        word = wordsA.find(w => w.german === germanWord);
+        word = wordsA.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
       }
       
       if (!word) {
@@ -62,11 +65,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Word not found" });
       }
       
+      // Preparar un ejemplo para mostrar
+      let exampleSentence = null;
+      if (word.example) {
+        exampleSentence = word.example;
+      } else {
+        // Si no hay ejemplo, crear uno básico
+        exampleSentence = `Dieses Wort ist "${germanWord}".\nEsta palabra es "${word.spanish}".`;
+      }
+      
       // For simple cases, do direct comparison
       if (translation.toLowerCase() === word.spanish.toLowerCase()) {
         return res.json({ 
           isCorrect: true,
-          correctTranslation: word.spanish
+          correctTranslation: word.spanish,
+          explanation: "¡Correcto! Tu traducción es exacta.",
+          exampleSentence
         });
       }
       
@@ -78,7 +92,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         difficulty
       );
       
-      return res.json(verificationResult);
+      // Asegurar que siempre incluya el ejemplo de oración
+      return res.json({
+        ...verificationResult,
+        exampleSentence: verificationResult.exampleSentence || exampleSentence
+      });
       
     } catch (error) {
       console.error("Error verifying translation:", error);

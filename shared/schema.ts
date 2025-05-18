@@ -73,6 +73,7 @@ export interface VerifyTranslationResponse {
   isCorrect: boolean;
   correctTranslation?: string;
   explanation?: string;
+  exampleSentence?: string;
 }
 
 export interface VerifyReverseTranslationResponse {

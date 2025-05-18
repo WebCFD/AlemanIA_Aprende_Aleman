@@ -168,6 +168,7 @@ export default function VocabularyCard({
       return result as VerifyReverseTranslationResponse;
     },
     onSuccess: (data) => {
+      setSubmittedTranslation(translation);
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
       setExampleSentence(data.exampleSentence);
