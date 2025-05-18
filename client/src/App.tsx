@@ -79,7 +79,14 @@ function Router() {
   
   // Efecto para asegurar que la página se cargue desde la parte superior en cada cambio de ruta
   useEffect(() => {
+    console.log('Router useEffect ejecutado', { 
+      scrollY: window.scrollY, 
+      location,
+      hash: window.location.hash,
+      href: window.location.href
+    });
     window.scrollTo(0, 0);
+    console.log('Después de scrollTo', { scrollY: window.scrollY });
   }, [location]);
   
   return (
