@@ -160,13 +160,18 @@ export default function PrepositionsCard({
     let isAnswerCorrect = false;
     let correctAnswerText = "";
     let explanationText = "";
+    let exampleForAudio = "";
 
     if (difficulty === "A" && currentPreposition) {
       if (isReverseMode) {
         // Modo inverso (español -> alemán)
         isAnswerCorrect = answer.trim().toLowerCase() === currentPreposition.german.toLowerCase();
         correctAnswerText = currentPreposition.german;
-        explanationText = `La preposición correcta es "${currentPreposition.german}" que significa "${currentPreposition.spanish}" en español.`;
+        
+        // Frase de ejemplo para nivel A
+        const exampleText = `Ejemplo: "Ich gehe ${currentPreposition.german} die Stadt." (Voy a la ciudad.)`;
+        explanationText = exampleText;
+        exampleForAudio = `Ich gehe ${currentPreposition.german} die Stadt.`;
       } else {
         // Modo directo (alemán -> español)
         const possibleAnswers = currentPreposition.spanish.split(", ");
@@ -174,13 +179,21 @@ export default function PrepositionsCard({
           answer.trim().toLowerCase() === possible.toLowerCase()
         );
         correctAnswerText = currentPreposition.spanish;
-        explanationText = `"${currentPreposition.german}" significa "${currentPreposition.spanish}" en español.`;
+        
+        // Frase de ejemplo para nivel A
+        const exampleText = `Ejemplo: "Ich gehe ${currentPreposition.german} die Stadt." (Voy a la ciudad.)`;
+        explanationText = exampleText;
+        exampleForAudio = `Ich gehe ${currentPreposition.german} die Stadt.`;
       }
     } else if ((difficulty === "B" || difficulty === "C") && currentGapSentence) {
       // Nivel B o C (completar huecos)
       isAnswerCorrect = answer.trim().toLowerCase() === currentGapSentence.answer.toLowerCase();
       correctAnswerText = currentGapSentence.answer;
-      explanationText = `La preposición correcta es "${currentGapSentence.answer}". La frase completa es: "${currentGapSentence.sentence.replace('___', currentGapSentence.answer)}" (${currentGapSentence.translation})`;
+      
+      // Frase completa para niveles B y C
+      const completeGermanSentence = currentGapSentence.sentence.replace('___', currentGapSentence.answer);
+      explanationText = `${completeGermanSentence} (${currentGapSentence.translation})`;
+      exampleForAudio = completeGermanSentence;
     } else {
       toast({
         title: "Error",
@@ -189,6 +202,9 @@ export default function PrepositionsCard({
       });
       return;
     }
+    
+    // Guardamos la frase de ejemplo para reproducir audio
+    setExampleSentence(explanationText);
 
     // Actualizar estado basado en la corrección
     setIsCorrect(isAnswerCorrect);
@@ -488,17 +504,24 @@ export default function PrepositionsCard({
                       variant="ghost"
                       size="sm"
                       className="h-7 px-2 text-blue-700 hover:text-blue-900 -mt-1"
-                      onClick={() => handlePlayAudio(
-                        difficulty === "A" && currentPreposition 
-                          ? currentPreposition.german 
-                          : currentGapSentence?.sentence.replace('___', currentGapSentence.answer)
-                      )}
+                      onClick={() => {
+                        // Reproducir la frase de ejemplo completa
+                        if (difficulty === "A" && currentPreposition) {
+                          handlePlayAudio(`Ich gehe ${currentPreposition.german} die Stadt.`);
+                        } else if (currentGapSentence) {
+                          handlePlayAudio(currentGapSentence.sentence.replace('___', currentGapSentence.answer));
+                        }
+                      }}
                     >
                       <Volume2 className="h-3 w-3 mr-1" /> 
                       <span className="text-xs">Escuchar ejemplo</span>
                     </Button>
                   </div>
-                  <p className="text-blue-800 text-sm">{exampleSentence}</p>
+                  <p className="text-blue-800 text-sm">{
+                    difficulty === "A" && currentPreposition
+                      ? `"Ich gehe ${currentPreposition.german} die Stadt." (Voy a la ciudad.)`
+                      : exampleSentence
+                  }</p>
                 </div>
               )}
             </div>
