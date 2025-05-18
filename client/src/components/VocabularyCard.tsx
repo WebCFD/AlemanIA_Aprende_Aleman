@@ -245,8 +245,9 @@ export default function VocabularyCard({
     // Guardar la traducción enviada para mostrarla en el feedback
     setSubmittedTranslation(translation.trim());
 
-    if (isReverseMode && difficulty === "A" && selectedReverseWord) {
+    if (isReverseMode && selectedReverseWord) {
       // Modo inverso: verificamos traducción español -> alemán usando la palabra seleccionada
+      // Funciona tanto para nivel A como para B
       verifyReverseMutation.mutate({ 
         spanishWord: selectedReverseWord.spanish, 
         translation: translation.trim(),
