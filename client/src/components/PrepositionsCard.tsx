@@ -7,7 +7,8 @@ import {
   XCircle, 
   Send, 
   ArrowRight, 
-  Volume2
+  Volume2,
+  Repeat
 } from "lucide-react";
 import { Difficulty } from "@shared/schema";
 import { Card } from "@/components/ui/card";
@@ -290,152 +291,186 @@ export default function PrepositionsCard({
     }, 100);
   };
 
+  // Get level name
+  const getLevelName = () => {
+    switch(difficulty) {
+      case "A": return "Nivel A (Principiante)";
+      case "B": return "Nivel B (Intermedio)";
+      case "C": return "Nivel C (Avanzado)";
+    }
+  };
+
   return (
-    <Card className="w-full max-w-2xl mx-auto border p-6 rounded-xl shadow-md relative overflow-hidden">
-      {/* Contador de puntuación */}
-      <div className="flex justify-between items-center absolute top-4 right-4">
-        <div className="flex items-center gap-1">
-          <span className="inline-flex items-center justify-center rounded-full w-6 h-6 bg-green-100 text-green-800 font-medium text-xs">
-            {correctCount}
-          </span>
-          <span>/</span>
-          <span className="inline-flex items-center justify-center rounded-full w-6 h-6 bg-red-100 text-red-800 font-medium text-xs">
-            {incorrectCount}
-          </span>
+    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+      {/* Progress Tracker - Igual que en VocabularyCard */}
+      <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center">
+            <CheckCircle className="h-5 w-5 text-[#4CAF50]" />
+            <span className="ml-1 font-medium">{correctCount}</span>
+          </div>
+          <div className="flex items-center">
+            <XCircle className="h-5 w-5 text-[#F44336]" />
+            <span className="ml-1 font-medium">{incorrectCount}</span>
+          </div>
         </div>
+        <span className="font-heading font-bold">{getLevelName()}</span>
       </div>
-
-      {/* Título de la tarjeta */}
-      <div className="flex justify-center items-center mb-6">
-        <h2 className="text-xl font-bold text-center text-[#4A6FA5]">
-          {difficulty === "A" 
-            ? "Preposiciones en Alemán" 
-            : `Preposiciones Nivel ${difficulty}`}
-        </h2>
-      </div>
-
-      {/* Contenido principal */}
-      {!showFeedback ? (
-        <>
-          {/* Pregunta */}
-          <div className="text-center mb-6">
-            {difficulty === "A" && currentPreposition && (
-              isReverseMode ? (
-                <h3 className="text-lg font-semibold mb-4">
-                  Traduce al alemán: <span className="text-[#4A6FA5] font-bold">{currentPreposition.spanish}</span>
-                </h3>
-              ) : (
-                <h3 className="text-lg font-semibold mb-4">
-                  ¿Qué significa en español: <span className="text-[#4A6FA5] font-bold">{currentPreposition.german}</span>?
-                  <button 
-                    onClick={() => handlePlayAudio(currentPreposition.german)}
-                    className="ml-2 inline-flex items-center justify-center rounded-full w-6 h-6 bg-[#4A6FA5] text-white"
-                    aria-label="Escuchar pronunciación"
-                  >
-                    <Volume2 className="h-3 w-3" />
-                  </button>
-                </h3>
-              )
-            )}
-            
-            {(difficulty === "B" || difficulty === "C") && currentGapSentence && (
-              <>
-                <h3 className="text-lg font-semibold mb-4">
-                  Completa la frase con la preposición adecuada:
-                </h3>
-                <p className="text-[#4A6FA5] font-bold text-xl mb-2">
-                  {currentGapSentence.sentence.replace('___', '____')}
-                  <button 
-                    onClick={() => handlePlayAudio(currentGapSentence.sentence.replace('___', '...'))}
-                    className="ml-2 inline-flex items-center justify-center rounded-full w-6 h-6 bg-[#4A6FA5] text-white"
-                    aria-label="Escuchar pronunciación"
-                  >
-                    <Volume2 className="h-3 w-3" />
-                  </button>
-                </p>
-                <p className="text-gray-600 italic">{currentGapSentence.translation}</p>
-              </>
-            )}
-            
-            {(!currentPreposition && !currentGapSentence) && (
-              <h3 className="text-lg font-semibold mb-4">
-                Cargando...
-              </h3>
-            )}
-          </div>
+      
+      {/* Contenedor principal */}
+      <div className="p-6 md:p-8">
+        {/* Preposition Card */}
+        <div className="mb-6 text-center">
+          {difficulty === "A" && (
+            <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
+              {isReverseMode && currentPreposition
+                ? currentPreposition.spanish
+                : currentPreposition?.german || "..."}
+            </span>
+          )}
           
-          <div className="mb-4">
-            <Input
-              type="text"
-              placeholder={isReverseMode 
-                ? "Escribe la preposición en alemán..." 
-                : difficulty === "A" 
-                  ? "Escribe el significado en español..." 
-                  : "Escribe la preposición correcta..."}
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              onKeyPress={handleKeyPress}
-              ref={inputRef}
-              className="text-center"
-              autoFocus
-            />
-          </div>
-
-          <div className="flex justify-center">
-            <Button
-              onClick={handleSubmitAnswer}
-              className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white gap-2"
-            >
-              <Send className="h-4 w-4" />
-              <span>Comprobar</span>
-            </Button>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className={`rounded-lg p-4 mb-6 ${
-            isCorrect 
-              ? "bg-green-100 border border-green-200" 
-              : "bg-red-100 border border-red-200"
-          }`}>
-            <div className="flex items-start gap-3">
-              {isCorrect ? (
-                <CheckCircle className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
+          {(difficulty === "B" || difficulty === "C") && currentGapSentence && (
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold mb-2">
+                Completa la frase con la preposición adecuada:
+              </h3>
+              <p className="bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-xl md:text-2xl mb-1">
+                {currentGapSentence.sentence.replace('___', '____')}
+                <button 
+                  onClick={() => handlePlayAudio(currentGapSentence.sentence.replace('___', '...'))}
+                  className="ml-2 inline-flex items-center justify-center rounded-full w-6 h-6 bg-[#4A6FA5] text-white"
+                  aria-label="Escuchar pronunciación"
+                >
+                  <Volume2 className="h-3 w-3" />
+                </button>
+              </p>
+              <p className="text-gray-600 italic">{currentGapSentence.translation}</p>
+            </div>
+          )}
+          
+          {difficulty === "A" && (
+            <>
+              {isReverseMode ? (
+                <>
+                  <div className="text-neutral-300 text-sm mb-1">Traduce esta preposición al alemán</div>
+                </>
               ) : (
-                <XCircle className="h-6 w-6 text-red-600 flex-shrink-0 mt-0.5" />
+                <>
+                  <div className="text-neutral-300 text-sm">Traduce esta preposición al español</div>
+                  {currentPreposition && (
+                    <button 
+                      onClick={() => handlePlayAudio(currentPreposition.german)}
+                      className="mt-2 inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                    >
+                      <Volume2 className="h-3 w-3 mr-1" />
+                      <span>Escuchar</span>
+                    </button>
+                  )}
+                </>
               )}
               
-              <div>
-                <p className="font-medium mb-1">
-                  {isCorrect ? "¡Correcto!" : "Incorrecto"}
-                </p>
-                <p className="text-sm">
-                  {isCorrect 
-                    ? `Tu respuesta "${submittedAnswer}" es correcta.` 
-                    : `Tu respuesta fue "${submittedAnswer}". La respuesta correcta es "${correctResponse}".`}
-                </p>
-                
-                {/* Ejemplo de frase si existe */}
-                {exampleSentence && (
-                  <div className="mt-3 p-3 bg-blue-50 rounded-md text-sm">
-                    <p>{exampleSentence}</p>
-                  </div>
-                )}
+              {isReverseMode && (
+                <div className="mt-2 flex justify-center">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <Repeat className="h-3 w-3 mr-1" />
+                    Modo Inverso
+                  </span>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        
+        {/* No mostrar el campo de entrada cuando se muestra feedback */}
+        {!showFeedback ? (
+          <>
+            {/* Translation Input */}
+            <div className="mb-6">
+              <div className="relative">
+                <Input
+                  ref={inputRef}
+                  type="text"
+                  className="w-full border border-neutral-200 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-[#4A6FA5]"
+                  placeholder={isReverseMode 
+                    ? "Escribe la preposición en alemán..." 
+                    : difficulty === "A" 
+                      ? "Escribe el significado en español..." 
+                      : "Escribe la preposición correcta..."}
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  disabled={showFeedback}
+                  autoFocus
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-1.5">
+                  <Button 
+                    onClick={handleSubmitAnswer} 
+                    variant="ghost" 
+                    className="h-8 px-2 text-neutral-400 hover:text-[#4A6FA5]"
+                    disabled={showFeedback}
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-center">
-            <Button
-              onClick={handleNextItem}
-              className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white gap-2"
-            >
-              <ArrowRight className="h-4 w-4" />
-              <span>Siguiente</span>
-            </Button>
-          </div>
-        </>
-      )}
+            
+            {/* Submit Button */}
+            <div className="flex justify-center">
+              <Button
+                onClick={handleSubmitAnswer}
+                className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
+                disabled={showFeedback}
+              >
+                Comprobar
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Feedback Section */}
+            <div className={`p-4 mb-6 rounded-lg border ${
+              isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+            }`}>
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 mt-1">
+                  {isCorrect ? (
+                    <CheckCircle className="h-5 w-5 text-green-600" />
+                  ) : (
+                    <XCircle className="h-5 w-5 text-red-600" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-1">
+                    {isCorrect ? "¡Correcto!" : "Incorrecto"}
+                  </h3>
+                  <p>
+                    {isCorrect 
+                      ? `Tu respuesta "${submittedAnswer}" es correcta.` 
+                      : `Tu respuesta fue "${submittedAnswer}". La respuesta correcta es "${correctResponse}".`}
+                  </p>
+                  
+                  {exampleSentence && (
+                    <div className="mt-3 p-3 bg-blue-50 rounded border border-blue-100 text-blue-800 text-sm">
+                      <p>{exampleSentence}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            
+            {/* Next Button */}
+            <div className="flex justify-center">
+              <Button 
+                onClick={handleNextItem}
+                className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
+              >
+                Siguiente preposición
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
     </Card>
   );
 }
