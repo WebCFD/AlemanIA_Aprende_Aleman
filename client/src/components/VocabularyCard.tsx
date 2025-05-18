@@ -80,8 +80,36 @@ export default function VocabularyCard({
       setIsReverseMode(false);
       setSelectedReverseWord(null);
       fetchNewWord();
-    } else {
-      // Si no es nivel B, reset al modo normal
+    } 
+    // Si es nivel C, siempre en modo inverso
+    else if (difficulty === "C") {
+      setIsBLevelAlternating(false);
+      setAlternateCounter(0);
+      setIsReverseMode(true);
+      
+      // Obtener una palabra aleatoria para modo inverso
+      const getNewReverseWord = async () => {
+        try {
+          const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
+          if (!response.ok) {
+            throw new Error("Error fetching word");
+          }
+          const newWord = await response.json();
+          setSelectedReverseWord(newWord);
+        } catch (error) {
+          console.error("Error fetching reverse word:", error);
+          toast({
+            title: "Error",
+            description: "No se pudo obtener una palabra para el nivel C",
+            variant: "destructive",
+          });
+        }
+      };
+      
+      getNewReverseWord();
+    } 
+    else {
+      // Si es nivel A, reset al modo normal
       setIsBLevelAlternating(false);
       setAlternateCounter(0);
       setIsReverseMode(false);
@@ -300,7 +328,7 @@ export default function VocabularyCard({
     }
   };
 
-  // Handle next word - versión actualizada con lógica para nivel B
+  // Handle next word - versión actualizada con lógica para niveles A, B y C
   const handleNextWord = () => {
     // 1. Primero ocultamos el UI de feedback
     setShowFeedback(false);
@@ -310,8 +338,35 @@ export default function VocabularyCard({
     setExampleSentence(undefined);
     setCorrectResponse(undefined);
     
-    // 3. Manejar lógica específica para Nivel B
-    if (difficulty === "B") {
+    // 3. Manejar lógica específica para Nivel C (siempre inverso)
+    if (difficulty === "C") {
+      // En nivel C siempre mantenemos el modo inverso
+      setIsReverseMode(true);
+      setTranslation("");
+      
+      // Obtener una palabra aleatoria nueva para modo inverso
+      const getNewReverseWord = async () => {
+        try {
+          const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
+          if (!response.ok) {
+            throw new Error('Error al obtener palabra para modo inverso en nivel C');
+          }
+          const newWord = await response.json();
+          setSelectedReverseWord(newWord);
+        } catch (error) {
+          console.error("Error fetching word for level C:", error);
+          toast({
+            title: "Error",
+            description: "No se pudo obtener una nueva palabra para el nivel C",
+            variant: "destructive",
+          });
+        }
+      };
+      
+      getNewReverseWord();
+    }
+    // 4. Manejar lógica específica para Nivel B (alternancia)
+    else if (difficulty === "B") {
       // Para el primer ejercicio en nivel B, iniciamos modo alternante
       if (!isBLevelAlternating) {
         setIsBLevelAlternating(true);
@@ -555,11 +610,13 @@ export default function VocabularyCard({
           ) : (
             <div className="text-neutral-300 text-sm">Traduce esta palabra al español</div>
           )}
-          {isReverseMode && difficulty === "A" && (
+          {isReverseMode && (difficulty === "A" || difficulty === "B" || difficulty === "C") && (
             <div className="mt-2 flex justify-center">
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                difficulty === "C" ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
+              }`}>
                 <Repeat className="h-3 w-3 mr-1" />
-                Modo Inverso
+                {difficulty === "C" ? 'Modo Avanzado (Inverso)' : 'Modo Inverso'}
               </span>
             </div>
           )}
