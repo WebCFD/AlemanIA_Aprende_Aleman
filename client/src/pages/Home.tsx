@@ -2,6 +2,7 @@ import { useState } from "react";
 import VocabularySection from "@/components/VocabularySection";
 import PronounsSection from "@/components/PronounsSection";
 import VerbsSection from "@/components/VerbsSection";
+import PrepositionsSection from "@/components/PrepositionsSection";
 import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <VocabularySection sharedDifficulty={currentDifficulty} />
       <PronounsSection sharedDifficulty={currentDifficulty} />
       <VerbsSection sharedDifficulty={currentDifficulty} />
+      <PrepositionsSection sharedDifficulty={currentDifficulty} />
     </div>
   );
 }
