@@ -430,17 +430,6 @@ export default function PrepositionsCard({
                 </div>
               </div>
             </div>
-            
-            {/* Submit Button */}
-            <div className="flex justify-center">
-              <Button
-                onClick={handleSubmitAnswer}
-                className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
-                disabled={showFeedback}
-              >
-                Comprobar
-              </Button>
-            </div>
           </>
         ) : (
           <>
