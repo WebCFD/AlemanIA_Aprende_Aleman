@@ -75,13 +75,6 @@ function Navigation() {
 }
 
 function Router() {
-  const [location] = useLocation();
-  
-  // Efecto para asegurar que la página se cargue desde la parte superior en cada cambio de ruta
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
-  
   return (
     <>
       <Header />
@@ -101,17 +94,6 @@ function Router() {
 }
 
 function App() {
-  // Desactivar el comportamiento de "scroll restoration" del navegador
-  useEffect(() => {
-    // Verificamos si la API history está disponible y tiene scrollRestoration
-    if ('scrollRestoration' in history) {
-      // Desactivamos la restauración automática del scroll
-      history.scrollRestoration = 'manual';
-    }
-    
-    // Forzar scroll al inicio cuando la página se carga inicialmente
-    window.scrollTo(0, 0);
-  }, []);
   
   return (
     <QueryClientProvider client={queryClient}>

@@ -8,10 +8,7 @@ import { Difficulty } from "@shared/schema";
 export default function Home() {
   const [currentDifficulty, setCurrentDifficulty] = useState<Difficulty>("A");
 
-  // Efecto para asegurar que la página se cargue desde la parte superior
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
 
   const handleDifficultyChange = (difficulty: Difficulty) => {
     setCurrentDifficulty(difficulty);
