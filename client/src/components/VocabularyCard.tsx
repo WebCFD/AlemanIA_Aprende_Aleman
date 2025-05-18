@@ -63,6 +63,34 @@ export default function VocabularyCard({
     retry: false,
     refetchOnWindowFocus: false,
   } as any);
+  
+  // Reiniciar estados cuando cambia la dificultad
+  useEffect(() => {
+    // Reiniciar contadores y modos al cambiar de dificultad
+    setIsCorrect(null);
+    setShowFeedback(false);
+    setExampleSentence(undefined);
+    setCorrectResponse(undefined);
+    setTranslation("");
+    
+    // Si es nivel B, preparamos para el modo alternante
+    if (difficulty === "B") {
+      setIsBLevelAlternating(true);
+      setAlternateCounter(0);
+      setIsReverseMode(false);
+      setSelectedReverseWord(null);
+      fetchNewWord();
+    } else {
+      // Si no es nivel B, reset al modo normal
+      setIsBLevelAlternating(false);
+      setAlternateCounter(0);
+      setIsReverseMode(false);
+      setSelectedReverseWord(null);
+      setConsecutiveCorrect(0);
+      setLastCorrectWords([]);
+      fetchNewWord();
+    }
+  }, [difficulty, fetchNewWord]);
 
   // Verify normal translation (alemán -> español)
   const verifyMutation = useMutation({
@@ -249,7 +277,7 @@ export default function VocabularyCard({
     }
   };
 
-  // Handle next word - versión simplificada directa
+  // Handle next word - versión actualizada con lógica para nivel B
   const handleNextWord = () => {
     // 1. Primero ocultamos el UI de feedback
     setShowFeedback(false);
@@ -259,8 +287,47 @@ export default function VocabularyCard({
     setExampleSentence(undefined);
     setCorrectResponse(undefined);
     
-    // 3. Alternar modos y cargar la siguiente palabra
-    if (isReverseMode) {
+    // 3. Manejar lógica específica para Nivel B
+    if (difficulty === "B") {
+      // Para el primer ejercicio en nivel B, iniciamos modo alternante
+      if (!isBLevelAlternating) {
+        setIsBLevelAlternating(true);
+        setAlternateCounter(0);
+        setIsReverseMode(false); // Empezamos con modo directo
+        fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
+      } else {
+        // Alternamos entre modo directo e inverso después de cada ejercicio
+        const newCounter = alternateCounter + 1;
+        setAlternateCounter(newCounter);
+        
+        // Si es par, usamos modo directo; si es impar, modo inverso
+        const shouldBeReverse = newCounter % 2 === 1;
+        setIsReverseMode(shouldBeReverse);
+        
+        if (shouldBeReverse) {
+          // Modo inverso: usamos la palabra actual como la palabra seleccionada
+          if (currentWord) {
+            setSelectedReverseWord(currentWord);
+            setTranslation("");
+          } else {
+            // Si no hay palabra actual (no debería suceder), fallback a modo normal
+            setIsReverseMode(false);
+            fetchNewWord();
+            setTranslation("");
+            setSelectedReverseWord(null);
+          }
+        } else {
+          // Modo directo: obtenemos una nueva palabra
+          fetchNewWord();
+          setTranslation("");
+          setSelectedReverseWord(null);
+        }
+      }
+    }
+    // 4. Manejar niveles A y C con lógica original
+    else if (isReverseMode) {
       // Después de completar un ejercicio inverso, volvemos al modo normal
       setIsReverseMode(false);
       // Cargar nueva palabra y luego limpiar input
@@ -290,13 +357,13 @@ export default function VocabularyCard({
         setSelectedReverseWord(null);
       }
     } else {
-      // Caso normal: buscar nueva palabra
+      // Caso normal para nivel A y C: buscar nueva palabra
       fetchNewWord();
       setTranslation("");
       setSelectedReverseWord(null);
     }
     
-    // 4. Enfocar el input después de un pequeño retraso para permitir que React actualice la UI
+    // 5. Enfocar el input después de un pequeño retraso para permitir que React actualice la UI
     setTimeout(() => {
       if (inputRef.current) {
         inputRef.current.focus();
