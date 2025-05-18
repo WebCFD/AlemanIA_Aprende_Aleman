@@ -619,12 +619,17 @@ export default function VocabularyCard({
               </p>
               <p className="text-neutral-400 ml-7">
                 {isReverseMode && selectedReverseWord ? (
-                  <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
+                  <>
+                    {selectedReverseWord.spanish} = {selectedReverseWord.article ? 
+                      <><span className="font-semibold">{selectedReverseWord.article}</span> {correctResponse || selectedReverseWord.german}</> : 
+                      <>{correctResponse || selectedReverseWord.german}</>
+                    }
+                  </>
                 ) : (
                   <>
                     {isNoun(currentWord?.german) && currentWord?.article ? (
                       <>
-                        {currentWord.article} {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
+                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
                       </>
                     ) : (
                       <>{currentWord?.german} = {currentWord?.spanish}</>
@@ -649,12 +654,17 @@ export default function VocabularyCard({
               </p>
               <p className="text-neutral-400 ml-7">
                 {isReverseMode && selectedReverseWord ? (
-                  <>{selectedReverseWord.spanish} = {correctResponse || selectedReverseWord.german}</>
+                  <>
+                    {selectedReverseWord.spanish} = {selectedReverseWord.article ? 
+                      <><span className="font-semibold">{selectedReverseWord.article}</span> {correctResponse || selectedReverseWord.german}</> : 
+                      <>{correctResponse || selectedReverseWord.german}</>
+                    }
+                  </>
                 ) : (
                   <>
                     {isNoun(currentWord?.german) && currentWord?.article ? (
                       <>
-                        {currentWord.article} {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
+                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
                       </>
                     ) : (
                       <>{currentWord?.german} = {currentWord?.spanish}</>
