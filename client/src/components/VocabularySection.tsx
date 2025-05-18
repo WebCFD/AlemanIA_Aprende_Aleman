@@ -1,12 +1,17 @@
 import { useState } from "react";
 import VocabularyCard from "./VocabularyCard";
+import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
 interface VocabularySectionProps {
-  sharedDifficulty: Difficulty;
+  sharedDifficulty?: Difficulty; // Hacemos el prop opcional
 }
 
 export default function VocabularySection({ sharedDifficulty }: VocabularySectionProps) {
+  // Usamos el contexto si no se proporciona la dificultad como prop
+  const { currentDifficulty } = useDifficulty();
+  // Aseguramos que siempre tengamos un valor válido para difficulty
+  const difficulty: Difficulty = sharedDifficulty || currentDifficulty;
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
 
@@ -30,7 +35,7 @@ export default function VocabularySection({ sharedDifficulty }: VocabularySectio
       </div>
 
       <VocabularyCard 
-        difficulty={sharedDifficulty}
+        difficulty={difficulty}
         correctCount={correctCount}
         incorrectCount={incorrectCount}
         onCorrectAnswer={handleCorrectAnswer}

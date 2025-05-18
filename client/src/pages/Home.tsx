@@ -1,27 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import VocabularySection from "@/components/VocabularySection";
 import PronounsSection from "@/components/PronounsSection";
 import VerbsSection from "@/components/VerbsSection";
-import DifficultySelector from "@/components/DifficultySelector";
+import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
 export default function Home() {
-  const [currentDifficulty, setCurrentDifficulty] = useState<Difficulty>("A");
-
-
-
-  const handleDifficultyChange = (difficulty: Difficulty) => {
-    setCurrentDifficulty(difficulty);
-  };
+  // Usar el contexto global de dificultad en lugar del estado local
+  const { currentDifficulty } = useDifficulty();
 
   return (
     <div className="container mx-auto px-4 md:px-6 py-8">
-      <div className="mb-8">
-        <DifficultySelector 
-          currentDifficulty={currentDifficulty} 
-          onDifficultyChange={handleDifficultyChange} 
-        />
-      </div>
+      {/* Se elimina el selector de dificultad de aquí ya que se ha movido al banner */}
       
       <VocabularySection sharedDifficulty={currentDifficulty} />
       <PronounsSection sharedDifficulty={currentDifficulty} />

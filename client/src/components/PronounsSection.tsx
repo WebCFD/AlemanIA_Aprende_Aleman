@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import PronounCard from "./PronounCard";
+import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
 interface PronounsSectionProps {
-  sharedDifficulty: Difficulty;
+  sharedDifficulty?: Difficulty; // Hacemos el prop opcional
 }
 
 export default function PronounsSection({ sharedDifficulty }: PronounsSectionProps) {
+  // Usamos el contexto si no se proporciona la dificultad como prop
+  const { currentDifficulty } = useDifficulty();
+  // Aseguramos que siempre tengamos un valor válido para difficulty
+  const difficulty: Difficulty = sharedDifficulty || currentDifficulty;
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [incorrectCount, setIncorrectCount] = useState<number>(0);
 
@@ -31,7 +36,7 @@ export default function PronounsSection({ sharedDifficulty }: PronounsSectionPro
       </div>
       
       <PronounCard
-        difficulty={sharedDifficulty}
+        difficulty={difficulty}
         correctCount={correctCount}
         incorrectCount={incorrectCount}
         onCorrectAnswer={handleCorrectAnswer}
