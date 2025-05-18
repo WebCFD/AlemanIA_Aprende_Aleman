@@ -43,6 +43,8 @@ export default function VocabularyCard({
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isReverseMode, setIsReverseMode] = useState(false);
+  const [isBLevelAlternating, setIsBLevelAlternating] = useState(false); // Para el modo alternante del nivel B
+  const [alternateCounter, setAlternateCounter] = useState(0); // Para llevar el control de alternancia en nivel B
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);

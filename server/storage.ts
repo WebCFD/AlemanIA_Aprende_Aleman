@@ -640,14 +640,35 @@ export class MemStorage implements IStorage {
   }
 
   async getRandomWordByDifficulty(difficulty: Difficulty): Promise<Word | undefined> {
-    const difficultyWords = await this.getWordsByDifficulty(difficulty);
-    
-    if (difficultyWords.length === 0) {
-      return undefined;
+    // Nivel B tiene reglas especiales: 30% nivel A, 70% nivel B
+    if (difficulty === "B") {
+      // Obtener palabras de nivel A y B
+      const wordsA = await this.getWordsByDifficulty("A");
+      const wordsB = await this.getWordsByDifficulty("B");
+      
+      // Verificar que haya palabras en ambos niveles
+      if (wordsA.length === 0 || wordsB.length === 0) {
+        return undefined;
+      }
+      
+      // Determinar si usaremos palabras de nivel A o B (70% probabilidad de B)
+      const useWordB = Math.random() <= 0.7;
+      
+      // Seleccionar una palabra aleatoria del nivel correspondiente
+      const sourceArray = useWordB ? wordsB : wordsA;
+      const randomIndex = Math.floor(Math.random() * sourceArray.length);
+      return sourceArray[randomIndex];
+    } else {
+      // Comportamiento normal para niveles A y C
+      const difficultyWords = await this.getWordsByDifficulty(difficulty);
+      
+      if (difficultyWords.length === 0) {
+        return undefined;
+      }
+      
+      const randomIndex = Math.floor(Math.random() * difficultyWords.length);
+      return difficultyWords[randomIndex];
     }
-    
-    const randomIndex = Math.floor(Math.random() * difficultyWords.length);
-    return difficultyWords[randomIndex];
   }
 
   async createWord(insertWord: InsertWord): Promise<Word> {
