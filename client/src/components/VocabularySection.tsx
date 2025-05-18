@@ -10,8 +10,8 @@ interface VocabularySectionProps {
 export default function VocabularySection({ sharedDifficulty }: VocabularySectionProps) {
   // Usamos el contexto si no se proporciona la dificultad como prop
   const { currentDifficulty } = useDifficulty();
-  // Aseguramos que siempre tengamos un valor válido para difficulty
-  const difficulty: Difficulty = sharedDifficulty || currentDifficulty;
+  // Aseguramos que siempre tengamos un valor válido para difficulty, currentDifficulty nunca será undefined
+  const difficulty = sharedDifficulty ?? currentDifficulty;
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
 

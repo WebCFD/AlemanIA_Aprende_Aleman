@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import VerbsCard from "./VerbsCard";
+import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
 interface VerbsSectionProps {
-  sharedDifficulty: Difficulty;
+  sharedDifficulty?: Difficulty; // Hacemos el prop opcional
 }
 
 export default function VerbsSection({ sharedDifficulty }: VerbsSectionProps) {
+  // Usamos el contexto si no se proporciona la dificultad como prop
+  const { currentDifficulty } = useDifficulty();
+  // Aseguramos que siempre tengamos un valor válido para difficulty, currentDifficulty nunca será undefined
+  const difficulty = sharedDifficulty ?? currentDifficulty;
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [incorrectCount, setIncorrectCount] = useState<number>(0);
 
@@ -31,7 +36,7 @@ export default function VerbsSection({ sharedDifficulty }: VerbsSectionProps) {
       </div>
       
       <VerbsCard
-        difficulty={sharedDifficulty}
+        difficulty={difficulty}
         correctCount={correctCount}
         incorrectCount={incorrectCount}
         onCorrectAnswer={handleCorrectAnswer}
