@@ -95,7 +95,10 @@ export default function VocabularyCard({
   // Verify normal translation (alemán -> español)
   const verifyMutation = useMutation({
     mutationFn: async ({ germanWord, translation, difficulty }: { germanWord: string; translation: string; difficulty: Difficulty }) => {
-      const response = await apiRequest('POST', '/api/vocabulary/verify', { 
+      // Si estamos en nivel B, buscamos la palabra en el pool correcto (A o B)
+      const poolFactor = difficulty === "B" ? "&includePoolA=true" : "";
+      
+      const response = await apiRequest('POST', `/api/vocabulary/verify?difficulty=${difficulty}${poolFactor}`, { 
         germanWord, 
         translation,
         difficulty,
@@ -104,11 +107,14 @@ export default function VocabularyCard({
       return result as VerifyTranslationResponse;
     },
     onSuccess: (data) => {
+      setSubmittedTranslation(translation);
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
       
       // Mostrar frase de ejemplo en modo directo si existe
-      if (currentWord?.example) {
+      if (data.exampleSentence) {
+        setExampleSentence(data.exampleSentence);
+      } else if (currentWord?.example) {
         setExampleSentence(currentWord.example);
       }
       
