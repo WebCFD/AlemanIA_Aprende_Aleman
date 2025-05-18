@@ -108,6 +108,29 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    console.log('App montado - Scroll inicial:', {
+      scrollY: window.scrollY,
+      scrollX: window.scrollX,
+      innerHeight: window.innerHeight,
+      documentHeight: document.documentElement.scrollHeight
+    });
+    
+    // Monitor de scroll
+    const handleScroll = () => {
+      console.log('Scroll detectado:', {
+        scrollY: window.scrollY,
+        timestamp: new Date().toISOString()
+      });
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
