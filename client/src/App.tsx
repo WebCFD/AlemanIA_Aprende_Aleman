@@ -79,14 +79,7 @@ function Router() {
   
   // Efecto para asegurar que la página se cargue desde la parte superior en cada cambio de ruta
   useEffect(() => {
-    console.log('Router useEffect ejecutado', { 
-      scrollY: window.scrollY, 
-      location,
-      hash: window.location.hash,
-      href: window.location.href
-    });
     window.scrollTo(0, 0);
-    console.log('Después de scrollTo', { scrollY: window.scrollY });
   }, [location]);
   
   return (
@@ -108,27 +101,16 @@ function Router() {
 }
 
 function App() {
+  // Desactivar el comportamiento de "scroll restoration" del navegador
   useEffect(() => {
-    console.log('App montado - Scroll inicial:', {
-      scrollY: window.scrollY,
-      scrollX: window.scrollX,
-      innerHeight: window.innerHeight,
-      documentHeight: document.documentElement.scrollHeight
-    });
+    // Verificamos si la API history está disponible y tiene scrollRestoration
+    if ('scrollRestoration' in history) {
+      // Desactivamos la restauración automática del scroll
+      history.scrollRestoration = 'manual';
+    }
     
-    // Monitor de scroll
-    const handleScroll = () => {
-      console.log('Scroll detectado:', {
-        scrollY: window.scrollY,
-        timestamp: new Date().toISOString()
-      });
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    // Forzar scroll al inicio cuando la página se carga inicialmente
+    window.scrollTo(0, 0);
   }, []);
   
   return (

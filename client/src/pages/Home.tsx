@@ -10,14 +10,7 @@ export default function Home() {
 
   // Efecto para asegurar que la página se cargue desde la parte superior
   useEffect(() => {
-    console.log('Home useEffect ejecutado', { 
-      scrollY: window.scrollY,
-      hash: window.location.hash,
-      href: window.location.href,
-      documentHeight: document.body.scrollHeight
-    });
     window.scrollTo(0, 0);
-    console.log('Home después de scrollTo', { scrollY: window.scrollY });
   }, []);
 
   const handleDifficultyChange = (difficulty: Difficulty) => {
