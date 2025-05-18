@@ -39,6 +39,7 @@ export default function VocabularyCard({
   onIncorrectAnswer
 }: VocabularyCardProps) {
   const [translation, setTranslation] = useState("");
+  const [submittedTranslation, setSubmittedTranslation] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isReverseMode, setIsReverseMode] = useState(false);
@@ -210,6 +211,9 @@ export default function VocabularyCard({
     }
 
     if (!currentWord) return;
+    
+    // Guardar la traducción enviada para mostrarla en el feedback
+    setSubmittedTranslation(translation.trim());
 
     if (isReverseMode && difficulty === "A" && selectedReverseWord) {
       // Modo inverso: verificamos traducción español -> alemán usando la palabra seleccionada
@@ -508,7 +512,7 @@ export default function VocabularyCard({
                 <span className="font-medium">¡Correcto!</span>
               </div>
               <p className="text-neutral-400 ml-7">
-                Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+                Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
               </p>
               <p className="text-neutral-400 ml-7">
                 {isReverseMode && selectedReverseWord ? (
