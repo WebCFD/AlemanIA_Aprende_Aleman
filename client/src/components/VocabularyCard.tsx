@@ -247,18 +247,35 @@ export default function VocabularyCard({
 
     if (isReverseMode && selectedReverseWord) {
       // Modo inverso: verificamos traducción español -> alemán usando la palabra seleccionada
-      // Funciona tanto para nivel A como para B
+      console.log("Verificando modo inverso con:", {
+        spanishWord: selectedReverseWord.spanish,
+        germanWord: selectedReverseWord.german,
+        difficulty: selectedReverseWord.difficulty
+      });
+      
       verifyReverseMutation.mutate({ 
         spanishWord: selectedReverseWord.spanish, 
         translation: translation.trim(),
         germanWord: selectedReverseWord.german
       });
-    } else {
+    } else if (currentWord) {
       // Modo normal: verificamos traducción alemán -> español
+      console.log("Verificando modo directo con:", {
+        germanWord: currentWord.german,
+        difficulty: difficulty
+      });
+      
       verifyMutation.mutate({ 
         germanWord: currentWord.german, 
         translation: translation.trim(),
         difficulty: difficulty
+      });
+    } else {
+      // Si no tenemos palabra actual, mostrar error
+      toast({
+        title: "Error de verificación",
+        description: "No se pudo obtener la palabra para verificar la respuesta",
+        variant: "destructive",
       });
     }
   };

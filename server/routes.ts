@@ -46,10 +46,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { germanWord, translation, difficulty } = validationResult.data;
       
       // Find the word in the database
-      const words = await storage.getWordsByDifficulty(difficulty);
-      const word = words.find(w => w.german === germanWord);
+      // Para nivel B, buscar en palabras de nivel A y B
+      let words = await storage.getWordsByDifficulty(difficulty);
+      let word = words.find(w => w.german === germanWord);
+      
+      // Si estamos en nivel B y no encontramos la palabra, buscar también en nivel A
+      if (!word && difficulty === "B") {
+        const wordsA = await storage.getWordsByDifficulty("A");
+        word = wordsA.find(w => w.german === germanWord);
+      }
       
       if (!word) {
+        // Para depuración - registrar qué palabra no se encontró
+        console.log(`Palabra no encontrada: ${germanWord} en nivel ${difficulty}`);
         return res.status(404).json({ message: "Word not found" });
       }
       
