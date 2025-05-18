@@ -307,17 +307,16 @@ export default function VocabularyCard({
         setIsReverseMode(shouldBeReverse);
         
         if (shouldBeReverse) {
-          // Modo inverso: usamos la palabra actual como la palabra seleccionada
-          if (currentWord) {
-            setSelectedReverseWord(currentWord);
-            setTranslation("");
-          } else {
-            // Si no hay palabra actual (no debería suceder), fallback a modo normal
-            setIsReverseMode(false);
-            fetchNewWord();
-            setTranslation("");
-            setSelectedReverseWord(null);
-          }
+          // Modo inverso: obtenemos una nueva palabra aleatoria del pool 30% A y 70% B
+          // Pero primero eliminamos la referencia de palabra anterior para modo inverso
+          setSelectedReverseWord(null);
+          // Luego obtenemos una nueva palabra y la guardamos como la palabra seleccionada inversa
+          fetchNewWord().then(() => {
+            if (currentWord) {
+              setSelectedReverseWord(currentWord);
+            }
+          });
+          setTranslation("");
         } else {
           // Modo directo: obtenemos una nueva palabra
           fetchNewWord();
