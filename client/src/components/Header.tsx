@@ -63,11 +63,41 @@ export default function Header() {
       
       {/* Selector de dificultad debajo del banner principal */}
       <div className="mt-4 flex justify-center w-full">
-        <div className="bg-white py-2 px-4 rounded-lg shadow-sm border border-gray-200">
-          <CompactDifficultySelector 
-            currentDifficulty={currentDifficulty}
-            onDifficultyChange={setCurrentDifficulty}
-          />
+        <div className="max-w-2xl w-full mx-auto bg-white p-6 rounded-xl shadow-md">
+          <div className="mb-6">
+            <h3 className="font-heading font-semibold text-xl mb-4">Selecciona tu nivel:</h3>
+            
+            <div className="flex justify-center gap-4 mb-6">
+              {(["A", "B", "C"] as Difficulty[]).map((level) => (
+                <button
+                  key={level}
+                  onClick={() => setCurrentDifficulty(level)}
+                  className={`py-2 px-6 rounded-full font-medium transition-all duration-200 flex items-center gap-2 ${
+                    currentDifficulty === level 
+                      ? level === "A" ? "bg-[#4A6FA5] text-white" : level === "B" ? "bg-[#4A6FA5] text-white" : "bg-[#4A6FA5] text-white"
+                      : level === "A" ? "bg-gray-100 text-[#4A6FA5]" : level === "B" ? "bg-gray-100 text-[#4A6FA5]" : "bg-gray-100 text-[#4A6FA5]"
+                  }`}
+                >
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-[#4A6FA5] font-bold">
+                    {level}
+                  </span>
+                  <span>{level === "A" ? "Principiante" : level === "B" ? "Intermedio" : "Avanzado"}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          <div className="text-sm text-neutral-500 bg-neutral-100 p-3 rounded-lg">
+            <p>
+              <span className="font-semibold">Nivel {currentDifficulty}:</span> {
+                currentDifficulty === "A" ? 
+                  "Practica con las 200 palabras más comunes y frecuentes en alemán, ideales para principiantes." :
+                currentDifficulty === "B" ? 
+                  "Practica con las 200 palabras relativamente frecuentes en alemán, para un nivel intermedio." : 
+                  "Practica con las 200 palabras de nivel avanzado en alemán, consideradas de alta educación."
+              }
+            </p>
+          </div>
         </div>
       </div>
       
