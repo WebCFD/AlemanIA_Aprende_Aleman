@@ -49,14 +49,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Find the word in the database
       let word = null;
       
-      // Primero buscar en el nivel de dificultad especificado
-      const words = await storage.getWordsByDifficulty(difficulty);
-      word = words.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
-      
-      // Si estamos en nivel B o si se solicitó incluir palabras de nivel A
-      if (!word && (difficulty === "B" || includePoolA)) {
-        const wordsA = await storage.getWordsByDifficulty("A");
-        word = wordsA.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
+      // Para nivel B, buscamos tanto en palabras de nivel B como de nivel A
+      if (difficulty === "B") {
+        // Primero buscar en nivel B
+        const wordsB = await storage.getWordsByDifficulty("B");
+        word = wordsB.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
+        
+        // Si no se encuentra, buscar en nivel A
+        if (!word) {
+          const wordsA = await storage.getWordsByDifficulty("A");
+          word = wordsA.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
+        }
+      } else {
+        // Para niveles A y C, buscar solo en ese nivel
+        const words = await storage.getWordsByDifficulty(difficulty);
+        word = words.find(w => w.german.toLowerCase() === germanWord.toLowerCase());
       }
       
       if (!word) {

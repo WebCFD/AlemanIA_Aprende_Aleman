@@ -95,10 +95,8 @@ export default function VocabularyCard({
   // Verify normal translation (alemán -> español)
   const verifyMutation = useMutation({
     mutationFn: async ({ germanWord, translation, difficulty }: { germanWord: string; translation: string; difficulty: Difficulty }) => {
-      // Si estamos en nivel B, buscamos la palabra en el pool correcto (A o B)
-      const poolFactor = difficulty === "B" ? "&includePoolA=true" : "";
-      
-      const response = await apiRequest('POST', `/api/vocabulary/verify?difficulty=${difficulty}${poolFactor}`, { 
+      // Solo pasamos los parámetros necesarios en el body, no usamos query params
+      const response = await apiRequest('POST', '/api/vocabulary/verify', { 
         germanWord, 
         translation,
         difficulty,
