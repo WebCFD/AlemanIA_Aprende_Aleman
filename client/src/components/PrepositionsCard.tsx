@@ -111,6 +111,7 @@ export default function PrepositionsCard({
   const [currentPreposition, setCurrentPreposition] = useState<Preposition | null>(null);
   const [currentGapSentence, setCurrentGapSentence] = useState<GapSentence | null>(null);
   const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
+  const [currentExamples, setCurrentExamples] = useState<PrepositionExamples | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
@@ -151,7 +152,7 @@ export default function PrepositionsCard({
   };
 
   // Verificar la respuesta cuando el usuario envía su traducción
-  const handleSubmitAnswer = () => {
+  const handleSubmitAnswer = async () => {
     if (!answer.trim()) {
       toast({
         title: "Respuesta vacía",
@@ -168,16 +169,17 @@ export default function PrepositionsCard({
     let correctAnswerText = "";
     let explanationText = "";
     let exampleForAudio = "";
+    let prepositionToFetch = "";
 
     if (difficulty === "A" && currentPreposition) {
       if (isReverseMode) {
         // Modo inverso (español -> alemán)
         isAnswerCorrect = answer.trim().toLowerCase() === currentPreposition.german.toLowerCase();
         correctAnswerText = currentPreposition.german;
+        prepositionToFetch = currentPreposition.german;
         
-        // Frase de ejemplo para nivel A
-        const exampleText = `Ejemplo: "Ich gehe ${currentPreposition.german} die Stadt." (Voy a la ciudad.)`;
-        explanationText = exampleText;
+        // Placeholder temporal mientras se cargan ejemplos dinámicos
+        explanationText = "Cargando ejemplos...";
         exampleForAudio = `Ich gehe ${currentPreposition.german} die Stadt.`;
       } else {
         // Modo directo (alemán -> español)
@@ -186,16 +188,17 @@ export default function PrepositionsCard({
           answer.trim().toLowerCase() === possible.toLowerCase()
         );
         correctAnswerText = currentPreposition.spanish;
+        prepositionToFetch = currentPreposition.german;
         
-        // Frase de ejemplo para nivel A
-        const exampleText = `Ejemplo: "Ich gehe ${currentPreposition.german} die Stadt." (Voy a la ciudad.)`;
-        explanationText = exampleText;
+        // Placeholder temporal mientras se cargan ejemplos dinámicos
+        explanationText = "Cargando ejemplos...";
         exampleForAudio = `Ich gehe ${currentPreposition.german} die Stadt.`;
       }
     } else if ((difficulty === "B" || difficulty === "C") && currentGapSentence) {
       // Nivel B o C (completar huecos)
       isAnswerCorrect = answer.trim().toLowerCase() === currentGapSentence.answer.toLowerCase();
       correctAnswerText = currentGapSentence.answer;
+      prepositionToFetch = currentGapSentence.answer;
       
       // Frase completa para niveles B y C
       const completeGermanSentence = currentGapSentence.sentence.replace('___', currentGapSentence.answer);
@@ -217,7 +220,19 @@ export default function PrepositionsCard({
     setIsCorrect(isAnswerCorrect);
     setShowFeedback(true);
     setCorrectResponse(correctAnswerText);
-    setExampleSentence(explanationText);
+    
+    // Obtener ejemplos dinámicos de Claude
+    try {
+      // Solo obtenemos ejemplos cuando hay una preposición clara para mostrar
+      if (prepositionToFetch) {
+        const examples = await fetchPrepositionExamples(prepositionToFetch);
+        console.log("Ejemplos cargados para:", prepositionToFetch);
+        setCurrentExamples(examples);
+      }
+    } catch (error) {
+      console.error("Error al obtener ejemplos:", error);
+      // En caso de error, mantenemos la explicación por defecto
+    }
 
     if (isAnswerCorrect) {
       // Incrementar contador de respuestas correctas
@@ -231,6 +246,27 @@ export default function PrepositionsCard({
         setConsecutiveCorrect(0);
       }
       onIncorrectAnswer();
+    }
+  };
+
+  // Obtener ejemplos de preposiciones generados por Claude
+  const fetchPrepositionExamples = async (preposition: string) => {
+    try {
+      const response = await fetch(`/api/prepositions/examples?preposition=${preposition}&difficulty=${difficulty}`);
+      
+      if (!response.ok) {
+        throw new Error("Error al obtener ejemplos de preposiciones");
+      }
+      
+      const data = await response.json();
+      return data as PrepositionExamples;
+    } catch (error) {
+      console.error("Error fetching preposition examples:", error);
+      // Fallback si hay un error
+      return {
+        examples: [`Ich gehe ${preposition} die Stadt. (Voy a la ciudad)`],
+        explanation: "Las preposiciones en alemán pueden regir diferentes casos gramaticales según su uso."
+      };
     }
   };
 
@@ -286,6 +322,7 @@ export default function PrepositionsCard({
     setIsCorrect(null);
     setExampleSentence(undefined);
     setCorrectResponse(undefined);
+    setCurrentExamples(null);
     
     if (difficulty === "A") {
       if (isReverseMode) {
@@ -491,8 +528,43 @@ export default function PrepositionsCard({
                 </div>
               )}
               
-              {/* Example sentence */}
-              {exampleSentence && (
+              {/* Dynamic examples from Claude */}
+              {currentExamples && (
+                <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  {/* Explanation section */}
+                  <div className="mb-3">
+                    <p className="text-blue-800 font-medium text-sm mb-1">Explicación gramatical:</p>
+                    <p className="text-blue-800 text-sm">{currentExamples.explanation}</p>
+                  </div>
+                  
+                  {/* Examples section */}
+                  <div>
+                    <p className="text-blue-800 font-medium text-sm mb-1">Ejemplos:</p>
+                    {currentExamples.examples.map((example: string, index: number) => (
+                      <div key={index} className="mb-2 last:mb-0">
+                        <div className="flex justify-between items-start">
+                          <p className="text-blue-800 text-sm">{example}</p>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900 -mt-1 ml-2"
+                            onClick={() => {
+                              // Extraer solo la parte en alemán (antes del paréntesis)
+                              const germanPart = example.split('(')[0].trim();
+                              handlePlayAudio(germanPart);
+                            }}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Fallback example sentence (if Claude examples not loaded yet) */}
+              {!currentExamples && exampleSentence && (
                 <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-blue-800 font-medium text-sm">Ejemplo:</p>
