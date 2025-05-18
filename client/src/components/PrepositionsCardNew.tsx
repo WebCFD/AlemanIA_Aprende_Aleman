@@ -39,39 +39,38 @@ const prepositionsA: Preposition[] = [
   { german: "mit", spanish: "con" },
   { german: "auf", spanish: "sobre, encima" },
   { german: "zu", spanish: "a, hacia" },
-  { german: "für", spanish: "para" },
   { german: "von", spanish: "de" },
-  { german: "an", spanish: "a, en" },
-  { german: "bei", spanish: "junto a, en casa de" },
-  { german: "nach", spanish: "después, hacia" },
-  { german: "aus", spanish: "de, desde dentro" },
-  { german: "über", spanish: "sobre, por encima" },
-  { german: "um", spanish: "alrededor" },
-  { german: "vor", spanish: "delante" },
-  { german: "durch", spanish: "a través" },
-  { german: "zwischen", spanish: "entre" }
+  { german: "an", spanish: "en, a" },
+  { german: "nach", spanish: "a, después de" },
+  { german: "bei", spanish: "en, cerca de" },
+  { german: "aus", spanish: "de, desde" },
+  { german: "für", spanish: "para" },
+  { german: "ohne", spanish: "sin" },
+  { german: "um", spanish: "alrededor de" },
+  { german: "gegen", spanish: "contra" },
+  { german: "über", spanish: "sobre" }
 ];
 
 const prepositionsB: Preposition[] = [
-  { german: "an", spanish: "a, en" },
-  { german: "auf", spanish: "sobre, encima" },
-  { german: "aus", spanish: "de, desde dentro" },
-  { german: "außer", spanish: "excepto" },
-  { german: "bei", spanish: "junto a, en casa de" },
-  { german: "bis", spanish: "hasta" },
-  { german: "durch", spanish: "a través de" },
-  { german: "entlang", spanish: "a lo largo de" },
-  { german: "für", spanish: "para" },
-  { german: "gegen", spanish: "contra" }
+  { german: "zwischen", spanish: "entre" },
+  { german: "neben", spanish: "junto a" },
+  { german: "vor", spanish: "delante de" },
+  { german: "hinter", spanish: "detrás de" },
+  { german: "unter", spanish: "debajo de" },
+  { german: "während", spanish: "durante" },
+  { german: "wegen", spanish: "a causa de" },
+  { german: "durch", spanish: "a través de" }
 ];
 
 const prepositionsC: Preposition[] = [
-  ...prepositionsB,
-  { german: "anstatt/statt", spanish: "en vez de" },
   { german: "trotz", spanish: "a pesar de" },
-  { german: "angesichts", spanish: "en vista de" },
-  { german: "aufgrund", spanish: "debido a" },
-  { german: "außerhalb", spanish: "fuera de" }
+  { german: "statt", spanish: "en lugar de" },
+  { german: "innerhalb", spanish: "dentro de" },
+  { german: "außerhalb", spanish: "fuera de" },
+  { german: "anhand", spanish: "mediante" },
+  { german: "jenseits", spanish: "más allá de" },
+  { german: "anlässlich", spanish: "con motivo de" },
+  { german: "binnen", spanish: "dentro de (tiempo)" }
 ];
 
 // Frases con espacios para completar (nivel B y C)
@@ -151,6 +150,32 @@ export default function PrepositionsCard({
     const randomIndex = Math.floor(Math.random() * sentences.length);
     setCurrentGapSentence(sentences[randomIndex]);
     setCurrentPreposition(null);
+  };
+
+  // Función para obtener ejemplos dinámicos de preposiciones
+  const fetchPrepositionExamples = async (preposition: string) => {
+    try {
+      setLoadingExamples(true);
+      const response = await fetch(`/api/prepositions/examples?preposition=${preposition}&difficulty=${difficulty}`);
+      
+      if (!response.ok) {
+        throw new Error('Error al obtener ejemplos de preposiciones');
+      }
+      
+      const data = await response.json();
+      setPrepositionExamples(data);
+      return data;
+    } catch (error) {
+      console.error('Error obteniendo ejemplos:', error);
+      toast({
+        title: "Error",
+        description: "No se pudieron cargar los ejemplos. Intentaremos más tarde.",
+        variant: "destructive",
+      });
+      return null;
+    } finally {
+      setLoadingExamples(false);
+    }
   };
 
   // Verificar la respuesta cuando el usuario envía su traducción
@@ -241,21 +266,51 @@ export default function PrepositionsCard({
     // Actualizar estado basado en la corrección
     setIsCorrect(isAnswerCorrect);
     setShowFeedback(true);
-    setCorrectResponse(correctAnswerText);
-    setExampleSentence(explanationText);
 
+    // Guardar la respuesta correcta para mostrarla
+    if (difficulty === "A" && currentPreposition) {
+      setCorrectResponse(isReverseMode ? currentPreposition.german : currentPreposition.spanish);
+    } else if (currentGapSentence) {
+      setCorrectResponse(currentGapSentence.answer);
+    }
+
+    // Actualizar contadores y cambiar a modo inverso si corresponde
     if (isAnswerCorrect) {
-      // Incrementar contador de respuestas correctas
-      if (difficulty === "A" && !isReverseMode) {
-        setConsecutiveCorrect(prev => prev + 1);
-      }
       onCorrectAnswer();
+      
+      if (difficulty === "A") {
+        setConsecutiveCorrect(prev => prev + 1);
+        
+        // En nivel A, cada 4 respuestas correctas cambiamos a modo inverso para 1 pregunta
+        if (consecutiveCorrect === 3 && !isReverseMode) {
+          setIsReverseMode(true);
+        }
+      }
     } else {
-      // Resetear contador si es incorrecto
-      if (difficulty === "A" && !isReverseMode) {
+      onIncorrectAnswer();
+    }
+  };
+
+  // Pasar a la siguiente preposición/frase
+  const handleNextQuestion = () => {
+    setAnswer("");
+    setShowFeedback(false);
+    setPrepositionExamples(null);
+    
+    if (difficulty === "A") {
+      // Para nivel A, después de una pregunta en modo inverso, volvemos a modo directo
+      if (isReverseMode) {
+        setIsReverseMode(false);
         setConsecutiveCorrect(0);
       }
-      onIncorrectAnswer();
+      getNewPrepositionA();
+    } else {
+      getNewGapSentence();
+    }
+    
+    // Focus en el input
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
@@ -284,154 +339,125 @@ export default function PrepositionsCard({
         });
       }
     } catch (error) {
+      console.error("Error al reproducir audio:", error);
       toast({
-        title: "Error de audio",
-        description: "No se pudo reproducir el audio. Intenta de nuevo.",
+        title: "Error",
+        description: "No se pudo reproducir el audio",
         variant: "destructive"
       });
     }
   };
 
-  // Manejar entrada de teclado
+  // Manejar pulsación de tecla Enter en el input
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      
-      if (showFeedback) {
-        handleNextItem();
-      } else if (answer.trim()) {
-        handleSubmitAnswer();
-      }
-    }
-  };
-
-  // Pasar a la siguiente preposición o frase
-  const handleNextItem = () => {
-    setShowFeedback(false);
-    setIsCorrect(null);
-    setExampleSentence(undefined);
-    setCorrectResponse(undefined);
-    
-    if (difficulty === "A") {
-      if (isReverseMode) {
-        // Después de completar modo inverso, volver a modo normal
-        setIsReverseMode(false);
-        getNewPrepositionA();
-      } else if (consecutiveCorrect >= 4) {
-        // Si hay 4 correctas consecutivas, cambiar a modo inverso
-        setIsReverseMode(true);
-        setConsecutiveCorrect(0);
-        // Mantener la misma preposición pero en modo inverso
-      } else {
-        // Caso normal: obtener nueva preposición
-        getNewPrepositionA();
-      }
-    } else {
-      // Nivel B o C: obtener nueva frase con hueco
-      getNewGapSentence();
-    }
-    
-    setAnswer("");
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    }, 100);
-  };
-
-  // Get level name
-  const getLevelName = () => {
-    switch(difficulty) {
-      case "A": return "Nivel A (Principiante)";
-      case "B": return "Nivel B (Intermedio)";
-      case "C": return "Nivel C (Avanzado)";
+    if (e.key === "Enter") {
+      handleSubmitAnswer();
     }
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-      {/* Progress Tracker - Igual que en VocabularyCard */}
-      <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
+    <Card className="w-full p-6 shadow-md border border-neutral-200 rounded-xl bg-white">
+      <div className="flex flex-col">
+        <div className="flex justify-between items-center mb-4">
           <div className="flex items-center">
-            <CheckCircle className="h-5 w-5 text-[#4CAF50]" />
-            <span className="ml-1 font-medium">{correctCount}</span>
-          </div>
-          <div className="flex items-center">
-            <XCircle className="h-5 w-5 text-[#F44336]" />
-            <span className="ml-1 font-medium">{incorrectCount}</span>
-          </div>
-        </div>
-        <span className="font-heading font-bold">{getLevelName()}</span>
-      </div>
-      
-      {/* Contenedor principal */}
-      <div className="p-6 md:p-8">
-        {/* Preposition Card */}
-        <div className="mb-6 text-center">
-          {difficulty === "A" && (
-            <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
-              {isReverseMode && currentPreposition
-                ? currentPreposition.spanish
-                : currentPreposition?.german || "..."}
-            </span>
-          )}
-          
-          {(difficulty === "B" || difficulty === "C") && currentGapSentence && (
-            <div className="mb-4">
-              <h3 className="text-lg font-semibold mb-2">
-                Completa la frase con la preposición adecuada:
-              </h3>
-              <p className="bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-xl md:text-2xl mb-1">
-                {currentGapSentence.sentence.replace('___', '____')}
-                <button 
-                  onClick={() => handlePlayAudio(currentGapSentence.sentence.replace('___', '...'))}
-                  className="ml-2 inline-flex items-center justify-center rounded-full w-6 h-6 bg-[#4A6FA5] text-white"
-                  aria-label="Escuchar pronunciación"
-                >
-                  <Volume2 className="h-3 w-3" />
-                </button>
-              </p>
-              <p className="text-gray-600 italic">{currentGapSentence.translation}</p>
+            <h3 className="text-xl font-semibold text-[#4A6FA5]">Preposiciones</h3>
+            <div className="bg-[#4A6FA5] text-white text-xs font-medium ml-2 px-2.5 py-1 rounded-md">
+              {difficulty}
             </div>
-          )}
+          </div>
           
-          {difficulty === "A" && (
-            <>
-              {isReverseMode ? (
-                <>
-                  <div className="text-neutral-300 text-sm mb-1">Traduce esta preposición al alemán</div>
-                </>
-              ) : (
-                <>
-                  <div className="text-neutral-300 text-sm">Traduce esta preposición al español</div>
-                  {currentPreposition && (
-                    <button 
-                      onClick={() => handlePlayAudio(currentPreposition.german)}
-                      className="mt-2 inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                    >
-                      <Volume2 className="h-3 w-3 mr-1" />
-                      <span>Escuchar</span>
-                    </button>
-                  )}
-                </>
-              )}
-              
-              {isReverseMode && (
-                <div className="mt-2 flex justify-center">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                    <Repeat className="h-3 w-3 mr-1" />
-                    Modo Inverso
-                  </span>
-                </div>
-              )}
-            </>
-          )}
+          <div className="flex space-x-2">
+            <div className="flex items-center">
+              <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+              <span className="text-sm font-medium text-green-500">{correctCount}</span>
+            </div>
+            <div className="flex items-center">
+              <XCircle className="w-4 h-4 text-red-500 mr-1" />
+              <span className="text-sm font-medium text-red-500">{incorrectCount}</span>
+            </div>
+          </div>
         </div>
         
         {/* No mostrar el campo de entrada cuando se muestra feedback */}
         {!showFeedback ? (
           <>
+            {/* Header con instrucciones */}
+            <div className="mb-6">
+              {difficulty === "A" && (
+                <p className="text-neutral-600 text-sm mb-2">
+                  {!isReverseMode 
+                    ? "Traduce la siguiente preposición del alemán al español:"
+                    : "Traduce la siguiente preposición del español al alemán:"}
+                </p>
+              )}
+              
+              {(difficulty === "B" || difficulty === "C") && (
+                <p className="text-neutral-600 text-sm mb-2">
+                  Completa la frase con la preposición correcta:
+                </p>
+              )}
+              
+              {/* Word or Sentence to Translate */}
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  {difficulty === "A" && currentPreposition && (
+                    <div className="text-xl font-medium text-[#4A6FA5] flex items-center">
+                      {!isReverseMode ? (
+                        <>
+                          {currentPreposition.german}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="ml-2 h-8 p-0 text-[#4A6FA5]"
+                            onClick={() => handlePlayAudio(currentPreposition.german)}
+                          >
+                            <Volume2 className="h-4 w-4" />
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          {currentPreposition.spanish}
+                        </>
+                      )}
+                    </div>
+                  )}
+                  
+                  {(difficulty === "B" || difficulty === "C") && currentGapSentence && (
+                    <div className="text-lg font-medium text-[#4A6FA5] flex items-center">
+                      {currentGapSentence.sentence.replace('___', '____')}
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="ml-2 h-8 p-0 text-[#4A6FA5]"
+                        onClick={() => handlePlayAudio(currentGapSentence.sentence.replace('___', '...'))}
+                      >
+                        <Volume2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Mode Indicator for Level A */}
+                {difficulty === "A" && (
+                  <div className="flex items-center">
+                    <span className="text-xs text-neutral-500 mr-1">
+                      {!isReverseMode ? "DE" : "ES"}
+                    </span>
+                    <ArrowRight className="h-3 w-3 text-neutral-400" />
+                    <span className="text-xs text-neutral-500 ml-1">
+                      {!isReverseMode ? "ES" : "DE"}
+                    </span>
+                  </div>
+                )}
+              </div>
+              
+              {(difficulty === "B" || difficulty === "C") && currentGapSentence && (
+                <p className="text-sm text-neutral-500 mt-2 italic">
+                  {currentGapSentence.translation}
+                </p>
+              )}
+            </div>
+            
             {/* Translation Input */}
             <div className="mb-6">
               <div className="relative">
@@ -466,43 +492,39 @@ export default function PrepositionsCard({
         ) : (
           <>
             {/* Feedback Section - Exactamente igual a VocabularyCard */}
-            <div className="mb-5 transition-all duration-300">
-              {isCorrect === true && (
-                <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
-                  <div className="flex items-start mb-2">
-                    <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
-                    <span className="font-medium">¡Correcto!</span>
-                  </div>
-                  <p className="text-neutral-400 ml-7">
-                    Tu respuesta: <span className="font-semibold">{submittedAnswer}</span>
-                  </p>
-                  <p className="text-neutral-400 ml-7">
-                    {difficulty === "A" && currentPreposition ? (
-                      isReverseMode ? (
-                        <>{currentPreposition.spanish} = {currentPreposition.german}</>
-                      ) : (
-                        <>{currentPreposition.german} = {currentPreposition.spanish}</>
-                      )
+            <div className="mb-6">
+              {isCorrect !== null && (
+                <div className={`py-2 px-3 flex items-start border rounded-md ${
+                  isCorrect 
+                    ? "bg-green-50 border-green-100" 
+                    : "bg-red-50 border-red-100"
+                }`}>
+                  <div className="mr-2 mt-0.5">
+                    {isCorrect ? (
+                      <CheckCircle className="h-5 w-5 text-green-500" />
                     ) : (
-                      <>La preposición correcta es: {correctResponse}</>
+                      <XCircle className="h-5 w-5 text-red-500" />
                     )}
-                  </p>
+                  </div>
+                  <div>
+                    <p className={`font-semibold ${
+                      isCorrect ? "text-green-700" : "text-red-700"
+                    }`}>
+                      {isCorrect ? "¡Correcto!" : "Incorrecto"}
+                    </p>
+                    <p className="text-neutral-600 mt-1">
+                      Tu respuesta: <span className="font-medium">{submittedAnswer}</span>
+                    </p>
+                  </div>
                 </div>
               )}
               
-              {isCorrect === false && (
-                <div className="bg-red-100 border border-[#F44336] text-[#F44336] rounded-lg p-4">
-                  <div className="flex items-start mb-2">
-                    <XCircle className="mr-2 h-5 w-5" />
-                    <span className="font-medium">Incorrecto</span>
-                  </div>
-                  <p className="text-neutral-400 ml-7">
-                    Tu respuesta: <span className="font-semibold">{submittedAnswer}</span>
-                  </p>
-                  <p className="text-neutral-400 ml-7">
+              {!isCorrect && correctResponse && (
+                <div className="mt-2">
+                  <p className="text-neutral-600">
                     Respuesta correcta:
                   </p>
-                  <p className="text-neutral-400 ml-7">
+                  <p className="text-neutral-600 ml-7">
                     {difficulty === "A" && currentPreposition ? (
                       isReverseMode ? (
                         <>{currentPreposition.spanish} = {currentPreposition.german}</>
@@ -591,11 +613,11 @@ export default function PrepositionsCard({
             
             {/* Next Button */}
             <div className="flex justify-center">
-              <Button 
-                onClick={handleNextItem}
+              <Button
+                onClick={handleNextQuestion}
                 className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
               >
-                Siguiente preposición
+                Siguiente
               </Button>
             </div>
           </>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PrepositionsCard from "./PrepositionsCard";
+import PrepositionsCard from "./PrepositionsCardNew";
 import { useDifficulty } from "../context/DifficultyContext";
 import { Difficulty } from "@shared/schema";
 
