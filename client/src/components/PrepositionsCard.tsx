@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Difficulty } from "@shared/schema";
 import { Card } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
 
 interface PrepositionsCardProps {
   difficulty: Difficulty;
@@ -31,6 +32,12 @@ interface GapSentence {
   sentence: string;
   answer: string;
   translation: string;
+}
+
+// Definición para ejemplos de preposiciones
+interface PrepositionExamples {
+  examples: string[];
+  explanation: string;
 }
 
 // Definición de las preposiciones para cada nivel
