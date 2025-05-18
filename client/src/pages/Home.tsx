@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VocabularySection from "@/components/VocabularySection";
 import PronounsSection from "@/components/PronounsSection";
 import VerbsSection from "@/components/VerbsSection";
@@ -7,6 +7,11 @@ import { Difficulty } from "@shared/schema";
 
 export default function Home() {
   const [currentDifficulty, setCurrentDifficulty] = useState<Difficulty>("A");
+
+  // Efecto para asegurar que la página se cargue desde la parte superior
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleDifficultyChange = (difficulty: Difficulty) => {
     setCurrentDifficulty(difficulty);
