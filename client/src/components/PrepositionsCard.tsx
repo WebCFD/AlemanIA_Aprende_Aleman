@@ -428,35 +428,79 @@ export default function PrepositionsCard({
           </>
         ) : (
           <>
-            {/* Feedback Section */}
-            <div className={`p-4 mb-6 rounded-lg border ${
-              isCorrect ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
-            }`}>
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 mt-1">
-                  {isCorrect ? (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-red-600" />
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg mb-1">
-                    {isCorrect ? "¡Correcto!" : "Incorrecto"}
-                  </h3>
-                  <p>
-                    {isCorrect 
-                      ? `Tu respuesta "${submittedAnswer}" es correcta.` 
-                      : `Tu respuesta fue "${submittedAnswer}". La respuesta correcta es "${correctResponse}".`}
+            {/* Feedback Section - Exactamente igual a VocabularyCard */}
+            <div className="mb-5 transition-all duration-300">
+              {isCorrect === true && (
+                <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
+                  <div className="flex items-start mb-2">
+                    <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
+                    <span className="font-medium">¡Correcto!</span>
+                  </div>
+                  <p className="text-neutral-400 ml-7">
+                    Tu respuesta: <span className="font-semibold">{submittedAnswer}</span>
                   </p>
-                  
-                  {exampleSentence && (
-                    <div className="mt-3 p-3 bg-blue-50 rounded border border-blue-100 text-blue-800 text-sm">
-                      <p>{exampleSentence}</p>
-                    </div>
-                  )}
+                  <p className="text-neutral-400 ml-7">
+                    {difficulty === "A" && currentPreposition ? (
+                      isReverseMode ? (
+                        <>{currentPreposition.spanish} = {currentPreposition.german}</>
+                      ) : (
+                        <>{currentPreposition.german} = {currentPreposition.spanish}</>
+                      )
+                    ) : (
+                      <>La preposición correcta es: {correctResponse}</>
+                    )}
+                  </p>
                 </div>
-              </div>
+              )}
+              
+              {isCorrect === false && (
+                <div className="bg-red-100 border border-[#F44336] text-[#F44336] rounded-lg p-4">
+                  <div className="flex items-start mb-2">
+                    <XCircle className="mr-2 h-5 w-5" />
+                    <span className="font-medium">Incorrecto</span>
+                  </div>
+                  <p className="text-neutral-400 ml-7">
+                    Tu respuesta: <span className="font-semibold">{submittedAnswer}</span>
+                  </p>
+                  <p className="text-neutral-400 ml-7">
+                    Respuesta correcta:
+                  </p>
+                  <p className="text-neutral-400 ml-7">
+                    {difficulty === "A" && currentPreposition ? (
+                      isReverseMode ? (
+                        <>{currentPreposition.spanish} = {currentPreposition.german}</>
+                      ) : (
+                        <>{currentPreposition.german} = {currentPreposition.spanish}</>
+                      )
+                    ) : (
+                      <>La preposición correcta es: {correctResponse}</>
+                    )}
+                  </p>
+                </div>
+              )}
+              
+              {/* Example sentence */}
+              {exampleSentence && (
+                <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex justify-between items-start mb-2">
+                    <p className="text-blue-800 font-medium text-sm">Ejemplo:</p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-7 px-2 text-blue-700 hover:text-blue-900 -mt-1"
+                      onClick={() => handlePlayAudio(
+                        difficulty === "A" && currentPreposition 
+                          ? currentPreposition.german 
+                          : currentGapSentence?.sentence.replace('___', currentGapSentence.answer)
+                      )}
+                    >
+                      <Volume2 className="h-3 w-3 mr-1" /> 
+                      <span className="text-xs">Escuchar ejemplo</span>
+                    </Button>
+                  </div>
+                  <p className="text-blue-800 text-sm">{exampleSentence}</p>
+                </div>
+              )}
             </div>
             
             {/* Next Button */}
