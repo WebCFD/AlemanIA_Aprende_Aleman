@@ -149,6 +149,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Enviar feedback
   app.post("/api/feedback", handleSendFeedback);
   
+  // Endpoint para generar ejemplos de preposiciones
+  app.get("/api/prepositions/examples", async (req, res) => {
+    try {
+      const preposition = req.query.preposition as string;
+      const difficulty = (req.query.difficulty as Difficulty) || "A";
+      
+      if (!preposition) {
+        return res.status(400).json({ message: "Se requiere el parámetro 'preposition'" });
+      }
+      
+      // Validar dificultad
+      if (!["A", "B", "C"].includes(difficulty)) {
+        return res.status(400).json({ message: "Nivel de dificultad inválido. Debe ser A, B o C." });
+      }
+      
+      // Generar ejemplos usando Claude
+      const examples = await generatePrepositionExamples(preposition, difficulty);
+      
+      return res.json(examples);
+    } catch (error) {
+      console.error("Error al generar ejemplos de preposiciones:", error);
+      return res.status(500).json({ message: "Error del servidor" });
+    }
+  });
+  
   // Rutas para ejercicios de pronombres y declinaciones
   
   // Obtener una frase aleatoria por nivel de dificultad

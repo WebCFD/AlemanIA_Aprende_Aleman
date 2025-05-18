@@ -104,6 +104,15 @@ export default function PrepositionsCard({
   const [currentPreposition, setCurrentPreposition] = useState<Preposition | null>(null);
   const [currentGapSentence, setCurrentGapSentence] = useState<GapSentence | null>(null);
   const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
+  // Estado para ejemplos generados por Claude
+  const [prepositionExamples, setPrepositionExamples] = useState<{
+    preposition: string;
+    examples: { germanSentence: string; spanishTranslation: string }[];
+    explanation: string;
+    case: string;
+  } | null>(null);
+  // Estado para indicar si estamos cargando ejemplos
+  const [loadingExamples, setLoadingExamples] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
@@ -114,6 +123,7 @@ export default function PrepositionsCard({
     setExampleSentence(undefined);
     setCorrectResponse(undefined);
     setAnswer("");
+    setPrepositionExamples(null);
     
     if (difficulty === "A") {
       // Para nivel A, comenzamos con una preposición aleatoria
