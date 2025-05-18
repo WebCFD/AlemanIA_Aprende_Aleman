@@ -75,6 +75,13 @@ function Navigation() {
 }
 
 function Router() {
+  const [location] = useLocation();
+  
+  // Efecto para asegurar que la página se cargue desde la parte superior en cada cambio de ruta
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
   return (
     <>
       <Header />
