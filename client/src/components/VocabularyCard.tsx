@@ -612,11 +612,9 @@ export default function VocabularyCard({
           )}
           {isReverseMode && (difficulty === "A" || difficulty === "B" || difficulty === "C") && (
             <div className="mt-2 flex justify-center">
-              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                difficulty === "C" ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
-              }`}>
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                 <Repeat className="h-3 w-3 mr-1" />
-                {difficulty === "C" ? 'Modo Avanzado (Inverso)' : 'Modo Inverso'}
+                Modo Inverso
               </span>
             </div>
           )}
