@@ -307,18 +307,35 @@ export default function VocabularyCard({
         setIsReverseMode(shouldBeReverse);
         
         if (shouldBeReverse) {
-          // Modo inverso: obtenemos una nueva palabra aleatoria del pool 30% A y 70% B
-          // Pero primero eliminamos la referencia de palabra anterior para modo inverso
-          setSelectedReverseWord(null);
-          // Luego obtenemos una nueva palabra y la guardamos como la palabra seleccionada inversa
-          fetchNewWord().then(() => {
-            if (currentWord) {
-              setSelectedReverseWord(currentWord);
-            }
-          });
+          // Modo inverso: hacer una solicitud directa para obtener una palabra independiente
+          // para evitar usar la misma palabra que en modo directo
+          setIsReverseMode(true);
           setTranslation("");
+          
+          // Obtener una palabra completamente nueva para modo inverso
+          const getNewReverseWord = async () => {
+            try {
+              // Hacer solicitud directa para evitar interferencias con el cache de React Query
+              const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
+              if (!response.ok) {
+                throw new Error('Error al obtener palabra para modo inverso');
+              }
+              const newWord = await response.json();
+              setSelectedReverseWord(newWord);
+            } catch (error) {
+              console.error("Error fetching reverse word:", error);
+              toast({
+                title: "Error",
+                description: "No se pudo obtener una nueva palabra para modo inverso",
+                variant: "destructive",
+              });
+            }
+          };
+          
+          getNewReverseWord();
         } else {
           // Modo directo: obtenemos una nueva palabra
+          setIsReverseMode(false);
           fetchNewWord();
           setTranslation("");
           setSelectedReverseWord(null);
