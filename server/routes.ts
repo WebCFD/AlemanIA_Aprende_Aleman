@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { verifyTranslationSchema, verifySentenceSchema, verifyVerbSchema, type Difficulty } from "@shared/schema";
-import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer } from "./anthropic";
+import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer, generatePrepositionExamples } from "./anthropic";
 import { handleSendFeedback } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {

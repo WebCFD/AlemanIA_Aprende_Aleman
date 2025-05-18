@@ -390,6 +390,107 @@ export async function verifyReverseTranslation(
  * @param correctAnswer La respuesta correcta conocida
  * @returns Objeto con el resultado de la verificación
  */
+/**
+ * Genera ejemplos de uso de preposiciones en alemán con explicaciones
+ * @param preposition La preposición en alemán
+ * @param difficulty El nivel de dificultad (A, B, o C)
+ * @returns Objeto con ejemplos y explicaciones para la preposición
+ */
+export async function generatePrepositionExamples(
+  preposition: string,
+  difficulty: string = "A"
+) {
+  try {
+    const prompt = `
+    Actúa como un profesor de alemán especializado en preposiciones.
+    
+    Necesito que generes ejemplos de uso de la preposición alemana "${preposition}" para un estudiante de nivel ${
+      difficulty === "A" ? "principiante" : difficulty === "B" ? "intermedio" : "avanzado"
+    }.
+    
+    Por favor, responde en formato JSON con la siguiente estructura:
+    {
+      "preposition": string, // La preposición en alemán
+      "examples": [
+        {
+          "germanSentence": string, // Una frase en alemán que usa la preposición (máx. 10 palabras)
+          "spanishTranslation": string // Traducción al español de la frase
+        },
+        // 1-2 ejemplos más
+      ],
+      "explanation": string, // Una explicación didáctica en español (2-3 líneas) sobre cómo y cuándo usar esta preposición, reglas gramaticales relevantes
+      "case": string, // Información sobre el caso gramatical que rige esta preposición (acusativo, dativo, etc.)
+    }
+    
+    Para nivel A (principiante): Usa oraciones muy simples con vocabulario básico.
+    Para nivel B (intermedio): Usa oraciones de complejidad media con algún vocabulario menos común.
+    Para nivel C (avanzado): Usa oraciones más complejas y ejemplos que muestren casos especiales o excepciones.
+    
+    Asegúrate de que tu respuesta sea estrictamente un objeto JSON válido, sin texto o explicaciones antes o después.
+    `;
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 1500,
+      temperature: 0.7, // Un poco más de temperatura para mayor variedad
+      system: "Eres un profesor de alemán especializado en gramática, con énfasis en preposiciones y su uso correcto.",
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    // Extraer y parsear la respuesta JSON
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      console.error("Formato de respuesta inesperado de Claude:", response.content);
+      // Respuesta de fallback
+      return {
+        preposition: preposition,
+        examples: [
+          {
+            germanSentence: `Ich gehe ${preposition} die Stadt.`,
+            spanishTranslation: `Voy a la ciudad.`
+          }
+        ],
+        explanation: "Esta preposición se usa para indicar dirección o movimiento hacia un lugar.",
+        case: "Acusativo",
+      };
+    }
+    
+    const responseText = response.content[0].text;
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    
+    if (!jsonMatch) {
+      console.error("No se pudo extraer una respuesta JSON válida:", responseText);
+      // Respuesta de fallback
+      return {
+        preposition: preposition,
+        examples: [
+          {
+            germanSentence: `Ich gehe ${preposition} die Stadt.`,
+            spanishTranslation: `Voy a la ciudad.`
+          }
+        ],
+        explanation: "Esta preposición se usa para indicar dirección o movimiento hacia un lugar.",
+        case: "Acusativo",
+      };
+    }
+    
+    return JSON.parse(jsonMatch[0]);
+  } catch (error) {
+    console.error("Error en generatePrepositionExamples:", error);
+    // Respuesta de fallback en caso de error
+    return {
+      preposition: preposition,
+      examples: [
+        {
+          germanSentence: `Ich gehe ${preposition} die Stadt.`,
+          spanishTranslation: `Voy a la ciudad.`
+        }
+      ],
+      explanation: "No se pudieron generar ejemplos debido a un error.",
+      case: "",
+    };
+  }
+}
+
 export async function verifySentenceAnswer(
   spanishSentence: string,
   germanSentenceWithGap: string,
