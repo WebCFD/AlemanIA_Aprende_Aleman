@@ -539,7 +539,7 @@ export default function VocabularyCard({
                 <span className="font-medium">Incorrecto</span>
               </div>
               <p className="text-neutral-400 ml-7">
-                Tu respuesta: <span className="font-semibold">{userAnswer}</span>
+                Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
               </p>
               <p className="text-neutral-400 ml-7">
                 Respuesta correcta:
