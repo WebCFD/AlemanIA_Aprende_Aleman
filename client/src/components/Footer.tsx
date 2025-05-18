@@ -18,15 +18,33 @@ export default function Footer() {
           
           {location === "/" && (
             <div className="flex gap-4">
-              <Link href="#vocabulario" className="text-gray-300 hover:text-white transition-colors">
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('vocabulario')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+              >
                 Vocabulario
-              </Link>
-              <Link href="#pronombres" className="text-gray-300 hover:text-white transition-colors">
+              </a>
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('pronouns')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+              >
                 Pronombres
-              </Link>
-              <Link href="#verbos" className="text-gray-300 hover:text-white transition-colors">
+              </a>
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('verbs')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+              >
                 Verbos
-              </Link>
+              </a>
             </div>
           )}
         </div>
