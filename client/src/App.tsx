@@ -76,6 +76,13 @@ function Navigation() {
 }
 
 function Router() {
+  const [location] = useLocation();
+  
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+  
   return (
     <>
       <Header />
