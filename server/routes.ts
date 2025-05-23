@@ -81,9 +81,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         exampleSentence = `Dieses Wort ist "${germanWord}".\nEsta palabra es "${word.spanish}".`;
       }
       
-      // Optimización para nivel A modo directo: solo usar Anthropic para errores
-      if (difficulty === "A") {
-        // Verificación directa con base de datos para nivel A
+      // Optimización para niveles A y B modo directo: solo usar Anthropic para errores
+      if (difficulty === "A" || difficulty === "B") {
+        // Verificación directa con base de datos para niveles A y B
         const isCorrect = translation.toLowerCase().trim() === word.spanish.toLowerCase().trim();
         
         if (isCorrect) {
@@ -109,7 +109,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
       } else {
-        // Para niveles B y C, mantener Anthropic siempre
+        // Para nivel C, mantener Anthropic siempre
         const verificationResult = await verifyTranslation(
           germanWord,
           translation,
@@ -144,8 +144,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         words.find(w => w.german.toLowerCase() === germanWord.toLowerCase())
       );
 
-      // Optimización para nivel A modo reverso: detectar errores comunes sin Claude
-      if (difficulty === "A" && word) {
+      // Optimización para niveles A y B modo reverso: detectar errores comunes sin Claude
+      if ((difficulty === "A" || difficulty === "B") && word) {
         const userInput = translation.trim();
         const userInputLower = userInput.toLowerCase();
         const fullCorrectTranslation = word.article ? `${word.article} ${word.german}` : word.german;
@@ -182,7 +182,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         return res.json(verificationResult);
       } else {
-        // Para niveles B y C, o si no se encuentra la palabra, mantener Anthropic siempre
+        // Para nivel C, o si no se encuentra la palabra, mantener Anthropic siempre
         const verificationResult = await verifyReverseTranslation(
           spanishWord,
           translation,
