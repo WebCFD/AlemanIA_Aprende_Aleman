@@ -280,16 +280,16 @@ export async function verifyReverseTranslation(
     }
     
     const prompt = `
-    Palabra española: "${spanishWord}"
-    Traducción correcta: "${fullCorrectTranslation}"
-    Respuesta del usuario: "${userTranslation}"
+    Español: "${spanishWord}"
+    Correcto: "${fullCorrectTranslation}"
+    Usuario: "${userTranslation}"
     
-    Explicación MUY BREVE por qué es incorrecto, UNA regla gramatical básica (si aplica)
+    Explicación: máximo 3 frases, 20 palabras total.
     
-    Responde en formato JSON:
+    JSON:
     {
       "isCorrect": false,
-      "explanation": string (MÁXIMO 15 palabras),
+      "explanation": string,
       "correctTranslation": string
     }
     `;
