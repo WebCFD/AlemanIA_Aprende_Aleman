@@ -165,7 +165,7 @@ export default function PronounsDeclinationsCard({
         </div>
       </CardHeader>
       
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6 md:p-8 space-y-6">
         {/* Frase en español */}
         <div className="mb-6">
           <h3 className="text-sm font-medium text-gray-500 mb-2">Frase en español:</h3>
