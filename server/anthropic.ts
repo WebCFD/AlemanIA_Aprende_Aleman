@@ -136,11 +136,7 @@ export async function verifyTranslation(
     }
     
     const prompt = `
-    Alemán: "${germanWord}"
-    Correcto: "${correctTranslation}"
-    Usuario: "${userTranslation}"
-    
-    Explicación: máximo 10 palabras por qué está mal.
+    TEST: Responde con exactamente "Los primeros 3 decimales de pi son: 3.141"
     
     JSON:
     {
