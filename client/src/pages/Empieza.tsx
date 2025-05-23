@@ -24,16 +24,30 @@ export default function Empieza() {
     return () => clearTimeout(timer);
   }, []);
   // Función para reproducir audio usando la Web Speech API
-  const handlePlayAudio = (text: string) => {
+  const handlePlayAudio = (singularText: string, pluralText?: string) => {
     if ('speechSynthesis' in window) {
       // Detener cualquier síntesis de voz en curso
       window.speechSynthesis.cancel();
       
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'de-DE'; // Establecer el idioma a alemán
-      utterance.rate = 0.9; // Velocidad ligeramente más lenta para mejor comprensión
+      // Crear utterance para singular
+      const singularUtterance = new SpeechSynthesisUtterance(singularText);
+      singularUtterance.lang = 'de-DE';
+      singularUtterance.rate = 0.8;
       
-      window.speechSynthesis.speak(utterance);
+      // Si hay plural, reproducir después del singular
+      if (pluralText) {
+        singularUtterance.onend = () => {
+          // Pequeña pausa antes del plural
+          setTimeout(() => {
+            const pluralUtterance = new SpeechSynthesisUtterance(pluralText);
+            pluralUtterance.lang = 'de-DE';
+            pluralUtterance.rate = 0.8;
+            window.speechSynthesis.speak(pluralUtterance);
+          }, 500);
+        };
+      }
+      
+      window.speechSynthesis.speak(singularUtterance);
     } else {
       console.log('Tu navegador no soporta la Web Speech API');
     }
@@ -500,7 +514,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Essen")}
+                          onClick={() => handlePlayAudio("das Essen", "die Essen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -516,7 +530,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Leben")}
+                          onClick={() => handlePlayAudio("das Leben", "die Leben")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -532,7 +546,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Erlebnis")}
+                          onClick={() => handlePlayAudio("das Erlebnis", "die Erlebnisse")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -548,7 +562,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Ergebnis")}
+                          onClick={() => handlePlayAudio("das Ergebnis", "die Ergebnisse")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -564,7 +578,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Dokument")}
+                          onClick={() => handlePlayAudio("das Dokument", "die Dokumente")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -580,7 +594,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Vögelchen")}
+                          onClick={() => handlePlayAudio("das Vögelchen", "die Vögelchen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -596,7 +610,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Büchlein")}
+                          onClick={() => handlePlayAudio("das Büchlein", "die Büchlein")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -612,7 +626,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Kind")}
+                          onClick={() => handlePlayAudio("das Kind", "die Kinder")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -628,7 +642,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Museum")}
+                          onClick={() => handlePlayAudio("das Museum", "die Museen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -644,7 +658,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Rad")}
+                          onClick={() => handlePlayAudio("das Rad", "die Räder")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -660,7 +674,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-purple-700 hover:text-purple-900"
-                          onClick={() => handlePlayAudio("Auto")}
+                          onClick={() => handlePlayAudio("das Auto", "die Autos")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -700,7 +714,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Fähigkeit")}
+                          onClick={() => handlePlayAudio("die Fähigkeit", "die Fähigkeiten")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -716,7 +730,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Polizistin")}
+                          onClick={() => handlePlayAudio("die Polizistin", "die Polizistinnen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -732,7 +746,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Forschung")}
+                          onClick={() => handlePlayAudio("die Forschung", "die Forschungen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -748,7 +762,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Sonne")}
+                          onClick={() => handlePlayAudio("die Sonne", "die Sonnen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -764,7 +778,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Portion")}
+                          onClick={() => handlePlayAudio("die Portion", "die Portionen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -780,7 +794,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Wissenschaft")}
+                          onClick={() => handlePlayAudio("die Wissenschaft", "die Wissenschaften")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -796,7 +810,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Konsequenz")}
+                          onClick={() => handlePlayAudio("die Konsequenz", "die Konsequenzen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -812,7 +826,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Spezialität")}
+                          onClick={() => handlePlayAudio("die Spezialität", "die Spezialitäten")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -828,7 +842,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Comtesse")}
+                          onClick={() => handlePlayAudio("die Comtesse", "die Comtessen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -844,7 +858,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Frau")}
+                          onClick={() => handlePlayAudio("die Frau", "die Frauen")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -860,7 +874,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Kartoffel")}
+                          onClick={() => handlePlayAudio("die Kartoffel", "die Kartoffeln")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
@@ -877,7 +891,7 @@ export default function Empieza() {
                           variant="ghost" 
                           size="sm" 
                           className="h-7 px-2 text-pink-700 hover:text-pink-900"
-                          onClick={() => handlePlayAudio("Kamera")}
+                          onClick={() => handlePlayAudio("die Kamera", "die Kameras")}
                         >
                           <Volume2 className="h-3 w-3" />
                         </Button>
