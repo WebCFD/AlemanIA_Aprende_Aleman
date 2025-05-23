@@ -595,7 +595,7 @@ export default function VocabularyCard({
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg">
+    <Card className="w-full max-w-[95vw] lg:max-w-4xl xl:max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
       {/* Progress Tracker */}
       <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -612,9 +612,9 @@ export default function VocabularyCard({
       </div>
       
       {/* Contenedor principal */}
-      <div className="p-6 md:p-8">
+      <div className="p-4 sm:p-6 md:p-8 space-y-6">
         {/* Word Card */}
-        <div className="mb-6 text-center">
+        <div className="text-center">
           {isLoadingWord ? (
             <div className="animate-pulse inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1 min-w-[100px] h-12"></div>
           ) : (
@@ -643,7 +643,7 @@ export default function VocabularyCard({
         </div>
         
         {/* Translation Input */}
-        <div className="mb-6">
+        <div className="min-w-0 flex-1">
           <div className="relative">
             <Input
               ref={inputRef}
@@ -669,7 +669,7 @@ export default function VocabularyCard({
         </div>
 
         {/* Play Button */}
-        <div className="mb-6 flex justify-center">
+        <div className="flex justify-center">
           <Button
             variant="outline"
             className="flex items-center text-[#4A6FA5] border-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white transition-all duration-300"
@@ -687,8 +687,8 @@ export default function VocabularyCard({
         </div>
         
         {/* Feedback Section */}
-        <div className={`mb-5 transition-all duration-300 ${
-          showFeedback ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0 overflow-hidden'
+        <div className={`min-w-0 flex-1 transition-all duration-300 ${
+          showFeedback ? 'opacity-100' : 'opacity-0 max-h-0 overflow-hidden'
         }`}>
           {showFeedback && isCorrect === true && (
             <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
