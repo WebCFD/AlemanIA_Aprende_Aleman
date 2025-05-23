@@ -62,7 +62,6 @@ export default function VocabularyCard({
     queryKey: ['/api/vocabulary/random', difficulty],
     retry: false,
     refetchOnWindowFocus: false,
-    staleTime: Infinity, // Mantener contenido estable
   } as any);
   
   // Reiniciar estados cuando cambia la dificultad
