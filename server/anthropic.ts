@@ -140,7 +140,7 @@ export async function verifyTranslation(
     Correcto: "${correctTranslation}"
     Usuario: "${userTranslation}"
     
-    Explicación: máximo 10 palabras por qué está mal.
+    Da una explicación didáctica de por qué está mal, máximo 25 palabras.
     
     JSON:
     {
@@ -284,7 +284,7 @@ export async function verifyReverseTranslation(
     Correcto: "${fullCorrectTranslation}"
     Usuario: "${userTranslation}"
     
-    Explica BREVEMENTE por qué, si existe una regla gramatical para palabras similares, menciónala. Máximo 3 frases, 20 palabras.
+    Explica didácticamente por qué está mal, si existe una regla gramatical para palabras similares, menciónala. Máximo 5 frases, 40 palabras.
     
     JSON:
     {
