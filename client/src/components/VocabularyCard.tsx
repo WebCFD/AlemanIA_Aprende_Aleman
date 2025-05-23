@@ -680,9 +680,11 @@ export default function VocabularyCard({
               <p className="text-muted-foreground ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>
-                    {selectedReverseWord.spanish} = {selectedReverseWord.article ? 
-                      <><span className="font-semibold">{selectedReverseWord.article}</span> {correctResponse || selectedReverseWord.german}</> : 
-                      <>{correctResponse || selectedReverseWord.german}</>
+                    {selectedReverseWord.spanish} = {correctResponse ? 
+                      <>{correctResponse}</> : 
+                      selectedReverseWord.article ? 
+                        <><span className="font-semibold">{selectedReverseWord.article}</span> {selectedReverseWord.german}</> : 
+                        <>{selectedReverseWord.german}</>
                     }
                   </>
                 ) : (
@@ -715,9 +717,11 @@ export default function VocabularyCard({
               <p className="text-muted-foreground ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>
-                    {selectedReverseWord.spanish} = {selectedReverseWord.article ? 
-                      <><span className="font-semibold">{selectedReverseWord.article}</span> {correctResponse || selectedReverseWord.german}</> : 
-                      <>{correctResponse || selectedReverseWord.german}</>
+                    {selectedReverseWord.spanish} = {correctResponse ? 
+                      <>{correctResponse}</> : 
+                      selectedReverseWord.article ? 
+                        <><span className="font-semibold">{selectedReverseWord.article}</span> {selectedReverseWord.german}</> : 
+                        <>{selectedReverseWord.german}</>
                     }
                   </>
                 ) : (
