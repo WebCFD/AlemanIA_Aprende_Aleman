@@ -81,29 +81,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
         exampleSentence = `Dieses Wort ist "${germanWord}".\nEsta palabra es "${word.spanish}".`;
       }
       
-      // For simple cases, do direct comparison
-      if (translation.toLowerCase() === word.spanish.toLowerCase()) {
-        return res.json({ 
-          isCorrect: true,
-          correctTranslation: word.spanish,
-          explanation: "¡Correcto! Tu traducción es exacta.",
-          exampleSentence
+      // Optimización para nivel A modo directo: solo usar Anthropic para errores
+      if (difficulty === "A") {
+        // Verificación directa con base de datos para nivel A
+        const isCorrect = translation.toLowerCase().trim() === word.spanish.toLowerCase().trim();
+        
+        if (isCorrect) {
+          // Respuesta correcta: sin Anthropic, respuesta instantánea
+          return res.json({ 
+            isCorrect: true,
+            correctTranslation: word.spanish,
+            explanation: "¡Correcto! Tu traducción es exacta.",
+            exampleSentence
+          });
+        } else {
+          // Respuesta incorrecta: usar Anthropic para explicación educativa
+          const verificationResult = await verifyTranslation(
+            germanWord,
+            translation,
+            word.spanish,
+            difficulty
+          );
+          
+          return res.json({
+            ...verificationResult,
+            exampleSentence: verificationResult.exampleSentence || exampleSentence
+          });
+        }
+      } else {
+        // Para niveles B y C, mantener Anthropic siempre
+        const verificationResult = await verifyTranslation(
+          germanWord,
+          translation,
+          word.spanish,
+          difficulty
+        );
+        
+        return res.json({
+          ...verificationResult,
+          exampleSentence: verificationResult.exampleSentence || exampleSentence
         });
       }
-      
-      // For more complex translations, use Claude
-      const verificationResult = await verifyTranslation(
-        germanWord,
-        translation,
-        word.spanish,
-        difficulty
-      );
-      
-      // Asegurar que siempre incluya el ejemplo de oración
-      return res.json({
-        ...verificationResult,
-        exampleSentence: verificationResult.exampleSentence || exampleSentence
-      });
       
     } catch (error) {
       console.error("Error verifying translation:", error);
