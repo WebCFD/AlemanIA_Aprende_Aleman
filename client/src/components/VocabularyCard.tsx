@@ -21,7 +21,7 @@ import {
   Video
 } from "lucide-react";
 import { Word, Difficulty, VerifyTranslationResponse, VerifyReverseTranslationResponse } from "@shared/schema";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 interface VocabularyCardProps {
   difficulty: Difficulty;
@@ -579,7 +579,7 @@ export default function VocabularyCard({
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg min-h-fit">
+    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
       {/* Progress Tracker */}
       <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
