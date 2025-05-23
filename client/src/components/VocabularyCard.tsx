@@ -604,11 +604,11 @@ export default function VocabularyCard({
           )}
           {isReverseMode ? (
             <>
-              <div className="text-neutral-300 text-sm mb-1">Traduce esta palabra al alemán</div>
+              <div className="text-muted-foreground text-sm mb-1">Traduce esta palabra al alemán</div>
               <div className="text-amber-600 text-xs">Importante: incluye el artículo (der, die, das) si es un sustantivo</div>
             </>
           ) : (
-            <div className="text-neutral-300 text-sm">Traduce esta palabra al español</div>
+            <div className="text-muted-foreground text-sm">Traduce esta palabra al español</div>
           )}
           {isReverseMode && (difficulty === "A" || difficulty === "B" || difficulty === "C") && (
             <div className="mt-2 flex justify-center">

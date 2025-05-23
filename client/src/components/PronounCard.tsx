@@ -253,7 +253,7 @@ export default function PronounCard({
           <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">
             {currentSentence?.spanishText || "Cargando..."}
           </span>
-          <div className="text-neutral-300 text-sm mt-2">
+          <div className="text-muted-foreground text-sm mt-2">
             Completa la frase en alemán
           </div>
         </div>

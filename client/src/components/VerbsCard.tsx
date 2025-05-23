@@ -264,7 +264,7 @@ export default function VerbsCard({
               : `${currentVerb?.spanishPronoun} ${currentVerb?.spanishConjugation}`
             }
           </span>
-          <div className="text-neutral-300 text-sm mt-2">
+          <div className="text-muted-foreground text-sm mt-2">
             <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
               {getVerbFormLabel()}
             </span>

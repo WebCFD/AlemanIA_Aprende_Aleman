@@ -412,11 +412,11 @@ export default function PrepositionsCard({
             <>
               {isReverseMode ? (
                 <>
-                  <div className="text-neutral-300 text-sm mb-1">Traduce esta preposición al alemán</div>
+                  <div className="text-muted-foreground text-sm mb-1">Traduce esta preposición al alemán</div>
                 </>
               ) : (
                 <>
-                  <div className="text-neutral-300 text-sm">Traduce esta preposición al español</div>
+                  <div className="text-muted-foreground text-sm">Traduce esta preposición al español</div>
                   {currentPreposition && (
                     <button 
                       onClick={() => handlePlayAudio(currentPreposition.german)}
