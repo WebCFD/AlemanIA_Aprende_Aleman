@@ -455,6 +455,79 @@ export async function generatePrepositionExamples(
   }
 }
 
+/**
+ * Explica las reglas de género alemán cuando hay error de artículo
+ * @param germanWord La palabra alemana
+ * @param correctArticle El artículo correcto (der, die, das)
+ * @param userInput La respuesta del usuario con artículo incorrecto
+ * @returns Objeto con explicación de reglas de género
+ */
+export async function explainGermanGender(
+  germanWord: string,
+  correctArticle: string,
+  userInput: string
+): Promise<{
+  isCorrect: boolean;
+  explanation: string;
+  correctTranslation: string;
+  genderRule?: string;
+}> {
+  try {
+    const fullCorrectTranslation = `${correctArticle} ${germanWord}`;
+    
+    const prompt = `
+    Palabra alemana: "${germanWord}"
+    Artículo correcto: "${correctArticle}"
+    Respuesta del usuario: "${userInput}"
+    
+    Explica BREVEMENTE por qué "${germanWord}" usa "${correctArticle}". Si existe una regla gramatical para palabras similares, menciónala.
+    
+    Responde en formato JSON:
+    {
+      "isCorrect": false,
+      "explanation": string (MÁXIMO 20 palabras),
+      "correctTranslation": string,
+      "genderRule": string (regla si existe, o null si no hay regla clara)
+    }
+    `;
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-haiku-20240307',
+      max_tokens: 200,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    if (!response.content[0] || response.content[0].type !== 'text') {
+      throw new Error('Respuesta inválida de Claude');
+    }
+
+    const content = response.content[0].text;
+    const jsonMatch = content.match(/\{[^}]*\}/);
+    
+    if (!jsonMatch) {
+      throw new Error('No se encontró JSON válido en la respuesta');
+    }
+
+    const result = JSON.parse(jsonMatch[0]);
+    
+    return {
+      isCorrect: false,
+      explanation: result.explanation,
+      correctTranslation: fullCorrectTranslation,
+      genderRule: result.genderRule
+    };
+  } catch (error) {
+    console.error("Error al explicar género alemán con Claude:", error);
+    
+    // Fallback con explicación básica
+    return {
+      isCorrect: false,
+      explanation: `Incorrecto. "${germanWord}" usa "${correctArticle}".`,
+      correctTranslation: `${correctArticle} ${germanWord}`
+    };
+  }
+}
+
 export async function verifySentenceAnswer(
   spanishSentence: string,
   germanSentenceWithGap: string,

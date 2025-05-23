@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { verifyTranslationSchema, verifySentenceSchema, verifyVerbSchema, type Difficulty } from "@shared/schema";
-import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer, generatePrepositionExamples } from "./anthropic";
+import { verifyTranslation, verifyReverseTranslation, verifySentenceAnswer, generatePrepositionExamples, explainGermanGender } from "./anthropic";
 import { handleSendFeedback } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -173,16 +173,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
         
-        // 3. Error de artículo (palabra correcta pero artículo incorrecto)
+        // 3. Error de artículo (palabra correcta pero artículo incorrecto) → Claude para reglas de género
         if (word.article && userInputLower.includes(word.german.toLowerCase())) {
           const userWords = userInputLower.split(' ');
           const correctWord = word.german.toLowerCase();
           if (userWords.includes(correctWord)) {
-            return res.json({
-              isCorrect: false,
-              correctTranslation: fullCorrectTranslation,
-              explanation: `Artículo incorrecto. "${word.german}" usa "${word.article}".`
-            });
+            const genderExplanation = await explainGermanGender(
+              word.german,
+              word.article,
+              userInput
+            );
+            return res.json(genderExplanation);
           }
         }
         
