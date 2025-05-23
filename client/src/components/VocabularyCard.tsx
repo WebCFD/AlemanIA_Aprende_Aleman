@@ -50,6 +50,7 @@ export default function VocabularyCard({
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const [selectedReverseWord, setSelectedReverseWord] = useState<Word | null>(null);
   const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
+  const [explanation, setExplanation] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
@@ -136,6 +137,7 @@ export default function VocabularyCard({
       setSubmittedTranslation(translation);
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
+      setExplanation(data.explanation || ""); // Guardar la explicación educativa de Claude
       
       // Mostrar frase de ejemplo en modo directo si existe
       if (data.exampleSentence) {
@@ -197,6 +199,7 @@ export default function VocabularyCard({
       setSubmittedTranslation(translation);
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
+      setExplanation(data.explanation || ""); // Guardar la explicación educativa de Claude para modo reverso
       
       // Para modo inverso, usar el ejemplo del selectedReverseWord para mantener consistencia
       if (selectedReverseWord?.example) {
@@ -705,6 +708,13 @@ export default function VocabularyCard({
                   </>
                 )}
               </p>
+              
+              {/* Mostrar explicación educativa de Claude para respuestas correctas */}
+              {explanation && (
+                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <p className="text-green-800 text-sm leading-relaxed">{explanation}</p>
+                </div>
+              )}
             </div>
           )}
           
@@ -742,6 +752,13 @@ export default function VocabularyCard({
                   </>
                 )}
               </p>
+              
+              {/* Mostrar explicación educativa de Claude */}
+              {explanation && (
+                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 text-sm leading-relaxed">{explanation}</p>
+                </div>
+              )}
             </div>
           )}
           
