@@ -144,36 +144,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
         words.find(w => w.german.toLowerCase() === germanWord.toLowerCase())
       );
 
-      // Optimización para nivel A modo reverso: solo usar Anthropic para errores
+      // Optimización para nivel A modo reverso: detectar errores comunes sin Claude
       if (difficulty === "A" && word) {
-        const userInput = translation.toLowerCase().trim();
-        const correctWithArticle = word.article ? `${word.article} ${word.german}`.toLowerCase() : word.german.toLowerCase();
+        const userInput = translation.trim();
+        const userInputLower = userInput.toLowerCase();
+        const fullCorrectTranslation = word.article ? `${word.article} ${word.german}` : word.german;
+        const correctLower = fullCorrectTranslation.toLowerCase();
         
-        // Para sustantivos (con artículo), el artículo es OBLIGATORIO
-        // Para palabras sin artículo, se acepta solo la palabra
-        const isCorrect = word.article 
-          ? userInput === correctWithArticle  // Sustantivo: DEBE incluir artículo correcto
-          : userInput === word.german.toLowerCase();  // No sustantivo: solo la palabra
-        
-        if (isCorrect) {
-          // Respuesta correcta: sin Anthropic, respuesta instantánea
-          const fullCorrectTranslation = word.article ? `${word.article} ${word.german}` : word.german;
+        // 1. Verificar respuesta exacta (correcta)
+        if (userInput === fullCorrectTranslation) {
           return res.json({ 
             isCorrect: true,
             correctTranslation: fullCorrectTranslation,
             explanation: "¡Correcto! Tu traducción es exacta.",
             exampleSentence: word.example || `Beispiel: Das ist ${fullCorrectTranslation}.`
           });
-        } else {
-          // Respuesta incorrecta: usar Anthropic para explicación educativa
-          const verificationResult = await verifyReverseTranslation(
-            spanishWord,
-            translation,
-            germanWord
-          );
-          
-          return res.json(verificationResult);
         }
+        
+        // 2. Error de capitalización (coincide en todo excepto mayúsculas/minúsculas)
+        if (userInputLower === correctLower) {
+          const isNoun = !!word.article;
+          return res.json({
+            isCorrect: false,
+            correctTranslation: fullCorrectTranslation,
+            explanation: isNoun 
+              ? "Los sustantivos alemanes siempre van en mayúscula inicial."
+              : "Esta palabra no es sustantivo, debe ir en minúscula."
+          });
+        }
+        
+        // 3. Error de artículo (palabra correcta pero artículo incorrecto)
+        if (word.article && userInputLower.includes(word.german.toLowerCase())) {
+          const userWords = userInputLower.split(' ');
+          const correctWord = word.german.toLowerCase();
+          if (userWords.includes(correctWord)) {
+            return res.json({
+              isCorrect: false,
+              correctTranslation: fullCorrectTranslation,
+              explanation: `Artículo incorrecto. "${word.german}" usa "${word.article}".`
+            });
+          }
+        }
+        
+        // 4. Solo errores complejos van a Claude
+        const verificationResult = await verifyReverseTranslation(
+          spanishWord,
+          translation,
+          germanWord
+        );
+        
+        return res.json(verificationResult);
       } else {
         // Para niveles B y C, o si no se encuentra la palabra, mantener Anthropic siempre
         const verificationResult = await verifyReverseTranslation(
