@@ -47,6 +47,7 @@ export default function VocabularyCard({
   const [alternateCounter, setAlternateCounter] = useState(0); // Para llevar el control de alternancia en nivel B
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
+  const [directModeCount, setDirectModeCount] = useState(0); // Contador para nivel A: cada 3 palabras correctas
   const [exampleSentence, setExampleSentence] = useState<string | undefined>(undefined);
   const [selectedReverseWord, setSelectedReverseWord] = useState<Word | null>(null);
   const [correctResponse, setCorrectResponse] = useState<string | undefined>(undefined);
@@ -74,8 +75,16 @@ export default function VocabularyCard({
     setCorrectResponse(undefined);
     setTranslation("");
     
+    // Reiniciar contadores específicos por nivel
+    if (difficulty === "A") {
+      setDirectModeCount(0);
+      setIsReverseMode(false);
+      setSelectedReverseWord(null);
+      setLastCorrectWords([]);
+      fetchNewWord();
+    }
     // Si es nivel B, preparamos para el modo alternante
-    if (difficulty === "B") {
+    else if (difficulty === "B") {
       setIsBLevelAlternating(true);
       setAlternateCounter(0);
       setIsReverseMode(false);
@@ -147,31 +156,30 @@ export default function VocabularyCard({
       }
       
       if (data.isCorrect) {
-        // Solo para nivel A, rastreamos palabras correctas
+        // Solo para nivel A, implementamos el sistema de revisión cada 3 palabras
         if (difficulty === "A" && !isReverseMode) {
-          // Añadir a últimas palabras correctas
+          // Añadir palabra actual a la lista de palabras correctas
           setLastCorrectWords(prev => {
             const newList = [...prev, currentWord!];
-            // Mantener solo las últimas 5
-            if (newList.length > 5) newList.shift();
+            // Mantener solo las últimas 3 para revisión
+            if (newList.length > 3) newList.shift();
             return newList;
           });
           
-          // Aumentar contador de correctas consecutivas
-          setConsecutiveCorrect(prev => {
+          // Incrementar contador de palabras directas
+          setDirectModeCount(prev => {
             const newCount = prev + 1;
-            // Si llegamos a 5, marcamos que en la próxima palabra debemos entrar en modo inverso
-            // pero no lo activamos automáticamente
+            // Si llegamos a 3 palabras correctas, activar modo reverso automáticamente
+            if (newCount === 3) {
+              return 0; // Reiniciar contador
+            }
             return newCount;
           });
         }
         
         onCorrectAnswer();
       } else {
-        // Si es incorrecto, reseteamos el contador para el nivel A
-        if (difficulty === "A" && !isReverseMode) {
-          setConsecutiveCorrect(0);
-        }
+        // Si es incorrecto en nivel A, NO reseteamos el contador (solo cuenta las correctas)
         onIncorrectAnswer();
       }
     },
@@ -430,41 +438,42 @@ export default function VocabularyCard({
         }
       }
     }
-    // 4. Manejar niveles A y C con lógica original
-    else if (isReverseMode) {
-      // Después de completar un ejercicio inverso, volvemos al modo normal
-      setIsReverseMode(false);
-      // Cargar nueva palabra y luego limpiar input
-      fetchNewWord();
-      setTranslation("");
-      setSelectedReverseWord(null);
-    } else if (consecutiveCorrect >= 4 && difficulty === "A") {
-      // Si llegamos a 4 correctas y estamos en nivel A, pasamos a modo inverso
-      setIsReverseMode(true);
-      // Resetear el contador para el próximo ciclo
-      setConsecutiveCorrect(0);
-      
-      // Seleccionar una palabra aleatoria de las últimas 5 correctas
-      if (lastCorrectWords.length > 0) {
+    // 4. Manejar lógica específica para Nivel A (cada 3 palabras correctas → 1 reversa)
+    else if (difficulty === "A") {
+      if (isReverseMode) {
+        // Después de completar un ejercicio inverso, volvemos al modo directo
+        setIsReverseMode(false);
+        fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
+      } else if (directModeCount === 0 && lastCorrectWords.length >= 3) {
+        // Si acabamos de completar 3 palabras correctas, activar modo reverso automáticamente
+        setIsReverseMode(true);
+        
+        // Seleccionar una palabra aleatoria de las últimas 3 correctas
         const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
-        // Usar directamente la palabra de la lista de correctas
         const selectedWord = lastCorrectWords[randomIndex];
         
-        // Limpiar y establecer la nueva palabra
         setTranslation("");
         setSelectedReverseWord(selectedWord);
       } else {
-        // Si por alguna razón no hay palabras en el historial, buscar una nueva
-        setIsReverseMode(false); // Volver al modo normal si no hay palabras
+        // Caso normal: buscar nueva palabra en modo directo
         fetchNewWord();
         setTranslation("");
         setSelectedReverseWord(null);
       }
     } else {
-      // Caso normal para nivel A y C: buscar nueva palabra
-      fetchNewWord();
-      setTranslation("");
-      setSelectedReverseWord(null);
+      // Para otros niveles o casos generales
+      if (isReverseMode) {
+        setIsReverseMode(false);
+        fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
+      } else {
+        fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
+      }
     }
     
     // 5. Enfocar el input después de un pequeño retraso para permitir que React actualice la UI
