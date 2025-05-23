@@ -713,7 +713,7 @@ export default function VocabularyCard({
                   <>
                     {isNoun(currentWord?.german) && currentWord?.article ? (
                       <>
-                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
+                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article, currentWord.german)}"</span> {currentWord?.spanish}
                       </>
                     ) : (
                       <>{currentWord?.german} = {currentWord?.spanish}</>
@@ -757,7 +757,7 @@ export default function VocabularyCard({
                   <>
                     {isNoun(currentWord?.german) && currentWord?.article ? (
                       <>
-                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article)}"</span> {currentWord?.spanish}
+                        <span className="font-semibold">{currentWord.article}</span> {currentWord?.german} = <span className="italic">"{translateArticle(currentWord.article, currentWord.german)}"</span> {currentWord?.spanish}
                       </>
                     ) : (
                       <>{currentWord?.german} = {currentWord?.spanish}</>
