@@ -486,6 +486,7 @@ export default function Empieza() {
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -494,60 +495,160 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Essen</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Essen</td>
                       <td className="py-3 px-4 text-sm text-gray-700">la comida</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Essen")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Leben</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leben</td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vida</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Leben")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Erlebnis</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebnis<u>se</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vivencia</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Erlebnis")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Ergebnis</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebnis<u>se</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el resultado</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Ergebnis")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ment → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Dokument</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokument<u>e</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el documento</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Dokument")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-chen</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Vögelchen</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögelchen</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el pajarillo</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Vögelchen")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-lein</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Büchlein</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büchlein</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el librito</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Büchlein")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Kind</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kind<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el niño</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Kind")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-um → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Museum</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Muse<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el museo</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Museum")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut + <code>-er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Rad</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Räd<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la rueda</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                          onClick={() => handlePlayAudio("Rad")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
