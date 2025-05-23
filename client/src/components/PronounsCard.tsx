@@ -54,7 +54,7 @@ export default function PronounsCard({
   // Consulta para obtener una frase aleatoria según la dificultad
   const { data: currentSentence, refetch } = useQuery<SentenceData>({
     queryKey: ['/api/sentences/random', difficulty],
-    staleTime: Infinity, // No recargar automáticamente
+    staleTime: Infinity // No recargar automáticamente
   });
 
   // Mutación para verificar respuesta
