@@ -191,6 +191,7 @@ export default function VocabularyCard({
         spanishWord, 
         translation,
         germanWord,
+        difficulty,
       });
       const result = await response.json();
       return result as VerifyReverseTranslationResponse;

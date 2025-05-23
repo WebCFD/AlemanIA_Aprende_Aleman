@@ -132,31 +132,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Verify reverse translation (español -> alemán)
   app.post("/api/vocabulary/verify-reverse", async (req, res) => {
     try {
-      const { spanishWord, translation, germanWord } = req.body;
+      const { spanishWord, translation, germanWord, difficulty } = req.body;
       
       // Validar datos de entrada
       if (!spanishWord || !translation || !germanWord) {
         return res.status(400).json({ message: "Datos incompletos. Se requiere spanishWord, translation y germanWord." });
       }
-      
-      // Para casos simples, hacer comparación directa
-      if (translation.toLowerCase().trim() === germanWord.toLowerCase().trim()) {
-        return res.json({ 
-          isCorrect: true,
-          correctTranslation: germanWord,
-          explanation: "¡Correcto! Tu traducción es exacta.",
-          exampleSentence: `Beispiel: Ich benutze das Wort "${germanWord}" in einem Satz.`
-        });
-      }
-      
-      // Para traducciones más complejas, usar Claude
-      const verificationResult = await verifyReverseTranslation(
-        spanishWord,
-        translation,
-        germanWord
+
+      // Buscar la palabra en la base de datos para obtener el artículo correcto
+      const word = await storage.getWordsByDifficulty(difficulty || "A").then(words => 
+        words.find(w => w.german.toLowerCase() === germanWord.toLowerCase())
       );
-      
-      return res.json(verificationResult);
+
+      // Optimización para nivel A modo reverso: solo usar Anthropic para errores
+      if (difficulty === "A" && word) {
+        const userInput = translation.toLowerCase().trim();
+        const correctWithArticle = word.article ? `${word.article} ${word.german}`.toLowerCase() : word.german.toLowerCase();
+        const correctWithoutArticle = word.german.toLowerCase();
+        
+        // Verificar si la respuesta es correcta (con o sin artículo)
+        const isCorrect = userInput === correctWithArticle || userInput === correctWithoutArticle;
+        
+        if (isCorrect) {
+          // Respuesta correcta: sin Anthropic, respuesta instantánea
+          const fullCorrectTranslation = word.article ? `${word.article} ${word.german}` : word.german;
+          return res.json({ 
+            isCorrect: true,
+            correctTranslation: fullCorrectTranslation,
+            explanation: "¡Correcto! Tu traducción es exacta.",
+            exampleSentence: word.example || `Beispiel: Das ist ${fullCorrectTranslation}.`
+          });
+        } else {
+          // Respuesta incorrecta: usar Anthropic para explicación educativa
+          const verificationResult = await verifyReverseTranslation(
+            spanishWord,
+            translation,
+            germanWord
+          );
+          
+          return res.json(verificationResult);
+        }
+      } else {
+        // Para niveles B y C, o si no se encuentra la palabra, mantener Anthropic siempre
+        const verificationResult = await verifyReverseTranslation(
+          spanishWord,
+          translation,
+          germanWord
+        );
+        
+        return res.json(verificationResult);
+      }
       
     } catch (error) {
       console.error("Error al verificar traducción inversa:", error);
