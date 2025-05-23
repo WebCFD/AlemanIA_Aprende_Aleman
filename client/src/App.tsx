@@ -80,7 +80,7 @@ function Router() {
     <>
       <Header />
       <Navigation />
-      <main className="min-h-[calc(100vh-220px)]">
+      <main className="min-h-screen">
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/empieza" component={Empieza} />
