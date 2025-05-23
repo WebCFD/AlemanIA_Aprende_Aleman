@@ -152,16 +152,14 @@ export async function verifyTranslation(
     
     2. Si la respuesta es correcta, felicita al usuario brevemente.
     
-    3. Si la respuesta es incorrecta, proporciona una explicación educativa que incluya:
-       - Qué específicamente está mal en la respuesta del usuario
+    3. Si la respuesta es incorrecta, proporciona una explicación breve que incluya:
        - La traducción correcta
-       - Una regla gramatical o lingüística relevante en alemán (si aplica)
-       - Un consejo para recordar mejor la palabra o concepto
+       - Una regla gramatical básica (si aplica)
     
     Responde en formato JSON con estas propiedades:
     {
       "isCorrect": boolean,
-      "explanation": string (explicación en español, educativa y cordial, máximo 3-4 oraciones)
+      "explanation": string (explicación en español, máximo 2 oraciones)
     }
     `;
 
@@ -313,16 +311,14 @@ export async function verifyReverseTranslation(
        - Genera una frase de ejemplo en alemán utilizando la palabra
        - Esta frase debe ser simple y adecuada para principiantes
        
-    3. Si la respuesta es incorrecta, proporciona una explicación educativa que incluya:
-       - Qué específicamente está mal en la respuesta del usuario
-       - La traducción correcta, incluyendo el artículo si es un sustantivo
-       - Una regla gramatical alemana relevante (por ejemplo: reglas de artículos, capitalización de sustantivos, etc.)
-       - Un truco mnemotécnico o consejo para recordar mejor la palabra
+    3. Si la respuesta es incorrecta, proporciona una explicación breve que incluya:
+       - La traducción correcta con artículo si es sustantivo
+       - Una regla gramatical básica (artículos, capitalización, etc.)
     
     Responde en formato JSON con estas propiedades:
     {
       "isCorrect": boolean,
-      "explanation": string (explicación en español, educativa y cordial, máximo 4-5 oraciones),
+      "explanation": string (explicación en español, máximo 2 oraciones),
       "correctTranslation": string (la palabra correcta en alemán con artículo si corresponde),
       "exampleSentence": string (SOLO si es correcta, una frase de ejemplo en alemán)
     }
