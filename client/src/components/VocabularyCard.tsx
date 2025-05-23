@@ -62,8 +62,7 @@ export default function VocabularyCard({
     queryKey: ['/api/vocabulary/random', difficulty],
     retry: false,
     refetchOnWindowFocus: false,
-    staleTime: 1000 * 60 * 30, // 30 minutes - mantener datos estables
-    gcTime: 1000 * 60 * 60, // 1 hour - mantener en caché
+    staleTime: Infinity, // No recargar automáticamente - mantiene contenido estable
   } as any);
   
   // Reiniciar estados cuando cambia la dificultad
