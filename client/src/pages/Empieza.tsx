@@ -462,71 +462,224 @@ export default function Empieza() {
           <div id="plural" className="mb-12 pt-2">
             <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
               <TextQuote className="w-5 h-5 mr-2" /> 
-              4. Formación del plural
+              4. Formación del plural según el género
             </h3>
             
-            <p className="mb-4 text-gray-700">
-              La formación del plural en alemán puede parecer compleja al principio porque hay varias maneras de formar el plural, a diferencia del español donde generalmente solo añadimos -s o -es.
+            <p className="mb-6 text-gray-700">
+              En alemán, la formación del plural depende principalmente del <strong>género del sustantivo</strong>. 
+              Cada género (masculino, femenino y neutro) tiene patrones específicos que te ayudarán a 
+              predecir cómo formar el plural correctamente.
             </p>
-            
-            <h4 className="text-lg font-medium text-gray-800 mt-6 mb-3">Formas comunes de crear el plural</h4>
-            
-            <div className="overflow-x-auto mb-6">
-              <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Método</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
-                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Añadir -e</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">der Tisch</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Tische</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">la mesa → las mesas</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Añadir -er</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">das Kind</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Kinder</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">el niño → los niños</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Añadir -n/-en</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Frau</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Frauen</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">la mujer → las mujeres</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Añadir -s</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">das Auto</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Autos</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">el coche → los coches</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Sin cambio</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">der Lehrer</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Lehrer</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">el profesor → los profesores</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 text-sm text-gray-700">Cambio de vocal (Umlaut)</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Mutter</td>
-                    <td className="py-3 px-4 text-sm font-medium text-[#4A6FA5]">die Mütter</td>
-                    <td className="py-3 px-4 text-sm text-gray-700">la madre → las madres</td>
-                  </tr>
-                </tbody>
-              </table>
+
+            {/* Sustantivos Neutros */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                Sustantivos Neutros (das)
+              </h4>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-purple-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Terminación</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Essen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Essen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la comida</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Erlebnis</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebnisse</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la vivencia</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ment → -e</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Dokument</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokumente</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el documento</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-chen</code> (diminutivo)</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Vögelchen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögelchen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el pajarillo</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-lein</code> (diminutivo)</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Büchlein</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büchlein</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el librito</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -er</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kinder</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el niño</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Handy</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Handys</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el móvil</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
-              <p className="text-blue-800 font-medium mb-2">Importante:</p>
-              <p className="text-blue-700">
-                En alemán, todos los sustantivos en plural llevan el artículo <strong>die</strong>, independientemente del género que tengan en singular.
-              </p>
+
+            {/* Sustantivos Femeninos */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-pink-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-pink-500 rounded-full mr-2"></span>
+                Sustantivos Femeninos (die)
+              </h4>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-pink-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Terminación</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-keit → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeit</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeiten</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la capacidad</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-in → -en</code> (profesiones femeninas)</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistin</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistinnen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la mujer policía</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ung → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschung</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschungen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la investigación</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-e → -n</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonnen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el sol</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ion → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portion</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portionen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la porción</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-schaft → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaft</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaften</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la ciencia</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Sustantivos Masculinos */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                Sustantivos Masculinos (der)
+              </h4>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-blue-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Terminación</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Jäger</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäger</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el cazador</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ling → -e</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Zwilling</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Zwillinge</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el gemelo</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ist → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Polizist</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizisten</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el policía</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700"><code>-or → -en</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Motor</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Motoren</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el motor</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -e</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Brief</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Briefe</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">la carta</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männer</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el hombre</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Consejos importantes */}
+            <div className="space-y-4">
+              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="text-blue-800 font-medium mb-2">Regla fundamental:</p>
+                <p className="text-blue-700">
+                  En alemán, <strong>todos los sustantivos en plural llevan el artículo "die"</strong>, 
+                  independientemente del género que tengan en singular.
+                </p>
+              </div>
+
+              <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                <p className="text-yellow-800 font-medium mb-2">Diminutivos (-chen, -lein):</p>
+                <p className="text-yellow-700">
+                  Cuando añades <code>-chen</code> o <code>-lein</code> a cualquier palabra, 
+                  automáticamente se convierte en <strong>neutra</strong> y a menudo añade Umlaut a la primera vocal.
+                  Ejemplo: der Vogel → das Vögelchen
+                </p>
+              </div>
+
+              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                <p className="text-green-800 font-medium mb-2">Consejo práctico:</p>
+                <p className="text-green-700">
+                  Las palabras extranjeras (especialmente del inglés) que terminan en vocales sueltas 
+                  (-i, -o, -u, -y) generalmente forman el plural con <code>-s</code>.
+                </p>
+              </div>
             </div>
           </div>
           
