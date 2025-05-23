@@ -197,7 +197,13 @@ export default function VocabularyCard({
       setSubmittedTranslation(translation);
       setIsCorrect(data.isCorrect);
       setShowFeedback(true);
-      setExampleSentence(data.exampleSentence);
+      
+      // Para modo inverso, usar el ejemplo del selectedReverseWord para mantener consistencia
+      if (selectedReverseWord?.example) {
+        setExampleSentence(selectedReverseWord.example);
+      } else if (data.exampleSentence) {
+        setExampleSentence(data.exampleSentence);
+      }
       
       // Guardamos la traducción correcta incluyendo el artículo
       setCorrectResponse(data.correctTranslation);
@@ -755,6 +761,10 @@ export default function VocabularyCard({
                 </Button>
               </div>
               <p className="text-blue-600 italic">{exampleSentence}</p>
+              {/* Mostrar traducción del ejemplo tanto en modo directo como inverso */}
+              {isReverseMode && selectedReverseWord?.exampleTranslation && (
+                <p className="text-blue-400 text-sm mt-1">{selectedReverseWord.exampleTranslation}</p>
+              )}
               {!isReverseMode && currentWord?.exampleTranslation && (
                 <p className="text-blue-400 text-sm mt-1">{currentWord.exampleTranslation}</p>
               )}
