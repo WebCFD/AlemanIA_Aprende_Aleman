@@ -551,27 +551,9 @@ export default function Empieza() {
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Handy</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Handys</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el móvil</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Auto</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">die Autos</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el coche</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Taxi</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Taxis</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el taxi</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">das Kanu</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kanus</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">la canoa</td>
                     </tr>
                   </tbody>
                 </table>
@@ -662,18 +644,7 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffeln</td>
                       <td className="py-3 px-4 text-sm text-gray-700">la patata</td>
                     </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-el → -n</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Zwiebel</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Zwiebeln</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">la cebolla</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-el → -n</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Schüssel</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Schüsseln</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">la fuente</td>
-                    </tr>
+
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-a → -s</code> / <code>-a → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera / die Firma</td>
@@ -709,24 +680,7 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäger</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el cazador</td>
                     </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Lehrer</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Lehrer</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el profesor</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Toaster</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Toaster</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">la tostadora</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ling → -e</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Zwilling</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Zwillinge</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el gemelo</td>
-                    </tr>
+
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ling → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Schmetterling</td>
@@ -739,24 +693,7 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizisten</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el policía</td>
                     </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-ist → -en</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Extremist</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Extremisten</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el extremista</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-or → -en</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Motor</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Motoren</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el motor</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-sm text-gray-700"><code>-or → -en</code></td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Traktor</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Traktoren</td>
-                      <td className="py-3 px-4 text-sm text-gray-700">el tractor</td>
-                    </tr>
+
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Brief</td>
@@ -768,6 +705,18 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Mann</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männer</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el hombre</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Wald</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Wälder</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el bosque</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Rand</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Ränder</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">el borde</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ismus → -en</code></td>
@@ -811,6 +760,20 @@ export default function Empieza() {
                   Las palabras extranjeras (especialmente del inglés) que terminan en vocales sueltas 
                   (-i, -o, -u, -y) generalmente forman el plural con <code>-s</code>.
                 </p>
+              </div>
+
+              <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
+                <p className="text-orange-800 font-medium mb-2">Regla del Umlaut:</p>
+                <p className="text-orange-700 mb-3">
+                  A veces, como en las palabras neutras de la misma naturaleza, la primera sílaba también 
+                  coge "Umlaut" en el plural. Esto es especialmente común en sustantivos masculinos de una sílaba.
+                </p>
+                <div className="text-sm text-orange-600">
+                  <p><strong>Ejemplos típicos:</strong></p>
+                  <p>• <code>der Mann → die Männer</code> (el hombre → los hombres)</p>
+                  <p>• <code>der Wald → die Wälder</code> (el bosque → los bosques)</p>
+                  <p>• <code>das Rad → die Räder</code> (la rueda → las ruedas)</p>
+                </div>
               </div>
             </div>
           </div>
