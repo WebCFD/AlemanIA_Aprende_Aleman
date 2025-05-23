@@ -492,25 +492,25 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Essen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ess<u>en</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Essen</td>
                       <td className="py-3 px-4 text-sm text-gray-700">la comida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Leben</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leb<u>en</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leben</td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Erlebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebni<u>sse</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebnis<u>se</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vivencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Ergebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebni<u>sse</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebnis<u>se</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el resultado</td>
                     </tr>
                     <tr>
@@ -522,13 +522,13 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-chen</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Vögelchen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögel<u>chen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögelchen</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el pajarillo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-lein</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Büchlein</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büch<u>lein</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büchlein</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el librito</td>
                     </tr>
                     <tr>
@@ -581,19 +581,19 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-keit → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeit</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkei<u>ten</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeit<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la capacidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-in → -en</code> (profesiones femeninas)</td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistin</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizisti<u>nnen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistin<u>nen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mujer policía</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ung → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschung</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschu<u>ngen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschung<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la investigación</td>
                     </tr>
                     <tr>
@@ -605,7 +605,7 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ion → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portion</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portio<u>nen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portion<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la porción</td>
                     </tr>
                     <tr>
