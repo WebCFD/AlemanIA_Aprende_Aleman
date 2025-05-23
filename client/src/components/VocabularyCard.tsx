@@ -637,7 +637,7 @@ export default function VocabularyCard({
               <Button 
                 onClick={handleSubmitTranslation} 
                 variant="ghost" 
-                className="h-8 px-2 text-neutral-400 hover:text-[#4A6FA5]"
+                className="h-8 px-2 text-neutral-600 hover:text-[#4A6FA5]"
                 disabled={showFeedback || (isReverseMode && !selectedReverseWord)}
               >
                 <Send className="h-4 w-4" />
@@ -674,10 +674,10 @@ export default function VocabularyCard({
                 <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
                 <span className="font-medium">¡Correcto!</span>
               </div>
-              <p className="text-neutral-400 ml-7">
+              <p className="text-neutral-600 ml-7">
                 Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
               </p>
-              <p className="text-neutral-400 ml-7">
+              <p className="text-neutral-600 ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>
                     {selectedReverseWord.spanish} = {selectedReverseWord.article ? 
@@ -706,13 +706,13 @@ export default function VocabularyCard({
                 <XCircle className="mr-2 h-5 w-5" />
                 <span className="font-medium">Incorrecto</span>
               </div>
-              <p className="text-neutral-400 ml-7">
+              <p className="text-neutral-600 ml-7">
                 Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
               </p>
-              <p className="text-neutral-400 ml-7">
+              <p className="text-neutral-600 ml-7">
                 Respuesta correcta:
               </p>
-              <p className="text-neutral-400 ml-7">
+              <p className="text-neutral-600 ml-7">
                 {isReverseMode && selectedReverseWord ? (
                   <>
                     {selectedReverseWord.spanish} = {selectedReverseWord.article ? 

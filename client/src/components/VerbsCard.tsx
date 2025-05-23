@@ -289,7 +289,7 @@ export default function VerbsCard({
                   <Button 
                     onClick={handleSubmitAnswer} 
                     variant="ghost" 
-                    className="h-8 px-2 text-neutral-400 hover:text-[#4A6FA5]"
+                    className="h-8 px-2 text-neutral-600 hover:text-[#4A6FA5]"
                     disabled={verifyMutation.isPending || !userAnswer.trim()}
                   >
                     <Send className="h-4 w-4" />
@@ -311,10 +311,10 @@ export default function VerbsCard({
             {/* Feedback similar al de VocabularyCard y PronounCard */}
             <div className="mb-6">
               {isCorrect ? (
-                <div className="p-4 bg-green-100 border border-green-500 rounded-lg">
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                   <div className="flex items-start mb-2">
                     <CheckCircle className="mr-2 h-5 w-5 text-green-600" />
-                    <span className="font-medium text-green-700">¡Correcto!</span>
+                    <span className="font-medium text-green-800">¡Correcto!</span>
                   </div>
                   <p className="text-neutral-500 ml-7">
                     Tu respuesta: <span className="font-semibold">{userAnswer}</span>
