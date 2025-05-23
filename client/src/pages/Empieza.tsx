@@ -611,25 +611,25 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-schaft → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaft</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaf<u>ten</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaft<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la ciencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-enz → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konsequenz</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konseque<u>nzen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konsequenz<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la consecuencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tät → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Spezialität</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Speziali<u>täten</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Spezialitä<u>ten</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la especialidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tesse → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comtesse</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comte<u>ssen</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comtes<u>sen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la condesa</td>
                     </tr>
                     <tr>
@@ -677,7 +677,7 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Jäger</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäg<u>er</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäger</td>
                       <td className="py-3 px-4 text-sm text-gray-700">el cazador</td>
                     </tr>
 
@@ -721,13 +721,13 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ismus → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Tourismus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Touris<u>men</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Tourismus<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el turismo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Doble "s" en plural</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Bus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Bu<u>sse</u></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Bus<u>se</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el autobús</td>
                     </tr>
                   </tbody>
