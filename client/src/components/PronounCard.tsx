@@ -287,7 +287,7 @@ export default function PronounCard({
                   <Button 
                     onClick={handleSubmitAnswer} 
                     variant="ghost" 
-                    className="h-8 px-2 text-neutral-600 hover:text-[#4A6FA5]"
+                    className="h-8 px-2 text-muted-foreground hover:text-[#4A6FA5]"
                     disabled={verifyMutation.isPending || !userAnswer.trim()}
                   >
                     <Send className="h-4 w-4" />
