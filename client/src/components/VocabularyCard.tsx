@@ -579,7 +579,7 @@ export default function VocabularyCard({
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg">
+    <Card className="max-w-3xl mx-auto rounded-xl shadow-lg">
       {/* Progress Tracker */}
       <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
