@@ -579,23 +579,24 @@ export default function VocabularyCard({
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg">
+    <Card className="max-w-3xl mx-auto rounded-xl shadow-lg">
+      {/* Progress Tracker */}
+      <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center">
+            <CheckCircle className="h-5 w-5 text-[#4CAF50]" />
+            <span className="ml-1 font-medium">{correctCount}</span>
+          </div>
+          <div className="flex items-center">
+            <XCircle className="h-5 w-5 text-[#F44336]" />
+            <span className="ml-1 font-medium">{incorrectCount}</span>
+          </div>
+        </div>
+        <span className="font-heading font-bold">{getLevelName()}</span>
+      </div>
+      
       {/* Contenedor principal */}
       <div className="p-6 md:p-8">
-        {/* Progress Tracker */}
-        <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center rounded-lg mb-6 -mx-2 md:-mx-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center">
-              <CheckCircle className="h-5 w-5 text-[#4CAF50]" />
-              <span className="ml-1 font-medium">{correctCount}</span>
-            </div>
-            <div className="flex items-center">
-              <XCircle className="h-5 w-5 text-[#F44336]" />
-              <span className="ml-1 font-medium">{incorrectCount}</span>
-            </div>
-          </div>
-          <span className="font-heading font-bold">{getLevelName()}</span>
-        </div>
         {/* Word Card */}
         <div className="mb-6 text-center">
           {isLoadingWord ? (
