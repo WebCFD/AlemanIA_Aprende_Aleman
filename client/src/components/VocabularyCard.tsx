@@ -43,8 +43,8 @@ export default function VocabularyCard({
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isReverseMode, setIsReverseMode] = useState(false);
-  const [isBLevelAlternating, setIsBLevelAlternating] = useState(false); // Para el modo alternante del nivel B
-  const [alternateCounter, setAlternateCounter] = useState(0); // Para llevar el control de alternancia en nivel B
+  const [bLevelDirectCount, setBLevelDirectCount] = useState(0); // Contador para nivel B: cada 4 palabras directas
+  const [bLevelReverseCount, setBLevelReverseCount] = useState(0); // Contador para nivel B: 3 palabras reversas
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0);
   const [lastCorrectWords, setLastCorrectWords] = useState<Word[]>([]);
   const [directModeCount, setDirectModeCount] = useState(0); // Contador para nivel A: cada 3 palabras correctas
@@ -83,18 +83,17 @@ export default function VocabularyCard({
       setLastCorrectWords([]);
       fetchNewWord();
     }
-    // Si es nivel B, preparamos para el modo alternante
+    // Si es nivel B, preparamos para el sistema 4 directas + 3 reversas
     else if (difficulty === "B") {
-      setIsBLevelAlternating(true);
-      setAlternateCounter(0);
+      setBLevelDirectCount(0);
+      setBLevelReverseCount(0);
       setIsReverseMode(false);
       setSelectedReverseWord(null);
+      setLastCorrectWords([]);
       fetchNewWord();
     } 
     // Si es nivel C, siempre en modo inverso
     else if (difficulty === "C") {
-      setIsBLevelAlternating(false);
-      setAlternateCounter(0);
       setIsReverseMode(true);
       
       // Obtener una palabra aleatoria para modo inverso
@@ -119,9 +118,7 @@ export default function VocabularyCard({
       getNewReverseWord();
     } 
     else {
-      // Si es nivel A, reset al modo normal
-      setIsBLevelAlternating(false);
-      setAlternateCounter(0);
+      // Para otros niveles, reset al modo normal
       setIsReverseMode(false);
       setSelectedReverseWord(null);
       setConsecutiveCorrect(0);
@@ -156,30 +153,41 @@ export default function VocabularyCard({
       }
       
       if (data.isCorrect) {
-        // Solo para nivel A, implementamos el sistema de revisión cada 3 palabras
-        if (difficulty === "A" && !isReverseMode) {
+        // Sistema de revisión para niveles A y B
+        if ((difficulty === "A" || difficulty === "B") && !isReverseMode) {
           // Añadir palabra actual a la lista de palabras correctas
           setLastCorrectWords(prev => {
             const newList = [...prev, currentWord!];
-            // Mantener solo las últimas 3 para revisión
-            if (newList.length > 3) newList.shift();
+            // Para nivel A: mantener 3, para nivel B: mantener 4
+            const maxWords = difficulty === "A" ? 3 : 4;
+            if (newList.length > maxWords) newList.shift();
             return newList;
           });
           
-          // Incrementar contador de palabras directas
-          setDirectModeCount(prev => {
-            const newCount = prev + 1;
-            // Si llegamos a 3 palabras correctas, activar modo reverso automáticamente
-            if (newCount === 3) {
-              return 0; // Reiniciar contador
-            }
-            return newCount;
-          });
+          if (difficulty === "A") {
+            // Nivel A: cada 3 palabras correctas
+            setDirectModeCount(prev => {
+              const newCount = prev + 1;
+              if (newCount === 3) {
+                return 0; // Reiniciar contador
+              }
+              return newCount;
+            });
+          } else if (difficulty === "B") {
+            // Nivel B: cada 4 palabras correctas
+            setBLevelDirectCount(prev => {
+              const newCount = prev + 1;
+              if (newCount === 4) {
+                return 0; // Reiniciar contador
+              }
+              return newCount;
+            });
+          }
         }
         
         onCorrectAnswer();
       } else {
-        // Si es incorrecto en nivel A, NO reseteamos el contador (solo cuenta las correctas)
+        // Si es incorrecto, NO reseteamos contadores (solo cuenta las correctas)
         onIncorrectAnswer();
       }
     },
@@ -383,59 +391,43 @@ export default function VocabularyCard({
       
       getNewReverseWord();
     }
-    // 4. Manejar lógica específica para Nivel B (alternancia)
+    // 4. Manejar lógica específica para Nivel B (4 directas + 3 reversas)
     else if (difficulty === "B") {
-      // Para el primer ejercicio en nivel B, iniciamos modo alternante
-      if (!isBLevelAlternating) {
-        setIsBLevelAlternating(true);
-        setAlternateCounter(0);
-        setIsReverseMode(false); // Empezamos con modo directo
-        fetchNewWord();
-        setTranslation("");
-        setSelectedReverseWord(null);
-      } else {
-        // Alternamos entre modo directo e inverso después de cada ejercicio
-        const newCounter = alternateCounter + 1;
-        setAlternateCounter(newCounter);
-        
-        // Si es par, usamos modo directo; si es impar, modo inverso
-        const shouldBeReverse = newCounter % 2 === 1;
-        setIsReverseMode(shouldBeReverse);
-        
-        if (shouldBeReverse) {
-          // Modo inverso: hacer una solicitud directa para obtener una palabra independiente
-          // para evitar usar la misma palabra que en modo directo
-          setIsReverseMode(true);
-          setTranslation("");
+      if (isReverseMode) {
+        // Estamos en modo reverso, incrementar contador de reversas
+        if (bLevelReverseCount < 2) {
+          // Aún faltan palabras reversas, seleccionar otra de las últimas 4 correctas
+          setBLevelReverseCount(prev => prev + 1);
           
-          // Obtener una palabra completamente nueva para modo inverso
-          const getNewReverseWord = async () => {
-            try {
-              // Hacer solicitud directa para evitar interferencias con el cache de React Query
-              const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
-              if (!response.ok) {
-                throw new Error('Error al obtener palabra para modo inverso');
-              }
-              const newWord = await response.json();
-              setSelectedReverseWord(newWord);
-            } catch (error) {
-              console.error("Error fetching reverse word:", error);
-              toast({
-                title: "Error",
-                description: "No se pudo obtener una nueva palabra para modo inverso",
-                variant: "destructive",
-              });
-            }
-          };
-          
-          getNewReverseWord();
+          if (lastCorrectWords.length > 0) {
+            const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
+            const selectedWord = lastCorrectWords[randomIndex];
+            setTranslation("");
+            setSelectedReverseWord(selectedWord);
+          }
         } else {
-          // Modo directo: obtenemos una nueva palabra
+          // Completamos las 3 reversas, volver al modo directo
+          setBLevelReverseCount(0);
+          setBLevelDirectCount(0);
           setIsReverseMode(false);
           fetchNewWord();
           setTranslation("");
           setSelectedReverseWord(null);
         }
+      } else if (bLevelDirectCount === 0 && lastCorrectWords.length >= 4) {
+        // Acabamos de completar 4 palabras directas, iniciar ciclo de 3 reversas
+        setIsReverseMode(true);
+        setBLevelReverseCount(1); // Empezamos con la primera reversa
+        
+        const randomIndex = Math.floor(Math.random() * lastCorrectWords.length);
+        const selectedWord = lastCorrectWords[randomIndex];
+        setTranslation("");
+        setSelectedReverseWord(selectedWord);
+      } else {
+        // Modo directo normal
+        fetchNewWord();
+        setTranslation("");
+        setSelectedReverseWord(null);
       }
     }
     // 4. Manejar lógica específica para Nivel A (cada 3 palabras correctas → 1 reversa)
