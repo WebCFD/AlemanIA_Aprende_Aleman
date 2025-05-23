@@ -204,7 +204,7 @@ export default function Empieza() {
               </table>
             </div>
             <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-sm text-gray-700">
-              <p><strong>Consejo:</strong> En Alemania, "Guten Tag" se usa durante el día, "Guten Morgen" por la mañana (hasta las 11:00 aprox.) y "Guten Abend" por la tarde/noche (desde las 18:00 aprox.).</p>
+              <p><u>Consejo:</u> En Alemania, "Guten Tag" se usa durante el día, "Guten Morgen" por la mañana (hasta las 11:00 aprox.) y "Guten Abend" por la tarde/noche (desde las 18:00 aprox.).</p>
             </div>
           </div>
           
@@ -216,27 +216,27 @@ export default function Empieza() {
             </h3>
             
             <p className="mb-4 text-gray-700">
-              Una de las particularidades más importantes del alemán es que <strong>todos los sustantivos se escriben con mayúscula inicial</strong>, sin importar su posición en la oración.
+              Una de las particularidades más importantes del alemán es que <u>todos los sustantivos se escriben con mayúscula inicial</u>, sin importar su posición en la oración.
             </p>
             
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               <div className="bg-green-50 p-4 rounded-lg border border-green-200">
                 <p className="font-medium text-green-800 mb-2">Correcto</p>
                 <ul className="space-y-2 text-green-700">
-                  <li>das <strong>H</strong>aus (la casa)</li>
-                  <li>der <strong>M</strong>ann (el hombre)</li>
-                  <li>die <strong>F</strong>rau (la mujer)</li>
-                  <li>das <strong>B</strong>uch (el libro)</li>
+                  <li>das <u>H</u>aus (la casa)</li>
+                  <li>der <u>M</u>ann (el hombre)</li>
+                  <li>die <u>F</u>rau (la mujer)</li>
+                  <li>das <u>B</u>uch (el libro)</li>
                 </ul>
               </div>
               
               <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                 <p className="font-medium text-red-800 mb-2">Incorrecto</p>
                 <ul className="space-y-2 text-red-700">
-                  <li>das <strong>h</strong>aus</li>
-                  <li>der <strong>m</strong>ann</li>
-                  <li>die <strong>f</strong>rau</li>
-                  <li>das <strong>b</strong>uch</li>
+                  <li>das <u>h</u>aus</li>
+                  <li>der <u>m</u>ann</li>
+                  <li>die <u>f</u>rau</li>
+                  <li>das <u>b</u>uch</li>
                 </ul>
               </div>
             </div>
@@ -291,7 +291,7 @@ export default function Empieza() {
             </h3>
             
             <p className="mb-4 text-gray-700">
-              Los pronombres personales son fundamentales para construir oraciones. A diferencia de los sustantivos, los pronombres personales <strong>no</strong> se escriben con mayúscula inicial (excepto el pronombre formal "Sie").
+              Los pronombres personales son fundamentales para construir oraciones. A diferencia de los sustantivos, los pronombres personales <u>no</u> se escriben con mayúscula inicial (excepto el pronombre formal "Sie").
             </p>
             
             <div className="overflow-x-auto mb-6">
@@ -454,7 +454,7 @@ export default function Empieza() {
             </div>
             
             <div className="p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm text-gray-700">
-              <p><strong>Nota:</strong> En alemán, "Sie" (con mayúscula) es la forma de cortesía para dirigirse a alguien de manera formal, similar a "usted" en español. Es muy importante en contextos formales y profesionales.</p>
+              <p><u>Nota:</u> En alemán, "Sie" (con mayúscula) es la forma de cortesía para dirigirse a alguien de manera formal, similar a "usted" en español. Es muy importante en contextos formales y profesionales.</p>
             </div>
           </div>
           
@@ -466,7 +466,7 @@ export default function Empieza() {
             </h3>
             
             <p className="mb-6 text-gray-700">
-              En alemán, la formación del plural depende principalmente del <strong>género del sustantivo</strong>. 
+              En alemán, la formación del plural depende principalmente del <u>género del sustantivo</u>. 
               Cada género (masculino, femenino y neutro) tiene patrones específicos que te ayudarán a 
               predecir cómo formar el plural correctamente.
             </p>
@@ -492,67 +492,67 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Essen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ess<strong>en</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ess<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la comida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Leben</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leb<strong>en</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leb<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Erlebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebni<strong>sse</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebni<u>sse</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vivencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Ergebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebni<strong>sse</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebni<u>sse</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el resultado</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ment → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Dokument</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokument<strong>e</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokument<u>e</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el documento</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-chen</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Vögelchen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögel<strong>chen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögel<u>chen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el pajarillo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-lein</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Büchlein</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büch<strong>lein</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büch<u>lein</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el librito</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Kind</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kind<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kind<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el niño</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-um → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Museum</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Muse<strong>en</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Muse<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el museo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut + <code>-er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Rad</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Räd<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Räd<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la rueda</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Auto</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Auto<strong>s</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Auto<u>s</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el coche</td>
                     </tr>
                   </tbody>
@@ -581,74 +581,74 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-keit → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeit</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkei<strong>ten</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkei<u>ten</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la capacidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-in → -en</code> (profesiones femeninas)</td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistin</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizisti<strong>nnen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizisti<u>nnen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mujer policía</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ung → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschung</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschu<strong>ngen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschu<u>ngen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la investigación</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-e → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne<strong>n</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne<u>n</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el sol</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ion → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portion</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portio<strong>nen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portio<u>nen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la porción</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-schaft → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaft</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaf<strong>ten</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaf<u>ten</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la ciencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-enz → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konsequenz</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konseque<strong>nzen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konseque<u>nzen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la consecuencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tät → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Spezialität</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Speziali<strong>täten</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Speziali<u>täten</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la especialidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tesse → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comtesse</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comte<strong>ssen</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comte<u>ssen</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la condesa</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frau</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frau<strong>en</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frau<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mujer</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-el → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffel</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffel<strong>n</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffel<u>n</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la patata</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-a → -s</code> / <code>-a → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera / die Firma</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera<strong>s</strong> / die Fir<strong>men</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera<u>s</u> / die Fir<u>men</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la cámara / la empresa</td>
                     </tr>
                   </tbody>
@@ -677,57 +677,57 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Jäger</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäg<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäg<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el cazador</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ling → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Schmetterling</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Schmetterling<strong>e</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Schmetterling<u>e</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mariposa</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ist → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Polizist</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizist<strong>en</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizist<u>en</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el policía</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Brief</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Brief<strong>e</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Brief<u>e</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la carta</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Mann</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männ<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männ<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el hombre</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Wald</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Wäld<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Wäld<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el bosque</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Rand</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Ränd<strong>er</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Ränd<u>er</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el borde</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ismus → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Tourismus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Touris<strong>men</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Touris<u>men</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el turismo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Doble "s" en plural</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Bus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Bu<strong>sse</strong></td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Bu<u>sse</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el autobús</td>
                     </tr>
                   </tbody>
@@ -740,7 +740,7 @@ export default function Empieza() {
               <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-blue-800 font-medium mb-2">Regla fundamental:</p>
                 <p className="text-blue-700">
-                  En alemán, <strong>todos los sustantivos en plural llevan el artículo "die"</strong>, 
+                  En alemán, <u>todos los sustantivos en plural llevan el artículo "die"</u>, 
                   independientemente del género que tengan en singular.
                 </p>
               </div>
@@ -749,7 +749,7 @@ export default function Empieza() {
                 <p className="text-yellow-800 font-medium mb-2">Diminutivos (-chen, -lein):</p>
                 <p className="text-yellow-700">
                   Cuando añades <code>-chen</code> o <code>-lein</code> a cualquier palabra, 
-                  automáticamente se convierte en <strong>neutra</strong> y a menudo añade Umlaut a la primera vocal.
+                  automáticamente se convierte en <u>neutra</u> y a menudo añade Umlaut a la primera vocal.
                   Ejemplo: der Vogel → das Vögelchen
                 </p>
               </div>
@@ -769,7 +769,7 @@ export default function Empieza() {
                   coge "Umlaut" en el plural. Esto es especialmente común en sustantivos masculinos de una sílaba.
                 </p>
                 <div className="text-sm text-orange-600">
-                  <p><strong>Ejemplos típicos:</strong></p>
+                  <p><u>Ejemplos típicos:</u></p>
                   <p>• <code>der Mann → die Männer</code> (el hombre → los hombres)</p>
                   <p>• <code>der Wald → die Wälder</code> (el bosque → los bosques)</p>
                   <p>• <code>das Rad → die Räder</code> (la rueda → las ruedas)</p>
