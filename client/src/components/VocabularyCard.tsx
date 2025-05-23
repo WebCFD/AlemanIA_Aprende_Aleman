@@ -518,13 +518,25 @@ export default function VocabularyCard({
   };
   
   // Función para traducir el artículo alemán al español
-  const translateArticle = (article: string | null): string | null => {
+  const translateArticle = (article: string | null, germanWord?: string): string | null => {
     if (!article) return null;
+    
+    // Lista de palabras alemanas que son inherentemente plurales
+    const pluralWords = ["eltern", "leute", "menschen"];
+    
+    // Verificar si la palabra es plural
+    const isPlural = germanWord ? pluralWords.includes(germanWord.toLowerCase()) : false;
     
     switch(article) {
       case "der": return "el";
-      case "die": return "la";
-      case "das": return "lo";
+      case "die": 
+        if (isPlural) {
+          // Para palabras plurales con "die", usar "los" o "las" según el contexto
+          // Para "Eltern" (padres) usar "los"
+          return germanWord?.toLowerCase() === "eltern" ? "los" : "las";
+        }
+        return "la";
+      case "das": return "el"; // "das" neutro también se traduce como "el"
       default: return null;
     }
   };
