@@ -152,20 +152,20 @@ export async function verifyTranslation(
     
     2. Si la respuesta es correcta, felicita al usuario brevemente.
     
-    3. Si la respuesta es incorrecta, proporciona una explicación breve que incluya:
+    3. Si la respuesta es incorrecta, proporciona una explicación MUY BREVE que incluya:
        - La traducción correcta
-       - Una regla gramatical básica (si aplica)
+       - UNA regla gramatical básica (si aplica)
     
     Responde en formato JSON con estas propiedades:
     {
       "isCorrect": boolean,
-      "explanation": string (explicación en español, máximo 2 oraciones)
+      "explanation": string (explicación en español, MÁXIMO 1 oración de 15 palabras)
     }
     `;
 
     const response = await anthropic.messages.create({
       model: 'claude-3-haiku-20240307',
-      max_tokens: 500,
+      max_tokens: 200,
       messages: [{ role: 'user', content: prompt }],
     });
 
@@ -311,14 +311,14 @@ export async function verifyReverseTranslation(
        - Genera una frase de ejemplo en alemán utilizando la palabra
        - Esta frase debe ser simple y adecuada para principiantes
        
-    3. Si la respuesta es incorrecta, proporciona una explicación breve que incluya:
+    3. Si la respuesta es incorrecta, proporciona una explicación MUY BREVE que incluya:
        - La traducción correcta con artículo si es sustantivo
-       - Una regla gramatical básica (artículos, capitalización, etc.)
+       - UNA regla gramatical básica (artículos, capitalización, etc.)
     
     Responde en formato JSON con estas propiedades:
     {
       "isCorrect": boolean,
-      "explanation": string (explicación en español, máximo 2 oraciones),
+      "explanation": string (explicación en español, MÁXIMO 1 oración de 15 palabras),
       "correctTranslation": string (la palabra correcta en alemán con artículo si corresponde),
       "exampleSentence": string (SOLO si es correcta, una frase de ejemplo en alemán)
     }
@@ -326,7 +326,7 @@ export async function verifyReverseTranslation(
 
     const response = await anthropic.messages.create({
       model: 'claude-3-haiku-20240307',
-      max_tokens: 1000,
+      max_tokens: 300,
       messages: [{ role: 'user', content: prompt }],
     });
 
@@ -444,7 +444,7 @@ export async function generatePrepositionExamples(
 
     const response = await anthropic.messages.create({
       model: 'claude-3-haiku-20240307',
-      max_tokens: 1000,
+      max_tokens: 300,
       messages: [{ role: 'user', content: prompt }],
     });
 
