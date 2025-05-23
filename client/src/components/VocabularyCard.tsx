@@ -118,7 +118,7 @@ export default function VocabularyCard({
       setLastCorrectWords([]);
       fetchNewWord();
     }
-  }, [difficulty]);
+  }, [difficulty, fetchNewWord]);
 
   // Verify normal translation (alemán -> español)
   const verifyMutation = useMutation({
