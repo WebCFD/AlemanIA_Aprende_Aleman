@@ -53,7 +53,7 @@ export default function VocabularyCard({
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
-  // Fetch a random word based on difficulty with stable caching
+  // Fetch a random word based on difficulty
   const { 
     data: currentWord, 
     refetch: fetchNewWord,
@@ -62,7 +62,6 @@ export default function VocabularyCard({
     queryKey: ['/api/vocabulary/random', difficulty],
     retry: false,
     refetchOnWindowFocus: false,
-    staleTime: Infinity, // No recargar automáticamente - mantiene contenido estable
   } as any);
   
   // Reiniciar estados cuando cambia la dificultad
