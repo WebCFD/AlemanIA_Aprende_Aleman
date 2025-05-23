@@ -693,8 +693,8 @@ export default function VocabularyCard({
           {showFeedback && isCorrect === true && (
             <div className="bg-green-100 border border-[#4CAF50] text-[#4CAF50] rounded-lg p-4">
               <div className="flex items-start mb-2">
-                <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5" />
-                <span className="font-medium">¡Correcto!</span>
+                <CheckCircle className="mr-2 text-[#4CAF50] h-5 w-5 flex-shrink-0" />
+                <span className="font-medium min-w-0 flex-1">¡Correcto!</span>
               </div>
               <p className="text-muted-foreground ml-7">
                 Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
@@ -724,8 +724,8 @@ export default function VocabularyCard({
               
               {/* Mostrar explicación educativa de Claude para respuestas correctas */}
               {explanation && (
-                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-800 text-sm leading-relaxed">{explanation}</p>
+                <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg min-w-0 flex-1">
+                  <p className="text-green-800 text-sm leading-relaxed break-words whitespace-pre-wrap hyphens-auto">{explanation}</p>
                 </div>
               )}
             </div>
@@ -734,8 +734,8 @@ export default function VocabularyCard({
           {showFeedback && isCorrect === false && (
             <div className="bg-red-100 border border-[#F44336] text-[#F44336] rounded-lg p-4">
               <div className="flex items-start mb-2">
-                <XCircle className="mr-2 h-5 w-5" />
-                <span className="font-medium">Incorrecto</span>
+                <XCircle className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span className="font-medium min-w-0 flex-1">Incorrecto</span>
               </div>
               <p className="text-muted-foreground ml-7">
                 Tu respuesta: <span className="font-semibold">{submittedTranslation}</span>
@@ -768,8 +768,8 @@ export default function VocabularyCard({
               
               {/* Mostrar explicación educativa de Claude */}
               {explanation && (
-                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <p className="text-red-800 text-sm leading-relaxed">{explanation}</p>
+                <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg min-w-0 flex-1">
+                  <p className="text-red-800 text-sm leading-relaxed break-words whitespace-pre-wrap hyphens-auto">{explanation}</p>
                 </div>
               )}
             </div>
