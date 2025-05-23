@@ -148,10 +148,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (difficulty === "A" && word) {
         const userInput = translation.toLowerCase().trim();
         const correctWithArticle = word.article ? `${word.article} ${word.german}`.toLowerCase() : word.german.toLowerCase();
-        const correctWithoutArticle = word.german.toLowerCase();
         
-        // Verificar si la respuesta es correcta (con o sin artículo)
-        const isCorrect = userInput === correctWithArticle || userInput === correctWithoutArticle;
+        // Para sustantivos (con artículo), el artículo es OBLIGATORIO
+        // Para palabras sin artículo, se acepta solo la palabra
+        const isCorrect = word.article 
+          ? userInput === correctWithArticle  // Sustantivo: DEBE incluir artículo correcto
+          : userInput === word.german.toLowerCase();  // No sustantivo: solo la palabra
         
         if (isCorrect) {
           // Respuesta correcta: sin Anthropic, respuesta instantánea
