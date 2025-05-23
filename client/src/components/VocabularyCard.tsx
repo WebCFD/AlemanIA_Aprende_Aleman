@@ -536,7 +536,7 @@ export default function VocabularyCard({
           return germanWord?.toLowerCase() === "eltern" ? "los" : "las";
         }
         return "la";
-      case "das": return "el"; // "das" neutro también se traduce como "el"
+      case "das": return "lo"; // "das" neutro se traduce como "lo"
       default: return null;
     }
   };
