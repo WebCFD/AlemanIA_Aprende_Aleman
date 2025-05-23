@@ -872,6 +872,16 @@ export default function Empieza() {
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera / die Firma</td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera<u>s</u> / die Fir<u>men</u></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la cámara / la empresa</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-pink-700 hover:text-pink-900"
+                          onClick={() => handlePlayAudio("Kamera")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -893,6 +903,7 @@ export default function Empieza() {
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Singular</th>
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
                       <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
