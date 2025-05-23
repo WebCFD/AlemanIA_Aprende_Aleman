@@ -53,31 +53,16 @@ export default function VocabularyCard({
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
-  // Estado para manejar la palabra actual
-  const [currentWord, setCurrentWord] = useState<Word | null>(null);
-  const [isLoadingWord, setIsLoadingWord] = useState(false);
-  const [hasInitialLoad, setHasInitialLoad] = useState(false);
-
-  // Función para cargar nueva palabra
-  const fetchNewWord = async () => {
-    setIsLoadingWord(true);
-    try {
-      const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
-      const data = await response.json();
-      setCurrentWord(data);
-    } catch (error) {
-      console.error('Error fetching word:', error);
-    } finally {
-      setIsLoadingWord(false);
-    }
-  };
-
-  // Cargar palabra inicial solo cuando cambia la dificultad
-  useEffect(() => {
-    setHasInitialLoad(false);
-    setCurrentWord(null);
-    fetchNewWord();
-  }, [difficulty]);
+  // Fetch a random word based on difficulty
+  const { 
+    data: currentWord, 
+    refetch: fetchNewWord,
+    isLoading: isLoadingWord,
+  } = useQuery<Word>({
+    queryKey: ['/api/vocabulary/random', difficulty],
+    retry: false,
+    refetchOnWindowFocus: false,
+  } as any);
   
   // Reiniciar estados cuando cambia la dificultad
   useEffect(() => {
