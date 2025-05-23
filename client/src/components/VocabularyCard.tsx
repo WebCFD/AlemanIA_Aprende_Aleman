@@ -53,48 +53,31 @@ export default function VocabularyCard({
   const inputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   
-  // Estado local para evitar recargas
-  const [cachedWords, setCachedWords] = useState<Record<string, Word>>({});
-  const [loadedDifficulties, setLoadedDifficulties] = useState(new Set<string>());
+  // Estado para manejar la palabra actual
   const [currentWord, setCurrentWord] = useState<Word | null>(null);
   const [isLoadingWord, setIsLoadingWord] = useState(false);
+  const [hasInitialLoad, setHasInitialLoad] = useState(false);
 
-  // Cargar palabra solo si no la tenemos en caché
-  useEffect(() => {
-    const difficultyKey = `${difficulty}`;
-    
-    if (cachedWords[difficultyKey]) {
-      // Usar palabra del caché
-      setCurrentWord(cachedWords[difficultyKey]);
-    } else if (!loadedDifficulties.has(difficultyKey)) {
-      // Cargar nueva palabra solo si no hemos cargado esta dificultad
-      setIsLoadingWord(true);
-      fetch(`/api/vocabulary/random?difficulty=${difficulty}`)
-        .then(response => response.json())
-        .then(data => {
-          setCurrentWord(data);
-          setCachedWords(prev => ({ ...prev, [difficultyKey]: data }));
-          setLoadedDifficulties(prev => new Set(prev).add(difficultyKey));
-        })
-        .catch(error => console.error('Error fetching word:', error))
-        .finally(() => setIsLoadingWord(false));
-    }
-  }, [difficulty]); // Solo dependemos de difficulty
-
-  // Función para obtener nueva palabra (solo cuando se presiona "Otra palabra")
+  // Función para cargar nueva palabra
   const fetchNewWord = async () => {
     setIsLoadingWord(true);
     try {
       const response = await fetch(`/api/vocabulary/random?difficulty=${difficulty}`);
       const data = await response.json();
       setCurrentWord(data);
-      setCachedWords(prev => ({ ...prev, [`${difficulty}`]: data }));
     } catch (error) {
-      console.error('Error fetching new word:', error);
+      console.error('Error fetching word:', error);
     } finally {
       setIsLoadingWord(false);
     }
   };
+
+  // Cargar palabra inicial solo cuando cambia la dificultad
+  useEffect(() => {
+    setHasInitialLoad(false);
+    setCurrentWord(null);
+    fetchNewWord();
+  }, [difficulty]);
   
   // Reiniciar estados cuando cambia la dificultad
   useEffect(() => {
