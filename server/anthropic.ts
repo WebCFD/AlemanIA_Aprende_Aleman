@@ -136,30 +136,16 @@ export async function verifyTranslation(
     }
     
     const prompt = `
-    Estás evaluando traducciones del alemán al español para una aplicación de aprendizaje de idiomas.
+    Palabra alemana: "${germanWord}"
+    Traducción correcta: "${correctTranslation}"
+    Respuesta del usuario: "${userTranslation}"
     
-    Palabra en alemán: "${germanWord}"
-    Traducción correcta al español: "${correctTranslation}"
-    Traducción propuesta por el usuario: "${userTranslation}"
-    Nivel de dificultad: "${difficulty}"
+    Explicación MUY BREVE por qué es incorrecto, UNA regla gramatical básica (si aplica)
     
-    Tarea:
-    1. Determina si la traducción del usuario es correcta o suficientemente cercana a la correcta.
-       - Variaciones ortográficas menores pueden ser aceptables
-       - Sinónimos cercanos pueden ser aceptables
-       - Para nivel A (principiante) sé más permisivo con las variaciones
-       - Para nivel C (avanzado) sé más estricto
-    
-    2. Si la respuesta es correcta, felicita al usuario brevemente.
-    
-    3. Si la respuesta es incorrecta, proporciona una explicación MUY BREVE que incluya:
-       - La traducción correcta
-       - UNA regla gramatical básica (si aplica)
-    
-    Responde en formato JSON con estas propiedades:
+    Responde en formato JSON:
     {
-      "isCorrect": boolean,
-      "explanation": string (explicación en español, MÁXIMO 1 oración de 15 palabras)
+      "isCorrect": false,
+      "explanation": string (MÁXIMO 15 palabras)
     }
     `;
 
@@ -294,33 +280,17 @@ export async function verifyReverseTranslation(
     }
     
     const prompt = `
-    Estás evaluando traducciones del español al alemán para una aplicación de aprendizaje de idiomas.
+    Palabra española: "${spanishWord}"
+    Traducción correcta: "${fullCorrectTranslation}"
+    Respuesta del usuario: "${userTranslation}"
     
-    Palabra en español: "${spanishWord}"
-    Traducción correcta al alemán: "${fullCorrectTranslation}"
-    Traducción propuesta por el usuario: "${userTranslation}"
+    Explicación MUY BREVE por qué es incorrecto, UNA regla gramatical básica (si aplica)
     
-    Tarea:
-    1. Determina si la traducción del usuario es correcta. Considera:
-       - El usuario debe incluir el artículo correcto (der, die, das) si es un sustantivo
-       - Variaciones ortográficas menores pueden ser aceptables
-       - Sinónimos exactos pueden ser aceptables
-       
-    2. Si la respuesta es correcta:
-       - Felicita al usuario brevemente
-       - Genera una frase de ejemplo en alemán utilizando la palabra
-       - Esta frase debe ser simple y adecuada para principiantes
-       
-    3. Si la respuesta es incorrecta, proporciona una explicación MUY BREVE que incluya:
-       - La traducción correcta con artículo si es sustantivo
-       - UNA regla gramatical básica (artículos, capitalización, etc.)
-    
-    Responde en formato JSON con estas propiedades:
+    Responde en formato JSON:
     {
-      "isCorrect": boolean,
-      "explanation": string (explicación en español, MÁXIMO 1 oración de 15 palabras),
-      "correctTranslation": string (la palabra correcta en alemán con artículo si corresponde),
-      "exampleSentence": string (SOLO si es correcta, una frase de ejemplo en alemán)
+      "isCorrect": false,
+      "explanation": string (MÁXIMO 15 palabras),
+      "correctTranslation": string
     }
     `;
 
