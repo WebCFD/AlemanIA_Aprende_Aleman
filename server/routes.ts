@@ -173,21 +173,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
         
-        // 3. Error de artículo (palabra correcta pero artículo incorrecto) → Claude para reglas de género
-        if (word.article && userInputLower.includes(word.german.toLowerCase())) {
-          const userWords = userInputLower.split(' ');
-          const correctWord = word.german.toLowerCase();
-          if (userWords.includes(correctWord)) {
-            const genderExplanation = await explainGermanGender(
-              word.german,
-              word.article,
-              userInput
-            );
-            return res.json(genderExplanation);
-          }
-        }
-        
-        // 4. Solo errores complejos van a Claude
+        // 3. Todos los errores van al prompt didáctico principal
         const verificationResult = await verifyReverseTranslation(
           spanishWord,
           translation,
