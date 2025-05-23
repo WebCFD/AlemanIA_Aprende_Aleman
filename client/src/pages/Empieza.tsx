@@ -492,67 +492,67 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Essen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Essen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ess<strong>en</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la comida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-en</code> (verbos sustantivados)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Leben</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leben</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Leb<strong>en</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vida</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Erlebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebnisse</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Erlebni<strong>sse</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la vivencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-nis → -se</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Ergebnis</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebnisse</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Ergebni<strong>sse</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el resultado</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ment → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Dokument</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokumente</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Dokument<strong>e</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el documento</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-chen</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Vögelchen</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögelchen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Vögel<strong>chen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el pajarillo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-lein</code> (diminutivo)</td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Büchlein</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büchlein</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Büch<strong>lein</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el librito</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Kind</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kinder</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Kind<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el niño</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-um → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Museum</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Museen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Muse<strong>en</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el museo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut + <code>-er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Rad</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Räder</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Räd<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la rueda</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Extranjerismos <code>→ -s</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-purple-600">das Auto</td>
-                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Autos</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">die Auto<strong>s</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el coche</td>
                     </tr>
                   </tbody>
@@ -581,74 +581,74 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-keit → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeit</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkeiten</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Fähigkei<strong>ten</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la capacidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-in → -en</code> (profesiones femeninas)</td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistin</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizistinnen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Polizisti<strong>nnen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mujer policía</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ung → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschung</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschungen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Forschu<strong>ngen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la investigación</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-e → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonnen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Sonne<strong>n</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el sol</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ion → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portion</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portionen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Portio<strong>nen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la porción</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-schaft → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaft</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaften</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Wissenschaf<strong>ten</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la ciencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-enz → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konsequenz</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konsequenzen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Konseque<strong>nzen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la consecuencia</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tät → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Spezialität</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Spezialitäten</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Speziali<strong>täten</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la especialidad</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-tesse → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comtesse</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comtessen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Comte<strong>ssen</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la condesa</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frau</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frauen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Frau<strong>en</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mujer</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-el → -n</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffel</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffeln</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kartoffel<strong>n</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la patata</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-a → -s</code> / <code>-a → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera / die Firma</td>
-                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kameras / die Firmen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-pink-600">die Kamera<strong>s</strong> / die Fir<strong>men</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la cámara / la empresa</td>
                     </tr>
                   </tbody>
@@ -677,57 +677,57 @@ export default function Empieza() {
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-er</code> (sin cambio)</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Jäger</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäger</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Jäg<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el cazador</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ling → -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Schmetterling</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Schmetterlinge</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Schmetterling<strong>e</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la mariposa</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ist → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Polizist</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizisten</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Polizist<strong>en</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el policía</td>
                     </tr>
 
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Una sílaba <code>→ -e</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Brief</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Briefe</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Brief<strong>e</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">la carta</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Mann</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männer</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Männ<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el hombre</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Wald</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Wälder</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Wäld<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el bosque</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Con Umlaut <code>→ -er</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Rand</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Ränder</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Ränd<strong>er</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el borde</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700"><code>-ismus → -en</code></td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Tourismus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Tourismen</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Touris<strong>men</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el turismo</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-sm text-gray-700">Doble "s" en plural</td>
                       <td className="py-3 px-4 text-sm font-medium text-blue-600">der Bus</td>
-                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Busse</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">die Bu<strong>sse</strong></td>
                       <td className="py-3 px-4 text-sm text-gray-700">el autobús</td>
                     </tr>
                   </tbody>
