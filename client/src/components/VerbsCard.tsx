@@ -238,7 +238,7 @@ export default function VerbsCard({
   };
 
   return (
-    <Card className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <Card className="w-full max-w-[95vw] lg:max-w-4xl xl:max-w-5xl mx-auto bg-white rounded-xl shadow-lg">
       {/* Progress Tracker */}
       <div className="bg-[#6B8CB8] text-white p-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -255,7 +255,7 @@ export default function VerbsCard({
       </div>
       
       {/* Contenedor principal */}
-      <div className="p-6 md:p-8">
+      <div className="p-4 sm:p-6 md:p-8 space-y-6">
         {/* Verb Display */}
         <div className="mb-6 text-center">
           <span className="inline-block bg-[#6B8CB8] bg-opacity-10 text-[#4A6FA5] px-4 py-2 rounded-lg font-heading font-bold text-2xl md:text-3xl mb-1">

@@ -148,7 +148,7 @@ export default function PronounsDeclinationsCard({
   }
   
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-lg border-2 transition-all duration-300 ease-in-out">
+    <Card className="w-full max-w-[95vw] lg:max-w-4xl xl:max-w-5xl mx-auto shadow-lg border-2 transition-all duration-300 ease-in-out">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-2xl font-bold text-gray-800">
