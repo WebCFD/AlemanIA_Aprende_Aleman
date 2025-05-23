@@ -284,7 +284,7 @@ export async function verifyReverseTranslation(
     Correcto: "${fullCorrectTranslation}"
     Usuario: "${userTranslation}"
     
-    Explicación: máximo 3 frases, 20 palabras total.
+    Explica BREVEMENTE por qué, si existe una regla gramatical para palabras similares, menciónala. Máximo 3 frases, 20 palabras.
     
     JSON:
     {
