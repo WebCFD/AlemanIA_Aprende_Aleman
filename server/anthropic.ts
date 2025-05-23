@@ -136,16 +136,16 @@ export async function verifyTranslation(
     }
     
     const prompt = `
-    Palabra alemana: "${germanWord}"
-    Traducción correcta: "${correctTranslation}"
-    Respuesta del usuario: "${userTranslation}"
+    Alemán: "${germanWord}"
+    Correcto: "${correctTranslation}"
+    Usuario: "${userTranslation}"
     
-    Explicación MUY BREVE por qué es incorrecto, UNA regla gramatical básica (si aplica)
+    Explicación: máximo 10 palabras por qué está mal.
     
-    Responde en formato JSON:
+    JSON:
     {
       "isCorrect": false,
-      "explanation": string (MÁXIMO 15 palabras)
+      "explanation": string
     }
     `;
 
