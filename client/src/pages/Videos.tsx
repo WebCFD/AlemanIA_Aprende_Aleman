@@ -1,14 +1,40 @@
-import { useEffect } from "react";
-import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Clock, X } from "lucide-react";
 import { useDifficulty } from "../context/DifficultyContext";
 import saludosVideoThumbnail from "@assets/image_1749204521832.png";
 import presentacionVideoThumbnail from "@assets/image_1749204660165.png";
 
 export default function Videos() {
   const { currentDifficulty } = useDifficulty();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalVideoUrl, setModalVideoUrl] = useState("");
 
-  const openVideoInYouTube = (videoUrl: string) => {
-    window.open(videoUrl, '_blank', 'noopener,noreferrer');
+  // Función para convertir URL de YouTube a formato embebido que evita restricciones
+  const convertToEmbedUrl = (youtubeUrl: string) => {
+    // Extrae el ID del video de diferentes formatos de URL de YouTube
+    let videoId = '';
+    
+    if (youtubeUrl.includes('youtu.be/')) {
+      videoId = youtubeUrl.split('youtu.be/')[1].split('?')[0];
+    } else if (youtubeUrl.includes('youtube.com/watch?v=')) {
+      videoId = youtubeUrl.split('v=')[1].split('&')[0];
+    } else if (youtubeUrl.includes('youtube.com/embed/')) {
+      videoId = youtubeUrl.split('embed/')[1].split('?')[0];
+    }
+    
+    // Usa parámetros que ayudan a evitar algunas restricciones
+    return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  };
+
+  const openVideoModal = (youtubeUrl: string) => {
+    const embedUrl = convertToEmbedUrl(youtubeUrl);
+    setModalVideoUrl(embedUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalVideoUrl("");
   };
 
   // Función para obtener descripción del nivel
@@ -99,7 +125,7 @@ export default function Videos() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <button 
-                onClick={() => openVideoInYouTube("https://youtu.be/mIA5pwW_7WY")}
+                onClick={() => openVideoModal("https://youtu.be/mIA5pwW_7WY")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
               >
                 <div className="relative h-48 flex items-center justify-center overflow-hidden">
@@ -129,7 +155,7 @@ export default function Videos() {
               </button>
               
               <button 
-                onClick={() => openVideoInYouTube("https://youtu.be/r94aqLUO0wo")}
+                onClick={() => openVideoModal("https://youtu.be/r94aqLUO0wo")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
               >
                 <div className="relative h-48 flex items-center justify-center overflow-hidden">
@@ -247,7 +273,32 @@ export default function Videos() {
         </div>
       </div>
 
-
+      {/* Modal para reproducir videos */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b">
+              <h3 className="text-lg font-semibold text-gray-800">Video Tutorial</h3>
+              <button
+                onClick={closeModal}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+            <div className="relative">
+              <iframe
+                src={modalVideoUrl}
+                className="w-full h-[60vh]"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Video Tutorial"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
