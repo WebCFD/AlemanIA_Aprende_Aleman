@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Clock, X } from "lucide-react";
 import { useDifficulty } from "../context/DifficultyContext";
-import saludosVideoThumbnail from "@assets/image_1749204521832.png";
+import saludosVideoThumbnail from "@assets/image_1749216726081.png";
 import presentacionVideoThumbnail from "@assets/image_1749204660165.png";
 
 export default function Videos() {
@@ -135,7 +135,7 @@ export default function Videos() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <button 
-                onClick={() => openVideoModal("https://youtu.be/VQ7F_6Op8jc")}
+                onClick={() => openVideoModal("https://youtu.be/nImfUI8UHkM")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
               >
                 <div className="relative h-48 flex items-center justify-center overflow-hidden">
@@ -150,7 +150,7 @@ export default function Videos() {
                   </div>
                   
                   <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
-                    11:57
+                    4:12
                   </div>
                   
                   <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
