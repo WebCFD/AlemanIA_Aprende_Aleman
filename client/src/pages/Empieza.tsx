@@ -1,8 +1,25 @@
 import { useEffect } from "react";
 import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDifficulty } from "../context/DifficultyContext";
 
 export default function Empieza() {
+  const { currentDifficulty } = useDifficulty();
+  
+  // Función para obtener el nombre del nivel
+  const getLevelName = () => {
+    switch (currentDifficulty) {
+      case "A":
+        return "A Principiante";
+      case "B":
+        return "B Intermedio";
+      case "C":
+        return "C Avanzado";
+      default:
+        return "A Principiante";
+    }
+  };
+  
   // Efecto para scroll automático a la sección guardada en localStorage
   useEffect(() => {
     // Pequeño retraso para asegurar que la página se ha cargado completamente
@@ -55,7 +72,7 @@ export default function Empieza() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-[#4A6FA5] mb-6">Empieza de 0</h1>
+        <h1 className="text-3xl font-bold text-[#4A6FA5] mb-6">Base Teórica: {getLevelName()}</h1>
         
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
