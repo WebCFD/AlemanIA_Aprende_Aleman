@@ -20,91 +20,174 @@ export default function Header() {
   };
   
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md h-[10vh] flex items-center">
-      <div className="container mx-auto px-4 md:px-6 w-full">
-        <div className="flex items-center justify-between w-full">
+    <header className="sticky top-0 z-50 bg-white shadow-md min-h-[10vh] flex items-center" style={{ padding: 'clamp(0.5rem, 1.5vw, 1rem) 0' }}>
+      <div className="w-full" style={{ padding: '0 clamp(1rem, 3vw, 2rem)' }}>
+        <div className="flex items-center justify-between w-full" style={{ gap: 'clamp(0.5rem, 2vw, 1.5rem)' }}>
           {/* Logo, Title y Frase - Izquierda */}
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1 sm:gap-2 md:gap-3 mb-1">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full bg-[#4A6FA5] flex items-center justify-center">
-                <span className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg">DE</span>
+          <div className="flex flex-col" style={{ flexBasis: '30%' }}>
+            <div className="flex items-center mb-1" style={{ gap: 'clamp(0.25rem, 1vw, 0.75rem)' }}>
+              <div 
+                className="rounded-full bg-[#4A6FA5] flex items-center justify-center"
+                style={{ 
+                  width: 'clamp(1.5rem, 3vw, 3rem)', 
+                  height: 'clamp(1.5rem, 3vw, 3rem)' 
+                }}
+              >
+                <span 
+                  className="text-white font-bold"
+                  style={{ fontSize: 'clamp(0.7rem, 1.5vw, 1.2rem)' }}
+                >
+                  DE
+                </span>
               </div>
-              <h1 className="font-heading font-bold text-sm sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl text-[#4A6FA5] tracking-tight">
+              <h1 
+                className="font-heading font-bold text-[#4A6FA5] tracking-tight"
+                style={{ fontSize: 'clamp(1.2rem, 4vw, 2.5rem)' }}
+              >
                 AlemanIA
               </h1>
             </div>
-            <div className="italic hidden sm:block">
-              <p className="text-xs sm:text-xs md:text-sm text-[#4A6FA5] leading-tight font-medium">"Quien aprende una nueva lengua adquiere una nueva alma."</p>
-              <p className="text-xs text-gray-600">- Carlos V de Alemania y I de España (1500-1558)</p>
+            <div className="italic">
+              <p 
+                className="text-[#4A6FA5] leading-tight font-medium"
+                style={{ fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)' }}
+              >
+                "Quien aprende una nueva lengua adquiere una nueva alma."
+              </p>
+              <p 
+                className="text-gray-600"
+                style={{ fontSize: 'clamp(0.5rem, 1vw, 0.75rem)' }}
+              >
+                - Carlos V de Alemania y I de España (1500-1558)
+              </p>
             </div>
           </div>
           
           {/* Selector de Nivel - Centro */}
-          <div className="flex flex-col items-center">
-            <p className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2 hidden md:block">Selecciona tu nivel:</p>
-            <div className="flex items-center gap-0.5 sm:gap-1 bg-gray-100 rounded-full p-0.5 sm:p-1">
+          <div className="flex flex-col items-center" style={{ flexBasis: '40%' }}>
+            <p 
+              className="text-gray-600 mb-1"
+              style={{ fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)' }}
+            >
+              Selecciona tu nivel:
+            </p>
+            <div 
+              className="flex items-center bg-gray-100 rounded-full"
+              style={{ 
+                gap: 'clamp(0.125rem, 0.5vw, 0.25rem)',
+                padding: 'clamp(0.125rem, 0.5vw, 0.25rem)'
+              }}
+            >
               <button
                 onClick={() => setCurrentDifficulty("A")}
-                className={`py-1 px-2 sm:py-2 sm:px-3 md:px-4 rounded-full font-medium transition-all duration-200 flex items-center gap-1 sm:gap-2 text-xs sm:text-sm ${
+                className={`rounded-full font-medium transition-all duration-200 flex items-center ${
                   currentDifficulty === "A" 
                     ? "bg-[#4A6FA5] text-white"
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
+                style={{ 
+                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
+                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
+                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                }}
               >
-                <span className="flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white text-[#4A6FA5] font-bold text-xs">
+                <span 
+                  className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
+                  style={{ 
+                    width: 'clamp(1rem, 2vw, 1.5rem)', 
+                    height: 'clamp(1rem, 2vw, 1.5rem)',
+                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                  }}
+                >
                   A
                 </span>
-                <span className="hidden sm:inline">Principiante</span>
+                <span>Principiante</span>
               </button>
               
               <button
                 onClick={() => setCurrentDifficulty("B")}
-                className={`py-1 px-2 sm:py-2 sm:px-3 md:px-4 rounded-full font-medium transition-all duration-200 flex items-center gap-1 sm:gap-2 text-xs sm:text-sm ${
+                className={`rounded-full font-medium transition-all duration-200 flex items-center ${
                   currentDifficulty === "B" 
                     ? "bg-[#4A6FA5] text-white"
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
+                style={{ 
+                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
+                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
+                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                }}
               >
-                <span className="flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white text-[#4A6FA5] font-bold text-xs">
+                <span 
+                  className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
+                  style={{ 
+                    width: 'clamp(1rem, 2vw, 1.5rem)', 
+                    height: 'clamp(1rem, 2vw, 1.5rem)',
+                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                  }}
+                >
                   B
                 </span>
-                <span className="hidden sm:inline">Intermedio</span>
+                <span>Intermedio</span>
               </button>
               
               <button
                 onClick={() => setCurrentDifficulty("C")}
-                className={`py-1 px-2 sm:py-2 sm:px-3 md:px-4 rounded-full font-medium transition-all duration-200 flex items-center gap-1 sm:gap-2 text-xs sm:text-sm ${
+                className={`rounded-full font-medium transition-all duration-200 flex items-center ${
                   currentDifficulty === "C" 
                     ? "bg-[#4A6FA5] text-white"
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
+                style={{ 
+                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
+                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
+                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                }}
               >
-                <span className="flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-white text-[#4A6FA5] font-bold text-xs">
+                <span 
+                  className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
+                  style={{ 
+                    width: 'clamp(1rem, 2vw, 1.5rem)', 
+                    height: 'clamp(1rem, 2vw, 1.5rem)',
+                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                  }}
+                >
                   C
                 </span>
-                <span className="hidden sm:inline">Avanzado</span>
+                <span>Avanzado</span>
               </button>
             </div>
           </div>
           
           {/* Botones - Derecha */}
-          <div className="flex flex-col items-end gap-1 sm:gap-2">
+          <div className="flex flex-col items-end" style={{ flexBasis: '30%', gap: 'clamp(0.25rem, 1vw, 0.5rem)' }}>
             <Button 
               variant="default" 
-              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-1 sm:gap-2 transition-colors w-28 sm:w-36 md:w-44 lg:w-56"
+              className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium rounded-full flex items-center justify-center transition-colors"
               onClick={handleTipButton}
+              style={{ 
+                padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
+                gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
+                fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)',
+                width: 'clamp(7rem, 15vw, 14rem)'
+              }}
             >
-              <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs md:text-sm">Invítanos a un café</span>
+              <Heart style={{ width: 'clamp(0.75rem, 1.5vw, 1rem)', height: 'clamp(0.75rem, 1.5vw, 1rem)' }} />
+              <span>Invítanos a un café</span>
             </Button>
             
             <Button 
               variant="default" 
-              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded-full flex items-center justify-center gap-1 sm:gap-2 transition-colors w-28 sm:w-36 md:w-44 lg:w-56"
+              className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium rounded-full flex items-center justify-center transition-colors"
               onClick={() => setFeedbackDialogOpen(true)}
+              style={{ 
+                padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
+                gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
+                fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)',
+                width: 'clamp(7rem, 15vw, 14rem)'
+              }}
             >
-              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="text-xs sm:text-xs md:text-sm">Tu feedback nos interesa</span>
+              <MessageSquare style={{ width: 'clamp(0.75rem, 1.5vw, 1rem)', height: 'clamp(0.75rem, 1.5vw, 1rem)' }} />
+              <span>Tu feedback nos interesa</span>
             </Button>
           </div>
         </div>
