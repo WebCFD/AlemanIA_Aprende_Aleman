@@ -96,24 +96,22 @@ export default function Videos() {
                 href="https://youtu.be/mIA5pwW_7WY?si=JdeQMlTkFG53DmMD" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
+                className="bg-blue-50 border border-blue-200 rounded-lg p-6 hover:bg-blue-100 transition-colors block"
               >
-                <div className="bg-gradient-to-br from-red-500 to-red-600 h-40 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-                  <div className="relative z-10 bg-white bg-opacity-90 rounded-full p-3">
-                    <Video className="w-8 h-8 text-red-600" />
+                <div className="flex items-start space-x-4">
+                  <div className="bg-[#4A6FA5] text-white rounded-full p-3 flex-shrink-0">
+                    <Video className="w-6 h-6" />
                   </div>
-                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-                    YouTube
-                  </div>
-                </div>
-                <div className="p-4">
-                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
-                  <h3 className="text-lg font-medium text-gray-800 mb-1">Saludos básicos en alemán</h3>
-                  <p className="text-sm text-gray-600 mb-2">Hallo, Guten Tag, Auf Wiedersehen</p>
-                  <div className="flex items-center text-gray-500 text-xs">
-                    <Layers className="w-4 h-4 mr-1" />
-                    <span>Video disponible</span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded">Nivel A1</span>
+                      <span className="text-xs text-red-600 font-medium">YouTube</span>
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-800 mb-2">Saludos básicos en alemán</h3>
+                    <p className="text-sm text-gray-600 mb-3">Hallo, Guten Tag, Auf Wiedersehen</p>
+                    <div className="text-xs text-[#4A6FA5] font-medium">
+                      ▶ Ver video
+                    </div>
                   </div>
                 </div>
               </a>
@@ -122,24 +120,22 @@ export default function Videos() {
                 href="https://youtu.be/r94aqLUO0wo?si=Yk0oq22zUlmsQuTc" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
+                className="bg-blue-50 border border-blue-200 rounded-lg p-6 hover:bg-blue-100 transition-colors block"
               >
-                <div className="bg-gradient-to-br from-red-500 to-red-600 h-40 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-                  <div className="relative z-10 bg-white bg-opacity-90 rounded-full p-3">
-                    <Video className="w-8 h-8 text-red-600" />
+                <div className="flex items-start space-x-4">
+                  <div className="bg-[#4A6FA5] text-white rounded-full p-3 flex-shrink-0">
+                    <Video className="w-6 h-6" />
                   </div>
-                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-                    YouTube
-                  </div>
-                </div>
-                <div className="p-4">
-                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
-                  <h3 className="text-lg font-medium text-gray-800 mb-1">Presentaciones personales</h3>
-                  <p className="text-sm text-gray-600 mb-2">Cómo presentarte en alemán</p>
-                  <div className="flex items-center text-gray-500 text-xs">
-                    <Layers className="w-4 h-4 mr-1" />
-                    <span>Video disponible</span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded">Nivel A1</span>
+                      <span className="text-xs text-red-600 font-medium">YouTube</span>
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-800 mb-2">Presentaciones personales</h3>
+                    <p className="text-sm text-gray-600 mb-3">Cómo presentarte en alemán</p>
+                    <div className="text-xs text-[#4A6FA5] font-medium">
+                      ▶ Ver video
+                    </div>
                   </div>
                 </div>
               </a>
