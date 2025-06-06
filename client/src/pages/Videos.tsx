@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Clock } from "lucide-react";
 import { useDifficulty } from "../context/DifficultyContext";
+import saludosVideoThumbnail from "@assets/image_1749204521832.png";
 
 export default function Videos() {
   const { currentDifficulty } = useDifficulty();
@@ -101,7 +102,7 @@ export default function Videos() {
                 <div className="relative h-48 flex items-center justify-center overflow-hidden">
                   {/* Imagen real del video de YouTube */}
                   <img 
-                    src="/attached_assets/image_1749204521832.png" 
+                    src={saludosVideoThumbnail} 
                     alt="Los Saludos en Alemán - Miniatura del video"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
