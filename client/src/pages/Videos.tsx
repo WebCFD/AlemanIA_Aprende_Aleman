@@ -226,6 +226,166 @@ export default function Videos() {
               </button>
             </div>
           </div>
+
+          {/* Sección 2: Sustantivos y mayúsculas */}
+          <div id="sustantivos-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              2. Sustantivos y mayúsculas
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre las reglas de mayúsculas en alemán y sustantivos básicos.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Reglas de mayúsculas</h4>
+                <p className="text-sm text-gray-600">Cuándo usar mayúsculas en alemán</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Sustantivos básicos</h4>
+                <p className="text-sm text-gray-600">Vocabulario esencial de sustantivos</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 3: Pronombres personales */}
+          <div id="pronombres-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <Users className="w-5 h-5 mr-2" /> 
+              3. Pronombres personales
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre los pronombres personales en alemán (ich, du, er, sie, es).
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Pronombres básicos</h4>
+                <p className="text-sm text-gray-600">ich, du, er, sie, es, wir, ihr, sie</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Uso en oraciones</h4>
+                <p className="text-sm text-gray-600">Cómo usar pronombres en contexto</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 4: Formación del plural */}
+          <div id="plural-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <Layers className="w-5 h-5 mr-2" /> 
+              4. Formación del plural
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre las reglas del plural en alemán y sus excepciones.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Reglas del plural</h4>
+                <p className="text-sm text-gray-600">-e, -er, -en, -s y umlauts</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Plurales irregulares</h4>
+                <p className="text-sm text-gray-600">Excepciones y casos especiales</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 5: Expresiones útiles */}
+          <div id="expresiones-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <TextQuote className="w-5 h-5 mr-2" /> 
+              5. Expresiones útiles
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos con frases y expresiones comunes para el día a día.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Frases cotidianas</h4>
+                <p className="text-sm text-gray-600">Expresiones para conversaciones básicas</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Preguntas básicas</h4>
+                <p className="text-sm text-gray-600">Cómo hacer preguntas en alemán</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 6: Tiempo presente */}
+          <div id="tiempo-presente-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <Clock className="w-5 h-5 mr-2" /> 
+              6. Tiempo presente
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre la conjugación de verbos en presente (Präsens).
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Verbos regulares</h4>
+                <p className="text-sm text-gray-600">Conjugación básica en presente</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Verbos irregulares</h4>
+                <p className="text-sm text-gray-600">sein, haben y otros verbos especiales</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+            </div>
+          </div>
         </>
       );
     } else if (currentDifficulty === "B") {
