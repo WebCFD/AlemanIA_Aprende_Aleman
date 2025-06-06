@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import Empieza from "@/pages/Empieza";
+import EmpiezaNew from "@/pages/EmpiezaNew";
 import Videos from "@/pages/Videos";
 import QuienesSomos from "@/pages/QuienesSomos";
 import Header from "@/components/Header";
@@ -83,7 +83,7 @@ function Router() {
       <main className="min-h-screen">
         <Switch>
           <Route path="/" component={Home} />
-          <Route path="/empieza" component={Empieza} />
+          <Route path="/empieza" component={EmpiezaNew} />
           <Route path="/videos" component={Videos} />
           <Route path="/quienes-somos" component={QuienesSomos} />
           <Route component={NotFound} />

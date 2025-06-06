@@ -19,6 +19,52 @@ export default function Empieza() {
         return "A Principiante";
     }
   };
+
+  // Función para obtener la descripción según el nivel
+  const getLevelDescription = () => {
+    switch (currentDifficulty) {
+      case "A":
+        return "En esta sección aprenderás lo básico para empezar a hablar alemán desde cero. Encontrarás saludos, expresiones comunes y vocabulario fundamental para tus primeras conversaciones.";
+      case "B":
+        return "Profundiza en la gramática alemana con casos, verbos modales y estructuras más complejas. Perfecto para quienes ya dominan lo básico y quieren avanzar al siguiente nivel.";
+      case "C":
+        return "Domina los aspectos más avanzados del alemán incluyendo subjuntivo, voz pasiva y construcciones complejas. Para estudiantes que buscan fluidez y precisión gramatical.";
+      default:
+        return "En esta sección aprenderás lo básico para empezar a hablar alemán desde cero. Encontrarás saludos, expresiones comunes y vocabulario fundamental para tus primeras conversaciones.";
+    }
+  };
+
+  // Función para obtener la tabla de contenidos según el nivel
+  const getTableOfContents = () => {
+    switch (currentDifficulty) {
+      case "A":
+        return [
+          { id: "saludos", title: "1. Saludos básicos" },
+          { id: "sustantivos", title: "2. Sustantivos y mayúsculas" },
+          { id: "pronombres", title: "3. Pronombres personales" },
+          { id: "plural", title: "4. Formación del plural" },
+          { id: "expresiones", title: "5. Expresiones útiles" }
+        ];
+      case "B":
+        return [
+          { id: "casos", title: "1. Casos alemanes (Nominativ/Akkusativ)" },
+          { id: "verbos-modales", title: "2. Verbos modales" },
+          { id: "preposiciones", title: "3. Preposiciones con casos" },
+          { id: "orden-palabras", title: "4. Orden de palabras" },
+          { id: "perfekt", title: "5. Tiempo pasado (Perfekt)" }
+        ];
+      case "C":
+        return [
+          { id: "todos-casos", title: "1. Todos los casos (Dativ/Genitiv)" },
+          { id: "subjuntivo", title: "2. Subjuntivo (Konjunktiv)" },
+          { id: "voz-pasiva", title: "3. Voz pasiva (Passiv)" },
+          { id: "subordinadas", title: "4. Oraciones subordinadas" },
+          { id: "idiomaticas", title: "5. Expresiones idiomáticas" }
+        ];
+      default:
+        return [];
+    }
+  };
   
   // Efecto para scroll automático a la sección guardada en localStorage
   useEffect(() => {
@@ -69,51 +115,12 @@ export default function Empieza() {
       console.log('Tu navegador no soporta la Web Speech API');
     }
   };
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-[#4A6FA5] mb-6">Base Teórica: {getLevelName()}</h1>
-        
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            ¡Bienvenido al alemán!
-          </h2>
-          
-          <p className="text-gray-600 mb-6">
-            En esta sección aprenderás lo básico para empezar a hablar alemán desde cero. 
-            Encontrarás saludos, expresiones comunes y vocabulario fundamental para tus primeras 
-            conversaciones.
-          </p>
-          
-          <div className="border-l-4 border-[#4A6FA5] pl-4 py-2 bg-blue-50 mb-6">
-            <p className="italic text-gray-700">
-              "El primer paso es siempre el más difícil, pero también el más importante."
-            </p>
-          </div>
 
-          {/* Tabla de contenidos */}
-          <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-medium text-gray-800 mb-3">Contenido</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#saludos" className="text-[#4A6FA5] hover:underline">1. Saludos básicos</a>
-              </li>
-              <li>
-                <a href="#sustantivos" className="text-[#4A6FA5] hover:underline">2. Sustantivos y mayúsculas</a>
-              </li>
-              <li>
-                <a href="#pronombres" className="text-[#4A6FA5] hover:underline">3. Pronombres personales</a>
-              </li>
-              <li>
-                <a href="#plural" className="text-[#4A6FA5] hover:underline">4. Formación del plural</a>
-              </li>
-              <li>
-                <a href="#expresiones" className="text-[#4A6FA5] hover:underline">5. Expresiones útiles</a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Saludos básicos */}
+  // Función para renderizar contenido del nivel A
+  const renderLevelAContent = () => {
+    return (
+      <>
+        {/* Saludos básicos */}
           <div id="saludos" className="mb-12 pt-2">
             <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
               <MessageSquare className="w-5 h-5 mr-2" /> 
