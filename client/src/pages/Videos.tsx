@@ -15,21 +15,28 @@ export default function Videos() {
     let videoId = '';
     
     if (youtubeUrl.includes('youtu.be/')) {
-      videoId = youtubeUrl.split('youtu.be/')[1].split('?')[0];
+      videoId = youtubeUrl.split('youtu.be/')[1].split('?')[0].split('&')[0];
     } else if (youtubeUrl.includes('youtube.com/watch?v=')) {
       videoId = youtubeUrl.split('v=')[1].split('&')[0];
     } else if (youtubeUrl.includes('youtube.com/embed/')) {
       videoId = youtubeUrl.split('embed/')[1].split('?')[0];
     }
     
-    // Usa parámetros que ayudan a evitar algunas restricciones
-    return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    // Limpia cualquier parámetro adicional del ID
+    videoId = videoId.split('&')[0].split('?')[0].split('#')[0];
+    
+    // Usa parámetros optimizados para máxima compatibilidad
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=1&cc_load_policy=0&iv_load_policy=3&enablejsapi=1`;
   };
 
   const openVideoModal = (youtubeUrl: string) => {
     const embedUrl = convertToEmbedUrl(youtubeUrl);
     setModalVideoUrl(embedUrl);
     setIsModalOpen(true);
+  };
+
+  const openVideoInNewTab = (youtubeUrl: string) => {
+    window.open(youtubeUrl, '_blank', 'noopener,noreferrer');
   };
 
   const closeModal = () => {
