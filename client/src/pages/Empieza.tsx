@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Volume2 } from "lucide-react";
+import { BookOpen, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Volume2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDifficulty } from "../context/DifficultyContext";
 
