@@ -96,23 +96,31 @@ export default function Videos() {
                 href="https://youtu.be/mIA5pwW_7WY?si=JdeQMlTkFG53DmMD" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-blue-50 border border-blue-200 rounded-lg p-6 hover:bg-blue-100 transition-colors block"
+                className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-[#4A6FA5] text-white rounded-full p-3 flex-shrink-0">
-                    <Video className="w-6 h-6" />
+                <div className="relative bg-gradient-to-br from-gray-700 to-gray-900 h-48 flex items-center justify-center">
+                  {/* Simular fondo de video */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-800 opacity-80"></div>
+                  
+                  {/* Botón de play centralizado */}
+                  <div className="relative z-10 bg-red-600 hover:bg-red-700 transition-colors rounded-full p-4 shadow-lg">
+                    <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded">Nivel A1</span>
-                      <span className="text-xs text-red-600 font-medium">YouTube</span>
-                    </div>
-                    <h3 className="text-lg font-medium text-gray-800 mb-2">Saludos básicos en alemán</h3>
-                    <p className="text-sm text-gray-600 mb-3">Hallo, Guten Tag, Auf Wiedersehen</p>
-                    <div className="text-xs text-[#4A6FA5] font-medium">
-                      ▶ Ver video
-                    </div>
+                  
+                  {/* Duración en esquina inferior derecha */}
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                    5:30
                   </div>
+                  
+                  {/* Logo YouTube en esquina superior derecha */}
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
+                    YouTube
+                  </div>
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Saludos básicos en alemán</h3>
+                  <p className="text-sm text-gray-600">Hallo, Guten Tag, Auf Wiedersehen</p>
                 </div>
               </a>
               
@@ -120,23 +128,31 @@ export default function Videos() {
                 href="https://youtu.be/r94aqLUO0wo?si=Yk0oq22zUlmsQuTc" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-blue-50 border border-blue-200 rounded-lg p-6 hover:bg-blue-100 transition-colors block"
+                className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-[#4A6FA5] text-white rounded-full p-3 flex-shrink-0">
-                    <Video className="w-6 h-6" />
+                <div className="relative bg-gradient-to-br from-gray-700 to-gray-900 h-48 flex items-center justify-center">
+                  {/* Simular fondo de video */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 opacity-80"></div>
+                  
+                  {/* Botón de play centralizado */}
+                  <div className="relative z-10 bg-red-600 hover:bg-red-700 transition-colors rounded-full p-4 shadow-lg">
+                    <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded">Nivel A1</span>
-                      <span className="text-xs text-red-600 font-medium">YouTube</span>
-                    </div>
-                    <h3 className="text-lg font-medium text-gray-800 mb-2">Presentaciones personales</h3>
-                    <p className="text-sm text-gray-600 mb-3">Cómo presentarte en alemán</p>
-                    <div className="text-xs text-[#4A6FA5] font-medium">
-                      ▶ Ver video
-                    </div>
+                  
+                  {/* Duración en esquina inferior derecha */}
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                    6:15
                   </div>
+                  
+                  {/* Logo YouTube en esquina superior derecha */}
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
+                    YouTube
+                  </div>
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Presentaciones personales</h3>
+                  <p className="text-sm text-gray-600">Cómo presentarte en alemán</p>
                 </div>
               </a>
             </div>
