@@ -29,20 +29,20 @@ export default function Header() {
               <div 
                 className="rounded-full bg-[#4A6FA5] flex items-center justify-center"
                 style={{ 
-                  width: 'clamp(1.5rem, 3vw, 3rem)', 
-                  height: 'clamp(1.5rem, 3vw, 3rem)' 
+                  width: 'clamp(1rem, 5vw, 4rem)', 
+                  height: 'clamp(1rem, 5vw, 4rem)' 
                 }}
               >
                 <span 
                   className="text-white font-bold"
-                  style={{ fontSize: 'clamp(0.7rem, 1.5vw, 1.2rem)' }}
+                  style={{ fontSize: 'clamp(0.5rem, 2.5vw, 1.5rem)' }}
                 >
                   DE
                 </span>
               </div>
               <h1 
                 className="font-heading font-bold text-[#4A6FA5] tracking-tight"
-                style={{ fontSize: 'clamp(1.2rem, 4vw, 2.5rem)' }}
+                style={{ fontSize: 'clamp(0.8rem, 6vw, 3.5rem)' }}
               >
                 AlemanIA
               </h1>
@@ -50,13 +50,13 @@ export default function Header() {
             <div className="italic">
               <p 
                 className="text-[#4A6FA5] leading-tight font-medium"
-                style={{ fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)' }}
+                style={{ fontSize: 'clamp(0.4rem, 2vw, 1.2rem)' }}
               >
                 "Quien aprende una nueva lengua adquiere una nueva alma."
               </p>
               <p 
                 className="text-gray-600"
-                style={{ fontSize: 'clamp(0.5rem, 1vw, 0.75rem)' }}
+                style={{ fontSize: 'clamp(0.3rem, 1.5vw, 1rem)' }}
               >
                 - Carlos V de Alemania y I de España (1500-1558)
               </p>
@@ -67,15 +67,15 @@ export default function Header() {
           <div className="flex flex-col items-center" style={{ flexBasis: '40%' }}>
             <p 
               className="text-gray-600 mb-1"
-              style={{ fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)' }}
+              style={{ fontSize: 'clamp(0.4rem, 2vw, 1.2rem)' }}
             >
               Selecciona tu nivel:
             </p>
             <div 
               className="flex items-center bg-gray-100 rounded-full"
               style={{ 
-                gap: 'clamp(0.125rem, 0.5vw, 0.25rem)',
-                padding: 'clamp(0.125rem, 0.5vw, 0.25rem)'
+                gap: 'clamp(0.05rem, 1vw, 0.5rem)',
+                padding: 'clamp(0.05rem, 1vw, 0.5rem)'
               }}
             >
               <button
@@ -86,17 +86,17 @@ export default function Header() {
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
                 style={{ 
-                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
-                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
-                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                  padding: 'clamp(0.1rem, 2vw, 1rem) clamp(0.2rem, 3vw, 2rem)',
+                  gap: 'clamp(0.1rem, 1.5vw, 1rem)',
+                  fontSize: 'clamp(0.3rem, 2.5vw, 1.5rem)'
                 }}
               >
                 <span 
                   className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
                   style={{ 
-                    width: 'clamp(1rem, 2vw, 1.5rem)', 
-                    height: 'clamp(1rem, 2vw, 1.5rem)',
-                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                    width: 'clamp(0.6rem, 3vw, 2rem)', 
+                    height: 'clamp(0.6rem, 3vw, 2rem)',
+                    fontSize: 'clamp(0.3rem, 2vw, 1.2rem)'
                   }}
                 >
                   A
@@ -112,17 +112,17 @@ export default function Header() {
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
                 style={{ 
-                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
-                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
-                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                  padding: 'clamp(0.1rem, 2vw, 1rem) clamp(0.2rem, 3vw, 2rem)',
+                  gap: 'clamp(0.1rem, 1.5vw, 1rem)',
+                  fontSize: 'clamp(0.3rem, 2.5vw, 1.5rem)'
                 }}
               >
                 <span 
                   className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
                   style={{ 
-                    width: 'clamp(1rem, 2vw, 1.5rem)', 
-                    height: 'clamp(1rem, 2vw, 1.5rem)',
-                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                    width: 'clamp(0.6rem, 3vw, 2rem)', 
+                    height: 'clamp(0.6rem, 3vw, 2rem)',
+                    fontSize: 'clamp(0.3rem, 2vw, 1.2rem)'
                   }}
                 >
                   B
@@ -138,17 +138,17 @@ export default function Header() {
                     : "bg-gray-100 text-[#4A6FA5]"
                 }`}
                 style={{ 
-                  padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
-                  gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
-                  fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)'
+                  padding: 'clamp(0.1rem, 2vw, 1rem) clamp(0.2rem, 3vw, 2rem)',
+                  gap: 'clamp(0.1rem, 1.5vw, 1rem)',
+                  fontSize: 'clamp(0.3rem, 2.5vw, 1.5rem)'
                 }}
               >
                 <span 
                   className="flex items-center justify-center rounded-full bg-white text-[#4A6FA5] font-bold"
                   style={{ 
-                    width: 'clamp(1rem, 2vw, 1.5rem)', 
-                    height: 'clamp(1rem, 2vw, 1.5rem)',
-                    fontSize: 'clamp(0.5rem, 1vw, 0.75rem)'
+                    width: 'clamp(0.6rem, 3vw, 2rem)', 
+                    height: 'clamp(0.6rem, 3vw, 2rem)',
+                    fontSize: 'clamp(0.3rem, 2vw, 1.2rem)'
                   }}
                 >
                   C
@@ -159,19 +159,19 @@ export default function Header() {
           </div>
           
           {/* Botones - Derecha */}
-          <div className="flex flex-col items-end" style={{ flexBasis: '30%', gap: 'clamp(0.25rem, 1vw, 0.5rem)' }}>
+          <div className="flex flex-col items-end" style={{ flexBasis: '30%', gap: 'clamp(0.1rem, 1.5vw, 1rem)' }}>
             <Button 
               variant="default" 
               className="bg-[#FF9E44] hover:bg-[#FFBD7D] text-white font-medium rounded-full flex items-center justify-center transition-colors"
               onClick={handleTipButton}
               style={{ 
-                padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
-                gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
-                fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)',
-                width: 'clamp(7rem, 15vw, 14rem)'
+                padding: 'clamp(0.1rem, 2vw, 1rem) clamp(0.3rem, 3vw, 2rem)',
+                gap: 'clamp(0.1rem, 1vw, 0.8rem)',
+                fontSize: 'clamp(0.3rem, 2.5vw, 1.5rem)',
+                width: 'clamp(4rem, 25vw, 20rem)'
               }}
             >
-              <Heart style={{ width: 'clamp(0.75rem, 1.5vw, 1rem)', height: 'clamp(0.75rem, 1.5vw, 1rem)' }} />
+              <Heart style={{ width: 'clamp(0.4rem, 2.5vw, 1.5rem)', height: 'clamp(0.4rem, 2.5vw, 1.5rem)' }} />
               <span>Invítanos a un café</span>
             </Button>
             
@@ -180,13 +180,13 @@ export default function Header() {
               className="bg-[#4A6FA5] hover:bg-[#395888] text-white font-medium rounded-full flex items-center justify-center transition-colors"
               onClick={() => setFeedbackDialogOpen(true)}
               style={{ 
-                padding: 'clamp(0.25rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem)',
-                gap: 'clamp(0.25rem, 0.5vw, 0.5rem)',
-                fontSize: 'clamp(0.6rem, 1.2vw, 0.9rem)',
-                width: 'clamp(7rem, 15vw, 14rem)'
+                padding: 'clamp(0.1rem, 2vw, 1rem) clamp(0.3rem, 3vw, 2rem)',
+                gap: 'clamp(0.1rem, 1vw, 0.8rem)',
+                fontSize: 'clamp(0.3rem, 2.5vw, 1.5rem)',
+                width: 'clamp(4rem, 25vw, 20rem)'
               }}
             >
-              <MessageSquare style={{ width: 'clamp(0.75rem, 1.5vw, 1rem)', height: 'clamp(0.75rem, 1.5vw, 1rem)' }} />
+              <MessageSquare style={{ width: 'clamp(0.4rem, 2.5vw, 1.5rem)', height: 'clamp(0.4rem, 2.5vw, 1.5rem)' }} />
               <span>Tu feedback nos interesa</span>
             </Button>
           </div>
