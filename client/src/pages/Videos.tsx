@@ -134,7 +134,7 @@ export default function Videos() {
               Videos para aprender los saludos y expresiones más comunes en alemán.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <button 
                 onClick={() => openVideoModal("https://youtu.be/nImfUI8UHkM")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
@@ -195,6 +195,31 @@ export default function Videos() {
                 </div>
               </button>
               
+
+            </div>
+          </div>
+
+          {/* Sección 2: Sustantivos y mayúsculas */}
+          <div id="sustantivos-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              2. Sustantivos y mayúsculas
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre las reglas de mayúsculas en alemán y sustantivos básicos.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
+                  <Film className="w-12 h-12 text-gray-400" />
+                </div>
+                <h4 className="font-medium text-gray-800 mb-2">Reglas de mayúsculas</h4>
+                <p className="text-sm text-gray-600">Cuándo usar mayúsculas en alemán</p>
+                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
+              </div>
+              
               <button 
                 onClick={() => openVideoModal("https://youtu.be/pdDNlggNiYs")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
@@ -224,38 +249,6 @@ export default function Videos() {
                   <p className="text-sm text-gray-600">Vocabulario básico esencial</p>
                 </div>
               </button>
-            </div>
-          </div>
-
-          {/* Sección 2: Sustantivos y mayúsculas */}
-          <div id="sustantivos-videos" className="mb-12 pt-2">
-            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
-              <BookOpen className="w-5 h-5 mr-2" /> 
-              2. Sustantivos y mayúsculas
-            </h3>
-            
-            <p className="mb-4 text-gray-700">
-              Videos sobre las reglas de mayúsculas en alemán y sustantivos básicos.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
-                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
-                  <Film className="w-12 h-12 text-gray-400" />
-                </div>
-                <h4 className="font-medium text-gray-800 mb-2">Reglas de mayúsculas</h4>
-                <p className="text-sm text-gray-600">Cuándo usar mayúsculas en alemán</p>
-                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
-              </div>
-              
-              <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
-                <div className="flex items-center justify-center h-32 bg-gray-200 rounded mb-4">
-                  <Film className="w-12 h-12 text-gray-400" />
-                </div>
-                <h4 className="font-medium text-gray-800 mb-2">Sustantivos básicos</h4>
-                <p className="text-sm text-gray-600">Vocabulario esencial de sustantivos</p>
-                <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2 py-1 rounded mt-2">Próximamente</span>
-              </div>
             </div>
           </div>
 
