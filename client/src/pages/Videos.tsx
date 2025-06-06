@@ -135,7 +135,7 @@ export default function Videos() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <button 
-                onClick={() => openVideoModal("https://youtu.be/RuGmc662HDg")}
+                onClick={() => openVideoModal("https://youtu.be/VQ7F_6Op8jc")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
               >
                 <div className="relative h-48 flex items-center justify-center overflow-hidden">
