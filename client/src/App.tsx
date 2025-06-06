@@ -45,7 +45,7 @@ function Navigation() {
                 : "text-gray-600 hover:text-[#4A6FA5]"
             )}
           >
-            Empieza de 0
+            Base Teórica
           </button>
           <button 
             onClick={() => navigate("/videos")}
