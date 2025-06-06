@@ -80,42 +80,320 @@ export default function Videos() {
     if (currentDifficulty === "A") {
       return (
         <>
-          {/* Contenido nivel A - placeholder */}
-          <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-blue-800 font-medium">
-              📺 Contenido del Nivel A - En desarrollo
+          {/* Sección 1: Saludos básicos */}
+          <div id="saludos-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <MessageSquare className="w-5 h-5 mr-2" /> 
+              1. Saludos básicos
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos para aprender los saludos y expresiones más comunes en alemán.
             </p>
-            <p className="text-blue-700 text-sm mt-2">
-              Aquí se añadirá el contenido específico de videos para el nivel principiante.
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Saludos básicos en alemán</h3>
+                  <p className="text-sm text-gray-600 mb-2">Hallo, Guten Tag, Auf Wiedersehen</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>5:30 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Presentaciones personales</h3>
+                  <p className="text-sm text-gray-600 mb-2">Cómo presentarte en alemán</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>6:15 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 2: Sustantivos y mayúsculas */}
+          <div id="sustantivos-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              2. Sustantivos y mayúsculas
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Aprende el uso de los artículos en alemán y las reglas de sustantivos.
             </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Los artículos: der, die, das</h3>
+                  <p className="text-sm text-gray-600 mb-2">Guía completa del género en alemán</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>8:45 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Sustantivos con mayúscula</h3>
+                  <p className="text-sm text-gray-600 mb-2">Regla fundamental del alemán</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>4:20 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 6: Tiempo presente */}
+          <div id="tiempo-presente-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <Clock className="w-5 h-5 mr-2" /> 
+              6. Tiempo presente
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre conjugaciones en tiempo presente alemán.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Verbos regulares</h3>
+                  <p className="text-sm text-gray-600 mb-2">Conjugación básica: machen, lernen, spielen</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>7:20 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Verbos sein y haben</h3>
+                  <p className="text-sm text-gray-600 mb-2">Los verbos más importantes del alemán</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>9:15 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       );
     } else if (currentDifficulty === "B") {
       return (
         <>
-          {/* Contenido nivel B - placeholder */}
-          <div className="mb-8 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p className="text-orange-800 font-medium">
-              📚 Contenido del Nivel B - En desarrollo
+          {/* Sección 1: Casos alemanes */}
+          <div id="casos-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              1. Casos alemanes (Nominativ, Akkusativ)
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos explicativos sobre el sistema de casos alemán.
             </p>
-            <p className="text-orange-700 text-sm mt-2">
-              Aquí se añadirá el contenido específico de videos para el nivel intermedio.
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-orange-100 text-orange-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel B1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Introducción a los casos</h3>
+                  <p className="text-sm text-gray-600 mb-2">Nominativ vs Akkusativ explicado</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>12:30 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-orange-100 text-orange-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel B1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Artículos en casos</h3>
+                  <p className="text-sm text-gray-600 mb-2">der/den, die/die, das/das</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>10:45 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 2: Verbos modales */}
+          <div id="verbos-modales-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <TypeIcon className="w-5 h-5 mr-2" /> 
+              2. Verbos modales
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre können, müssen, wollen y otros verbos modales.
             </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-orange-100 text-orange-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel B1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">können, müssen, wollen</h3>
+                  <p className="text-sm text-gray-600 mb-2">Los tres verbos modales principales</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>15:20 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-orange-100 text-orange-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel B2</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Otros verbos modales</h3>
+                  <p className="text-sm text-gray-600 mb-2">dürfen, sollen, mögen en contexto</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>11:40 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       );
     } else if (currentDifficulty === "C") {
       return (
         <>
-          {/* Contenido nivel C - placeholder */}
-          <div className="mb-8 p-4 bg-purple-50 border border-purple-200 rounded-lg">
-            <p className="text-purple-800 font-medium">
-              🎓 Contenido del Nivel C - En desarrollo
+          {/* Sección 1: Todos los casos */}
+          <div id="casos-avanzados-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              1. Todos los casos (Dativ, Genitiv)
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos avanzados sobre Dativ y Genitiv en alemán.
             </p>
-            <p className="text-purple-700 text-sm mt-2">
-              Aquí se añadirá el contenido específico de videos para el nivel avanzado.
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-purple-100 text-purple-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel C1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Dativ completo</h3>
+                  <p className="text-sm text-gray-600 mb-2">Objeto indirecto y preposiciones</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>18:30 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-purple-100 text-purple-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel C2</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Genitiv en contextos formales</h3>
+                  <p className="text-sm text-gray-600 mb-2">Posesión y textos académicos</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>16:45 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sección 2: Subjuntivo */}
+          <div id="subjuntivo-videos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <MessageSquare className="w-5 h-5 mr-2" /> 
+              2. Subjuntivo (Konjunktiv I y II)
+            </h3>
+            
+            <p className="mb-4 text-gray-700">
+              Videos sobre el subjuntivo alemán en sus dos formas.
             </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-purple-100 text-purple-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel C1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Konjunktiv II</h3>
+                  <p className="text-sm text-gray-600 mb-2">Hipótesis y cortesía</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>22:15 min</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-gray-200 h-40 flex items-center justify-center">
+                  <Film className="w-12 h-12 text-gray-500" />
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-purple-100 text-purple-600 text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel C2</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">Konjunktiv I</h3>
+                  <p className="text-sm text-gray-600 mb-2">Discurso indirecto formal</p>
+                  <div className="flex items-center text-gray-500 text-xs">
+                    <Layers className="w-4 h-4 mr-1" />
+                    <span>19:30 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       );
