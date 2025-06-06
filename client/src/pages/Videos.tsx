@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, TextQuote, TypeIcon, Clock } from "lucide-react";
 import { useDifficulty } from "../context/DifficultyContext";
 import saludosVideoThumbnail from "@assets/image_1749204521832.png";
+import presentacionVideoThumbnail from "@assets/image_1749204660165.png";
 
 export default function Videos() {
   const { currentDifficulty } = useDifficulty();
@@ -135,9 +136,13 @@ export default function Videos() {
                 rel="noopener noreferrer"
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white"
               >
-                <div className="relative bg-gradient-to-br from-gray-700 to-gray-900 h-48 flex items-center justify-center">
-                  {/* Simular fondo de video */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-green-800 opacity-80"></div>
+                <div className="relative h-48 flex items-center justify-center overflow-hidden">
+                  {/* Imagen real del video de YouTube */}
+                  <img 
+                    src={presentacionVideoThumbnail} 
+                    alt="Introduce Yourself in German - Miniatura del video"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
                   
                   {/* Botón de play centralizado */}
                   <div className="relative z-10 bg-red-600 hover:bg-red-700 transition-colors rounded-full p-4 shadow-lg">
@@ -146,7 +151,7 @@ export default function Videos() {
                   
                   {/* Duración en esquina inferior derecha */}
                   <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
-                    6:15
+                    2:55
                   </div>
                   
                   {/* Logo YouTube en esquina superior derecha */}
