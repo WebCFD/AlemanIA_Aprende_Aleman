@@ -107,9 +107,20 @@ export default function Videos() {
                 </div>
               </div>
               
-              <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="bg-gray-200 h-40 flex items-center justify-center">
-                  <Film className="w-12 h-12 text-gray-500" />
+              <a 
+                href="https://youtu.be/r94aqLUO0wo?si=Yk0oq22zUlmsQuTc" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow block"
+              >
+                <div className="bg-gradient-to-br from-red-500 to-red-600 h-40 flex items-center justify-center relative">
+                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+                  <div className="relative z-10 bg-white bg-opacity-90 rounded-full p-3">
+                    <Video className="w-8 h-8 text-red-600" />
+                  </div>
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
+                    YouTube
+                  </div>
                 </div>
                 <div className="p-4">
                   <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
@@ -117,10 +128,10 @@ export default function Videos() {
                   <p className="text-sm text-gray-600 mb-2">Cómo presentarte en alemán</p>
                   <div className="flex items-center text-gray-500 text-xs">
                     <Layers className="w-4 h-4 mr-1" />
-                    <span>6:15 min</span>
+                    <span>Video disponible</span>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
