@@ -8,6 +8,7 @@ export default function Videos() {
   const { currentDifficulty } = useDifficulty();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalVideoUrl, setModalVideoUrl] = useState("");
+  const [originalVideoUrl, setOriginalVideoUrl] = useState("");
 
   // Función para convertir URL de YouTube a formato embebido que evita restricciones
   const convertToEmbedUrl = (youtubeUrl: string) => {
@@ -32,6 +33,7 @@ export default function Videos() {
   const openVideoModal = (youtubeUrl: string) => {
     const embedUrl = convertToEmbedUrl(youtubeUrl);
     setModalVideoUrl(embedUrl);
+    setOriginalVideoUrl(youtubeUrl);
     setIsModalOpen(true);
   };
 
@@ -42,6 +44,7 @@ export default function Videos() {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalVideoUrl("");
+    setOriginalVideoUrl("");
   };
 
   // Función para obtener descripción del nivel
@@ -286,12 +289,20 @@ export default function Videos() {
           <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold text-gray-800">Video Tutorial</h3>
-              <button
-                onClick={closeModal}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-600" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => openVideoInNewTab(originalVideoUrl)}
+                  className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                >
+                  Abrir en YouTube
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
             </div>
             <div className="relative">
               <iframe
@@ -302,6 +313,18 @@ export default function Videos() {
                 allowFullScreen
                 title="Video Tutorial"
               ></iframe>
+              {/* Mensaje de fallback si el video no carga */}
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 opacity-0 hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="text-center p-4">
+                  <p className="text-gray-600 mb-2">¿El video no se reproduce?</p>
+                  <button
+                    onClick={() => openVideoInNewTab(originalVideoUrl)}
+                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors pointer-events-auto"
+                  >
+                    Ver en YouTube
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
