@@ -3,6 +3,7 @@ import { Video, BookOpen, Film, Layers, MessageSquare, AlignJustify, Users, Text
 import { useDifficulty } from "../context/DifficultyContext";
 import saludosVideoThumbnail from "@assets/image_1749216726081.png";
 import presentacionVideoThumbnail from "@assets/image_1749204660165.png";
+import sustantivosVideoThumbnail from "@assets/image_1749217464312.png";
 
 export default function Videos() {
   const { currentDifficulty } = useDifficulty();
@@ -133,7 +134,7 @@ export default function Videos() {
               Videos para aprender los saludos y expresiones más comunes en alemán.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <button 
                 onClick={() => openVideoModal("https://youtu.be/nImfUI8UHkM")}
                 className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
@@ -191,6 +192,36 @@ export default function Videos() {
                   <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
                   <h3 className="text-lg font-medium text-gray-800 mb-1">Presentaciones personales</h3>
                   <p className="text-sm text-gray-600">Cómo presentarte en alemán</p>
+                </div>
+              </button>
+              
+              <button 
+                onClick={() => openVideoModal("https://youtu.be/pdDNlggNiYs")}
+                className="border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow block bg-white w-full text-left"
+              >
+                <div className="relative h-48 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={sustantivosVideoThumbnail} 
+                    alt="225+ Sustantivos en Alemán - Miniatura del video"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  
+                  <div className="relative z-10 bg-red-600 hover:bg-red-700 transition-colors rounded-full p-4 shadow-lg">
+                    <div className="w-0 h-0 border-l-[16px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
+                  </div>
+                  
+                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
+                    28:54
+                  </div>
+                  
+                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
+                    YouTube
+                  </div>
+                </div>
+                <div className="p-4">
+                  <span className="inline-block bg-blue-100 text-[#4A6FA5] text-xs font-medium px-2.5 py-0.5 rounded mb-2">Nivel A1</span>
+                  <h3 className="text-lg font-medium text-gray-800 mb-1">225+ Sustantivos en alemán</h3>
+                  <p className="text-sm text-gray-600">Vocabulario básico esencial</p>
                 </div>
               </button>
             </div>
