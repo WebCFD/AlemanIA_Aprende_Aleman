@@ -20,7 +20,7 @@ export default function Header() {
   };
   
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md py-4">
+    <header className="sticky top-0 z-50 bg-white shadow-md h-[15vh] flex items-center">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-start justify-between gap-4 md:gap-0">
           {/* Logo & Title - Izquierda */}
