@@ -80,6 +80,7 @@ export default function Videos() {
     if (currentDifficulty === "A") {
       return (
         <>
+          {/* Contenido nivel A - placeholder */}
           <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-blue-800 font-medium">
               📺 Contenido del Nivel A - En desarrollo
@@ -93,6 +94,7 @@ export default function Videos() {
     } else if (currentDifficulty === "B") {
       return (
         <>
+          {/* Contenido nivel B - placeholder */}
           <div className="mb-8 p-4 bg-orange-50 border border-orange-200 rounded-lg">
             <p className="text-orange-800 font-medium">
               📚 Contenido del Nivel B - En desarrollo
@@ -106,6 +108,7 @@ export default function Videos() {
     } else if (currentDifficulty === "C") {
       return (
         <>
+          {/* Contenido nivel C - placeholder */}
           <div className="mb-8 p-4 bg-purple-50 border border-purple-200 rounded-lg">
             <p className="text-purple-800 font-medium">
               🎓 Contenido del Nivel C - En desarrollo
