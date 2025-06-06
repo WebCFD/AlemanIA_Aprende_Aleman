@@ -1274,26 +1274,1345 @@ export default function Empieza() {
     } else if (currentDifficulty === "B") {
       return (
         <>
-          <div className="mb-8 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p className="text-orange-800 font-medium">
-              📚 Contenido del Nivel B - En desarrollo
+          {/* Casos alemanes (Nominativ, Akkusativ) */}
+          <div id="casos" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              1. Casos alemanes (Nominativ, Akkusativ)
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              Los casos en alemán determinan la función gramatical de sustantivos, pronombres y artículos en la oración. 
+              Son fundamentales para comunicarse correctamente en alemán.
             </p>
-            <p className="text-orange-700 text-sm mt-2">
-              Aquí se añadirá el contenido específico para el nivel intermedio con casos alemanes, verbos modales y más.
+
+            {/* Nominativ */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-green-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Nominativ (Caso Nominativo)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                El Nominativ se usa para el <u>sujeto</u> de la oración - quien realiza la acción.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-green-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Artículo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Masculino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Femenino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Neutro</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Definido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">der Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">die Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">das Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">die Männer</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Indefinido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">ein Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">eine Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">ein Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-green-600">-- Kinder</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="font-medium text-green-800 mb-2">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-green-700 text-sm">
+                    <li><strong>Der Mann</strong> arbeitet. (El hombre trabaja)</li>
+                    <li><strong>Die Frau</strong> ist nett. (La mujer es amable)</li>
+                    <li><strong>Das Kind</strong> spielt. (El niño juega)</li>
+                    <li><strong>Ein Auto</strong> steht dort. (Un coche está ahí)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-2">Pregunta clave:</p>
+                  <p className="text-blue-700 text-sm">
+                    <strong>Wer?</strong> (¿Quién?) o <strong>Was?</strong> (¿Qué?) hace la acción
+                  </p>
+                  <p className="text-blue-600 text-xs mt-2 italic">
+                    Ejemplo: Wer arbeitet? → Der Mann arbeitet.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Akkusativ */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                Akkusativ (Caso Acusativo)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                El Akkusativ se usa para el <u>objeto directo</u> - lo que recibe directamente la acción del verbo.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-red-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Artículo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Masculino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Femenino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Neutro</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Definido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">den Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">die Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">das Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">die Männer</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Indefinido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">einen Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">eine Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">ein Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">-- Kinder</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                  <p className="font-medium text-red-800 mb-2">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-red-700 text-sm">
+                    <li>Ich sehe <strong>den Mann</strong>. (Veo al hombre)</li>
+                    <li>Er kauft <strong>eine Frau</strong>. (Él compra una flor)</li>
+                    <li>Wir haben <strong>das Kind</strong>. (Tenemos al niño)</li>
+                    <li>Sie liest <strong>einen Brief</strong>. (Ella lee una carta)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                  <p className="font-medium text-yellow-800 mb-2">Pregunta clave:</p>
+                  <p className="text-yellow-700 text-sm">
+                    <strong>Wen?</strong> (¿A quién?) o <strong>Was?</strong> (¿Qué?) recibe la acción
+                  </p>
+                  <p className="text-yellow-600 text-xs mt-2 italic">
+                    Ejemplo: Wen siehst du? → Ich sehe den Mann.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-orange-50 border-l-4 border-orange-400 text-sm text-gray-700">
+              <p><u>Nota importante:</u> Solo el masculino cambia en Akkusativ (der→den, ein→einen). Femenino, neutro y plural mantienen la misma forma que en Nominativ.</p>
+            </div>
+          </div>
+
+          {/* Verbos modales */}
+          <div id="verbos-modales" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <TypeIcon className="w-5 h-5 mr-2" /> 
+              2. Verbos modales
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              Los verbos modales expresan posibilidad, necesidad, deseo o permiso. Son fundamentales para expresar matices en alemán.
             </p>
+
+            {/* können */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                können (poder, saber hacer)
+              </h4>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-blue-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pronombre</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Conjugación</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ich</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">kann</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                            onClick={() => handlePlayAudio("ich kann")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">du</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">kannst</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                            onClick={() => handlePlayAudio("du kannst")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">er/sie/es</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">kann</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                            onClick={() => handlePlayAudio("er kann")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">wir/sie/Sie</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">können</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                            onClick={() => handlePlayAudio("wir können")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ihr</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">könnt</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-blue-700 hover:text-blue-900"
+                            onClick={() => handlePlayAudio("ihr könnt")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-3">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-blue-700 text-sm">
+                    <li>Ich <strong>kann</strong> Deutsch sprechen. (Puedo hablar alemán)</li>
+                    <li>Du <strong>kannst</strong> schwimmen. (Sabes nadar)</li>
+                    <li>Er <strong>kann</strong> Auto fahren. (Sabe conducir)</li>
+                    <li>Wir <strong>können</strong> helfen. (Podemos ayudar)</li>
+                  </ul>
+                  <p className="text-blue-600 text-xs mt-3 italic">
+                    Uso: Capacidad, habilidad, posibilidad
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* müssen */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                müssen (tener que, deber)
+              </h4>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-red-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pronombre</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Conjugación</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ich</td>
+                        <td className="py-3 px-4 text-sm font-medium text-red-600">muss</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-red-700 hover:text-red-900"
+                            onClick={() => handlePlayAudio("ich muss")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">du</td>
+                        <td className="py-3 px-4 text-sm font-medium text-red-600">musst</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-red-700 hover:text-red-900"
+                            onClick={() => handlePlayAudio("du musst")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">er/sie/es</td>
+                        <td className="py-3 px-4 text-sm font-medium text-red-600">muss</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-red-700 hover:text-red-900"
+                            onClick={() => handlePlayAudio("er muss")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">wir/sie/Sie</td>
+                        <td className="py-3 px-4 text-sm font-medium text-red-600">müssen</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-red-700 hover:text-red-900"
+                            onClick={() => handlePlayAudio("wir müssen")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ihr</td>
+                        <td className="py-3 px-4 text-sm font-medium text-red-600">müsst</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-red-700 hover:text-red-900"
+                            onClick={() => handlePlayAudio("ihr müsst")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                  <p className="font-medium text-red-800 mb-3">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-red-700 text-sm">
+                    <li>Ich <strong>muss</strong> arbeiten. (Tengo que trabajar)</li>
+                    <li>Du <strong>musst</strong> lernen. (Tienes que estudiar)</li>
+                    <li>Er <strong>muss</strong> gehen. (Él tiene que irse)</li>
+                    <li>Wir <strong>müssen</strong> warten. (Tenemos que esperar)</li>
+                  </ul>
+                  <p className="text-red-600 text-xs mt-3 italic">
+                    Uso: Obligación, necesidad
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* wollen */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                wollen (querer)
+              </h4>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-purple-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pronombre</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Conjugación</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ich</td>
+                        <td className="py-3 px-4 text-sm font-medium text-purple-600">will</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                            onClick={() => handlePlayAudio("ich will")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">du</td>
+                        <td className="py-3 px-4 text-sm font-medium text-purple-600">willst</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                            onClick={() => handlePlayAudio("du willst")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">er/sie/es</td>
+                        <td className="py-3 px-4 text-sm font-medium text-purple-600">will</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                            onClick={() => handlePlayAudio("er will")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">wir/sie/Sie</td>
+                        <td className="py-3 px-4 text-sm font-medium text-purple-600">wollen</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                            onClick={() => handlePlayAudio("wir wollen")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ihr</td>
+                        <td className="py-3 px-4 text-sm font-medium text-purple-600">wollt</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-purple-700 hover:text-purple-900"
+                            onClick={() => handlePlayAudio("ihr wollt")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                  <p className="font-medium text-purple-800 mb-3">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-purple-700 text-sm">
+                    <li>Ich <strong>will</strong> nach Hause. (Quiero ir a casa)</li>
+                    <li>Du <strong>willst</strong> essen. (Quieres comer)</li>
+                    <li>Er <strong>will</strong> schlafen. (Él quiere dormir)</li>
+                    <li>Wir <strong>wollen</strong> reisen. (Queremos viajar)</li>
+                  </ul>
+                  <p className="text-purple-600 text-xs mt-3 italic">
+                    Uso: Deseo, voluntad, intención
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-indigo-50 border-l-4 border-indigo-400 text-sm text-gray-700">
+              <p><u>Estructura con verbos modales:</u> Modal + Infinitivo al final → "Ich kann Deutsch sprechen" (Puedo hablar alemán)</p>
+            </div>
+          </div>
+
+          {/* Preposiciones con casos */}
+          <div id="preposiciones" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <AlignJustify className="w-5 h-5 mr-2" /> 
+              3. Preposiciones con casos
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              Las preposiciones alemanas requieren casos específicos. Dominar esta relación es crucial para la gramática alemana.
+            </p>
+
+            {/* Preposiciones con Akkusativ */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                Preposiciones con Akkusativ
+              </h4>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-red-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Preposición</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Ejemplo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">durch</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">por, a través de</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">durch <strong>den</strong> Park</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("durch den Park")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">für</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">para</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">für <strong>den</strong> Mann</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("für den Mann")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">gegen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">contra</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">gegen <strong>die</strong> Wand</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("gegen die Wand")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">ohne</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">sin</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">ohne <strong>das</strong> Buch</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("ohne das Buch")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">um</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">alrededor de, a las</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">um <strong>das</strong> Haus</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("um das Haus")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Preposiciones mixtas */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-orange-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
+                Preposiciones mixtas (Akkusativ/Dativ)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Estas preposiciones usan <strong>Akkusativ</strong> para movimiento y <strong>Dativ</strong> para ubicación.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-orange-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Preposición</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Significado</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Movimiento (Akk)</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Ubicación (Dat)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-orange-600">in</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">en, dentro de</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">in <strong>den</strong> Park gehen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">in <strong>dem</strong> Park sein</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-orange-600">auf</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">sobre, en</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">auf <strong>den</strong> Tisch legen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">auf <strong>dem</strong> Tisch liegen</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-orange-600">an</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">en, junto a</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">an <strong>die</strong> Wand hängen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">an <strong>der</strong> Wand hängen</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-orange-600">unter</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">bajo, debajo de</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">unter <strong>den</strong> Tisch kriechen</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">unter <strong>dem</strong> Tisch sein</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                  <p className="font-medium text-red-800 mb-2">Movimiento (Wohin? - Akkusativ):</p>
+                  <ul className="space-y-1 text-red-700 text-sm">
+                    <li>Ich gehe <strong>in den</strong> Park.</li>
+                    <li>Er legt das Buch <strong>auf den</strong> Tisch.</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-2">Ubicación (Wo? - Dativ):</p>
+                  <ul className="space-y-1 text-blue-700 text-sm">
+                    <li>Ich bin <strong>im</strong> Park. (in dem)</li>
+                    <li>Das Buch liegt <strong>auf dem</strong> Tisch.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Orden de palabras */}
+          <div id="orden-palabras" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <Users className="w-5 h-5 mr-2" /> 
+              4. Orden de palabras
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              El alemán tiene reglas específicas para el orden de las palabras que difieren del español.
+            </p>
+
+            {/* Posición del verbo */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-green-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Posición del verbo conjugado
+              </h4>
+              
+              <div className="space-y-6">
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="font-medium text-green-800 mb-3">Oración principal: Verbo en 2ª posición</p>
+                  <div className="grid grid-cols-4 gap-2 text-sm">
+                    <div className="font-medium text-gray-700">Posición 1</div>
+                    <div className="font-medium text-gray-700">Posición 2 (Verbo)</div>
+                    <div className="font-medium text-gray-700">Posición 3+</div>
+                    <div className="font-medium text-gray-700">Final</div>
+                    
+                    <div className="bg-white p-2 rounded border">Ich</div>
+                    <div className="bg-green-100 p-2 rounded border font-medium">spreche</div>
+                    <div className="bg-white p-2 rounded border">gut</div>
+                    <div className="bg-white p-2 rounded border">Deutsch.</div>
+                    
+                    <div className="bg-white p-2 rounded border">Heute</div>
+                    <div className="bg-green-100 p-2 rounded border font-medium">gehe</div>
+                    <div className="bg-white p-2 rounded border">ich ins Kino</div>
+                    <div className="bg-white p-2 rounded border">--</div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-3">Con verbos modales: Infinitivo al final</p>
+                  <div className="grid grid-cols-4 gap-2 text-sm">
+                    <div className="bg-white p-2 rounded border">Ich</div>
+                    <div className="bg-blue-100 p-2 rounded border font-medium">kann</div>
+                    <div className="bg-white p-2 rounded border">gut Deutsch</div>
+                    <div className="bg-blue-100 p-2 rounded border font-medium">sprechen.</div>
+                    
+                    <div className="bg-white p-2 rounded border">Du</div>
+                    <div className="bg-blue-100 p-2 rounded border font-medium">musst</div>
+                    <div className="bg-white p-2 rounded border">heute</div>
+                    <div className="bg-blue-100 p-2 rounded border font-medium">arbeiten.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Orden de elementos */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                Orden de elementos: Te-Ka-Mo-Lo
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Secuencia: <strong>Te</strong>mporal - <strong>Ka</strong>usal - <strong>Mo</strong>dal - <strong>Lo</strong>kal
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-purple-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Temporal (cuándo)</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Kausal (por qué)</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Modal (cómo)</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Lokal (dónde)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">heute</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">wegen des Regens</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">mit dem Auto</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">zur Arbeit</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                <p className="font-medium text-purple-800 mb-2">Ejemplo completo:</p>
+                <p className="text-purple-700">
+                  Ich fahre <strong>heute</strong> <strong>wegen des Regens</strong> <strong>mit dem Auto</strong> <strong>zur Arbeit</strong>.
+                </p>
+                <p className="text-purple-600 text-sm italic mt-2">
+                  (Voy hoy por la lluvia en coche al trabajo)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tiempo pasado (Perfekt) */}
+          <div id="tiempo-pasado" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <TextQuote className="w-5 h-5 mr-2" /> 
+              5. Tiempo pasado (Perfekt)
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              El Perfekt es el tiempo pasado más usado en alemán hablado. Se forma con haben/sein + participio pasado.
+            </p>
+
+            {/* Formación con haben */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                Perfekt con "haben" (la mayoría de verbos)
+              </h4>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-blue-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Infinitivo</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Participio</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Ejemplo</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">machen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gemacht</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Ich habe es gemacht</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">kaufen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gekauft</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Er hat ein Auto gekauft</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">lernen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gelernt</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Sie hat Deutsch gelernt</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">essen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gegessen</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Wir haben Pizza gegessen</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-3">Estructura:</p>
+                  <div className="space-y-2 text-blue-700 text-sm">
+                    <p><strong>haben</strong> + participio al final</p>
+                    <div className="bg-white p-2 rounded border text-center">
+                      Ich <strong>habe</strong> gestern Pizza <strong>gegessen</strong>.
+                    </div>
+                    <p className="text-blue-600 italic">He comido pizza ayer.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Formación con sein */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-green-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Perfekt con "sein" (verbos de movimiento y cambio)
+              </h4>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-green-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Infinitivo</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Participio</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Ejemplo</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">gehen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">gegangen</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Ich bin nach Hause gegangen</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">kommen</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">gekommen</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Er ist spät gekommen</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">fahren</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">gefahren</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Sie ist nach Berlin gefahren</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">werden</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">geworden</td>
+                        <td className="py-3 px-4 text-sm text-gray-700">Das Kind ist müde geworden</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="font-medium text-green-800 mb-3">Cuándo usar "sein":</p>
+                  <ul className="space-y-1 text-green-700 text-sm">
+                    <li>• Verbos de movimiento</li>
+                    <li>• Verbos de cambio de estado</li>
+                    <li>• sein, werden, bleiben</li>
+                  </ul>
+                  <div className="bg-white p-2 rounded border text-center mt-3">
+                    Ich <strong>bin</strong> nach Berlin <strong>gefahren</strong>.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm text-gray-700">
+              <p><u>Consejo importante:</u> En alemán hablado se prefiere el Perfekt sobre el Präteritum. Es el tiempo pasado más útil para principiantes.</p>
+            </div>
           </div>
         </>
       );
     } else if (currentDifficulty === "C") {
       return (
         <>
-          <div className="mb-8 p-4 bg-purple-50 border border-purple-200 rounded-lg">
-            <p className="text-purple-800 font-medium">
-              🎓 Contenido del Nivel C - En desarrollo
+          {/* Todos los casos (Dativ, Genitiv) */}
+          <div id="casos-avanzados" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <BookOpen className="w-5 h-5 mr-2" /> 
+              1. Todos los casos (Dativ, Genitiv)
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              El Dativ y Genitiv completan el sistema de casos alemán. Son esenciales para expresiones complejas y textos formales.
             </p>
-            <p className="text-purple-700 text-sm mt-2">
-              Aquí se añadirá el contenido específico para el nivel avanzado con subjuntivo, voz pasiva y más.
+
+            {/* Dativ */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                Dativ (Caso Dativo)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                El Dativ se usa para el <u>objeto indirecto</u> - a quien o para quien se hace algo.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-blue-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Artículo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Masculino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Femenino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Neutro</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Definido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">dem Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">der Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">dem Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">den Männern</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Indefinido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">einem Mann</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">einer Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">einem Kind</td>
+                      <td className="py-3 px-4 text-sm font-medium text-blue-600">-- Männern</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-2">Ejemplos de uso:</p>
+                  <ul className="space-y-2 text-blue-700 text-sm">
+                    <li>Ich gebe <strong>dem Mann</strong> das Buch. (Doy el libro al hombre)</li>
+                    <li>Sie hilft <strong>der Frau</strong>. (Ella ayuda a la mujer)</li>
+                    <li>Wir zeigen <strong>dem Kind</strong> den Weg. (Mostramos el camino al niño)</li>
+                    <li>Er schreibt <strong>den Freunden</strong>. (Él escribe a los amigos)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                  <p className="font-medium text-yellow-800 mb-2">Pregunta clave:</p>
+                  <p className="text-yellow-700 text-sm">
+                    <strong>Wem?</strong> (¿A quién?) recibe indirectamente
+                  </p>
+                  <p className="text-yellow-600 text-xs mt-2 italic">
+                    Ejemplo: Wem gibst du das Buch? → Dem Mann.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200 mb-4">
+                <p className="font-medium text-indigo-800 mb-2">Preposiciones que requieren Dativ:</p>
+                <div className="grid md:grid-cols-3 gap-4 text-indigo-700 text-sm">
+                  <div>
+                    <ul className="space-y-1">
+                      <li><strong>aus</strong> - de, desde</li>
+                      <li><strong>bei</strong> - en casa de, cerca de</li>
+                      <li><strong>mit</strong> - con</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="space-y-1">
+                      <li><strong>nach</strong> - hacia, después de</li>
+                      <li><strong>seit</strong> - desde</li>
+                      <li><strong>von</strong> - de, desde</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul className="space-y-1">
+                      <li><strong>zu</strong> - a, hacia</li>
+                      <li><strong>gegenüber</strong> - enfrente de</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Genitiv */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
+                Genitiv (Caso Genitivo)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                El Genitiv expresa <u>posesión</u> y se usa en contextos formales y con ciertas preposiciones.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-purple-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Artículo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Masculino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Femenino</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Neutro</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Plural</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Definido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">des Mannes</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">der Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">des Kindes</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">der Männer</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Indefinido</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">eines Mannes</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">einer Frau</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">eines Kindes</td>
+                      <td className="py-3 px-4 text-sm font-medium text-purple-600">-- Männer</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                  <p className="font-medium text-purple-800 mb-2">Ejemplos de posesión:</p>
+                  <ul className="space-y-2 text-purple-700 text-sm">
+                    <li>Das Auto <strong>des Mannes</strong> (El coche del hombre)</li>
+                    <li>Die Tasche <strong>der Frau</strong> (El bolso de la mujer)</li>
+                    <li>Das Spielzeug <strong>des Kindes</strong> (El juguete del niño)</li>
+                    <li>Die Bücher <strong>der Studenten</strong> (Los libros de los estudiantes)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-pink-50 p-4 rounded-lg border border-pink-200">
+                  <p className="font-medium text-pink-800 mb-2">Preposiciones con Genitiv:</p>
+                  <ul className="space-y-1 text-pink-700 text-sm">
+                    <li><strong>während</strong> - durante</li>
+                    <li><strong>wegen</strong> - debido a</li>
+                    <li><strong>trotz</strong> - a pesar de</li>
+                    <li><strong>statt/anstatt</strong> - en lugar de</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Subjuntivo (Konjunktiv I y II) */}
+          <div id="subjuntivo" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <MessageSquare className="w-5 h-5 mr-2" /> 
+              2. Subjuntivo (Konjunktiv I y II)
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              El subjuntivo alemán tiene dos formas principales: Konjunktiv I (discurso indirecto) y Konjunktiv II (hipótesis, cortesía).
             </p>
+
+            {/* Konjunktiv II */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-green-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Konjunktiv II (Condicional)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Expresa situaciones hipotéticas, deseos irreales y forma de cortesía.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-green-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Verbo</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Konjunktiv II</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">sein (ich)</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">wäre</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-green-700 hover:text-green-900"
+                            onClick={() => handlePlayAudio("ich wäre")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">haben (ich)</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">hätte</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-green-700 hover:text-green-900"
+                            onClick={() => handlePlayAudio("ich hätte")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">können (ich)</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">könnte</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-green-700 hover:text-green-900"
+                            onClick={() => handlePlayAudio("ich könnte")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">würden + Inf.</td>
+                        <td className="py-3 px-4 text-sm font-medium text-green-600">würde gehen</td>
+                        <td className="py-3 px-4">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-7 px-2 text-green-700 hover:text-green-900"
+                            onClick={() => handlePlayAudio("ich würde gehen")}
+                          >
+                            <Volume2 className="h-3 w-3" />
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="font-medium text-green-800 mb-3">Usos principales:</p>
+                  <ul className="space-y-2 text-green-700 text-sm">
+                    <li><strong>Hipótesis:</strong> Wenn ich Zeit hätte, würde ich kommen.</li>
+                    <li><strong>Deseos:</strong> Ich wäre gern reich.</li>
+                    <li><strong>Cortesía:</strong> Könnten Sie mir helfen?</li>
+                    <li><strong>Sugerencias:</strong> Du solltest mehr lernen.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Konjunktiv I */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-blue-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                Konjunktiv I (Discurso indirecto)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Se usa principalmente para el discurso indirecto en textos formales y periodísticos.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                    <thead className="bg-blue-50">
+                      <tr>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Persona</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">sein</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">haben</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">gehen</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">ich</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">sei</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">habe</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gehe</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">er/sie/es</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">sei</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">habe</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gehe</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 px-4 text-sm text-gray-700">wir/sie</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">seien</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">hätten</td>
+                        <td className="py-3 px-4 text-sm font-medium text-blue-600">gingen</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <p className="font-medium text-blue-800 mb-3">Ejemplos de discurso indirecto:</p>
+                  <ul className="space-y-2 text-blue-700 text-sm">
+                    <li><strong>Directo:</strong> "Ich bin müde."</li>
+                    <li><strong>Indirecto:</strong> Er sagt, er sei müde.</li>
+                    <li><strong>Directo:</strong> "Wir haben Zeit."</li>
+                    <li><strong>Indirecto:</strong> Sie sagen, sie hätten Zeit.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Voz pasiva */}
+          <div id="voz-pasiva" className="mb-12 pt-2">
+            <h3 className="text-xl font-semibold text-[#4A6FA5] mb-3 flex items-center border-b pb-2">
+              <TypeIcon className="w-5 h-5 mr-2" /> 
+              3. Voz pasiva (Passiv)
+            </h3>
+            
+            <p className="mb-6 text-gray-700">
+              La voz pasiva se usa cuando el foco está en la acción y no en quien la realiza.
+            </p>
+
+            {/* Vorgangspassiv */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-red-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                Vorgangspassiv (werden + Partizip II)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Expresa un proceso o acción que se está realizando.
+              </p>
+              
+              <div className="overflow-x-auto mb-4">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-sm border">
+                  <thead className="bg-red-50">
+                    <tr>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Tiempo</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Activa</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Pasiva</th>
+                      <th className="py-3 px-4 text-left text-sm font-medium text-gray-700">Audio</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Presente</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">Er baut das Haus.</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">Das Haus wird gebaut.</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("Das Haus wird gebaut")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Pasado</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">Er baute das Haus.</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">Das Haus wurde gebaut.</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("Das Haus wurde gebaut")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-sm font-medium text-gray-700">Perfekt</td>
+                      <td className="py-3 px-4 text-sm text-gray-700">Er hat das Haus gebaut.</td>
+                      <td className="py-3 px-4 text-sm font-medium text-red-600">Das Haus ist gebaut worden.</td>
+                      <td className="py-3 px-4">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-7 px-2 text-red-700 hover:text-red-900"
+                          onClick={() => handlePlayAudio("Das Haus ist gebaut worden")}
+                        >
+                          <Volume2 className="h-3 w-3" />
+                        </Button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Zustandspassiv */}
+            <div className="mb-8">
+              <h4 className="text-lg font-semibold text-green-700 mb-4 flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                Zustandspassiv (sein + Partizip II)
+              </h4>
+              
+              <p className="mb-4 text-gray-700">
+                Expresa el resultado de una acción completada.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <p className="font-medium text-green-800 mb-3">Zustandspassiv (resultado):</p>
+                  <ul className="space-y-2 text-green-700 text-sm">
+                    <li>Das Fenster <strong>ist geöffnet</strong>. (La ventana está abierta)</li>
+                    <li>Der Brief <strong>ist geschrieben</strong>. (La carta está escrita)</li>
+                    <li>Das Auto <strong>ist repariert</strong>. (El coche está reparado)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+                  <p className="font-medium text-red-800 mb-3">Vorgangspassiv (proceso):</p>
+                  <ul className="space-y-2 text-red-700 text-sm">
+                    <li>Das Fenster <strong>wird geöffnet</strong>. (La ventana se abre)</li>
+                    <li>Der Brief <strong>wird geschrieben</strong>. (La carta se escribe)</li>
+                    <li>Das Auto <strong>wird repariert</strong>. (El coche se repara)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border-l-4 border-purple-400 text-sm text-gray-700">
+            <p><u>¡Felicidades!</u> Has completado el nivel avanzado de alemán. Estos conceptos te permitirán comunicarte con precisión y elegancia en situaciones complejas.</p>
           </div>
         </>
       );
